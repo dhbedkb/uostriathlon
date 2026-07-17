@@ -13,4 +13,19 @@ layout: default
       <p>No content file found for this page.</p>
     </div>
   </section>
+{% endif %}---
+layout: default
+---
+
+{% assign page_content = site.data.content[page.content_file] %}
+
+{% if page_content %}
+  {% include renderer.html sections=page_content.sections %}
+{% else %}
+  <section class="section">
+    <div class="container">
+      <h1>{{ page.title }}</h1>
+      <p>No content file found for this page.</p>
+    </div>
+  </section>
 {% endif %}
