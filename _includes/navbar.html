@@ -1,67 +1,49 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2685.6">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; color: #ffffff; -webkit-text-stroke: #ffffff}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; color: #ffffff; -webkit-text-stroke: #ffffff; min-height: 14.0px}
-    span.s1 {font-kerning: none}
-  </style>
-</head>
-<body>
-<p class="p1"><span class="s1">&lt;header class="site-header" data-header&gt;</span></p>
-<p class="p1"><span class="s1">  &lt;nav class="nav" aria-label="Main navigation"&gt;</span></p>
-<p class="p1"><span class="s1">    {{ '/' | relative_url }}</span></p>
-<p class="p1"><span class="s1">      &lt;span class="brand-mark" aria-hidden="true"&gt;S&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1">      &lt;span class="brand-text"&gt;</span></p>
-<p class="p1"><span class="s1">        &lt;span class="brand-name"&gt;{{ site.data.settings.brand.short_name }}&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1">        &lt;span class="brand-tagline"&gt;{{ site.data.settings.brand.tagline }}&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1">      &lt;/span&gt;</span></p>
-<p class="p1"><span class="s1">    &lt;/a&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">    &lt;button</span></p>
-<p class="p1"><span class="s1">      class="nav-toggle"</span></p>
-<p class="p1"><span class="s1">      type="button"</span></p>
-<p class="p1"><span class="s1">      data-nav-toggle</span></p>
-<p class="p1"><span class="s1">      aria-expanded="false"</span></p>
-<p class="p1"><span class="s1">      aria-controls="primary-navigation"</span></p>
-<p class="p1"><span class="s1">    &gt;</span></p>
-<p class="p1"><span class="s1">      &lt;span class="sr-only"&gt;Toggle navigation&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1">      &lt;span class="nav-toggle-line"&gt;&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1">      &lt;span class="nav-toggle-line"&gt;&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1">      &lt;span class="nav-toggle-line"&gt;&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1">    &lt;/button&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">    &lt;div class="nav-panel" id="primary-navigation" data-nav-panel&gt;</span></p>
-<p class="p1"><span class="s1">      &lt;div class="nav-links"&gt;</span></p>
-<p class="p1"><span class="s1">        {% for item in site.data.navigation.items %}</span></p>
-<p class="p1"><span class="s1">          {% assign current_url = page.url | replace: 'index.html', '' %}</span></p>
-<p class="p1"><span class="s1">          {{ item.url | relative_url }}</span></p>
-<p class="p1"><span class="s1">            {{ item.label }}</span></p>
-<p class="p1"><span class="s1">          &lt;/a&gt;</span></p>
-<p class="p1"><span class="s1">        {% endfor %}</span></p>
-<p class="p1"><span class="s1">      &lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">      &lt;div class="nav-actions"&gt;</span></p>
-<p class="p1"><span class="s1">        {% if site.data.settings.features.dark_mode %}</span></p>
-<p class="p1"><span class="s1">          &lt;button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark and light mode"&gt;</span></p>
-<p class="p1"><span class="s1">            &lt;span data-theme-icon&gt;☾&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1">          &lt;/button&gt;</span></p>
-<p class="p1"><span class="s1">        {% endif %}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">        {% if site.data.navigation.cta %}</span></p>
-<p class="p1"><span class="s1">          {{ site.data.navigation.cta.url | relative_url }}</span></p>
-<p class="p1"><span class="s1">            {{ site.data.navigation.cta.label }}</span></p>
-<p class="p1"><span class="s1">          &lt;/a&gt;</span></p>
-<p class="p1"><span class="s1">        {% endif %}</span></p>
-<p class="p1"><span class="s1">      &lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">    &lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">  &lt;/nav&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/header&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-</body>
-</html>
+<header class="site-header" data-header>
+  <nav class="nav" aria-label="Main navigation">
+    {{ '/' | relative_url }}
+      <span class="brand-mark" aria-hidden="true">S</span>
+      <span class="brand-text">
+        <span class="brand-name">{{ site.data.settings.brand.short_name }}</span>
+        <span class="brand-tagline">{{ site.data.settings.brand.tagline }}</span>
+      </span>
+    </a>
+
+    <button
+      class="nav-toggle"
+      type="button"
+      data-nav-toggle
+      aria-expanded="false"
+      aria-controls="primary-navigation"
+    >
+      <span class="sr-only">Toggle navigation</span>
+      <span class="nav-toggle-line"></span>
+      <span class="nav-toggle-line"></span>
+      <span class="nav-toggle-line"></span>
+    </button>
+
+    <div class="nav-panel" id="primary-navigation" data-nav-panel>
+      <div class="nav-links">
+        {% for item in site.data.navigation.items %}
+          {% assign current_url = page.url | replace: 'index.html', '' %}
+          {{ item.url | relative_url }}
+            {{ item.label }}
+          </a>
+        {% endfor %}
+      </div>
+
+      <div class="nav-actions">
+        {% if site.data.settings.features.dark_mode %}
+          <button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark and light mode">
+            <span data-theme-icon>☾</span>
+          </button>
+        {% endif %}
+
+        {% if site.data.navigation.cta %}
+          {{ site.data.navigation.cta.url | relative_url }}
+            {{ site.data.navigation.cta.label }}
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  </nav>
+</header>

@@ -1,82 +1,65 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2685.6">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; color: #ffffff; -webkit-text-stroke: #ffffff}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; color: #ffffff; -webkit-text-stroke: #ffffff; min-height: 14.0px}
-    span.s1 {font-kerning: none}
-  </style>
-</head>
-<body>
-<p class="p1"><span class="s1">&lt;footer class="site-footer"&gt;</span></p>
-<p class="p1"><span class="s1">  &lt;div class="container footer-grid"&gt;</span></p>
-<p class="p1"><span class="s1">    &lt;div class="footer-brand"&gt;</span></p>
-<p class="p1"><span class="s1">      {{ '/' | relative_url }}</span></p>
-<p class="p1"><span class="s1">        &lt;span class="brand-mark" aria-hidden="true"&gt;S&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1">        &lt;span class="brand-text"&gt;</span></p>
-<p class="p1"><span class="s1">          &lt;span class="brand-name"&gt;{{ site.data.settings.brand.short_name }}&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1">          &lt;span class="brand-tagline"&gt;{{ site.data.settings.brand.tagline }}&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1">        &lt;/span&gt;</span></p>
-<p class="p1"><span class="s1">      &lt;/a&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">      &lt;p&gt;</span></p>
-<p class="p1"><span class="s1">        {{ site.data.settings.footer.description }}</span></p>
-<p class="p1"><span class="s1">      &lt;/p&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">      &lt;p class="footer-small"&gt;</span></p>
-<p class="p1"><span class="s1">        {{ site.data.settings.footer.affiliation }}</span></p>
-<p class="p1"><span class="s1">      &lt;/p&gt;</span></p>
-<p class="p1"><span class="s1">    &lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">    &lt;div class="footer-column"&gt;</span></p>
-<p class="p1"><span class="s1">      &lt;h2&gt;Explore&lt;/h2&gt;</span></p>
-<p class="p1"><span class="s1">      &lt;ul&gt;</span></p>
-<p class="p1"><span class="s1">        {% for item in site.data.navigation.items %}</span></p>
-<p class="p1"><span class="s1">          &lt;li&gt;</span></p>
-<p class="p1"><span class="s1">            {{ item.url | relative_url }}{{ item.label }}&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1">          &lt;/li&gt;</span></p>
-<p class="p1"><span class="s1">        {% endfor %}</span></p>
-<p class="p1"><span class="s1">      &lt;/ul&gt;</span></p>
-<p class="p1"><span class="s1">    &lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">    &lt;div class="footer-column"&gt;</span></p>
-<p class="p1"><span class="s1">      &lt;h2&gt;Training&lt;/h2&gt;</span></p>
-<p class="p1"><span class="s1">      &lt;ul&gt;</span></p>
-<p class="p1"><span class="s1">        &lt;li&gt;{{ '/training/#swimming' | relative_url }}Swimming&lt;/a&gt;&lt;/li&gt;</span></p>
-<p class="p1"><span class="s1">        &lt;li&gt;{{ '/training/#cycling' | relative_url }}Cycling&lt;/a&gt;&lt;/li&gt;</span></p>
-<p class="p1"><span class="s1">        &lt;li&gt;{{ '/training/#running' | relative_url }}Running&lt;/a&gt;&lt;/li&gt;</span></p>
-<p class="p1"><span class="s1">        &lt;li&gt;{{ '/training/#strength' | relative_url }}Strength&lt;/a&gt;&lt;/li&gt;</span></p>
-<p class="p1"><span class="s1">        &lt;li&gt;{{ '/training/#socials' | relative_url }}Socials&lt;/a&gt;&lt;/li&gt;</span></p>
-<p class="p1"><span class="s1">      &lt;/ul&gt;</span></p>
-<p class="p1"><span class="s1">    &lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">    &lt;div class="footer-column"&gt;</span></p>
-<p class="p1"><span class="s1">      &lt;h2&gt;Connect&lt;/h2&gt;</span></p>
-<p class="p1"><span class="s1">      &lt;ul&gt;</span></p>
-<p class="p1"><span class="s1">        {% for social in site.data.socials.items %}</span></p>
-<p class="p1"><span class="s1">          &lt;li&gt;</span></p>
-<p class="p1"><span class="s1">            {{ social.url }}</span></p>
-<p class="p1"><span class="s1">              {{ social.label }}</span></p>
-<p class="p1"><span class="s1">            &lt;/a&gt;</span></p>
-<p class="p1"><span class="s1">          &lt;/li&gt;</span></p>
-<p class="p1"><span class="s1">        {% endfor %}</span></p>
-<p class="p1"><span class="s1">      &lt;/ul&gt;</span></p>
-<p class="p1"><span class="s1">    &lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">  &lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">  &lt;div class="container footer-bottom"&gt;</span></p>
-<p class="p1"><span class="s1">    &lt;p&gt;</span></p>
-<p class="p1"><span class="s1">      © {{ site.time | date: "%Y" }} {{ site.data.settings.brand.name }}.</span></p>
-<p class="p1"><span class="s1">    &lt;/p&gt;</span></p>
-<p class="p1"><span class="s1">    &lt;p&gt;</span></p>
-<p class="p1"><span class="s1">      Built with Jekyll and GitHub Pages.</span></p>
-<p class="p1"><span class="s1">    &lt;/p&gt;</span></p>
-<p class="p1"><span class="s1">  &lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/footer&gt;</span></p>
-</body>
-</html>
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      {{ '/' | relative_url }}
+        <span class="brand-mark" aria-hidden="true">S</span>
+        <span class="brand-text">
+          <span class="brand-name">{{ site.data.settings.brand.short_name }}</span>
+          <span class="brand-tagline">{{ site.data.settings.brand.tagline }}</span>
+        </span>
+      </a>
+
+      <p>
+        {{ site.data.settings.footer.description }}
+      </p>
+
+      <p class="footer-small">
+        {{ site.data.settings.footer.affiliation }}
+      </p>
+    </div>
+
+    <div class="footer-column">
+      <h2>Explore</h2>
+      <ul>
+        {% for item in site.data.navigation.items %}
+          <li>
+            {{ item.url | relative_url }}{{ item.label }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="footer-column">
+      <h2>Training</h2>
+      <ul>
+        <li>{{ '/training/#swimming' | relative_url }}Swimming</a></li>
+        <li>{{ '/training/#cycling' | relative_url }}Cycling</a></li>
+        <li>{{ '/training/#running' | relative_url }}Running</a></li>
+        <li>{{ '/training/#strength' | relative_url }}Strength</a></li>
+        <li>{{ '/training/#socials' | relative_url }}Socials</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-column">
+      <h2>Connect</h2>
+      <ul>
+        {% for social in site.data.socials.items %}
+          <li>
+            {{ social.url }}
+              {{ social.label }}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+
+  <div class="container footer-bottom">
+    <p>
+      © {{ site.time | date: "%Y" }} {{ site.data.settings.brand.name }}.
+    </p>
+    <p>
+      Built with Jekyll and GitHub Pages.
+    </p>
+  </div>
+</footer>
