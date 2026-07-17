@@ -1,4 +1,4 @@
-- title: University of Sheffield Triathlon Club
+title: University of Sheffield Triathlon Club
 description: Swim, bike and run with Sheffield’s student triathlon club.
 sections:
   - type: hero
@@ -103,6 +103,3 @@ sections:
     secondary_button:
       label: Ask a Question
       url: mailto:triathlon@sheffield.ac.uk
-
-- type: strava
-    title: Strava Feed
