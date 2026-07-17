@@ -979,3 +979,1437 @@ a {
     grid-template-columns: 1fr;
   }
 }
+
+
+/* Official palette, embeds and Apple-inspired overlap */
+
+:root {
+  --color-navy: #000000;
+  --color-deep-purple: #111111;
+  --color-purple: #202020;
+  --color-gold: #F7D35D;
+  --color-background: #000000;
+  --color-surface: #101010;
+  --color-surface-soft: rgba(255, 255, 255, 0.075);
+  --color-text: #FFFFFF;
+  --color-muted: #D6D6D6;
+  --color-border: rgba(255, 255, 255, 0.16);
+}
+
+[data-theme="light"] {
+  --color-background: #FFFFFF;
+  --color-surface: #F7F7F7;
+  --color-surface-soft: rgba(0, 0, 0, 0.045);
+  --color-text: #000000;
+  --color-muted: #3F3F3F;
+  --color-border: rgba(0, 0, 0, 0.16);
+}
+
+body {
+  background:
+    radial-gradient(circle at 20% 0%, rgba(247, 211, 93, 0.16), transparent 28rem),
+    var(--color-background);
+}
+
+[data-theme="light"] body {
+  background:
+    radial-gradient(circle at 20% 0%, rgba(247, 211, 93, 0.35), transparent 28rem),
+    var(--color-background);
+}
+
+.section-overlap {
+  margin-top: -2rem;
+  border-top-left-radius: clamp(2rem, 5vw, 4rem);
+  border-top-right-radius: clamp(2rem, 5vw, 4rem);
+  overflow: hidden;
+}
+
+.section-overlap + .section-overlap {
+  margin-top: -1rem;
+}
+
+.hero {
+  isolation: isolate;
+}
+
+.hero-photo {
+  filter: saturate(1.05) contrast(1.05);
+}
+
+.has-photo .hero-overlay {
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.96), rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.32)),
+    linear-gradient(0deg, rgba(0, 0, 0, 0.72), transparent 60%);
+}
+
+[data-theme="light"] .has-photo .hero-overlay {
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.94), rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.18)),
+    linear-gradient(0deg, rgba(255, 255, 255, 0.68), transparent 60%);
+}
+
+[data-theme="light"] .hero h1,
+[data-theme="light"] .hero-body {
+  color: #000000;
+}
+
+[data-theme="light"] .hero-subtitle,
+[data-theme="light"] .eyebrow {
+  color: #8A6A00;
+}
+
+.button.primary,
+.nav-cta {
+  background: #F7D35D;
+  color: #000000;
+}
+
+.button.secondary {
+  border-color: var(--color-border);
+  background: var(--color-surface-soft);
+}
+
+.embed-shell {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  background:
+    radial-gradient(circle at top right, rgba(247, 211, 93, 0.16), transparent 18rem),
+    var(--color-surface-soft);
+  box-shadow: var(--shadow-soft);
+  padding: clamp(1rem, 3vw, 2rem);
+}
+
+.embed-frame {
+  overflow: hidden;
+  border-radius: calc(var(--radius-xl) - 0.75rem);
+}
+
+.embed-frame iframe,
+.embed-frame blockquote {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.embed-placeholder {
+  display: grid;
+  gap: 1rem;
+  min-height: 260px;
+  align-content: center;
+  justify-items: start;
+  padding: clamp(1.5rem, 4vw, 3rem);
+}
+
+.embed-instagram {
+  background:
+    radial-gradient(circle at top left, rgba(247, 211, 93, 0.16), transparent 16rem),
+    linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(32, 32, 32, 0.9));
+}
+
+.embed-strava {
+  background:
+    radial-gradient(circle at top left, rgba(252, 76, 2, 0.22), transparent 16rem),
+    linear-gradient(135deg, rgba(0, 0, 0, 0.85), rgba(32, 32, 32, 0.9));
+}
+
+[data-theme="light"] .embed-instagram,
+[data-theme="light"] .embed-strava {
+  background:
+    radial-gradient(circle at top left, rgba(247, 211, 93, 0.3), transparent 16rem),
+    #FFFFFF;
+}
+
+.social-card {
+  min-height: 260px;
+  display: grid;
+  align-content: space-between;
+}
+
+.social-instagram {
+  background:
+    radial-gradient(circle at top left, rgba(247, 211, 93, 0.16), transparent 14rem),
+    var(--color-surface-soft);
+}
+
+.social-strava {
+  background:
+    radial-gradient(circle at top left, rgba(252, 76, 2, 0.22), transparent 14rem),
+    var(--color-surface-soft);
+}
+
+@supports (animation-timeline: view()) {
+  .reveal-card {
+    animation: subtle-rise linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 22%;
+  }
+
+  @keyframes subtle-rise {
+    from {
+      opacity: 0.72;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section-overlap {
+    margin-top: 0;
+    border-radius: 0;
+  }
+
+  .reveal-card {
+    animation: none !important;
+  }
+}
+
+
+/* Strong Apple-style section sliding and social embeds */
+
+@media (min-width: 960px) and (prefers-reduced-motion: no-preference) {
+  .page-home main,
+  .page-socials main,
+  .page-training main,
+  .page-events main {
+    isolation: isolate;
+  }
+
+  .page-home main > .section,
+  .page-socials main > .section,
+  .page-training main > .section,
+  .page-events main > .section {
+    position: sticky;
+    top: var(--nav-height);
+    min-height: calc(100vh - var(--nav-height));
+    display: grid;
+    align-items: center;
+    border-top-left-radius: clamp(2rem, 5vw, 5rem);
+    border-top-right-radius: clamp(2rem, 5vw, 5rem);
+    box-shadow: 0 -28px 90px rgba(0, 0, 0, 0.35);
+    transform: translateZ(0);
+  }
+
+  .page-home main > .section-hero,
+  .page-socials main > .section-hero,
+  .page-training main > .section-hero,
+  .page-events main > .section-hero {
+    position: relative;
+    top: auto;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .page-home main > .section:nth-of-type(2),
+  .page-socials main > .section:nth-of-type(2),
+  .page-training main > .section:nth-of-type(2),
+  .page-events main > .section:nth-of-type(2) {
+    z-index: 2;
+  }
+
+  .page-home main > .section:nth-of-type(3),
+  .page-socials main > .section:nth-of-type(3),
+  .page-training main > .section:nth-of-type(3),
+  .page-events main > .section:nth-of-type(3) {
+    z-index: 3;
+  }
+
+  .page-home main > .section:nth-of-type(4),
+  .page-socials main > .section:nth-of-type(4),
+  .page-training main > .section:nth-of-type(4),
+  .page-events main > .section:nth-of-type(4) {
+    z-index: 4;
+  }
+
+  .page-home main > .section:nth-of-type(5),
+  .page-socials main > .section:nth-of-type(5),
+  .page-training main > .section:nth-of-type(5),
+  .page-events main > .section:nth-of-type(5) {
+    z-index: 5;
+  }
+
+  .page-home main > .section:nth-of-type(6),
+  .page-socials main > .section:nth-of-type(6),
+  .page-training main > .section:nth-of-type(6),
+  .page-events main > .section:nth-of-type(6) {
+    z-index: 6;
+  }
+
+  .page-home main > .section:nth-of-type(7),
+  .page-socials main > .section:nth-of-type(7),
+  .page-training main > .section:nth-of-type(7),
+  .page-events main > .section:nth-of-type(7) {
+    z-index: 7;
+  }
+}
+
+@media (max-width: 959px), (prefers-reduced-motion: reduce) {
+  .section {
+    position: relative !important;
+    top: auto !important;
+    min-height: auto !important;
+    border-radius: 0 !important;
+  }
+}
+
+.embed-grid {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.embed-grid-two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.embed-grid-one {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.embed-card-heading {
+  margin-bottom: 1rem;
+}
+
+.embed-card-heading h3 {
+  margin: 0;
+  font-size: clamp(1.4rem, 3vw, 2rem);
+}
+
+.embed-card-heading p:not(.card-label) {
+  color: var(--color-muted);
+}
+
+.embed-frame {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  overflow: hidden;
+}
+
+.embed-frame iframe {
+  display: block;
+  max-width: 100%;
+  border-radius: 1rem;
+  background: #FFFFFF;
+}
+
+.embed-facebook iframe {
+  width: 100%;
+  max-width: 500px;
+}
+
+.embed-strava iframe {
+  width: 300px;
+  max-width: 100%;
+}
+
+.social-facebook {
+  background:
+    radial-gradient(circle at top left, rgba(24, 119, 242, 0.2), transparent 14rem),
+    var(--color-surface-soft);
+}
+
+.embed-facebook {
+  background:
+    radial-gradient(circle at top left, rgba(24, 119, 242, 0.18), transparent 18rem),
+    var(--color-surface-soft);
+}
+
+@media (max-width: 800px) {
+  .embed-grid-two {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+
+/* Panel stack fix */
+
+.section {
+  background: var(--color-background);
+}
+
+.site-footer {
+  position: relative;
+  z-index: 999;
+  background: var(--color-background);
+}
+
+@media (min-width: 1000px) and (prefers-reduced-motion: no-preference) {
+
+  main > .section {
+    position: sticky;
+    top: var(--nav-height);
+    min-height: calc(100vh - var(--nav-height));
+
+    background: var(--color-background);
+
+    border-top-left-radius: 3rem;
+    border-top-right-radius: 3rem;
+
+    overflow: hidden;
+
+    box-shadow:
+      0 -20px 80px rgba(0,0,0,.25);
+
+    isolation: isolate;
+  }
+
+  main > .section-hero {
+    position: relative;
+    top: auto;
+    min-height: 100vh;
+    border-radius: 0;
+    box-shadow: none;
+  }
+}
+
+.embed-grid,
+.embed-shell {
+  width: 100%;
+}
+
+.embed-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.embed-shell {
+  background: var(--color-surface);
+  border-radius: 2rem;
+  padding: 1rem;
+}
+
+.embed-shell iframe {
+  max-width: 100%;
+  display: block;
+  margin-inline: auto;
+}
+
+.embed-shell iframe[src*="facebook"] {
+  width: 100%;
+}
+
+.embed-shell iframe[src*="strava"] {
+  width: 100%;
+}
+
+.social-facebook {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(24,119,242,.15),
+      transparent
+    );
+}
+
+.social-instagram {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(247,211,93,.15),
+      transparent
+    );
+}
+
+.social-strava {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(252,76,2,.15),
+      transparent
+    );
+}
+
+
+/* FINAL: solid Apple panels and working embeds */
+
+/* Kill earlier sticky behaviour completely. It caused text bleed/overlap. */
+main > .section,
+.page-home main > .section,
+.page-socials main > .section,
+.page-training main > .section,
+.page-events main > .section {
+  position: relative !important;
+  top: auto !important;
+  min-height: auto !important;
+  display: block !important;
+  overflow: visible !important;
+}
+
+/* Every section is now a solid panel. No transparency behind text. */
+.section {
+  background: var(--color-background) !important;
+  color: var(--color-text);
+  position: relative;
+  z-index: 1;
+}
+
+/* Apple-style stacked panels: overlap visually, but remain normal document flow. */
+main > .section:not(.section-hero) {
+  margin-top: clamp(-4rem, -5vw, -2rem);
+  padding-top: clamp(6rem, 10vw, 9rem);
+  border-top-left-radius: clamp(2rem, 6vw, 5rem);
+  border-top-right-radius: clamp(2rem, 6vw, 5rem);
+  box-shadow: 0 -28px 90px rgba(0, 0, 0, 0.38);
+  isolation: isolate;
+}
+
+/* Alternating solid panel colours using official colours. */
+main > .section:nth-of-type(odd):not(.section-hero) {
+  background:
+    radial-gradient(circle at top right, rgba(247, 211, 93, 0.12), transparent 22rem),
+    #000000 !important;
+}
+
+main > .section:nth-of-type(even):not(.section-hero) {
+  background:
+    radial-gradient(circle at top left, rgba(247, 211, 93, 0.1), transparent 22rem),
+    #101010 !important;
+}
+
+[data-theme="light"] main > .section:nth-of-type(odd):not(.section-hero) {
+  background:
+    radial-gradient(circle at top right, rgba(247, 211, 93, 0.34), transparent 22rem),
+    #FFFFFF !important;
+}
+
+[data-theme="light"] main > .section:nth-of-type(even):not(.section-hero) {
+  background:
+    radial-gradient(circle at top left, rgba(247, 211, 93, 0.24), transparent 22rem),
+    #F7F7F3 !important;
+}
+
+/* Hero remains full and clean. */
+.section-hero {
+  margin-top: 0 !important;
+  border-radius: 0 !important;
+  overflow: hidden !important;
+}
+
+/* Footer should sit above panels cleanly. */
+.site-footer {
+  position: relative;
+  z-index: 20;
+  background: var(--color-background) !important;
+}
+
+/* Embed layout */
+.embed-grid {
+  display: grid;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.embed-grid-two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.embed-grid-one {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.embed-shell {
+  width: 100%;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  background: var(--color-surface) !important;
+  color: var(--color-text);
+  box-shadow: var(--shadow-soft);
+  padding: clamp(1rem, 3vw, 2rem);
+  overflow: hidden;
+}
+
+.embed-card-heading {
+  margin-bottom: 1rem;
+}
+
+.embed-card-heading h3 {
+  margin: 0;
+  font-size: clamp(1.4rem, 3vw, 2rem);
+}
+
+.embed-card-heading p:not(.card-label) {
+  color: var(--color-muted);
+}
+
+.embed-frame {
+  width: 100%;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 1rem;
+}
+
+.embed-frame iframe {
+  display: block;
+  max-width: 100%;
+  border-radius: 1rem;
+  background: #FFFFFF;
+}
+
+/* Facebook plugin wants a fixed max width but can sit centred. */
+.embed-facebook iframe {
+  width: 500px;
+  max-width: 100%;
+  min-height: 600px;
+}
+
+/* Strava widgets are 300px fixed from source, centred in cards. */
+.embed-strava iframe {
+  width: 300px;
+  max-width: 100%;
+}
+
+/* Stronger provider visual distinction */
+.embed-facebook {
+  background:
+    radial-gradient(circle at top left, rgba(24, 119, 242, 0.22), transparent 18rem),
+    var(--color-surface) !important;
+}
+
+.embed-strava {
+  background:
+    radial-gradient(circle at top left, rgba(252, 76, 2, 0.22), transparent 18rem),
+    var(--color-surface) !important;
+}
+
+.embed-instagram {
+  background:
+    radial-gradient(circle at top left, rgba(247, 211, 93, 0.22), transparent 18rem),
+    var(--color-surface) !important;
+}
+
+/* The screenshot showed the Facebook card without iframe. This makes missing embeds obvious. */
+.embed-placeholder {
+  min-height: 220px;
+  display: grid;
+  align-content: center;
+  gap: 1rem;
+}
+
+/* Make the social links grid accommodate 3 cards. */
+.social-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+/* Mobile: reduce panel overlap to avoid cramped layout. */
+@media (max-width: 900px) {
+  main > .section:not(.section-hero) {
+    margin-top: -1.5rem;
+    padding-top: 4rem;
+    border-top-left-radius: 2rem;
+    border-top-right-radius: 2rem;
+  }
+
+  .embed-grid-two,
+  .social-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Accessibility: no aggressive panel motion for reduced motion users. */
+@media (prefers-reduced-motion: reduce) {
+  main > .section:not(.section-hero) {
+    margin-top: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+}
+
+
+/* FINAL V2: Apple sliding, opaque panels, widgets */
+
+/* Base solid panels */
+.section {
+  background: #000000 !important;
+  color: #FFFFFF;
+  isolation: isolate;
+}
+
+[data-theme="light"] .section {
+  background: #FFFFFF !important;
+  color: #000000;
+}
+
+/* Restore the stronger Apple-style sticky slide, but with opaque panels. */
+@media (min-width: 1000px) and (prefers-reduced-motion: no-preference) {
+  body main {
+    isolation: isolate;
+  }
+
+  body main > .section {
+    position: sticky !important;
+    top: var(--nav-height) !important;
+    min-height: calc(100vh - var(--nav-height)) !important;
+    display: grid !important;
+    align-items: center !important;
+    overflow: hidden !important;
+
+    margin-top: 0 !important;
+    padding-top: clamp(5rem, 8vw, 8rem) !important;
+    padding-bottom: clamp(5rem, 8vw, 8rem) !important;
+
+    border-top-left-radius: clamp(2rem, 6vw, 5rem);
+    border-top-right-radius: clamp(2rem, 6vw, 5rem);
+    box-shadow: 0 -34px 95px rgba(0, 0, 0, 0.5);
+  }
+
+  body main > .section-hero {
+    position: relative !important;
+    top: auto !important;
+    min-height: calc(100vh - var(--nav-height)) !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    z-index: 1;
+  }
+
+  body main > .section:nth-of-type(2) { z-index: 2; }
+  body main > .section:nth-of-type(3) { z-index: 3; }
+  body main > .section:nth-of-type(4) { z-index: 4; }
+  body main > .section:nth-of-type(5) { z-index: 5; }
+  body main > .section:nth-of-type(6) { z-index: 6; }
+  body main > .section:nth-of-type(7) { z-index: 7; }
+  body main > .section:nth-of-type(8) { z-index: 8; }
+  body main > .section:nth-of-type(9) { z-index: 9; }
+}
+
+/* Opaque alternating panels */
+body main > .section:nth-of-type(odd):not(.section-hero) {
+  background:
+    radial-gradient(circle at top right, rgba(247, 211, 93, 0.12), transparent 22rem),
+    #000000 !important;
+}
+
+body main > .section:nth-of-type(even):not(.section-hero) {
+  background:
+    radial-gradient(circle at top left, rgba(247, 211, 93, 0.10), transparent 22rem),
+    #101010 !important;
+}
+
+[data-theme="light"] body main > .section:nth-of-type(odd):not(.section-hero) {
+  background:
+    radial-gradient(circle at top right, rgba(247, 211, 93, 0.34), transparent 22rem),
+    #FFFFFF !important;
+}
+
+[data-theme="light"] body main > .section:nth-of-type(even):not(.section-hero) {
+  background:
+    radial-gradient(circle at top left, rgba(247, 211, 93, 0.24), transparent 22rem),
+    #F7F7F3 !important;
+}
+
+/* Explicit text contrast fixes */
+[data-theme="light"] .hero h1,
+[data-theme="light"] .hero-subtitle,
+[data-theme="light"] .hero-body,
+[data-theme="light"] .section h1,
+[data-theme="light"] .section h2,
+[data-theme="light"] .section h3,
+[data-theme="light"] .section p {
+  color: #000000;
+}
+
+[data-theme="light"] .eyebrow,
+[data-theme="light"] .card-label,
+[data-theme="light"] .text-link {
+  color: #7A5E00;
+}
+
+/* Hero image overlay contrast */
+[data-theme="light"] .has-photo .hero-overlay {
+  background:
+    linear-gradient(90deg, rgba(255,255,255,0.96), rgba(255,255,255,0.78), rgba(255,255,255,0.26)),
+    linear-gradient(0deg, rgba(255,255,255,0.72), transparent 60%) !important;
+}
+
+.has-photo .hero-overlay {
+  background:
+    linear-gradient(90deg, rgba(0,0,0,0.96), rgba(0,0,0,0.72), rgba(0,0,0,0.30)),
+    linear-gradient(0deg, rgba(0,0,0,0.70), transparent 60%) !important;
+}
+
+/* Widgets: one section, three cards */
+.embed-grid-three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.embed-grid-two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.embed-grid-one {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.embed-grid {
+  display: grid;
+  gap: 1.25rem;
+  width: 100%;
+}
+
+.embed-shell {
+  background: var(--color-surface) !important;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: clamp(1rem, 2vw, 1.5rem);
+  overflow: hidden;
+  min-width: 0;
+}
+
+[data-theme="light"] .embed-shell {
+  background: #FFFFFF !important;
+}
+
+.embed-frame {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  overflow: hidden;
+}
+
+.embed-frame iframe {
+  display: block;
+  max-width: 100%;
+  border-radius: 1rem;
+  background: #FFFFFF;
+}
+
+.embed-strava iframe {
+  width: 300px;
+  max-width: 100%;
+}
+
+.embed-facebook iframe {
+  width: 500px;
+  max-width: 100%;
+  min-height: 600px;
+}
+
+/* If Facebook iframe is blocked by browser/privacy, at least card remains readable. */
+.embed-facebook {
+  background:
+    radial-gradient(circle at top left, rgba(24, 119, 242, 0.20), transparent 18rem),
+    var(--color-surface) !important;
+}
+
+.embed-strava {
+  background:
+    radial-gradient(circle at top left, rgba(252, 76, 2, 0.20), transparent 18rem),
+    var(--color-surface) !important;
+}
+
+/* Placeholder SVG images */
+.gallery-item img,
+.card-photo {
+  background-color: #111111;
+}
+
+/* Mobile and reduced motion: no sticky stack */
+@media (max-width: 999px), (prefers-reduced-motion: reduce) {
+  body main > .section {
+    position: relative !important;
+    top: auto !important;
+    min-height: auto !important;
+    display: block !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+  }
+
+  .embed-grid-three,
+  .embed-grid-two {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Footer above stack */
+.site-footer {
+  position: relative;
+  z-index: 100;
+  background: var(--color-background) !important;
+}
+
+
+/* ========================================================
+   Social widgets layout refresh
+   ======================================================== */
+
+#social-widgets .embed-grid-three {
+  display: grid;
+  grid-template-columns: minmax(320px, 520px);
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+#social-widgets .embed-strava {
+  width: 100%;
+}
+
+#social-widgets .embed-facebook {
+  width: min(100%, 900px);
+  margin-inline: auto;
+}
+
+#social-widgets .embed-facebook iframe {
+  width: 100% !important;
+  min-width: 100% !important;
+  max-width: 100% !important;
+  height: 850px !important;
+}
+
+#social-widgets .embed-strava iframe {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+#social-widgets .embed-shell {
+  min-height: auto;
+}
+
+@media (max-width: 900px) {
+
+  #social-widgets .embed-grid-three {
+    grid-template-columns: 1fr;
+  }
+
+  #social-widgets .embed-facebook {
+    width: 100%;
+  }
+}
+
+
+
+/* =====================================================
+   FINAL FEEDS LAYOUT
+   ===================================================== */
+
+#social-widgets .embed-grid-three {
+
+  display: grid;
+
+  grid-template-columns:
+      minmax(560px, 2fr)
+      minmax(320px, 1fr);
+
+  grid-template-rows:
+      auto
+      1fr;
+
+  grid-template-areas:
+      "facebook summary"
+      "facebook activity";
+
+  gap: 1.5rem;
+
+  align-items: stretch;
+}
+
+/* ----------------------------------------------------- */
+/* Assign cards to areas */
+/* ----------------------------------------------------- */
+
+#social-widgets .embed-facebook {
+  grid-area: facebook;
+}
+
+#social-widgets .embed-strava:nth-of-type(1) {
+  grid-area: activity;
+}
+
+#social-widgets .embed-strava:nth-of-type(2) {
+  grid-area: summary;
+}
+
+/* ----------------------------------------------------- */
+/* Preserve card appearance */
+/* ----------------------------------------------------- */
+
+#social-widgets .embed-shell {
+
+  display: flex;
+  flex-direction: column;
+
+  border-radius: 2rem;
+
+  padding: 1.5rem;
+
+  overflow: hidden;
+}
+
+/* ----------------------------------------------------- */
+/* Facebook card */
+/* ----------------------------------------------------- */
+
+#social-widgets .embed-facebook iframe {
+
+  width: 100% !important;
+
+  min-height: 900px !important;
+
+  height: 900px !important;
+
+  display: block;
+}
+
+#social-widgets .embed-facebook {
+
+  height: 100%;
+}
+
+/* ----------------------------------------------------- */
+/* Summary card */
+/* ----------------------------------------------------- */
+
+#social-widgets .embed-strava:nth-of-type(2) {
+
+  align-self: start;
+}
+
+/* ----------------------------------------------------- */
+/* Activity card */
+/* ----------------------------------------------------- */
+
+#social-widgets .embed-strava:nth-of-type(1) {
+
+  align-self: start;
+}
+
+/* ----------------------------------------------------- */
+/* Strava responsiveness */
+/* ----------------------------------------------------- */
+
+#social-widgets .embed-strava iframe {
+
+  display: block;
+
+  margin-inline: auto;
+
+  width: 100% !important;
+
+  max-width: 100%;
+}
+
+/* ----------------------------------------------------- */
+/* Mobile */
+/* ----------------------------------------------------- */
+
+@media (max-width: 1100px) {
+
+  #social-widgets .embed-grid-three {
+
+    grid-template-columns: 1fr;
+
+    grid-template-areas:
+      "summary"
+      "activity"
+      "facebook";
+  }
+
+  #social-widgets .embed-facebook iframe {
+
+    height: 750px !important;
+    min-height: 750px !important;
+  }
+}
+
+
+
+/* FINAL V3: carded feeds layout, facebook timeline only */
+
+#social-widgets .embed-grid-three {
+  display: grid;
+  grid-template-columns:
+    minmax(500px, 560px)
+    minmax(320px, 420px);
+  grid-template-rows:
+    minmax(250px, auto)
+    minmax(0, 1fr);
+  grid-template-areas:
+    "facebook summary"
+    "facebook activity";
+  gap: 1.5rem;
+  align-items: stretch;
+  justify-content: center;
+}
+
+/* Card order */
+#social-widgets .embed-facebook {
+  grid-area: facebook;
+}
+
+#social-widgets .embed-strava:nth-of-type(1) {
+  grid-area: summary;
+}
+
+#social-widgets .embed-strava:nth-of-type(2) {
+  grid-area: activity;
+}
+
+/* Preserve the card look */
+#social-widgets .embed-shell {
+  display: flex;
+  flex-direction: column;
+  border-radius: 2rem;
+  padding: 1.5rem;
+  overflow: hidden;
+  min-height: 0;
+}
+
+/* Keep headings compact so widgets use the vertical space */
+#social-widgets .embed-card-heading {
+  margin-bottom: 1rem;
+  flex: 0 0 auto;
+}
+
+#social-widgets .embed-card-heading h3 {
+  margin: 0;
+}
+
+#social-widgets .embed-card-heading p:not(.card-label) {
+  margin-bottom: 0;
+}
+
+/* Iframe area fills remaining card space */
+#social-widgets .embed-frame {
+  flex: 1 1 auto;
+  display: grid;
+  place-items: start center;
+  min-height: 0;
+  width: 100%;
+}
+
+/* Facebook: use the maximum Page Plugin width cleanly */
+#social-widgets .embed-facebook iframe {
+  width: 500px !important;
+  max-width: 100% !important;
+  height: 820px !important;
+  min-height: 820px !important;
+  display: block;
+  margin-inline: auto;
+}
+
+/* Strava summary: no dead space */
+#social-widgets .embed-strava:nth-of-type(1) {
+  align-self: stretch;
+}
+
+#social-widgets .embed-strava:nth-of-type(1) .embed-frame {
+  align-content: start;
+}
+
+#social-widgets .embed-strava:nth-of-type(1) iframe {
+  width: 300px !important;
+  max-width: 100% !important;
+  height: 160px !important;
+  min-height: 160px !important;
+}
+
+/* Strava activity: fills the lower-right card neatly */
+#social-widgets .embed-strava:nth-of-type(2) {
+  align-self: stretch;
+}
+
+#social-widgets .embed-strava:nth-of-type(2) iframe {
+  width: 300px !important;
+  max-width: 100% !important;
+  height: 454px !important;
+  min-height: 454px !important;
+}
+
+/* Make the right-hand column visually match the Facebook card height */
+@media (min-width: 1101px) {
+  #social-widgets .embed-facebook {
+    min-height: 100%;
+  }
+
+  #social-widgets .embed-strava:nth-of-type(1),
+  #social-widgets .embed-strava:nth-of-type(2) {
+    min-height: 0;
+  }
+}
+
+/* Mobile/tablet stack order */
+@media (max-width: 1100px) {
+  #social-widgets .embed-grid-three {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    grid-template-areas:
+      "summary"
+      "activity"
+      "facebook";
+  }
+
+  #social-widgets .embed-facebook iframe {
+    width: 500px !important;
+    max-width: 100% !important;
+    height: 720px !important;
+    min-height: 720px !important;
+  }
+}
+
+/* Small screens */
+@media (max-width: 560px) {
+  #social-widgets .embed-shell {
+    padding: 1rem;
+    border-radius: 1.25rem;
+  }
+
+  #social-widgets .embed-facebook iframe {
+    height: 650px !important;
+    min-height: 650px !important;
+  }
+}
+
+
+/* FINAL V4: exact social feed card layout */
+
+/*
+  Desired desktop layout:
+
+  ┌──────────────────────┬──────────────────┐
+  │                      │  Strava Summary  │
+  │   Facebook Feed      ├──────────────────┤
+  │                      │  Latest Activity │
+  │                      │                  │
+  └──────────────────────┴──────────────────┘
+*/
+
+#social-widgets .embed-grid-three {
+  display: grid !important;
+  grid-template-columns:
+    minmax(500px, 560px)
+    minmax(320px, 420px) !important;
+  grid-template-rows:
+    auto
+    1fr !important;
+  grid-template-areas:
+    "facebook summary"
+    "facebook activity" !important;
+  gap: 1.5rem !important;
+  align-items: stretch !important;
+  justify-content: center !important;
+}
+
+/* Exact card placement based on real YAML order */
+#social-widgets .embed-grid-three > .embed-shell:nth-child(1) {
+  grid-area: facebook !important;
+}
+
+#social-widgets .embed-grid-three > .embed-shell:nth-child(2) {
+  grid-area: summary !important;
+}
+
+#social-widgets .embed-grid-three > .embed-shell:nth-child(3) {
+  grid-area: activity !important;
+}
+
+/* Preserve cards */
+#social-widgets .embed-shell {
+  display: flex !important;
+  flex-direction: column !important;
+  border-radius: 2rem !important;
+  padding: 1.5rem !important;
+  overflow: hidden !important;
+  min-height: 0 !important;
+  height: auto !important;
+}
+
+/* Compact headings */
+#social-widgets .embed-card-heading {
+  flex: 0 0 auto !important;
+  margin-bottom: 1rem !important;
+}
+
+#social-widgets .embed-card-heading h3 {
+  margin: 0 !important;
+  line-height: 1.05 !important;
+}
+
+#social-widgets .embed-card-heading p:not(.card-label) {
+  margin-bottom: 0 !important;
+}
+
+/* Iframe area */
+#social-widgets .embed-frame {
+  flex: 0 0 auto !important;
+  display: grid !important;
+  place-items: start center !important;
+  width: 100% !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+}
+
+/* Facebook card: left, full-height feel, no Events tab, maximised plugin width */
+#social-widgets .embed-grid-three > .embed-shell:nth-child(1) {
+  height: 100% !important;
+}
+
+#social-widgets .embed-grid-three > .embed-shell:nth-child(1) .embed-frame {
+  flex: 1 1 auto !important;
+}
+
+#social-widgets .embed-grid-three > .embed-shell:nth-child(1) iframe {
+  width: 500px !important;
+  max-width: 100% !important;
+  height: 760px !important;
+  min-height: 760px !important;
+  display: block !important;
+  margin-inline: auto !important;
+}
+
+/* Strava summary: top-right, intentionally compact */
+#social-widgets .embed-grid-three > .embed-shell:nth-child(2) {
+  align-self: start !important;
+}
+
+#social-widgets .embed-grid-three > .embed-shell:nth-child(2) iframe {
+  width: 300px !important;
+  max-width: 100% !important;
+  height: 160px !important;
+  min-height: 160px !important;
+  display: block !important;
+  margin-inline: auto !important;
+}
+
+/* Latest activity: bottom-right */
+#social-widgets .embed-grid-three > .embed-shell:nth-child(3) {
+  align-self: stretch !important;
+}
+
+#social-widgets .embed-grid-three > .embed-shell:nth-child(3) iframe {
+  width: 300px !important;
+  max-width: 100% !important;
+  height: 454px !important;
+  min-height: 454px !important;
+  display: block !important;
+  margin-inline: auto !important;
+}
+
+/* Make the right column visually balance the Facebook card */
+@media (min-width: 1101px) {
+  #social-widgets .embed-grid-three > .embed-shell:nth-child(3) {
+    min-height: 0 !important;
+  }
+}
+
+/* Mobile/tablet stack order keeps summary above activity */
+@media (max-width: 1100px) {
+  #*ocial-widgets .embed-grid-three {
+*   grid-template-columns: 1fr !imp*rtant;
+    grid-template-rows: aut* !important;
+    grid-template-are*s:
+      "summary"
+      "activity*
+      "facebook" !important;
+  }
+*  #social-widgets .embed-grid-three > .embed-shell:nth-child(1) iframe {
+    width: 500px !important;
+    max-width: 100% !important;
+    height: 680px !important;
+    min-height: 680px !important;
+  }
+}
+
+/* Small screens */
+@media (max-width: 560px) {
+  #s*cial-widgets .embed-shell {
+    pa*ding: 1rem !important;
+    border-*adius: 1.25rem !important;
+  }
+
+  *social-widgets .embed-grid-three >*.embed-shell:nth-child(1) iframe {*    height: 620px !important;
+    *in-height: 620px !important;
+  }
+}*
+
+/* =====================================================
+   FINAL POLISH
+   ===================================================== */
+
+/* Narrow Strava column slightly */
+
+#social-widgets .embed-grid-three {
+
+  grid-template-columns:
+      minmax(500px, 540px)
+      minmax(330px, 360px) !important;
+}
+
+/* Facebook slightly shorter */
+
+#social-widgets .embed-grid-three > .embed-shell:nth-child(1) iframe {
+
+  height: 700px !important;
+  min-height: 700px !important;
+}
+
+/* Right-hand side should visually match Facebook height */
+
+#social-widgets .embed-grid-three {
+
+  align-items: stretch !important;
+}
+
+/* Summary card stays compact */
+
+#social-widgets .embed-grid-three > .embed-shell:nth-child(2) {
+
+  align-self: start !important;
+}
+
+#social-widgets .embed-grid-three > .embed-shell:nth-child(2) iframe {
+
+  height: 160px !important;
+  min-height: 160px !important;
+}
+
+/* Remove excess dead space below summary */
+
+#social-widgets .embed-grid-three > .embed-shell:nth-child(2) .embed-frame {
+
+  flex: 0 0 auto !important;
+}
+
+/* Activity card fills remaining vertical space */
+
+#social-widgets .embed-grid-three > .embed-shell:nth-child(3) {
+
+  height: 100% !important;
+}
+
+#social-widgets .embed-grid-three > .embed-shell:nth-child(3) .embed-frame {
+
+  flex: 1 1 auto !important;
+}
+
+#social-widgets .embed-grid-three > .embed-shell:nth-child(3) iframe {
+
+  height: 454px !important;
+  min-height: 454px !important;
+}
+
+/* Slightly tighten internal card padding */
+
+#social-widgets .embed-shell {
+
+  padding: 1.25rem !important;
+}
+
+/* Give Facebook card more visual importance */
+
+#social-widgets .embed-facebook {
+
+  border-color: rgba(247,211,93,.22) !important;
+}
+
+/*
+  Unfortunately Facebook and Strava iframes control
+  their own internal white backgrounds.
+
+  Browsers do not allow us to reliably restyle
+  iframe contents from another site.
+*/
+

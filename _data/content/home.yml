@@ -8,7 +8,7 @@ sections:
     title: Sheffield Triathlon
     subtitle: Swim. Bike. Run. Belong.
     body: A student-led triathlon club for complete beginners, social athletes and experienced racers.
-    background_image: /assets/images/home/hero.jpg
+    background_image: /assets/images/home/hero.svg
     primary_button:
       label: Join Today
       url: /join/
@@ -28,59 +28,49 @@ sections:
       The club trains across swimming, cycling and running, with a strong student
       community and routes that make the most of Sheffield and the Peak District.
 
-  - type: stats
-    id: club-stats
-    eyebrow: Club at a Glance
-    title: Train, race and belong.
-    subtitle: Placeholder numbers for now — update when committee confirms current figures.
-    items:
-      - number: 150+
-        label: Members
-      - number: 6
-        label: Weekly Sessions
-      - number: 40+
-        label: Races
-      - number: BUCS
-        label: Competitive Team
-
   - type: cards
     id: highlights
     eyebrow: Club Life
-    title: More than just training.
-    subtitle: The club should feel welcoming, active and social from the first visit.
+    title: Train, race, socialise.
+    subtitle: Replace the placeholders with real club photos when ready.
     cards:
       - title: Training
         label: Train
         description: Swim, bike and run sessions for a range of abilities.
-        image: /assets/images/home/training.jpg
+        image: /assets/images/home/training.svg
         url: /training/
       - title: Events
         label: Events
         description: Race opportunities, Give it a Go sessions and club activities.
-        image: /assets/images/home/events.jpg
+        image: /assets/images/home/events.svg
         url: /events/
       - title: Socials
         label: Social
-        description: Student socials, community, trips and memories beyond sport.
-        image: /assets/images/home/socials.jpg
+        description: Instagram, Strava, Facebook and student community.
+        image: /assets/images/home/socials.svg
         url: /socials/
 
   - type: socials
     id: social-integrations
     eyebrow: Follow
     title: Keep up with the club.
-    subtitle: Instagram and Strava are the best live channels for now.
+    subtitle: Instagram for club life. Strava for training. Facebook for updates.
     items:
       - platform: Instagram
         title: Instagram
-        description: Follow the club for photos, freshers updates, socials and training reminders.
+        description: Follow @sheffunitri for photos, freshers updates, socials and training reminders.
         url: https://www.instagram.com/sheffunitri/
         button: Open Instagram
       - platform: Strava
         title: Strava
-        description: Add the club Strava link here once confirmed.
-        url: "#"
+        description: Join Sheffield Triathlon on Strava.
+        url: https://www.strava.com/clubs/UoSTri
         button: Open Strava
+      - platform: Facebook
+        title: Facebook
+        description: Follow the public club page.
+        url: https://www.facebook.com/UoSTriathlon
+        button: Open Facebook
 
   - type: cta
     id: final-join-cta

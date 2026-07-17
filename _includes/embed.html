@@ -1,4 +1,4 @@
-<section id="{{ include.section_id }}" class="section section-embed" data-section-type="embed">
+<section id="{{ include.section_id }}" class="section section-embed apple-panel" data-section-type="embed">
   <div class="container">
     {% include section-heading.html
       eyebrow=include.section.eyebrow
@@ -7,16 +7,54 @@
       alignment=include.section.alignment
     %}
 
-    <div class="embed-card">
-      {% if include.section.embed_html %}
-        {{ include.section.embed_html }}
-      {% elsif include.section.url %}
-        <a class="button primary" href="{{ include.section.url }}" target="_blank" rel="noopener">
-          {{ include.section.button_label | default: "Open calendar" }}
-        </a>
-      {% else %}
-        <p>Add an embed code or external link in the YAML file.</p>
-      {% endif %}
-    </div>
+    {% if include.section.embeds %}
+      <div class="embed-grid embed-grid-{{ include.section.layout | default: 'two' }}">
+        {% for embed in include.section.embeds %}
+          <article class="embed-shell embed-{{ embed.provider | default: 'generic' }}">
+            <header class="embed-card-heading">
+              {% if embed.provider %}
+                <p class="card-label">{{ embed.provider }}</p>
+              {% endif %}
+
+              {% if embed.title %}
+                <h3>{{ embed.title }}</h3>
+              {% endif %}
+
+              {% if embed.description %}
+                <p>{{ embed.description }}</p>
+              {% endif %}
+            </header>
+
+            {% if embed.embed_html %}
+              <div class="embed-frame">
+                {{ embed.embed_html }}
+              </div>
+            {% elsif embed.url %}
+              <div class="embed-placeholder">
+                <a class="button primary" href="{{ embed.url }}" target="_blank" rel="noopener">
+                  {{ embed.button_label | default: "Open" }}
+                </a>
+              </div>
+            {% else %}
+              <div class="embed-placeholder">
+                <p>Embed not configured yet.</p>
+              </div>
+            {% endif %}
+          </article>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="embed-shell embed-{{ include.section.provider | default: 'generic' }}">
+        {% if include.section.embed_html %}
+          <div class="embed-frame">
+            {{ include.section.embed_html }}
+          </div>
+        {% else %}
+          <div class="embed-placeholder">
+            <p>Embed not configured yet.</p>
+          </div>
+        {% endif %}
+      </div>
+    {% endif %}
   </div>
 </section>

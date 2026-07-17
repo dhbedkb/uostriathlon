@@ -5,7 +5,7 @@ items:
 
   - platform: Strava
     label: Sheffield Triathlon on Strava
-    url: "#"
+    url: https://www.strava.com/clubs/UoSTri?utm_campaign=club_share&utm_content=38083&utm_medium=widget&utm_source=www-uostriathlon-co-uk.filesusr.com
 
   - platform: Email
     label: triathlon@sheffield.ac.uk
