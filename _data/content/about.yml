@@ -1,21 +1,13 @@
-title: About Sheffield Triathlon
-description: We are a student-led triathlon club welcoming complete beginners and experienced athletes alike.
+title: About
+description: About content has been merged into the homepage.
+
 sections:
   - type: hero
-    id: about-hero
-    eyebrow: Sheffield Triathlon
-    title: About Sheffield Triathlon
-    subtitle: Performance, community and belonging.
-    body: We are a student-led triathlon club welcoming complete beginners and experienced athletes alike.
+    id: about-retired
+    eyebrow: Merged
+    title: About has moved.
+    subtitle: The homepage now explains the club.
+    body: Home and About have been merged to keep the site simpler.
     primary_button:
-      label: Join Today
-      url: /join/
-    secondary_button:
-      label: View Training
-      url: /training/
-
-  - type: text
-    id: about-intro
-    eyebrow: Overview
-    title: About Sheffield Triathlon
-    body: We are a student-led triathlon club welcoming complete beginners and experienced athletes alike.
+      label: Go Home
+      url: /

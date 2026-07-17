@@ -1,12 +1,14 @@
 title: University of Sheffield Triathlon Club
 description: Swim, bike and run with Sheffield’s student triathlon club.
+
 sections:
   - type: hero
     id: home-hero
     eyebrow: University of Sheffield
-    title: University of Sheffield Triathlon Club
+    title: Sheffield Triathlon
     subtitle: Swim. Bike. Run. Belong.
-    body: Training, racing and social sport for all abilities.
+    body: A student-led triathlon club for complete beginners, social athletes and experienced racers.
+    background_image: /assets/images/home/hero.jpg
     primary_button:
       label: Join Today
       url: /join/
@@ -14,11 +16,23 @@ sections:
       label: View Training
       url: /training/
 
+  - type: text
+    id: about-club
+    eyebrow: About
+    title: Triathlon sounds intense. Joining us does not have to be.
+    body: >
+      Triathlon is three sports back to back — swim, bike and run — but you do not
+      need to arrive as a triathlete. Sheffield Triathlon welcomes complete beginners,
+      people from single-sport backgrounds, social members and experienced racers.
+
+      The club trains across swimming, cycling and running, with a strong student
+      community and routes that make the most of Sheffield and the Peak District.
+
   - type: stats
     id: club-stats
     eyebrow: Club at a Glance
     title: Train, race and belong.
-    subtitle: A student triathlon community built around performance, inclusivity and friendship.
+    subtitle: Placeholder numbers for now — update when committee confirms current figures.
     items:
       - number: 150+
         label: Members
@@ -30,76 +44,52 @@ sections:
         label: Competitive Team
 
   - type: cards
-    id: training-overview
-    eyebrow: Training
-    title: Swim. Bike. Run. Repeat.
-    subtitle: Sessions for complete beginners, social athletes and experienced racers.
+    id: highlights
+    eyebrow: Club Life
+    title: More than just training.
+    subtitle: The club should feel welcoming, active and social from the first visit.
     cards:
-      - title: Swimming
-        label: Swim
-        description: Coached pool sessions for a range of abilities.
-        schedule: Weekly sessions
-        location: Sheffield
-        url: /training/#swimming
-      - title: Cycling
-        label: Bike
-        description: Social and structured rides around Sheffield and the Peak District.
-        schedule: Weekly rides
-        location: Sheffield and Peak District
-        url: /training/#cycling
-      - title: Running
-        label: Run
-        description: Group runs, speed work and friendly training routes.
-        schedule: Weekly runs
-        location: Sheffield
-        url: /training/#running
+      - title: Training
+        label: Train
+        description: Swim, bike and run sessions for a range of abilities.
+        image: /assets/images/home/training.jpg
+        url: /training/
+      - title: Events
+        label: Events
+        description: Race opportunities, Give it a Go sessions and club activities.
+        image: /assets/images/home/events.jpg
+        url: /events/
+      - title: Socials
+        label: Social
+        description: Student socials, community, trips and memories beyond sport.
+        image: /assets/images/home/socials.jpg
+        url: /socials/
 
-  - type: events
-    id: upcoming-events
-    eyebrow: Events
-    title: Upcoming races and socials.
-    subtitle: From beginner-friendly events to competitive racing.
+  - type: socials
+    id: social-integrations
+    eyebrow: Follow
+    title: Keep up with the club.
+    subtitle: Instagram and Strava are the best live channels for now.
     items:
-      - title: Give it a Go Duathlon
-        date: September
-        location: Sheffield
-        type: Beginner Event
-        description: A friendly first step into multisport.
-        url: /join/
-      - title: Club Social
-        date: TBC
-        location: Sheffield
-        type: Social
-        description: Meet the club away from training.
-        url: /news/
-      - title: BUCS Triathlon
-        date: Spring
-        location: TBC
-        type: Race
-        description: Competitive university racing opportunity.
-        url: /races/
-
-  - type: gallery
-    id: gallery-preview
-    eyebrow: Gallery
-    title: Club life in motion.
-    subtitle: Training, racing, socials and Sheffield adventures.
-    images:
-      - category: Training
-        caption: Weekly training with the club.
-      - category: Racing
-        caption: Race days across the season.
-      - category: Socials
-        caption: Student life beyond training.
+      - platform: Instagram
+        title: Instagram
+        description: Follow the club for photos, freshers updates, socials and training reminders.
+        url: https://www.instagram.com/sheffunitri/
+        button: Open Instagram
+      - platform: Strava
+        title: Strava
+        description: Add the club Strava link here once confirmed.
+        url: "#"
+        button: Open Strava
 
   - type: cta
-    id: join-cta
+    id: final-join-cta
     eyebrow: Join
-    title: Ready to join Sheffield Triathlon?
-    body: You do not need to be a triathlete to start. Come along, meet the club and give it a go.
+    title: Ready to give triathlon a go?
+    body: You do not need to be a triathlete to start. Come along, meet the club and try a session.
     primary_button:
       label: Join Now
       url: /join/
     secondary_button:
-      label: Ask a Question
+      label: Email the Club
       url: mailto:triathlon@sheffield.ac.uk

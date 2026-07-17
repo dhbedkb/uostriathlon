@@ -1,21 +1,56 @@
 title: Committee
-description: Meet the students who help organise training, racing, socials and welfare.
+description: Meet the student committee behind Sheffield Triathlon.
+
 sections:
   - type: hero
     id: committee-hero
-    eyebrow: Sheffield Triathlon
-    title: Committee
+    eyebrow: Committee
+    title: Meet the Committee
     subtitle: Student-led. Community-focused.
-    body: Meet the students who help organise training, racing, socials and welfare.
+    body: The club is run by students who organise training, racing, socials and welfare.
     primary_button:
-      label: Join Today
-      url: /join/
+      label: Contact Us
+      url: mailto:triathlon@sheffield.ac.uk
     secondary_button:
-      label: View Training
-      url: /training/
+      label: Join the Club
+      url: /join/
 
-  - type: text
-    id: committee-intro
-    eyebrow: Overview
-    title: Committee
-    body: Meet the students who help organise training, racing, socials and welfare.
+  - type: committee
+    id: committee-grid
+    eyebrow: Team
+    title: Current committee.
+    subtitle: Replace these placeholders with the current committee.
+    members:
+      - name: President
+        role: President
+        bio: Coordinates the club and supports committee activity.
+        email: triathlon@sheffield.ac.uk
+      - name: Secretary
+        role: Secretary
+        bio: Supports organisation, communication and administration.
+        email: triathlon@sheffield.ac.uk
+      - name: Treasurer
+        role: Treasurer
+        bio: Helps manage club finances and planning.
+        email: triathlon@sheffield.ac.uk
+      - name: Training Officer
+        role: Training
+        bio: Helps coordinate sessions and training information.
+        email: triathlon@sheffield.ac.uk
+      - name: Social Secretary
+        role: Socials
+        bio: Helps organise social events and community activities.
+        email: triathlon@sheffield.ac.uk
+      - name: Welfare Officer
+        role: Welfare
+        bio: Supports member wellbeing and inclusion.
+        email: triathlon@sheffield.ac.uk
+
+  - type: cta
+    id: committee-cta
+    eyebrow: Contact
+    title: Need to ask committee something?
+    body: Email the club and the right person can respond.
+    primary_button:
+      label: Email the Club
+      url: mailto:triathlon@sheffield.ac.uk

@@ -7,23 +7,28 @@ brand:
 theme:
   default: dark
   colors:
-    navy: "#07111F"
-    purple: "#440099"
-    deep_purple: "#24135F"
-    gold: "#F2C94C"
+    black: "#050505"
+    charcoal: "#101010"
+    gold: "#FFD100"
     white: "#FFFFFF"
-    off_white: "#F8FAFC"
-    slate: "#64748B"
-    charcoal: "#111827"
+    off_white: "#F7F7F3"
+    grey: "#A3A3A3"
 
 features:
   dark_mode: true
   animations: true
   gallery_lightbox: true
 
+links:
+  training_calendar: "#"
+  events_calendar: "#"
+  instagram: "https://www.instagram.com/sheffunitri/"
+  strava: "#"
+  membership: "#"
+
 footer:
   description: >
-    Training, racing and socials for complete beginners and experienced
-    triathletes at the University of Sheffield.
+    Swim, bike and run with Sheffield Triathlon. Training, racing and socials
+    for complete beginners and experienced athletes.
   affiliation: >
-    A student-led club connected to University of Sheffield sport.
+    A student-led University of Sheffield triathlon club connected to Sport Sheffield.

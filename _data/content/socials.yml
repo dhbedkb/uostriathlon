@@ -1,0 +1,57 @@
+title: Socials
+description: Social events, club community, Instagram and Strava.
+
+sections:
+  - type: hero
+    id: socials-hero
+    eyebrow: Socials
+    title: Socials
+    subtitle: The club beyond training.
+    body: Social events are a major part of Sheffield Triathlon life.
+    background_image: /assets/images/socials/hero.jpg
+    primary_button:
+      label: Open Instagram
+      url: https://www.instagram.com/sheffunitri/
+    secondary_button:
+      label: Join the Club
+      url: /join/
+
+  - type: text
+    id: socials-intro
+    eyebrow: Community
+    title: Training is easier when people know your name.
+    body: >
+      Socials help new members settle in, keep training fun and make the club feel like
+      a student community rather than just a timetable.
+
+  - type: socials
+    id: social-links
+    eyebrow: Live Channels
+    title: Follow the club.
+    items:
+      - platform: Instagram
+        title: Instagram
+        description: Best place for photos, stories, freshers information and social updates.
+        url: https://www.instagram.com/sheffunitri/
+        button: Open Instagram
+      - platform: Strava
+        title: Strava
+        description: Add the club Strava page link once confirmed.
+        url: "#"
+        button: Open Strava
+
+  - type: gallery
+    id: socials-gallery
+    eyebrow: Photos
+    title: Social moments.
+    subtitle: Replace these placeholders with real club photos.
+    images:
+      - src: /assets/images/socials/social-1.jpg
+        alt: Sheffield Triathlon club social photo
+        caption: Club social placeholder.
+      - src: /assets/images/socials/social-2.jpg
+        alt: Sheffield Triathlon members at an event
+        caption: Event placeholder.
+      - src: /assets/images/socials/social-3.jpg
+        alt: Sheffield Triathlon group photo
+        caption: Group photo placeholder.

@@ -11,10 +11,11 @@
       <div class="gallery-grid">
         {% for image in include.section.images %}
           <figure class="gallery-item reveal-card">
-            <div class="gallery-placeholder">
-              <span>{{ image.category | default: "Club photo" }}</span>
-            </div>
-
+            {% if image.src %}
+              <img src="{{ image.src | relative_url }}" alt="{{ image.alt | default: image.caption | default: 'Sheffield Triathlon club photo' }}" loading="lazy">
+            {% else %}
+              <div class="gallery-placeholder"><span>{{ image.category | default: "Club photo" }}</span></div>
+            {% endif %}
             {% if image.caption %}
               <figcaption>{{ image.caption }}</figcaption>
             {% endif %}

@@ -1,0 +1,22 @@
+<section id="{{ include.section_id }}" class="section section-embed" data-section-type="embed">
+  <div class="container">
+    {% include section-heading.html
+      eyebrow=include.section.eyebrow
+      title=include.section.title
+      subtitle=include.section.subtitle
+      alignment=include.section.alignment
+    %}
+
+    <div class="embed-card">
+      {% if include.section.embed_html %}
+        {{ include.section.embed_html }}
+      {% elsif include.section.url %}
+        <a class="button primary" href="{{ include.section.url }}" target="_blank" rel="noopener">
+          {{ include.section.button_label | default: "Open calendar" }}
+        </a>
+      {% else %}
+        <p>Add an embed code or external link in the YAML file.</p>
+      {% endif %}
+    </div>
+  </div>
+</section>

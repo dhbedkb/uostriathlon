@@ -1,21 +1,55 @@
 title: Training
-description: Weekly sessions for all abilities across swimming, cycling, running, strength and socials.
+description: Training information and calendar link.
+
 sections:
   - type: hero
     id: training-hero
-    eyebrow: Sheffield Triathlon
+    eyebrow: Training
     title: Training
-    subtitle: Swim, bike, run and improve.
-    body: Weekly sessions for all abilities across swimming, cycling, running, strength and socials.
+    subtitle: Swim. Bike. Run.
+    body: Use this page to explain the training structure and link members to the live calendar.
+    background_image: /assets/images/training/hero.jpg
     primary_button:
-      label: Join Today
-      url: /join/
+      label: Open Training Calendar
+      url: "#"
     secondary_button:
-      label: View Training
-      url: /training/
+      label: Ask a Question
+      url: mailto:triathlon@sheffield.ac.uk
 
-  - type: text
-    id: training-intro
-    eyebrow: Overview
-    title: Training
-    body: Weekly sessions for all abilities across swimming, cycling, running, strength and socials.
+  - type: cards
+    id: training-types
+    eyebrow: Sessions
+    title: What training includes.
+    cards:
+      - title: Swimming
+        label: Swim
+        description: Pool sessions for a range of abilities.
+        image: /assets/images/training/swim.jpg
+      - title: Cycling
+        label: Bike
+        description: Social and structured rides around Sheffield and towards the Peaks.
+        image: /assets/images/training/bike.jpg
+      - title: Running
+        label: Run
+        description: Group runs and structured efforts for different paces.
+        image: /assets/images/training/run.jpg
+
+  - type: embed
+    id: training-calendar
+    eyebrow: Calendar
+    title: Live training calendar.
+    subtitle: Replace the button URL with the club Google Calendar link or embed code.
+    url: "#"
+    button_label: Open Training Calendar
+
+  - type: faq
+    id: training-faq
+    eyebrow: FAQ
+    title: Training questions.
+    items:
+      - question: Can beginners attend training?
+        answer: Yes. The club is built to welcome a range of abilities.
+      - question: Where is the live timetable?
+        answer: Use the training calendar link once committee has added the current calendar.
+      - question: What should I bring?
+        answer: Bring the kit needed for the session and ask committee if unsure.

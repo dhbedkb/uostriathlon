@@ -1,12 +1,14 @@
 title: Gallery
-description: A visual look at life in Sheffield Triathlon.
+description: Photos from training, racing, socials and club life.
+
 sections:
   - type: hero
     id: gallery-hero
-    eyebrow: Sheffield Triathlon
+    eyebrow: Gallery
     title: Gallery
     subtitle: Training days, race days and socials.
-    body: A visual look at life in Sheffield Triathlon.
+    body: Add real images into assets/images/gallery and update this YAML file.
+    background_image: /assets/images/gallery/hero.jpg
     primary_button:
       label: Join Today
       url: /join/
@@ -14,8 +16,27 @@ sections:
       label: View Training
       url: /training/
 
-  - type: text
-    id: gallery-intro
-    eyebrow: Overview
-    title: Gallery
-    body: A visual look at life in Sheffield Triathlon.
+  - type: gallery
+    id: gallery-grid
+    eyebrow: Photos
+    title: Club photos.
+    subtitle: Replace these paths with real uploaded images.
+    images:
+      - src: /assets/images/gallery/gallery-1.jpg
+        alt: Sheffield Triathlon club photo 1
+        caption: Training placeholder.
+      - src: /assets/images/gallery/gallery-2.jpg
+        alt: Sheffield Triathlon club photo 2
+        caption: Racing placeholder.
+      - src: /assets/images/gallery/gallery-3.jpg
+        alt: Sheffield Triathlon club photo 3
+        caption: Socials placeholder.
+      - src: /assets/images/gallery/gallery-4.jpg
+        alt: Sheffield Triathlon club photo 4
+        caption: Peaks placeholder.
+      - src: /assets/images/gallery/gallery-5.jpg
+        alt: Sheffield Triathlon club photo 5
+        caption: Give it a Go placeholder.
+      - src: /assets/images/gallery/gallery-6.jpg
+        alt: Sheffield Triathlon club photo 6
+        caption: Team placeholder.

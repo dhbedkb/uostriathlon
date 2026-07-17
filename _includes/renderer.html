@@ -26,6 +26,10 @@
       {% include faq.html section=section section_id=section_id section_index=section_index %}
     {% when "cta" %}
       {% include cta.html section=section section_id=section_id section_index=section_index %}
+    {% when "embed" %}
+      {% include embed.html section=section section_id=section_id section_index=section_index %}
+    {% when "socials" %}
+      {% include socials.html section=section section_id=section_id section_index=section_index %}
     {% else %}
       {% include unknown-section.html section=section section_id=section_id section_index=section_index %}
   {% endcase %}

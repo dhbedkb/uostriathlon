@@ -1,20 +1,16 @@
 items:
   - label: Home
     url: /
-  - label: About
-    url: /about/
   - label: Training
     url: /training/
-  - label: Races
-    url: /races/
+  - label: Events
+    url: /events/
+  - label: Socials
+    url: /socials/
   - label: Committee
     url: /committee/
   - label: Gallery
     url: /gallery/
-  - label: Join
-    url: /join/
-  - label: News
-    url: /news/
 
 cta:
   label: Join

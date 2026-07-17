@@ -902,3 +902,80 @@ a {
     display: none;
   }
 }
+
+
+/* Revised structure: Sport Sheffield-style black/gold/photo system */
+
+:root {
+  --color-navy: #050505;
+  --color-deep-purple: #101010;
+  --color-purple: #222222;
+  --color-gold: #FFD100;
+  --color-background: #050505;
+  --color-surface: #101010;
+  --color-surface-soft: rgba(255, 255, 255, 0.065);
+  --color-text: #FFFFFF;
+  --color-muted: #C7C7C7;
+  --color-border: rgba(255, 255, 255, 0.14);
+}
+
+[data-theme="light"] {
+  --color-background: #F7F7F3;
+  --color-surface: #FFFFFF;
+  --color-surface-soft: rgba(5, 5, 5, 0.045);
+  --color-text: #050505;
+  --color-muted: #5F5F5F;
+  --color-border: rgba(5, 5, 5, 0.14);
+}
+
+.hero-photo,
+.card-photo {
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.hero-photo {
+  position: absolute;
+  inset: 0;
+  transform: scale(1.02);
+}
+
+.has-photo .hero-overlay {
+  background:
+    linear-gradient(90deg, rgba(5, 5, 5, 0.95), rgba(5, 5, 5, 0.68), rgba(5, 5, 5, 0.28)),
+    linear-gradient(0deg, rgba(5, 5, 5, 0.62), transparent 55%);
+}
+
+.card-photo {
+  min-height: 220px;
+  background-color: #161616;
+}
+
+.gallery-item img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  display: block;
+}
+
+.embed-card,
+.social-card {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  background: var(--color-surface-soft);
+  box-shadow: var(--shadow-soft);
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+.social-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+@media (max-width: 700px) {
+  .social-grid {
+    grid-template-columns: 1fr;
+  }
+}
