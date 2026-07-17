@@ -45,9 +45,7 @@
       <ul>
         {% for social in site.data.socials.items %}
           <li>
-            {{ social.url }}
-              {{ social.label }}
-            </a>
+            {{ social.url }}{{ social.label }}</a>
           </li>
         {% endfor %}
       </ul>
@@ -55,11 +53,7 @@
   </div>
 
   <div class="container footer-bottom">
-    <p>
-      © {{ site.time | date: "%Y" }} {{ site.data.settings.brand.name }}.
-    </p>
-    <p>
-      Built with Jekyll and GitHub Pages.
-    </p>
+    <p>© {{ site.time | date: "%Y" }} {{ site.data.settings.brand.name }}.</p>
+    <p>Built with Jekyll and GitHub Pages.</p>
   </div>
 </footer>

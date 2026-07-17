@@ -4,8 +4,8 @@ description: >-
   Swim, bike and run with the University of Sheffield Triathlon Club.
   Training, racing and socials for complete beginners and experienced athletes alike.
 
-baseurl: ""
-url: "https://www.uostriathlon.co.uk"
+baseurl: "/uostriathlon"
+url: "https://dhbedkb.github.io"
 
 lang: en-GB
 timezone: Europe/London

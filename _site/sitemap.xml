@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
-<loc>http://localhost:4000/about/</loc>
+<loc>https://dhbedkb.github.io/uostriathlon/about/</loc>
 </url>
 <url>
-<loc>http://localhost:4000/committee/</loc>
+<loc>https://dhbedkb.github.io/uostriathlon/committee/</loc>
 </url>
 <url>
-<loc>http://localhost:4000/gallery/</loc>
+<loc>https://dhbedkb.github.io/uostriathlon/gallery/</loc>
 </url>
 <url>
-<loc>http://localhost:4000/</loc>
+<loc>https://dhbedkb.github.io/uostriathlon/</loc>
 </url>
 <url>
-<loc>http://localhost:4000/join/</loc>
+<loc>https://dhbedkb.github.io/uostriathlon/join/</loc>
 </url>
 <url>
-<loc>http://localhost:4000/news/</loc>
+<loc>https://dhbedkb.github.io/uostriathlon/news/</loc>
 </url>
 <url>
-<loc>http://localhost:4000/races/</loc>
+<loc>https://dhbedkb.github.io/uostriathlon/races/</loc>
 </url>
 <url>
-<loc>http://localhost:4000/training/</loc>
+<loc>https://dhbedkb.github.io/uostriathlon/training/</loc>
 </url>
 </urlset>
