@@ -1,6 +1,6 @@
 <header class="site-header" data-header>
   <nav class="nav" aria-label="Main navigation">
-    {{ '/' | relative_url }}
+    <a class="brand" href="{{ '/' | relative_url }}">
       <span class="brand-mark" aria-hidden="true">S</span>
       <span class="brand-text">
         <span class="brand-name">{{ site.data.settings.brand.short_name }}</span>
@@ -8,13 +8,7 @@
       </span>
     </a>
 
-    <button
-      class="nav-toggle"
-      type="button"
-      data-nav-toggle
-      aria-expanded="false"
-      aria-controls="primary-navigation"
-    >
+    <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="primary-navigation">
       <span class="sr-only">Toggle navigation</span>
       <span class="nav-toggle-line"></span>
       <span class="nav-toggle-line"></span>
@@ -25,9 +19,7 @@
       <div class="nav-links">
         {% for item in site.data.navigation.items %}
           {% assign current_url = page.url | replace: 'index.html', '' %}
-          {{ item.url | relative_url }}
-            {{ item.label }}
-          </a>
+          <a href="{{ item.url | relative_url }}" {% if current_url == item.url %}aria-current="page"{% endif %}>{{ item.label }}</a>
         {% endfor %}
       </div>
 
@@ -39,9 +31,7 @@
         {% endif %}
 
         {% if site.data.navigation.cta %}
-          {{ site.data.navigation.cta.url | relative_url }}
-            {{ site.data.navigation.cta.label }}
-          </a>
+          <a class="nav-cta" href="{{ site.data.navigation.cta.url | relative_url }}">{{ site.data.navigation.cta.label }}</a>
         {% endif %}
       </div>
     </div>

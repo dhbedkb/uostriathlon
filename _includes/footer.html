@@ -1,7 +1,7 @@
 <footer class="site-footer">
   <div class="container footer-grid">
     <div class="footer-brand">
-      {{ '/' | relative_url }}
+      <a class="brand footer-logo" href="{{ '/' | relative_url }}">
         <span class="brand-mark" aria-hidden="true">S</span>
         <span class="brand-text">
           <span class="brand-name">{{ site.data.settings.brand.short_name }}</span>
@@ -9,22 +9,15 @@
         </span>
       </a>
 
-      <p>
-        {{ site.data.settings.footer.description }}
-      </p>
-
-      <p class="footer-small">
-        {{ site.data.settings.footer.affiliation }}
-      </p>
+      <p>{{ site.data.settings.footer.description }}</p>
+      <p class="footer-small">{{ site.data.settings.footer.affiliation }}</p>
     </div>
 
     <div class="footer-column">
       <h2>Explore</h2>
       <ul>
         {% for item in site.data.navigation.items %}
-          <li>
-            {{ item.url | relative_url }}{{ item.label }}</a>
-          </li>
+          <li><a href="{{ item.url | relative_url }}">{{ item.label }}</a></li>
         {% endfor %}
       </ul>
     </div>
@@ -32,11 +25,10 @@
     <div class="footer-column">
       <h2>Training</h2>
       <ul>
-        <li>{{ '/training/#swimming' | relative_url }}Swimming</a></li>
-        <li>{{ '/training/#cycling' | relative_url }}Cycling</a></li>
-        <li>{{ '/training/#running' | relative_url }}Running</a></li>
-        <li>{{ '/training/#strength' | relative_url }}Strength</a></li>
-        <li>{{ '/training/#socials' | relative_url }}Socials</a></li>
+        <li><a href="{{ '/training/#swimming' | relative_url }}">Swimming</a></li>
+        <li><a href="{{ '/training/#cycling' | relative_url }}">Cycling</a></li>
+        <li><a href="{{ '/training/#running' | relative_url }}">Running</a></li>
+        <li><a href="{{ '/training/#strength' | relative_url }}">Strength</a></li>
       </ul>
     </div>
 
@@ -44,9 +36,7 @@
       <h2>Connect</h2>
       <ul>
         {% for social in site.data.socials.items %}
-          <li>
-            {{ social.url }}{{ social.label }}</a>
-          </li>
+          <li><a href="{{ social.url }}">{{ social.label }}</a></li>
         {% endfor %}
       </ul>
     </div>

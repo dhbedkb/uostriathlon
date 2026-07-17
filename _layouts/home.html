@@ -7,7 +7,9 @@ layout: default
 {% if page_content %}
   {% include renderer.html sections=page_content.sections %}
 {% else %}
-  <section>
-    <h1>No content file found</h1>
+  <section class="section">
+    <div class="container">
+      <h1>No content file found</h1>
+    </div>
   </section>
 {% endif %}

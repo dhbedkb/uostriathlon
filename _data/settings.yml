@@ -1,0 +1,29 @@
+brand:
+  name: University of Sheffield Triathlon Club
+  short_name: Sheffield Triathlon
+  tagline: Swim. Bike. Run. Belong.
+  email: triathlon@sheffield.ac.uk
+
+theme:
+  default: dark
+  colors:
+    navy: "#07111F"
+    purple: "#440099"
+    deep_purple: "#24135F"
+    gold: "#F2C94C"
+    white: "#FFFFFF"
+    off_white: "#F8FAFC"
+    slate: "#64748B"
+    charcoal: "#111827"
+
+features:
+  dark_mode: true
+  animations: true
+  gallery_lightbox: true
+
+footer:
+  description: >
+    Training, racing and socials for complete beginners and experienced
+    triathletes at the University of Sheffield.
+  affiliation: >
+    A student-led club connected to University of Sheffield sport.
