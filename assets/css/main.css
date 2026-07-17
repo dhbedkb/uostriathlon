@@ -2609,3 +2609,374 @@ body main > .section:nth-of-type(even):not(.section-hero) {
     min-height: 620px !important;
   }
 }
+
+
+/* =====================================================
+   FINAL HERO MOBILE + PARTIAL APPLE SLIDING REFINEMENT
+   ===================================================== */
+
+/*
+  This patch intentionally avoids making every section sticky.
+
+  Apple-style sliding is applied only to visually suitable sections:
+  - hero
+  - intro/showcase/card/social-logo/gallery style sections
+
+  It is NOT applied to:
+  - embed/widget sections
+  - FAQ sections
+  - committee grids
+  - long text-heavy utility sections
+
+  This prevents text overlap while keeping the premium sliding-panel feel.
+*/
+
+/* -----------------------------------------------------
+   1. Solid section foundations
+   ----------------------------------------------------- */
+
+.section {
+  position: relative;
+  isolation: isolate;
+  background: #000000 !important;
+  color: #ffffff;
+}
+
+[data-theme="light"] .section {
+  background: #ffffff !important;
+  color: #000000;
+}
+
+.section > .container,
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+/* -----------------------------------------------------
+   2. Hero photo handling
+   ----------------------------------------------------- */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  background: #000000 !important;
+}
+
+.hero-photo {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+
+  transform: scale(1.01);
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+/* Stronger dark-mode gradient for readability */
+.has-photo .hero-overlay,
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.96) 0%,
+      rgba(0, 0, 0, 0.76) 42%,
+      rgba(0, 0, 0, 0.42) 100%
+    ),
+    linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.82) 0%,
+      rgba(0, 0, 0, 0.28) 52%,
+      rgba(0, 0, 0, 0.45) 100%
+    ) !important;
+}
+
+/* Light mode: use white wash, but keep enough contrast */
+[data-theme="light"] .has-photo .hero-overlay,
+[data-theme="light"] .hero-overlay {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.96) 0%,
+      rgba(255, 255, 255, 0.82) 42%,
+      rgba(255, 255, 255, 0.42) 100%
+    ),
+    linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.84) 0%,
+      rgba(255, 255, 255, 0.28) 54%,
+      rgba(255, 255, 255, 0.56) 100%
+    ) !important;
+}
+
+[data-theme="light"] .hero h1,
+[data-theme="light"] .hero-subtitle,
+[data-theme="light"] .hero-body {
+  color: #000000 !important;
+}
+
+[data-theme="light"] .hero .eyebrow {
+  color: #7a5e00 !important;
+}
+
+/* -----------------------------------------------------
+   3. Mobile hero image behaviour
+   ----------------------------------------------------- */
+
+@media (max-width: 760px) {
+  .hero {
+    min-height: auto !important;
+    display: grid;
+    align-items: end;
+  }
+
+  .hero-content {
+    padding-top: clamp(7rem, 18vh, 10rem) !important;
+    padding-bottom: clamp(4rem, 12vh, 7rem) !important;
+  }
+
+  .hero-photo {
+    background-size: cover !important;
+    background-position: center top !important;
+    transform: none;
+  }
+
+  /*
+    On mobile, images often need stronger shading because the text
+    stacks over more of the photo.
+  */
+  .has-photo .hero-overlay,
+  .hero-overlay {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.78) 0%,
+        rgba(0, 0, 0, 0.52) 36%,
+        rgba(0, 0, 0, 0.92) 100%
+      ) !important;
+  }
+
+  [data-theme="light"] .has-photo .hero-overlay,
+  [data-theme="light"] .hero-overlay {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.86) 0%,
+        rgba(255, 255, 255, 0.56) 38%,
+        rgba(255, 255, 255, 0.94) 100%
+      ) !important;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.75rem, 16vw, 5rem) !important;
+  }
+
+  .hero-subtitle {
+    font-size: clamp(1.7rem, 9vw, 3rem) !important;
+  }
+}
+
+/* -----------------------------------------------------
+   4. Partial Apple-style sliding panels
+   ----------------------------------------------------- */
+
+/*
+  First disable any previous global sticky behaviour.
+  This prevents accidental overlap from older patches.
+*/
+
+main > .section {
+  position: relative !important;
+  top: auto !important;
+  min-height: auto !important;
+  overflow: visible !important;
+}
+
+/*
+  Apple-style effect: only selected visual sections.
+  These sections are opaque, full-panel, and safe to slide.
+*/
+
+@media (min-width: 1000px) and (prefers-reduced-motion: no-preference) {
+  body main > .section-hero,
+  body main > #about-club,
+  body main > #highlights,
+  body main > #social-integrations,
+  body main > #social-links,
+  body main > #socials-gallery {
+    position: sticky !important;
+    top: var(--nav-height) !important;
+
+    min-height: calc(100vh - var(--nav-height)) !important;
+
+    display: grid !important;
+    align-items: center !important;
+
+    overflow: hidden !important;
+
+    padding-top: clamp(5rem, 8vw, 8rem) !important;
+    padding-bottom: clamp(5rem, 8vw, 8rem) !important;
+
+    background: #000000 !important;
+    color: #ffffff;
+
+    border-top-left-radius: clamp(2rem, 6vw, 5rem);
+    border-top-right-radius: clamp(2rem, 6vw, 5rem);
+
+    box-shadow: 0 -34px 95px rgba(0, 0, 0, 0.48);
+  }
+
+  [data-theme="light"] body main > .section-hero,
+  [data-theme="light"] body main > #about-club,
+  [data-theme="light"] body main > #highlights,
+  [data-theme="light"] body main > #social-integrations,
+  [data-theme="light"] body main > #social-links,
+  [data-theme="light"] body main > #socials-gallery {
+    background: #ffffff !important;
+    color: #000000;
+    box-shadow: 0 -34px 95px rgba(0, 0, 0, 0.16);
+  }
+
+  body main > .section-hero {
+    top: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    z-index: 1;
+  }
+
+  body main > #about-club {
+    z-index: 2;
+  }
+
+  body main > #highlights {
+    z-index: 3;
+  }
+
+  body main > #social-integrations,
+  body main > #social-links {
+    z-index: 4;
+  }
+
+  body main > #socials-gallery {
+    z-index: 5;
+  }
+
+  /*
+    The widget section stays normal-flow because iframes are tall and
+    external widgets do not behave well inside sticky viewport panels.
+  */
+  body main > #social-widgets {
+    position: relative !important;
+    top: auto !important;
+    z-index: 6;
+    min-height: auto !important;
+    overflow: visible !important;
+  }
+}
+
+/* -----------------------------------------------------
+   5. Non-sticky sections still get the premium overlapping card look
+   ----------------------------------------------------- */
+
+main > .section:not(.section-hero) {
+  margin-top: clamp(-3rem, -4vw, -1.5rem);
+  padding-top: clamp(5rem, 8vw, 7rem);
+  border-top-left-radius: clamp(2rem, 6vw, 4rem);
+  border-top-right-radius: clamp(2rem, 6vw, 4rem);
+  box-shadow: 0 -22px 72px rgba(0, 0, 0, 0.28);
+}
+
+[data-theme="light"] main > .section:not(.section-hero) {
+  box-shadow: 0 -22px 72px rgba(0, 0, 0, 0.12);
+}
+
+/* Opaque alternating panel backgrounds */
+main > .section:nth-of-type(odd):not(.section-hero) {
+  background:
+    radial-gradient(circle at top right, rgba(247, 211, 93, 0.12), transparent 24rem),
+    #000000 !important;
+}
+
+main > .section:nth-of-type(even):not(.section-hero) {
+  background:
+    radial-gradient(circle at top left, rgba(247, 211, 93, 0.10), transparent 24rem),
+    #101010 !important;
+}
+
+[data-theme="light"] main > .section:nth-of-type(odd):not(.section-hero) {
+  background:
+    radial-gradient(circle at top right, rgba(247, 211, 93, 0.34), transparent 24rem),
+    #ffffff !important;
+}
+
+[data-theme="light"] main > .section:nth-of-type(even):not(.section-hero) {
+  background:
+    radial-gradient(circle at top left, rgba(247, 211, 93, 0.24), transparent 24rem),
+    #f7f7f3 !important;
+}
+
+/* -----------------------------------------------------
+   6. Mobile: no sticky Apple effect, but keep overlapping cards
+   ----------------------------------------------------- */
+
+@media (max-width: 999px), (prefers-reduced-motion: reduce) {
+  body main > .section {
+    position: relative !important;
+    top: auto !important;
+    min-height: auto !important;
+    display: block !important;
+    overflow: visible !important;
+  }
+
+  main > .section:not(.section-hero) {
+    margin-top: -1.5rem;
+    padding-top: 4rem;
+    border-top-left-radius: 2rem;
+    border-top-right-radius: 2rem;
+    box-shadow: 0 -14px 40px rgba(0, 0, 0, 0.24);
+  }
+
+  [data-theme="light"] main > .section:not(.section-hero) {
+    box-shadow: 0 -14px 40px rgba(0, 0, 0, 0.10);
+  }
+}
+
+/* -----------------------------------------------------
+   7. Extra contrast guardrails
+   ----------------------------------------------------- */
+
+[data-theme="light"] .section h1,
+[data-theme="light"] .section h2,
+[data-theme="light"] .section h3,
+[data-theme="light"] .section p,
+[data-theme="light"] .section li,
+[data-theme="light"] .section summary {
+  color: #000000;
+}
+
+[data-theme="light"] .section .lede,
+[data-theme="light"] .section .hero-body,
+[data-theme="light"] .section .faq-answer,
+[data-theme="light"] .section .card-meta,
+[data-theme="light"] .section .event-location {
+  color: #3f3f3f;
+}
+
+[data-theme="light"] .section .eyebrow,
+[data-theme="light"] .section .card-label,
+[data-theme="light"] .section .text-link {
+  color: #7a5e00;
+}
+
