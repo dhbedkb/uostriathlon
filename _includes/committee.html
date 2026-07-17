@@ -1,17 +1,32 @@
 <section id="{{ include.section_id }}" class="section section-committee" data-section-type="committee">
   <div class="container">
-    {% include section-heading.html eyebrow=include.section.eyebrow title=include.section.title subtitle=include.section.subtitle alignment=include.section.alignment %}
+    {% include section-heading.html
+      eyebrow=include.section.eyebrow
+      title=include.section.title
+      subtitle=include.section.subtitle
+      alignment=include.section.alignment
+    %}
+
     {% if include.section.members %}
       <div class="committee-grid">
         {% for member in include.section.members %}
-          <article class="profile-card">
-            <div class="profile-placeholder">{{ member.name | slice: 0 }}</div>
+          <article class="profile-card reveal-card">
+            <div class="profile-placeholder" aria-hidden="true">
+              <span>{{ member.name | slice: 0 }}</span>
+            </div>
+
             <h3>{{ member.name }}</h3>
+
             {% if member.role %}
               <p class="card-label">{{ member.role }}</p>
             {% endif %}
+
             {% if member.bio %}
               <p>{{ member.bio }}</p>
+            {% endif %}
+
+            {% if member.email %}
+              <a class="text-link" href="mailto:{{ member.email }}">Email →</a>
             {% endif %}
           </article>
         {% endfor %}

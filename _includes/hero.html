@@ -1,5 +1,7 @@
 <section id="{{ include.section_id }}" class="hero section-hero" data-section-type="hero">
+  <div class="hero-bg" aria-hidden="true"></div>
   <div class="hero-overlay" aria-hidden="true"></div>
+
   <div class="container hero-content">
     {% if include.section.eyebrow %}
       <p class="eyebrow">{{ include.section.eyebrow }}</p>
@@ -14,18 +16,27 @@
     {% endif %}
 
     {% if include.section.body %}
-      <p class="lede">{{ include.section.body }}</p>
+      <p class="hero-body">{{ include.section.body }}</p>
     {% endif %}
 
     {% if include.section.primary_button or include.section.secondary_button %}
       <div class="actions">
         {% if include.section.primary_button %}
-          <a class="button primary" href="{{ include.section.primary_button.url | relative_url }}">{{ include.section.primary_button.label }}</a>
+          <a class="button primary" href="{{ include.section.primary_button.url | relative_url }}">
+            {{ include.section.primary_button.label }}
+          </a>
         {% endif %}
+
         {% if include.section.secondary_button %}
-          <a class="button secondary" href="{{ include.section.secondary_button.url | relative_url }}">{{ include.section.secondary_button.label }}</a>
+          <a class="button secondary" href="{{ include.section.secondary_button.url | relative_url }}">
+            {{ include.section.secondary_button.label }}
+          </a>
         {% endif %}
       </div>
     {% endif %}
+  </div>
+
+  <div class="hero-scroll" aria-hidden="true">
+    <span>Scroll</span>
   </div>
 </section>

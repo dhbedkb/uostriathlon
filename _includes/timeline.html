@@ -1,14 +1,23 @@
 <section id="{{ include.section_id }}" class="section section-timeline" data-section-type="timeline">
   <div class="container">
-    {% include section-heading.html eyebrow=include.section.eyebrow title=include.section.title subtitle=include.section.subtitle alignment=include.section.alignment %}
+    {% include section-heading.html
+      eyebrow=include.section.eyebrow
+      title=include.section.title
+      subtitle=include.section.subtitle
+      alignment=include.section.alignment
+    %}
+
     {% if include.section.items %}
       <ol class="timeline-list">
         {% for item in include.section.items %}
-          <li>
-            <h3>{{ item.title }}</h3>
-            {% if item.description %}
-              <p>{{ item.description }}</p>
-            {% endif %}
+          <li class="timeline-item reveal-card">
+            <span class="timeline-number">{{ forloop.index }}</span>
+            <div>
+              <h3>{{ item.title }}</h3>
+              {% if item.description %}
+                <p>{{ item.description }}</p>
+              {% endif %}
+            </div>
           </li>
         {% endfor %}
       </ol>

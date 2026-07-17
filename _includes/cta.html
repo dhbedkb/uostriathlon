@@ -1,15 +1,18 @@
 <section id="{{ include.section_id }}" class="section section-cta" data-section-type="cta">
   <div class="container">
-    <div class="cta-card">
+    <div class="cta-card reveal-card">
       {% if include.section.eyebrow %}
         <p class="eyebrow">{{ include.section.eyebrow }}</p>
       {% endif %}
+
       {% if include.section.title %}
         <h2>{{ include.section.title }}</h2>
       {% endif %}
+
       {% if include.section.body %}
         <p class="lede">{{ include.section.body }}</p>
       {% endif %}
+
       <div class="actions">
         {% if include.section.primary_button %}
           <a class="button primary" href="{{ include.section.primary_button.url | relative_url }}">{{ include.section.primary_button.label }}</a>
