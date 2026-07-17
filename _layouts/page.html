@@ -7,10 +7,8 @@ layout: default
 {% if page_content %}
   {% include renderer.html sections=page_content.sections %}
 {% else %}
-  <section class="section">
-    <div class="container">
-      <h1>{{ page.title }}</h1>
-      {{ content }}
-    </div>
+  <section>
+    <h1>{{ page.title }}</h1>
+    {{ content }}
   </section>
 {% endif %}
