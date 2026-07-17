@@ -1,7 +1,32 @@
 {% for section in include.sections %}
-  <section>
-    <h2>{{ section.title }}</h2>
-    <p>{{ section.body }}</p>
-  </section>
+  {% assign section_type = section.type | default: "unknown" %}
+  {% assign section_id = section.id | default: section_type | slugify %}
+  {% assign section_index = forloop.index %}
+
+  {% case section_type %}
+    {% when "hero" %}
+      {% include hero.html section=section section_id=section_id section_index=section_index %}
+    {% when "text" %}
+      {% include text.html section=section section_id=section_id section_index=section_index %}
+    {% when "stats" %}
+      {% include stats.html section=section section_id=section_id section_index=section_index %}
+    {% when "cards" %}
+      {% include cards.html section=section section_id=section_id section_index=section_index %}
+    {% when "gallery" %}
+      {% include gallery.html section=section section_id=section_id section_index=section_index %}
+    {% when "events" %}
+      {% include events.html section=section section_id=section_id section_index=section_index %}
+    {% when "committee" %}
+      {% include committee.html section=section section_id=section_id section_index=section_index %}
+    {% when "sponsors" %}
+      {% include sponsors.html section=section section_id=section_id section_index=section_index %}
+    {% when "timeline" %}
+      {% include timeline.html section=section section_id=section_id section_index=section_index %}
+    {% when "faq" %}
+      {% include faq.html section=section section_id=section_id section_index=section_index %}
+    {% when "cta" %}
+      {% include cta.html section=section section_id=section_id section_index=section_index %}
+    {% else %}
+      {% include unknown-section.html section=section section_id=section_id section_index=section_index %}
+  {% endcase %}
 {% endfor %}
-``

@@ -1,0 +1,29 @@
+<section id="{{ include.section_id }}" class="section section-events" data-section-type="events">
+  <div class="container">
+    {% include section-heading.html eyebrow=include.section.eyebrow title=include.section.title subtitle=include.section.subtitle alignment=include.section.alignment %}
+    {% if include.section.items %}
+      <div class="event-grid">
+        {% for event in include.section.items %}
+          <article class="event-card">
+            {% if event.type %}
+              <p class="card-label">{{ event.type }}</p>
+            {% endif %}
+            <h3>{{ event.title }}</h3>
+            {% if event.date %}
+              <p><strong>Date:</strong> {{ event.date }}</p>
+            {% endif %}
+            {% if event.location %}
+              <p><strong>Location:</strong> {{ event.location }}</p>
+            {% endif %}
+            {% if event.description %}
+              <p>{{ event.description }}</p>
+            {% endif %}
+            {% if event.url %}
+              <a class="text-link" href="{{ event.url | relative_url }}">View details →</a>
+            {% endif %}
+          </article>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</section>

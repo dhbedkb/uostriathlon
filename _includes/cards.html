@@ -1,0 +1,31 @@
+<section id="{{ include.section_id }}" class="section section-cards" data-section-type="cards">
+  <div class="container">
+    {% include section-heading.html eyebrow=include.section.eyebrow title=include.section.title subtitle=include.section.subtitle alignment=include.section.alignment %}
+    {% if include.section.cards %}
+      <div class="card-grid">
+        {% for card in include.section.cards %}
+          <article class="content-card">
+            <div class="content-card-body">
+              {% if card.label %}
+                <p class="card-label">{{ card.label }}</p>
+              {% endif %}
+              <h3>{{ card.title }}</h3>
+              {% if card.description %}
+                <p>{{ card.description }}</p>
+              {% endif %}
+              {% if card.schedule %}
+                <p><strong>Schedule:</strong> {{ card.schedule }}</p>
+              {% endif %}
+              {% if card.location %}
+                <p><strong>Location:</strong> {{ card.location }}</p>
+              {% endif %}
+              {% if card.url %}
+                <a class="text-link" href="{{ card.url | relative_url }}">Learn more →</a>
+              {% endif %}
+            </div>
+          </article>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</section>

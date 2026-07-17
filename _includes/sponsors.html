@@ -1,0 +1,17 @@
+<section id="{{ include.section_id }}" class="section section-sponsors" data-section-type="sponsors">
+  <div class="container">
+    {% include section-heading.html eyebrow=include.section.eyebrow title=include.section.title subtitle=include.section.subtitle alignment=include.section.alignment %}
+    {% if include.section.sponsors %}
+      <div class="sponsor-grid">
+        {% for sponsor in include.section.sponsors %}
+          <article class="sponsor-card">
+            <h3>{{ sponsor.name }}</h3>
+            {% if sponsor.description %}
+              <p>{{ sponsor.description }}</p>
+            {% endif %}
+          </article>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</section>

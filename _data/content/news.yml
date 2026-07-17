@@ -1,0 +1,21 @@
+title: News
+description: Race reports, training updates, social news and committee announcements.
+sections:
+  - type: hero
+    id: news-hero
+    eyebrow: Sheffield Triathlon
+    title: News
+    subtitle: Updates from Sheffield Triathlon.
+    body: Race reports, training updates, social news and committee announcements.
+    primary_button:
+      label: Join Today
+      url: /join/
+    secondary_button:
+      label: View Training
+      url: /training/
+
+  - type: text
+    id: news-intro
+    eyebrow: Overview
+    title: News
+    body: Race reports, training updates, social news and committee announcements.

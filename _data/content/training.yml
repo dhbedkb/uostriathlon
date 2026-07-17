@@ -1,0 +1,21 @@
+title: Training
+description: Weekly sessions for all abilities across swimming, cycling, running, strength and socials.
+sections:
+  - type: hero
+    id: training-hero
+    eyebrow: Sheffield Triathlon
+    title: Training
+    subtitle: Swim, bike, run and improve.
+    body: Weekly sessions for all abilities across swimming, cycling, running, strength and socials.
+    primary_button:
+      label: Join Today
+      url: /join/
+    secondary_button:
+      label: View Training
+      url: /training/
+
+  - type: text
+    id: training-intro
+    eyebrow: Overview
+    title: Training
+    body: Weekly sessions for all abilities across swimming, cycling, running, strength and socials.

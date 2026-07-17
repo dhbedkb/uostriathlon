@@ -1,0 +1,21 @@
+title: Join Sheffield Triathlon
+description: Come along, try a session and become part of the club.
+sections:
+  - type: hero
+    id: join-hero
+    eyebrow: Sheffield Triathlon
+    title: Join Sheffield Triathlon
+    subtitle: You do not need to be a triathlete to start.
+    body: Come along, try a session and become part of the club.
+    primary_button:
+      label: Join Today
+      url: /join/
+    secondary_button:
+      label: View Training
+      url: /training/
+
+  - type: text
+    id: join-intro
+    eyebrow: Overview
+    title: Join Sheffield Triathlon
+    body: Come along, try a session and become part of the club.

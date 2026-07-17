@@ -1,0 +1,21 @@
+title: Committee
+description: Meet the students who help organise training, racing, socials and welfare.
+sections:
+  - type: hero
+    id: committee-hero
+    eyebrow: Sheffield Triathlon
+    title: Committee
+    subtitle: Student-led. Community-focused.
+    body: Meet the students who help organise training, racing, socials and welfare.
+    primary_button:
+      label: Join Today
+      url: /join/
+    secondary_button:
+      label: View Training
+      url: /training/
+
+  - type: text
+    id: committee-intro
+    eyebrow: Overview
+    title: Committee
+    body: Meet the students who help organise training, racing, socials and welfare.

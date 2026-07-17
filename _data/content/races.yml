@@ -1,0 +1,21 @@
+title: Races
+description: Discover race opportunities, beginner events and competitive university racing.
+sections:
+  - type: hero
+    id: races-hero
+    eyebrow: Sheffield Triathlon
+    title: Races
+    subtitle: From first finish lines to BUCS competition.
+    body: Discover race opportunities, beginner events and competitive university racing.
+    primary_button:
+      label: Join Today
+      url: /join/
+    secondary_button:
+      label: View Training
+      url: /training/
+
+  - type: text
+    id: races-intro
+    eyebrow: Overview
+    title: Races
+    body: Discover race opportunities, beginner events and competitive university racing.

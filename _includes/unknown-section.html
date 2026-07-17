@@ -1,0 +1,9 @@
+<section id="{{ include.section_id }}" class="section section-unknown" data-section-type="unknown">
+  <div class="container">
+    <div class="notice-card">
+      <p class="eyebrow">Unknown section</p>
+      <h2>Section type not recognised: <code>{{ include.section.type | default: "missing type" }}</code></h2>
+      <p>This section exists in the YAML file, but no matching include has been defined for it yet.</p>
+    </div>
+  </div>
+</section>

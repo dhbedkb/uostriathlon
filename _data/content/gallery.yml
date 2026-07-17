@@ -1,0 +1,21 @@
+title: Gallery
+description: A visual look at life in Sheffield Triathlon.
+sections:
+  - type: hero
+    id: gallery-hero
+    eyebrow: Sheffield Triathlon
+    title: Gallery
+    subtitle: Training days, race days and socials.
+    body: A visual look at life in Sheffield Triathlon.
+    primary_button:
+      label: Join Today
+      url: /join/
+    secondary_button:
+      label: View Training
+      url: /training/
+
+  - type: text
+    id: gallery-intro
+    eyebrow: Overview
+    title: Gallery
+    body: A visual look at life in Sheffield Triathlon.

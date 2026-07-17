@@ -1,0 +1,10 @@
+<section id="{{ include.section_id }}" class="section section-text" data-section-type="text">
+  <div class="container">
+    {% include section-heading.html eyebrow=include.section.eyebrow title=include.section.title subtitle=include.section.subtitle alignment=include.section.alignment %}
+    {% if include.section.body %}
+      <div class="prose">
+        {{ include.section.body | markdownify }}
+      </div>
+    {% endif %}
+  </div>
+</section>
