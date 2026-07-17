@@ -8,7 +8,7 @@ sections:
     title: Training
     subtitle: Swim. Bike. Run.
     body: Use this page to explain the training structure and link members to the live calendar.
-    background_image: /assets/images/training/hero.jpg
+    background_image: /assets/images/training/hero.webp
     primary_button:
       label: Open Training Calendar
       url: "#"

@@ -8,7 +8,7 @@ sections:
     title: Join Sheffield Triathlon
     subtitle: You do not need to be a triathlete to start.
     body: Come along, try a session and become part of the club.
-    background_image: /assets/images/home/join.jpg
+    background_image: /assets/images/home/join.webp
     primary_button:
       label: Email the Club
       url: mailto:triathlon@sheffield.ac.uk

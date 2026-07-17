@@ -2413,3 +2413,199 @@ body main > .section:nth-of-type(even):not(.section-hero) {
   iframe contents from another site.
 */
 
+
+
+/* FINAL V5: circular logo, logo-only socials, mobile feeds, image PNG placeholders */
+
+/* Circular cropped brand logo */
+.brand-logo-wrap {
+  width: 48px !important;
+  height: 48px !important;
+  min-width: 48px !important;
+  border-radius: 50% !important;
+  overflow: hidden !important;
+  background: #F7D35D !important;
+  padding: 0 !important;
+  box-shadow: 0 0 0 2px rgba(247, 211, 93, 0.35);
+}
+
+.brand-logo-wrap img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  display: block !important;
+}
+
+/* Logo-only follow section */
+.social-logo-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(1rem, 3vw, 1.5rem);
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.social-logo-link {
+  display: grid;
+  width: clamp(74px, 10vw, 112px);
+  height: clamp(74px, 10vw, 112px);
+  place-items: center;
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at top left, rgba(247, 211, 93, 0.18), transparent 60%),
+    var(--color-surface);
+  box-shadow: var(--shadow-soft);
+  text-decoration: none;
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.social-logo-link:hover {
+  transform: translateY(-4px);
+  border-color: rgba(247, 211, 93, 0.55);
+}
+
+.social-logo-link img {
+  width: 58%;
+  height: 58%;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+}
+
+.social-logo-link span {
+  color: var(--color-gold);
+  font-size: 1.4rem;
+  font-weight: 950;
+}
+
+/* Feed grid: desktop keeps Facebook left and Stravas right */
+#social-widgets .embed-grid-three {
+  display: grid !important;
+  grid-template-columns:
+    minmax(500px, 560px)
+    minmax(300px, 352px) !important;
+  grid-template-rows:
+    auto
+    auto !important;
+  grid-template-areas:
+    "facebook summary"
+    "facebook activity" !important;
+  gap: 1.25rem !important;
+  align-items: start !important;
+  justify-content: center !important;
+}
+
+#social-widgets .embed-grid-three > .embed-shell:nth-child(1) {
+  grid-area: facebook !important;
+}
+
+#social-widgets .embed-grid-three > .embed-shell:nth-child(2) {
+  grid-area: summary !important;
+}
+
+#social-widgets .embed-grid-three > .embed-shell:nth-child(3) {
+  grid-area: activity !important;
+}
+
+/* Tighter cards around iframes */
+#social-widgets .embed-shell {
+  display: flex !important;
+  flex-direction: column !important;
+  padding: 1rem !important;
+  border-radius: 1.75rem !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+}
+
+#social-widgets .embed-card-heading {
+  margin-bottom: 0.8rem !important;
+}
+
+#social-widgets .embed-card-heading h3 {
+  margin: 0 !important;
+  line-height: 1.05 !important;
+}
+
+#social-widgets .embed-card-heading p:not(.card-label) {
+  margin-bottom: 0 !important;
+}
+
+#social-widgets .embed-frame {
+  display: grid !important;
+  place-items: start center !important;
+  min-height: 0 !important;
+  width: 100% !important;
+  overflow: hidden !important;
+}
+
+/* Facebook plugin max width is 500px; card is sized around that. */
+#social-widgets .embed-grid-three > .embed-shell:nth-child(1) iframe {
+  width: 500px !important;
+  max-width: 100% !important;
+  height: 760px !important;
+  min-height: 760px !important;
+}
+
+/* Strava summary compact */
+#social-widgets .embed-grid-three > .embed-shell:nth-child(2) iframe {
+  width: 300px !important;
+  max-width: 100% !important;
+  height: 160px !important;
+  min-height: 160px !important;
+}
+
+/* Strava activity compact but complete */
+#social-widgets .embed-grid-three > .embed-shell:nth-child(3) iframe {
+  width: 300px !important;
+  max-width: 100% !important;
+  height: 454px !important;
+  min-height: 454px !important;
+}
+
+/* Mobile logic:
+   Facebook first, then Strava summary, then Strava latest activity.
+*/
+@media (max-width: 1100px) {
+  #social-widgets .embed-grid-three {
+    grid-template-columns: 1fr !important;
+    grid-template-areas:
+      "facebook"
+      "summary"
+      "activity" !important;
+  }
+
+  #social-widgets .embed-grid-three > .embed-shell:nth-child(1) iframe {
+    width: 500px !important;
+    max-width: 100% !important;
+    height: 680px !important;
+    min-height: 680px !important;
+  }
+}
+
+@media (max-width: 560px) {
+  .brand-logo-wrap {
+    width: 42px !important;
+    height: 42px !important;
+    min-width: 42px !important;
+  }
+
+  .social-logo-link {
+    width: 74px;
+    height: 74px;
+  }
+
+  #social-widgets .embed-shell {
+    padding: 0.85rem !important;
+    border-radius: 1.25rem !important;
+  }
+
+  #social-widgets .embed-grid-three > .embed-shell:nth-child(1) iframe {
+    height: 620px !important;
+    min-height: 620px !important;
+  }
+}

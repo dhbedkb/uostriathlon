@@ -1,7 +1,9 @@
 <header class="site-header" data-header>
   <nav class="nav" aria-label="Main navigation">
     <a class="brand" href="{{ '/' | relative_url }}">
-      <span class="brand-mark" aria-hidden="true">S</span>
+      <span class="brand-mark brand-logo-wrap" aria-hidden="true">
+        <img src="{{ site.data.settings.brand.logo | relative_url }}" alt="">
+      </span>
       <span class="brand-text">
         <span class="brand-name">{{ site.data.settings.brand.short_name }}</span>
         <span class="brand-tagline">{{ site.data.settings.brand.tagline }}</span>

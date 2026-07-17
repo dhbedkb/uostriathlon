@@ -8,7 +8,7 @@ sections:
     title: Sheffield Triathlon
     subtitle: Swim. Bike. Run. Belong.
     body: A student-led triathlon club for complete beginners, social athletes and experienced racers.
-    background_image: /assets/images/home/hero.svg
+    background_image: /assets/images/home/hero.webp
     primary_button:
       label: Join Today
       url: /join/
@@ -37,40 +37,35 @@ sections:
       - title: Training
         label: Train
         description: Swim, bike and run sessions for a range of abilities.
-        image: /assets/images/home/training.svg
+        image: /assets/images/home/training.webp
         url: /training/
       - title: Events
         label: Events
         description: Race opportunities, Give it a Go sessions and club activities.
-        image: /assets/images/home/events.svg
+        image: /assets/images/home/events.webp
         url: /events/
       - title: Socials
         label: Social
         description: Instagram, Strava, Facebook and student community.
-        image: /assets/images/home/socials.svg
+        image: /assets/images/home/socials.webp
         url: /socials/
 
   - type: socials
     id: social-integrations
+    layout: logos
     eyebrow: Follow
-    title: Keep up with the club.
+    title: Follow the club.
     subtitle: Instagram for club life. Strava for training. Facebook for updates.
     items:
       - platform: Instagram
-        title: Instagram
-        description: Follow @sheffunitri for photos, freshers updates, socials and training reminders.
+        icon: /assets/images/social/instagram.png
         url: https://www.instagram.com/sheffunitri/
-        button: Open Instagram
       - platform: Strava
-        title: Strava
-        description: Join Sheffield Triathlon on Strava.
+        icon: /assets/images/social/strava.png
         url: https://www.strava.com/clubs/UoSTri
-        button: Open Strava
       - platform: Facebook
-        title: Facebook
-        description: Follow the public club page.
+        icon: /assets/images/social/facebook.png
         url: https://www.facebook.com/UoSTriathlon
-        button: Open Facebook
 
   - type: cta
     id: final-join-cta

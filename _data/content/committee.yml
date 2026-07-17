@@ -8,6 +8,7 @@ sections:
     title: Meet the Committee
     subtitle: Student-led. Community-focused.
     body: The club is run by students who organise training, racing, socials and welfare.
+    background_image: /assets/images/committee/hero.webp
     primary_button:
       label: Contact Us
       url: mailto:triathlon@sheffield.ac.uk

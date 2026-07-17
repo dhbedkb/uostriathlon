@@ -8,7 +8,7 @@ sections:
     title: Gallery
     subtitle: Training days, race days and socials.
     body: Add real images into assets/images/gallery and update this YAML file.
-    background_image: /assets/images/gallery/hero.jpg
+    background_image: /assets/images/gallery/hero.webp
     primary_button:
       label: Join Today
       url: /join/

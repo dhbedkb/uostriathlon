@@ -8,7 +8,7 @@ sections:
     title: Events
     subtitle: Races, socials and Give it a Go.
     body: Use this page to point members towards the live events calendar.
-    background_image: /assets/images/events/hero.jpg
+    background_image: /assets/images/events/hero.webp
     primary_button:
       label: Open Events Calendar
       url: "#"

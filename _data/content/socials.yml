@@ -8,7 +8,7 @@ sections:
     title: Socials
     subtitle: The club beyond training.
     body: Follow the club, see what members are doing and get involved.
-    background_image: /assets/images/socials/hero.svg
+    background_image: /assets/images/socials/hero.webp
     primary_button:
       label: Open Instagram
       url: https://www.instagram.com/sheffunitri/
@@ -18,25 +18,20 @@ sections:
 
   - type: socials
     id: social-links
+    layout: logos
     eyebrow: Live Channels
     title: Follow the club.
     subtitle: Instagram for photos, Strava for training, Facebook for updates.
     items:
       - platform: Instagram
-        title: Instagram
-        description: Follow @sheffunitri for club photos, freshers updates, social posts and training reminders.
+        icon: /assets/images/social/instagram.png
         url: https://www.instagram.com/sheffunitri/
-        button: Open Instagram
       - platform: Strava
-        title: Strava
-        description: Join the club on Strava and keep up with training activity.
+        icon: /assets/images/social/strava.png
         url: https://www.strava.com/clubs/UoSTri
-        button: Open Strava
       - platform: Facebook
-        title: Facebook
-        description: Follow the club page for announcements and community updates.
+        icon: /assets/images/social/facebook.png
         url: https://www.facebook.com/UoSTriathlon
-        button: Open Facebook
 
   - type: gallery
     id: socials-gallery
@@ -44,13 +39,13 @@ sections:
     title: Social moments.
     subtitle: Replace these placeholders with real club photos.
     images:
-      - src: /assets/images/socials/social-1.svg
+      - src: /assets/images/socials/social-1.webp
         alt: Sheffield Triathlon club social placeholder image
         caption: Club social placeholder.
-      - src: /assets/images/socials/social-2.svg
+      - src: /assets/images/socials/social-2.webp
         alt: Sheffield Triathlon event placeholder image
         caption: Event placeholder.
-      - src: /assets/images/socials/social-3.svg
+      - src: /assets/images/socials/social-3.webp
         alt: Sheffield Triathlon group placeholder image
         caption: Group photo placeholder.
 

@@ -2,7 +2,9 @@
   <div class="container footer-grid">
     <div class="footer-brand">
       <a class="brand footer-logo" href="{{ '/' | relative_url }}">
-        <span class="brand-mark" aria-hidden="true">S</span>
+        <span class="brand-mark brand-logo-wrap" aria-hidden="true">
+          <img src="{{ site.data.settings.brand.logo | relative_url }}" alt="">
+        </span>
         <span class="brand-text">
           <span class="brand-name">{{ site.data.settings.brand.short_name }}</span>
           <span class="brand-tagline">{{ site.data.settings.brand.tagline }}</span>
@@ -28,7 +30,6 @@
         <li><a href="{{ '/training/#swimming' | relative_url }}">Swimming</a></li>
         <li><a href="{{ '/training/#cycling' | relative_url }}">Cycling</a></li>
         <li><a href="{{ '/training/#running' | relative_url }}">Running</a></li>
-        <li><a href="{{ '/training/#strength' | relative_url }}">Strength</a></li>
       </ul>
     </div>
 
