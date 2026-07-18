@@ -31,7 +31,9 @@ sections:
         extra_details: null
       - bio: Supports organisation, communication and administration.
         name: Barnaby Read
-        questions: []
+        questions:
+          - question: Favourite place in Sheffield
+            answer: The parkway
         image_position: center center
         favourite_place_description: null
         favourite_place: null
