@@ -29,14 +29,18 @@ sections:
         favourite_place: null
         favourite_place_description: null
         extra_details: null
-      - name: Barnaby Read
-        role: Secretary
-        bio: Supports organisation, communication and administration.
-        email: triathlon@sheffield.ac.uk
-        image: /assets/images/uploads/img_9541.webp
-        favourite_place: null
+      - bio: Supports organisation, communication and administration.
+        name: Barnaby Read
+        questions:
+          - question: Favourite place in Sheffield
+            answer: The parkway
+        image_position: center center
         favourite_place_description: null
+        favourite_place: null
         extra_details: null
+        role: Secretary
+        image: /assets/images/uploads/img_9541.webp
+        email: triathlon@sheffield.ac.uk
       - name: Treasurer
         role: Treasurer
         bio: Helps manage club finances and planning.
@@ -113,5 +117,5 @@ sections:
       label: Email the Club
       url: mailto:triathlon@sheffield.ac.uk
     secondary_button:
-      label: wut
-      url: wut
+      label: ""
+      url: ""
