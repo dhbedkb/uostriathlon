@@ -40,6 +40,7 @@ sections:
       - name: Joseph Fields
         role: Competitions Officer
       - bio: Supports organisation, communication and administration.
+        crop_x: ""
         name: Barnaby Read
         questions:
           - question: Favourite place in Sheffield
@@ -49,7 +50,7 @@ sections:
         favourite_place: null
         extra_details: null
         role: Secretary
-        image: ""
+        image: /assets/images/committee/raw/img_9541.jpg
         email: triathlon@sheffield.ac.uk
       - name: KJ Longstaff
         role: Charities and Publicity Secretary
