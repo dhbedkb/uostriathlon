@@ -49,7 +49,7 @@ sections:
         favourite_place: null
         extra_details: null
         role: Secretary
-        image: /assets/images/uploads/img_9541.webp
+        image: ""
         email: triathlon@sheffield.ac.uk
       - name: KJ Longstaff
         role: Charities and Publicity Secretary
