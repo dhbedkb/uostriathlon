@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: dhbedkb/uostriathlon        # TODO: confirm this matches your repo
+  repo: dhbedkb/uostriathlon
   branch: main
   base_url: https://TODO-your-worker-subdomain.workers.dev
   auth_endpoint: auth
@@ -10,69 +10,85 @@ public_folder: "/assets/images/uploads"
 publish_mode: simple
 site_url: https://www.uostriathlon.co.uk
 
-# Shared field sets for the polymorphic "sections" list below.
-# typeKey: type stores each item's chosen type in a `type:` key — matching
-# the field your renderer.html already switches on, so nothing there changes.
-
 collections:
-  - name: "site_pages"
-    label: "Pages"
+  - name: pages
+    label: Pages
     files:
-      - { name: "home",      label: "Home",      file: "_data/content/home.yml",      fields: &page_fields
-          - { label: "Title", name: "title", widget: "string" }
-          - { label: "Description", name: "description", widget: "text" }
-          - label: "Sections"
-            name: "sections"
-            widget: "list"
-            typeKey: "type"
+      - name: home
+        label: Home
+        file: _data/content/home.yml
+        fields: &page_fields
+          - label: Title
+            name: title
+            widget: string
+
+          - label: Description
+            name: description
+            widget: text
+            required: false
+
+          - label: Sections
+            name: sections
+            widget: list
+            typeKey: type
             types:
-              - name: "hero"
-                label: "Hero"
+              - name: hero
+                label: Hero
                 fields:
-                  - { label: "ID", name: "id", widget: "string", required: false }
-                  - { label: "Eyebrow", name: "eyebrow", widget: "string", required: false }
-                  - { label: "Title", name: "title", widget: "string", required: false }
-                  - { label: "Subtitle", name: "subtitle", widget: "string", required: false }
-                  - { label: "Body", name: "body", widget: "text", required: false }
-                  - { label: "Background image", name: "background_image", widget: "image", required: false }
-                  - label: "Primary button"
-                    name: "primary_button"
-                    widget: "object"
+                  - { label: ID, name: id, widget: string, required: false }
+                  - { label: Eyebrow, name: eyebrow, widget: string, required: false }
+                  - { label: Title, name: title, widget: string, required: false }
+                  - { label: Subtitle, name: subtitle, widget: string, required: false }
+                  - { label: Body, name: body, widget: text, required: false }
+                  - { label: Background image, name: background_image, widget: image, required: false }
+                  - label: Primary button
+                    name: primary_button
+                    widget: object
                     required: false
-                    fields: [{label: Label, name: label, widget: string}, {label: URL, name: url, widget: string}]
-                  - label: "Secondary button"
-                    name: "secondary_button"
-                    widget: "object"
+                    fields:
+                      - { label: Label, name: label, widget: string }
+                      - { label: URL, name: url, widget: string }
+                  - label: Secondary button
+                    name: secondary_button
+                    widget: object
                     required: false
-                    fields: [{label: Label, name: label, widget: string}, {label: URL, name: url, widget: string}]
-              - name: "text"
-                label: "Text block"
+                    fields:
+                      - { label: Label, name: label, widget: string }
+                      - { label: URL, name: url, widget: string }
+
+              - name: text
+                label: Text block
                 fields:
-                  - { label: "ID", name: "id", widget: "string", required: false }
-                  - { label: "Eyebrow", name: "eyebrow", widget: "string", required: false }
-                  - { label: "Title", name: "title", widget: "string", required: false }
-                  - { label: "Subtitle", name: "subtitle", widget: "string", required: false }
-                  - { label: "Body", name: "body", widget: "markdown", required: false }
-              - name: "stats"
-                label: "Stats"
+                  - { label: ID, name: id, widget: string, required: false }
+                  - { label: Eyebrow, name: eyebrow, widget: string, required: false }
+                  - { label: Title, name: title, widget: string, required: false }
+                  - { label: Subtitle, name: subtitle, widget: string, required: false }
+                  - { label: Body, name: body, widget: markdown, required: false }
+
+              - name: stats
+                label: Stats
                 fields:
-                  - { label: "ID", name: "id", widget: "string", required: false }
-                  - { label: "Eyebrow", name: "eyebrow", widget: "string", required: false }
-                  - { label: "Title", name: "title", widget: "string", required: false }
-                  - label: "Items"
-                    name: "items"
-                    widget: "list"
-                    fields: [{label: Number, name: number, widget: string}, {label: Label, name: label, widget: string}]
-              - name: "cards"
-                label: "Cards"
+                  - { label: ID, name: id, widget: string, required: false }
+                  - { label: Eyebrow, name: eyebrow, widget: string, required: false }
+                  - { label: Title, name: title, widget: string, required: false }
+                  - { label: Subtitle, name: subtitle, widget: string, required: false }
+                  - label: Items
+                    name: items
+                    widget: list
+                    fields:
+                      - { label: Number, name: number, widget: string }
+                      - { label: Label, name: label, widget: string }
+
+              - name: cards
+                label: Cards
                 fields:
-                  - { label: "ID", name: "id", widget: "string", required: false }
-                  - { label: "Eyebrow", name: "eyebrow", widget: "string", required: false }
-                  - { label: "Title", name: "title", widget: "string", required: false }
-                  - { label: "Subtitle", name: "subtitle", widget: "string", required: false }
-                  - label: "Cards"
-                    name: "cards"
-                    widget: "list"
+                  - { label: ID, name: id, widget: string, required: false }
+                  - { label: Eyebrow, name: eyebrow, widget: string, required: false }
+                  - { label: Title, name: title, widget: string, required: false }
+                  - { label: Subtitle, name: subtitle, widget: string, required: false }
+                  - label: Cards
+                    name: cards
+                    widget: list
                     fields:
                       - { label: Title, name: title, widget: string }
                       - { label: Label, name: label, widget: string, required: false }
@@ -81,30 +97,32 @@ collections:
                       - { label: URL, name: url, widget: string, required: false }
                       - { label: Schedule, name: schedule, widget: string, required: false }
                       - { label: Location, name: location, widget: string, required: false }
-              - name: "gallery"
-                label: "Gallery"
+
+              - name: gallery
+                label: Gallery
                 fields:
-                  - { label: "ID", name: "id", widget: "string", required: false }
-                  - { label: "Eyebrow", name: "eyebrow", widget: "string", required: false }
-                  - { label: "Title", name: "title", widget: "string", required: false }
-                  - { label: "Subtitle", name: "subtitle", widget: "string", required: false }
-                  - label: "Images"
-                    name: "images"
-                    widget: "list"
+                  - { label: ID, name: id, widget: string, required: false }
+                  - { label: Eyebrow, name: eyebrow, widget: string, required: false }
+                  - { label: Title, name: title, widget: string, required: false }
+                  - { label: Subtitle, name: subtitle, widget: string, required: false }
+                  - label: Images
+                    name: images
+                    widget: list
                     fields:
                       - { label: Image, name: src, widget: image }
                       - { label: Alt text, name: alt, widget: string, required: false }
                       - { label: Caption, name: caption, widget: string, required: false }
-              - name: "events"
-                label: "Events"
+
+              - name: events
+                label: Events list
                 fields:
-                  - { label: "ID", name: "id", widget: "string", required: false }
-                  - { label: "Eyebrow", name: "eyebrow", widget: "string", required: false }
-                  - { label: "Title", name: "title", widget: "string", required: false }
-                  - { label: "Subtitle", name: "subtitle", widget: "string", required: false }
-                  - label: "Items"
-                    name: "items"
-                    widget: "list"
+                  - { label: ID, name: id, widget: string, required: false }
+                  - { label: Eyebrow, name: eyebrow, widget: string, required: false }
+                  - { label: Title, name: title, widget: string, required: false }
+                  - { label: Subtitle, name: subtitle, widget: string, required: false }
+                  - label: Items
+                    name: items
+                    widget: list
                     fields:
                       - { label: Title, name: title, widget: string }
                       - { label: Date, name: date, widget: string, required: false }
@@ -112,131 +130,213 @@ collections:
                       - { label: Type, name: type, widget: string, required: false }
                       - { label: Description, name: description, widget: text, required: false }
                       - { label: URL, name: url, widget: string, required: false }
-              - name: "committee"
-                label: "Committee"
+
+              - name: committee
+                label: Committee
                 fields:
-                  - { label: "ID", name: "id", widget: "string", required: false }
-                  - { label: "Eyebrow", name: "eyebrow", widget: "string", required: false }
-                  - { label: "Title", name: "title", widget: "string", required: false }
-                  - { label: "Subtitle", name: "subtitle", widget: "string", required: false }
-                  - label: "Members"
-                    name: "members"
-                    widget: "list"
+                  - { label: ID, name: id, widget: string, required: false }
+                  - { label: Eyebrow, name: eyebrow, widget: string, required: false }
+                  - { label: Title, name: title, widget: string, required: false }
+                  - { label: Subtitle, name: subtitle, widget: string, required: false }
+                  - label: Members
+                    name: members
+                    widget: list
                     fields:
                       - { label: Name, name: name, widget: string }
                       - { label: Role, name: role, widget: string, required: false }
                       - { label: Bio, name: bio, widget: text, required: false }
                       - { label: Email, name: email, widget: string, required: false }
-              - name: "sponsors"
-                label: "Sponsors"
+
+              - name: sponsors
+                label: Sponsors
                 fields:
-                  - { label: "ID", name: "id", widget: "string", required: false }
-                  - { label: "Eyebrow", name: "eyebrow", widget: "string", required: false }
-                  - { label: "Title", name: "title", widget: "string", required: false }
-                  - label: "Sponsors"
-                    name: "sponsors"
-                    widget: "list"
+                  - { label: ID, name: id, widget: string, required: false }
+                  - { label: Eyebrow, name: eyebrow, widget: string, required: false }
+                  - { label: Title, name: title, widget: string, required: false }
+                  - { label: Subtitle, name: subtitle, widget: string, required: false }
+                  - label: Sponsors
+                    name: sponsors
+                    widget: list
                     fields:
                       - { label: Name, name: name, widget: string }
                       - { label: Description, name: description, widget: text, required: false }
                       - { label: URL, name: url, widget: string, required: false }
-              - name: "timeline"
-                label: "Timeline"
+
+              - name: timeline
+                label: Timeline
                 fields:
-                  - { label: "ID", name: "id", widget: "string", required: false }
-                  - { label: "Eyebrow", name: "eyebrow", widget: "string", required: false }
-                  - { label: "Title", name: "title", widget: "string", required: false }
-                  - label: "Items"
-                    name: "items"
-                    widget: "list"
-                    fields: [{label: Title, name: title, widget: string}, {label: Description, name: description, widget: text, required: false}]
-              - name: "faq"
-                label: "FAQ"
+                  - { label: ID, name: id, widget: string, required: false }
+                  - { label: Eyebrow, name: eyebrow, widget: string, required: false }
+                  - { label: Title, name: title, widget: string, required: false }
+                  - { label: Subtitle, name: subtitle, widget: string, required: false }
+                  - label: Items
+                    name: items
+                    widget: list
+                    fields:
+                      - { label: Title, name: title, widget: string }
+                      - { label: Description, name: description, widget: text, required: false }
+
+              - name: faq
+                label: FAQ
                 fields:
-                  - { label: "ID", name: "id", widget: "string", required: false }
-                  - { label: "Eyebrow", name: "eyebrow", widget: "string", required: false }
-                  - { label: "Title", name: "title", widget: "string", required: false }
-                  - label: "Items"
-                    name: "items"
-                    widget: "list"
-                    fields: [{label: Question, name: question, widget: string}, {label: Answer, name: answer, widget: text}]
-              - name: "cta"
-                label: "Call to action"
+                  - { label: ID, name: id, widget: string, required: false }
+                  - { label: Eyebrow, name: eyebrow, widget: string, required: false }
+                  - { label: Title, name: title, widget: string, required: false }
+                  - { label: Subtitle, name: subtitle, widget: string, required: false }
+                  - label: Items
+                    name: items
+                    widget: list
+                    fields:
+                      - { label: Question, name: question, widget: string }
+                      - { label: Answer, name: answer, widget: markdown }
+
+              - name: cta
+                label: Call to action
                 fields:
-                  - { label: "ID", name: "id", widget: "string", required: false }
-                  - { label: "Eyebrow", name: "eyebrow", widget: "string", required: false }
-                  - { label: "Title", name: "title", widget: "string", required: false }
-                  - { label: "Body", name: "body", widget: "text", required: false }
-                  - label: "Primary button"
-                    name: "primary_button"
-                    widget: "object"
+                  - { label: ID, name: id, widget: string, required: false }
+                  - { label: Eyebrow, name: eyebrow, widget: string, required: false }
+                  - { label: Title, name: title, widget: string, required: false }
+                  - { label: Body, name: body, widget: text, required: false }
+                  - label: Primary button
+                    name: primary_button
+                    widget: object
                     required: false
-                    fields: [{label: Label, name: label, widget: string}, {label: URL, name: url, widget: string}]
-                  - label: "Secondary button"
-                    name: "secondary_button"
-                    widget: "object"
+                    fields:
+                      - { label: Label, name: label, widget: string }
+                      - { label: URL, name: url, widget: string }
+                  - label: Secondary button
+                    name: secondary_button
+                    widget: object
                     required: false
-                    fields: [{label: Label, name: label, widget: string}, {label: URL, name: url, widget: string}]
-              - name: "embed"
-                label: "Embed / widget"
+                    fields:
+                      - { label: Label, name: label, widget: string }
+                      - { label: URL, name: url, widget: string }
+
+              - name: embed
+                label: Embed or widget
                 fields:
-                  - { label: "ID", name: "id", widget: "string", required: false }
-                  - { label: "Eyebrow", name: "eyebrow", widget: "string", required: false }
-                  - { label: "Title", name: "title", widget: "string", required: false }
-                  - { label: "Subtitle", name: "subtitle", widget: "string", required: false }
-                  - { label: "Button label", name: "button_label", widget: "string", required: false }
-                  - { label: "URL", name: "url", widget: "string", required: false }
-              - name: "socials"
-                label: "Socials"
+                  - { label: ID, name: id, widget: string, required: false }
+                  - { label: Provider, name: provider, widget: string, required: false }
+                  - { label: Eyebrow, name: eyebrow, widget: string, required: false }
+                  - { label: Title, name: title, widget: string, required: false }
+                  - { label: Subtitle, name: subtitle, widget: string, required: false }
+                  - { label: Layout, name: layout, widget: string, required: false }
+                  - label: Embeds
+                    name: embeds
+                    widget: list
+                    required: false
+                    fields:
+                      - { label: Provider, name: provider, widget: string, required: false }
+                      - { label: Title, name: title, widget: string, required: false }
+                      - { label: Description, name: description, widget: text, required: false }
+                      - { label: URL, name: url, widget: string, required: false }
+                      - { label: Button label, name: button_label, widget: string, required: false }
+                      - { label: Embed HTML, name: embed_html, widget: text, required: false }
+
+              - name: socials
+                label: Social links
                 fields:
-                  - { label: "ID", name: "id", widget: "string", required: false }
-                  - { label: "Eyebrow", name: "eyebrow", widget: "string", required: false }
-                  - { label: "Title", name: "title", widget: "string", required: false }
-                  - { label: "Layout", name: "layout", widget: "select", options: ["logos", "cards"], required: false }
-                  - label: "Items"
-                    name: "items"
-                    widget: "list"
+                  - { label: ID, name: id, widget: string, required: false }
+                  - { label: Eyebrow, name: eyebrow, widget: string, required: false }
+                  - { label: Title, name: title, widget: string, required: false }
+                  - { label: Subtitle, name: subtitle, widget: string, required: false }
+                  - { label: Layout, name: layout, widget: select, options: ["logos", "cards"], required: false }
+                  - label: Items
+                    name: items
+                    widget: list
                     fields:
                       - { label: Platform, name: platform, widget: string }
                       - { label: Icon, name: icon, widget: image, required: false }
+                      - { label: Title, name: title, widget: string, required: false }
+                      - { label: Description, name: description, widget: text, required: false }
                       - { label: URL, name: url, widget: string }
-              - name: "relay-bar"
-                label: "Relay bar (swim/bike/run divider)"
-                fields:
-                  - { label: "ID", name: "id", widget: "string", required: false }
-                  - { label: "Eyebrow", name: "eyebrow", widget: "string", required: false }
-                  - { label: "Title", name: "title", widget: "string", required: false }
-        }
-      - { name: "training",  label: "Training",  file: "_data/content/training.yml",  fields: *page_fields }
-      - { name: "events",    label: "Events",    file: "_data/content/events.yml",    fields: *page_fields }
-      - { name: "races",     label: "Races",     file: "_data/content/races.yml",     fields: *page_fields }
-      - { name: "socials",   label: "Socials",   file: "_data/content/socials.yml",   fields: *page_fields }
-      - { name: "committee", label: "Committee", file: "_data/content/committee.yml", fields: *page_fields }
-      - { name: "gallery",   label: "Gallery",   file: "_data/content/gallery.yml",   fields: *page_fields }
-      - { name: "about",     label: "About",     file: "_data/content/about.yml",     fields: *page_fields }
-      - { name: "join",      label: "Join",      file: "_data/content/join.yml",      fields: *page_fields }
-      - { name: "members",   label: "Members",   file: "_data/content/members.yml",   fields: *page_fields }
-      - { name: "news",      label: "News",      file: "_data/content/news.yml",      fields: *page_fields }
+                      - { label: Button, name: button, widget: string, required: false }
 
-  - name: "settings"
-    label: "Site settings"
+              - name: relay-bar
+                label: Relay bar
+                fields:
+                  - { label: ID, name: id, widget: string, required: false }
+                  - { label: Eyebrow, name: eyebrow, widget: string, required: false }
+                  - { label: Title, name: title, widget: string, required: false }
+
+      - name: training
+        label: Training
+        file: _data/content/training.yml
+        fields: *page_fields
+
+      - name: events
+        label: Events
+        file: _data/content/events.yml
+        fields: *page_fields
+
+      - name: races
+        label: Races
+        file: _data/content/races.yml
+        fields: *page_fields
+
+      - name: socials
+        label: Socials
+        file: _data/content/socials.yml
+        fields: *page_fields
+
+      - name: committee
+        label: Committee
+        file: _data/content/committee.yml
+        fields: *page_fields
+
+      - name: gallery
+        label: Gallery
+        file: _data/content/gallery.yml
+        fields: *page_fields
+
+      - name: about
+        label: About
+        file: _data/content/about.yml
+        fields: *page_fields
+
+      - name: join
+        label: Join
+        file: _data/content/join.yml
+        fields: *page_fields
+
+      - name: members
+        label: Members
+        file: _data/content/members.yml
+        fields: *page_fields
+
+      - name: news
+        label: News
+        file: _data/content/news.yml
+        fields: *page_fields
+
+  - name: settings
+    label: Site settings
     files:
-      - name: "settings"
-        label: "Brand & settings"
-        file: "_data/settings.yml"
+      - name: settings
+        label: Brand and settings
+        file: _data/settings.yml
         fields:
-          - label: "Brand"
-            name: "brand"
-            widget: "object"
+          - label: Brand
+            name: brand
+            widget: object
             fields:
               - { label: Name, name: name, widget: string }
               - { label: Short name, name: short_name, widget: string }
               - { label: Tagline, name: tagline, widget: string }
               - { label: Email, name: email, widget: string }
               - { label: Logo, name: logo, widget: image }
-          - label: "Links"
-            name: "links"
-            widget: "object"
+
+          - label: Theme
+            name: theme
+            widget: object
+            required: false
+            fields:
+              - { label: Default, name: default, widget: string, required: false }
+
+          - label: Links
+            name: links
+            widget: object
+            required: false
             fields:
               - { label: Training calendar, name: training_calendar, widget: string, required: false }
               - { label: Events calendar, name: events_calendar, widget: string, required: false }
@@ -244,25 +344,32 @@ collections:
               - { label: Strava, name: strava, widget: string, required: false }
               - { label: Facebook, name: facebook, widget: string, required: false }
               - { label: Membership, name: membership, widget: string, required: false }
-      - name: "navigation"
-        label: "Navigation"
-        file: "_data/navigation.yml"
+
+      - name: navigation
+        label: Navigation
+        file: _data/navigation.yml
         fields:
-          - label: "Items"
-            name: "items"
-            widget: "list"
-            fields: [{label: Label, name: label, widget: string}, {label: URL, name: url, widget: string}]
-          - label: "Join button"
-            name: "cta"
-            widget: "object"
-            fields: [{label: Label, name: label, widget: string}, {label: URL, name: url, widget: string}]
-      - name: "socials_list"
-        label: "Footer social links"
-        file: "_data/socials.yml"
+          - label: Items
+            name: items
+            widget: list
+            fields:
+              - { label: Label, name: label, widget: string }
+              - { label: URL, name: url, widget: string }
+
+          - label: Join button
+            name: cta
+            widget: object
+            fields:
+              - { label: Label, name: label, widget: string }
+              - { label: URL, name: url, widget: string }
+
+      - name: socials_list
+        label: Footer social links
+        file: _data/socials.yml
         fields:
-          - label: "Items"
-            name: "items"
-            widget: "list"
+          - label: Items
+            name: items
+            widget: list
             fields:
               - { label: Platform, name: platform, widget: string }
               - { label: Label, name: label, widget: string }

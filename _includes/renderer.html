@@ -30,6 +30,9 @@
       {% include embed.html section=section section_id=section_id section_index=section_index %}
     {% when "socials" %}
       {% include socials.html section=section section_id=section_id section_index=section_index %}
+    {% when "relay-bar" %}
+      {% include relay-bar.html section=section section_id=section_id section_index=section_index %}
+      {% include socials.html section=section section_id=section_id section_index=section_index %}
     {% else %}
       {% include unknown-section.html section=section section_id=section_id section_index=section_index %}
   {% endcase %}

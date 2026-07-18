@@ -2980,3 +2980,56 @@ main > .section:nth-of-type(even):not(.section-hero) {
   color: #7a5e00;
 }
 
+
+/* ---- Relay bar signature component ---- */
+
+.relay-bar {
+  display: flex;
+  width: 100%;
+  height: 10px;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.relay-bar span {
+  display: block;
+  height: 100%;
+}
+
+.relay-bar .swim {
+  width: 20%;
+  background: #2B5F7A;
+}
+
+.relay-bar .bike {
+  width: 55%;
+  background: var(--color-gold);
+}
+
+.relay-bar .run {
+  width: 25%;
+  background: #4F6B52;
+}
+
+.relay-key {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 0.75rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.relay-key i {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: 0.4rem;
+  border-radius: 2px;
+}
+
+.relay-key .swim i { background: #2B5F7A; }
+.relay-key .bike i { background: var(--color-gold); }
+.relay-key .run i  { background: #4F6B52; }
+
