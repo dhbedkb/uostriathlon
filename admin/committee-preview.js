@@ -29,9 +29,10 @@
         return asset.toString ? asset.toString() : String(asset);
       }
     } catch (error) {
-      console.warn("[cms-preview] getAsset failed", clean, error);
+      console.warn("[cms-preview] getAsset failed for draft", clean, error);
     }
 
+    console.warn("[cms-preview] No asset for", clean, "- may need publish");
     return "";
   }
 
