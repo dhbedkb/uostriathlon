@@ -49,7 +49,8 @@ sections:
     favourite_place: null
     extra_details: null
     role: Secretary
-    image: /assets/images/committee/profiles/barnaby-read-secretary.webp
+    image_raw: /assets/images/committee/raw/img_9541.jpg
+    image_profile: /assets/images/committee/profiles/barnaby-read-secretary.webp
     email: ''
     crop_y: 50
     crop_zoom: 100

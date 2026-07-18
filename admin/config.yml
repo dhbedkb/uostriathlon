@@ -6,7 +6,7 @@ backend:
   auth_endpoint: auth
 
 media_folder: "assets/images/uploads"
-public_folder: "/assets/images/uploads"
+public_folder: "/uostriathlon/assets/images/uploads"
 publish_mode: simple
 site_url: https://dhbedkb.github.io/uostriathlon/
 
@@ -143,13 +143,15 @@ collections:
                     widget: list
                     summary: "{{fields.name}} — {{fields.role}}"
                     fields:
-                      - label: Photo
-                        name: image
+                      - label: Source photo
+                        name: image_raw
                         widget: image
                         required: false
                         choose_url: false
                         media_folder: /assets/images/committee/raw
-                        public_folder: /assets/images/committee/raw
+                        public_folder: /uostriathlon/assets/images/committee/raw
+                        hint: "Upload the original photo here. The preview uses this immediately."
+                      - { label: Optimised profile photo, name: image_profile, widget: string, required: false, hint: "Generated automatically after publish. Do not edit manually." }
                       - { label: Crop horizontal focus %, name: crop_x, widget: number, default: 50, min: 0, max: 100, value_type: int, required: false, hint: "0 = left, 50 = centre, 100 = right. Watch the preview pane." }
                       - { label: Crop vertical focus %, name: crop_y, widget: number, default: 50, min: 0, max: 100, value_type: int, required: false, hint: "0 = top, 50 = centre, 100 = bottom. Watch the preview pane." }
                       - { label: Crop zoom %, name: crop_zoom, widget: number, default: 100, min: 100, max: 220, value_type: int, required: false, hint: "100 = normal. Increase to zoom into the face." }

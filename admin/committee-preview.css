@@ -134,6 +134,14 @@ body {
   box-sizing: border-box;
 }
 
+.cms-source-note {
+  color: #9e9e9e;
+  font-size: 12px;
+  margin-top: -4px;
+  margin-bottom: 12px;
+  word-break: break-word;
+}
+
 .cms-card p {
   color: #d0d0d0;
   margin: 0 0 10px;
