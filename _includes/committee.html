@@ -8,104 +8,114 @@
     %}
 
     {% if include.section.members %}
-      <div class="committee-grid">
+      <div class="committee-tile-list">
         {% for member in include.section.members %}
+          {% assign image_position = member.image_position | default: "center center" %}
           {% assign has_extra = false %}
-          {% if member.email or member.questions or member.extra_details %}
+          {% if member.image or member.bio or member.email or member.questions or member.extra_details %}
             {% assign has_extra = true %}
           {% endif %}
 
-          <article class="profile-card committee-profile-card reveal-card">
-            <div class="profile-image-wrap">
-              {% if member.image %}
-                {{ member.image | relative_url }}
-              {% else %}
-                <div class="profile-placeholder" aria-hidden="true">
-                  <span>{{ member.name | default: '?' | slice: 0 }}</span>
-                </div>
-              {% endif %}
-            </div>
+          <details class="committee-member-tile reveal-card">
+            <summary class="committee-tile-summary">
+              <span class="committee-tile-main">
+                {% if member.name %}
+                  <span class="committee-tile-name">{{ member.name }}</span>
+                {% else %}
+                  <span class="committee-tile-name">Committee member</span>
+                {% endif %}
 
-            <div class="profile-card-main">
-              {% if member.name %}
-                <h3>{{ member.name }}</h3>
-              {% endif %}
+                {% if member.role %}
+                  <span class="committee-tile-role">{{ member.role }}</span>
+                {% endif %}
+              </span>
 
-              {% if member.role %}
-                <p class="card-label">{{ member.role }}</p>
-              {% endif %}
+              <span class="committee-tile-action" aria-hidden="true">More</span>
+            </summary>
 
-              {% if member.bio %}
-                <p class="profile-bio">{{ member.bio }}</p>
-              {% endif %}
+            {% if has_extra %}
+              <div class="committee-tile-expanded">
+                <div class="committee-expanded-grid">
+                  <div class="committee-expanded-image-wrap" style="--committee-image-position: {{ image_position }};">
+                    {% if member.image %}
+                      {{ member.image | relative_url }}
+                    {% else %}
+                      <div class="committee-expanded-placeholder" aria-hidden="true">
+                        <span>{{ member.name | default: '?' | slice: 0 }}</span>
+                      </div>
+                    {% endif %}
+                  </div>
 
-              {% if has_extra %}
-                <div class="profile-extra profile-extra-desktop">
-                  {% if member.questions %}
-                    {% for item in member.questions %}
-                      {% if item.question or item.answer %}
-                        <p>
-                          {% if item.question %}
-                            <strong>{{ item.question }}</strong>
-                          {% endif %}
-                          {% if item.answer %}
-                            <span>{{ item.answer }}</span>
-                          {% endif %}
-                        </p>
-                      {% endif %}
-                    {% endfor %}
-                  {% endif %}
+                  <div class="committee-expanded-content">
+                    {% if member.bio %}
+                      <p class="committee-expanded-bio">{{ member.bio }}</p>
+                    {% endif %}
 
-                  {% if member.extra_details %}
-                    <div class="profile-extra-markdown">
-                      {{ member.extra_details | markdownify }}
-                    </div>
-                  {% endif %}
-
-                  {% if member.email %}
-                    <p>
-                      {{ member.email }}Email →</a>
-                    </p>
-                  {% endif %}
-                </div>
-
-                <details class="profile-details">
-                  <summary>More</summary>
-
-                  <div class="profile-extra profile-extra-mobile">
                     {% if member.questions %}
-                      {% for item in member.questions %}
-                        {% if item.question or item.answer %}
-                          <p>
-                            {% if item.question %}
-                              <strong>{{ item.question }}</strong>
-                            {% endif %}
-                            {% if item.answer %}
-                              <span>{{ item.answer }}</span>
-                            {% endif %}
-                          </p>
-                        {% endif %}
-                      {% endfor %}
+                      <div class="committee-question-list">
+                        {% for item in member.questions %}
+                          {% if item.question or item.answer %}
+                            <div class="committee-question">
+                              {% if item.question %}
+                                <strong>{{ item.question }}</strong>
+                              {% endif %}
+                              {% if item.answer %}
+                                <p>{{ item.answer }}</p>
+                              {% endif %}
+                            </div>
+                          {% endif %}
+                        {% endfor %}
+                      </div>
                     {% endif %}
 
                     {% if member.extra_details %}
-                      <div class="profile-extra-markdown">
+                      <div class="committee-extra-details">
                         {{ member.extra_details | markdownify }}
                       </div>
                     {% endif %}
 
                     {% if member.email %}
-                      <p>
+                      <p class="committee-email">
                         {{ member.email }}Email →</a>
                       </p>
                     {% endif %}
                   </div>
-                </details>
-              {% endif %}
-            </div>
-          </article>
+                </div>
+              </div>
+            {% endif %}
+          </details>
         {% endfor %}
       </div>
     {% endif %}
   </div>
+
+  <script>
+    (function () {
+      if (!window.matchMedia || !window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+        return;
+      }
+
+      document.querySelectorAll("#{{ include.section_id }} .committee-member-tile").forEach(function (tile) {
+        tile.addEventListener("mouseenter", function () {
+          if (!tile.open) {
+            tile.dataset.hoverOpened = "true";
+            tile.open = true;
+          }
+        });
+
+        tile.addEventListener("mouseleave", function () {
+          if (tile.dataset.hoverOpened === "true") {
+            tile.open = false;
+            delete tile.dataset.hoverOpened;
+          }
+        });
+
+        tile.addEventListener("toggle", function () {
+          if (tile.open && tile.dataset.hoverOpened !== "true") {
+            delete tile.dataset.hoverOpened;
+          }
+        });
+      });
+    })();
+  </script>
 </section>
