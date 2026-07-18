@@ -8,7 +8,7 @@ backend:
 media_folder: "assets/images/uploads"
 public_folder: "/assets/images/uploads"
 publish_mode: simple
-site_url: https://www.uostriathlon.co.uk
+site_url: https://dhbedkb.github.io/uostriathlon/
 
 collections:
   - name: pages
