@@ -33,7 +33,7 @@ sections:
         name: Barnaby Read
         questions:
           - question: Favourite place in Sheffield
-            answer: The parkway
+            answer: The parkway 2
         image_position: center center
         favourite_place_description: null
         favourite_place: null
@@ -117,5 +117,5 @@ sections:
       label: Email the Club
       url: mailto:triathlon@sheffield.ac.uk
     secondary_button:
-      label: ""
-      url: ""
+      label: ffs
+      url: ffs
