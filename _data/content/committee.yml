@@ -29,6 +29,16 @@ sections:
         favourite_place: null
         favourite_place_description: null
         extra_details: null
+      - name: Lorna Preston
+        role: Treasurer
+        bio: Helps manage club finances and planning.
+        email: triathlon@sheffield.ac.uk
+      - name: Kiera Dickinson
+        role: Welfare Officer
+        bio: Supports member wellbeing and inclusion.
+        email: triathlon@sheffield.ac.uk
+      - name: Joseph Fields
+        role: Competitions Officer
       - bio: Supports organisation, communication and administration.
         name: Barnaby Read
         questions:
@@ -41,46 +51,10 @@ sections:
         role: Secretary
         image: /assets/images/uploads/img_9541.webp
         email: triathlon@sheffield.ac.uk
-      - name: Treasurer
-        role: Treasurer
-        bio: Helps manage club finances and planning.
-        email: triathlon@sheffield.ac.uk
-        image: null
-        favourite_place: null
-        favourite_place_description: null
-        extra_details: null
-      - name: Training Officer
-        role: Training
-        bio: Helps coordinate sessions and training information.
-        email: triathlon@sheffield.ac.uk
-        image: null
-        favourite_place: null
-        favourite_place_description: null
-        extra_details: null
-      - name: Social Secretary
-        role: Socials
-        bio: Helps organise social events and community activities.
-        email: triathlon@sheffield.ac.uk
-        image: null
-        favourite_place: null
-        favourite_place_description: null
-        extra_details: null
-      - name: Welfare Officer
-        role: Welfare
-        bio: Supports member wellbeing and inclusion.
-        email: triathlon@sheffield.ac.uk
-        image: null
-        favourite_place: null
-        favourite_place_description: null
-        extra_details: null
-      - name: Barnaby Read
-        role: Secretary
-        bio: Supports organisation, communication and administration.
-        email: triathlon@sheffield.ac.uk
-      - name: Lorna Preston
-        role: Treasurer
-        bio: Helps manage club finances and planning.
-        email: triathlon@sheffield.ac.uk
+      - name: KJ Longstaff
+        role: Charities and Publicity Secretary
+      - name: Ben O'Connor
+        role: Hallam Secretary
       - name: Becky Smith
         role: Swimming Training Officer
         bio: Helps coordinate sessions and training information.
@@ -98,16 +72,6 @@ sections:
       - name: Seamus Maclean
         role: Social Secretary
         bio: Helps organise social events and community activities.
-      - name: Kiera Dickinson
-        role: Welfare Officer
-        bio: Supports member wellbeing and inclusion.
-        email: triathlon@sheffield.ac.uk
-      - name: Ben O'Connor
-        role: Hallam Secretary
-      - name: Joseph Fields
-        role: Competitions Officer
-      - name: KJ Longstaff
-        role: Charities and Publicity Secretary
   - type: cta
     id: committee-cta
     eyebrow: Contact
