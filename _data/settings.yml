@@ -3,7 +3,7 @@ brand:
   short_name: Sheffield Triathlon
   tagline: Swim. Bike. Run. Belong.
   email: triathlon@sheffield.ac.uk
-  logo: /assets/images/brand/logo.png
+  logo: /assets/images/brand/logo.webp
 
 theme:
   default: dark
