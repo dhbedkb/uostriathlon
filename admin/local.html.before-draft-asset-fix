@@ -7,7 +7,7 @@
   <link href="./config.local.yml" type="text/yaml" rel="cms-config-url">
 </head>
 <body>
-  <script src="https://unpkg.com/decap-cms@3.14.1/dist/decap-cms.js"></script>
-  <script src="./committee-preview.js?v=draft-asset-fix-1&v=local-backend-3"></script>
+  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  <script src="./committee-preview.js?v=local-backend-3"></script>
 </body>
 </html>

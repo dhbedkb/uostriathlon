@@ -24,13 +24,10 @@
 
     try {
       var asset = getAsset(clean);
-
       if (asset) {
         return asset.toString ? asset.toString() : String(asset);
       }
-    } catch (error) {
-      console.warn("[cms-preview] getAsset failed", clean, error);
-    }
+    } catch (e) {}
 
     return "";
   }
