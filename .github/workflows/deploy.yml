@@ -28,6 +28,17 @@ jobs:
           ruby-version: "3.3"
           bundler-cache: true
 
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Install image tooling
+        run: python -m pip install pillow pyyaml
+
+      - name: Optimise images
+        run: python scripts/optimise_site_images.py
+
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 

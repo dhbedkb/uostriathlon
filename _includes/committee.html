@@ -56,7 +56,12 @@
                     class="committee-crop-image-frame"
                     style="--crop-x: {{ crop_x }}%; --crop-y: {{ crop_y }}%; --crop-zoom: {{ crop_zoom | divided_by: 100.0 }};"
                   >
-                    {{ display_image_clean | relative_url }}
+                    <img
+                      class="committee-crop-image"
+                      src="{{ display_image_clean | relative_url }}"
+                      alt="{{ member.name | default: 'Committee member' }}"
+                      loading="lazy"
+                    >
                   </div>
                 {% endif %}
 

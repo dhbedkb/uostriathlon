@@ -8,6 +8,9 @@ CONTENT_DIR = ROOT / "_data/content"
 GENERATED_DIR = ROOT / "assets/images/generated"
 COMMITTEE_DIR = ROOT / "assets/images/committee/profiles"
 
+GENERATED_DIR.mkdir(parents=True, exist_ok=True)
+COMMITTEE_DIR.mkdir(parents=True, exist_ok=True)
+
 SUPPORTED_EXTENSIONS = {".jpg", ".jpeg", ".png", ".webp", ".bmp", ".tif", ".tiff"}
 
 def slugify(value):

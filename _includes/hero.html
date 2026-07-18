@@ -1,6 +1,11 @@
 <section id="{{ include.section_id }}" class="hero section-hero {% if include.section.background_image %}has-photo{% endif %}" data-section-type="hero">
   {% if include.section.background_image %}
-    <div class="hero-photo" style="background-image: url('{{ include.section.background_image | relative_url }}')" aria-hidden="true"></div>
+    {% assign hero_cache_key = include.section.background_image_raw | default: include.section.background_image | slugify %}
+    <div
+      class="hero-photo"
+      style="background-image: url('{{ include.section.background_image | relative_url }}?v={{ hero_cache_key }}-{{ include.section.background_crop_x | default: 50 }}-{{ include.section.background_crop_y | default: 50 }}-{{ include.section.background_crop_zoom | default: 100 }}')"
+      aria-hidden="true"
+    ></div>
   {% else %}
     <div class="hero-bg" aria-hidden="true"></div>
   {% endif %}
