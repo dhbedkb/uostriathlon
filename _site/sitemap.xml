@@ -33,4 +33,8 @@
 <url>
 <loc>http://localhost:4000/uostriathlon/training/</loc>
 </url>
+<url>
+<loc>http://localhost:4000/uostriathlon/admin/</loc>
+<lastmod>2026-07-18T13:43:45+01:00</lastmod>
+</url>
 </urlset>

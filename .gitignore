@@ -1,0 +1,9 @@
+.DS_Store
+
+# Build output — rebuilt by .github/workflows/deploy.yml on every push
+_site/
+.jekyll-cache/
+.sass-cache/
+.DS_Store
+_site/
+.DS_Store
