@@ -143,10 +143,16 @@ collections:
                     widget: list
                     summary: "{{fields.name}} — {{fields.role}}"
                     fields:
-                      - { label: Photo, name: image, widget: image, required: false }
-                      - { label: Crop horizontal focus %, name: crop_x, widget: number, default: 50, min: 0, max: 100, value_type: int, required: false, hint: "0 = left, 50 = centre, 100 = right" }
-                      - { label: Crop vertical focus %, name: crop_y, widget: number, default: 50, min: 0, max: 100, value_type: int, required: false, hint: "0 = top, 50 = centre, 100 = bottom" }
-                      - { label: Crop zoom %, name: crop_zoom, widget: number, default: 100, min: 100, max: 220, value_type: int, required: false, hint: "100 = normal. Increase to zoom in on the face." }
+                      - label: Photo
+                        name: image
+                        widget: image
+                        required: false
+                        choose_url: false
+                        media_folder: /assets/images/committee/raw
+                        public_folder: /assets/images/committee/raw
+                      - { label: Crop horizontal focus %, name: crop_x, widget: number, default: 50, min: 0, max: 100, value_type: int, required: false, hint: "0 = left, 50 = centre, 100 = right. Watch the preview pane." }
+                      - { label: Crop vertical focus %, name: crop_y, widget: number, default: 50, min: 0, max: 100, value_type: int, required: false, hint: "0 = top, 50 = centre, 100 = bottom. Watch the preview pane." }
+                      - { label: Crop zoom %, name: crop_zoom, widget: number, default: 100, min: 100, max: 220, value_type: int, required: false, hint: "100 = normal. Increase to zoom into the face." }
                       - { label: Name, name: name, widget: string, required: false }
                       - { label: Role, name: role, widget: string, required: false }
                       - { label: Bio, name: bio, widget: text, required: false }

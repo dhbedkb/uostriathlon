@@ -1,0 +1,150 @@
+body {
+  margin: 0;
+  padding: 24px;
+  background: #0b0b0b;
+  color: #ffffff;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.cms-preview-wrap {
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+.cms-preview-eyebrow {
+  color: #F7D35D;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.cms-preview-title {
+  margin: 8px 0 10px;
+  font-size: clamp(32px, 6vw, 64px);
+  line-height: 0.95;
+  font-weight: 950;
+}
+
+.cms-preview-subtitle,
+.cms-crop-help {
+  color: #cfcfcf;
+}
+
+.cms-crop-help {
+  margin-bottom: 28px;
+  font-size: 14px;
+}
+
+.cms-preview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+@media (min-width: 950px) {
+  .cms-preview-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.cms-card {
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 18px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at top right, rgba(247,211,93,0.13), transparent 180px),
+    #151515;
+}
+
+.cms-card-head {
+  min-height: 76px;
+  padding: 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+}
+
+.cms-card-name {
+  display: block;
+  font-weight: 950;
+  font-size: 24px;
+  line-height: 1.02;
+}
+
+.cms-card-role {
+  display: block;
+  margin-top: 6px;
+  color: #F7D35D;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.cms-card-body {
+  padding: 16px;
+}
+
+.cms-image-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: 14px;
+  background: #070707;
+  outline: 2px solid rgba(247,211,93,0.9);
+  outline-offset: -2px;
+  margin-bottom: 12px;
+}
+
+.cms-image-frame::before {
+  content: "Website crop frame";
+  position: absolute;
+  z-index: 2;
+  top: 8px;
+  left: 8px;
+  padding: 4px 7px;
+  border-radius: 999px;
+  background: rgba(0,0,0,0.74);
+  color: #F7D35D;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.cms-image-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: var(--crop-x, 50%) var(--crop-y, 50%);
+  transform: scale(var(--crop-zoom, 1));
+  transform-origin: var(--crop-x, 50%) var(--crop-y, 50%);
+  display: block;
+}
+
+.cms-no-image {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  color: #F7D35D;
+  font-weight: 900;
+  text-align: center;
+  padding: 14px;
+  box-sizing: border-box;
+}
+
+.cms-card p {
+  color: #d0d0d0;
+  margin: 0 0 10px;
+}
+
+.cms-question {
+  margin-top: 12px;
+}
+
+.cms-question strong {
+  display: block;
+  color: #ffffff;
+  margin-bottom: 3px;
+}
