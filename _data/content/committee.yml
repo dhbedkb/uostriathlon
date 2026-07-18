@@ -72,6 +72,8 @@ sections:
       - name: Seamus Maclean
         role: Social Secretary
         bio: Helps organise social events and community activities.
+      - name: Alice Thomas
+        role: Kit Secretary
   - type: cta
     id: committee-cta
     eyebrow: Contact
