@@ -26,26 +26,50 @@ sections:
         role: President
         bio: Coordinates the club and supports committee activity.
         email: triathlon@sheffield.ac.uk
+        image:
+        favourite_place:
+        favourite_place_description:
+        extra_details:
       - name: Secretary
         role: Secretary
         bio: Supports organisation, communication and administration.
         email: triathlon@sheffield.ac.uk
+        image:
+        favourite_place:
+        favourite_place_description:
+        extra_details:
       - name: Treasurer
         role: Treasurer
         bio: Helps manage club finances and planning.
         email: triathlon@sheffield.ac.uk
+        image:
+        favourite_place:
+        favourite_place_description:
+        extra_details:
       - name: Training Officer
         role: Training
         bio: Helps coordinate sessions and training information.
         email: triathlon@sheffield.ac.uk
+        image:
+        favourite_place:
+        favourite_place_description:
+        extra_details:
       - name: Social Secretary
         role: Socials
         bio: Helps organise social events and community activities.
         email: triathlon@sheffield.ac.uk
+        image:
+        favourite_place:
+        favourite_place_description:
+        extra_details:
       - name: Welfare Officer
         role: Welfare
         bio: Supports member wellbeing and inclusion.
         email: triathlon@sheffield.ac.uk
+        image:
+        favourite_place:
+        favourite_place_description:
+        extra_details:
 
   - type: cta
     id: committee-cta

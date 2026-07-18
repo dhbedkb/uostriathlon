@@ -142,10 +142,14 @@ collections:
                     name: members
                     widget: list
                     fields:
+                      - { label: Image, name: image, widget: image, required: false }
                       - { label: Name, name: name, widget: string }
                       - { label: Role, name: role, widget: string, required: false }
                       - { label: Bio, name: bio, widget: text, required: false }
                       - { label: Email, name: email, widget: string, required: false }
+                      - { label: Favourite place in Sheffield, name: favourite_place, widget: string, required: false }
+                      - { label: Favourite place description, name: favourite_place_description, widget: text, required: false }
+                      - { label: Extra details, name: extra_details, widget: markdown, required: false }
 
               - name: sponsors
                 label: Sponsors
