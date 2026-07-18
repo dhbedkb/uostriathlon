@@ -22,59 +22,22 @@
       return "";
     }
 
-    function withoutBase(value) {
-      if (value.indexOf("/uostriathlon/") === 0) {
-        return value.slice("/uostriathlon".length);
-      }
-      return value;
-    }
+    try {
+      var asset = getAsset(clean);
 
-    var debased = withoutBase(clean);
-    var candidates = [clean];
+      if (asset) {
+        var resolved = asset.toString ? asset.toString() : String(asset);
 
-    if (debased !== clean) {
-      candidates.push(debased);
-    }
-
-    if (debased.charAt(0) === "/") {
-      candidates.push(debased.slice(1));
-    }
-
-    for (var i = 0; i < candidates.length; i++) {
-      try {
-        var candidate = candidates[i];
-        var asset = getAsset(candidate);
-
-        if (asset) {
-          var resolved = asset.toString ? asset.toString() : String(asset);
-
-          if (resolved && resolved.indexOf("[object") === -1) {
-            console.log("[cms-preview] resolved via getAsset", {
-              original: clean,
-              candidate: candidate,
-              resolved: resolved
-            });
-            return resolved;
-          }
+        if (resolved && resolved.indexOf("[object") === -1) {
+          return resolved;
         }
-      } catch (error) {
-        console.warn("[cms-preview] getAsset failed", candidates[i], error);
       }
+    } catch (error) {
+      console.warn("[cms-preview] getAsset failed (nested/draft)", clean, error);
     }
 
-    if (clean.indexOf("/uostriathlon/") === 0) {
-      console.warn("[cms-preview] falling back to clean URL", clean);
-      return clean;
-    }
-
-    if (debased.indexOf("/assets/") === 0) {
-      var withBase = "/uostriathlon" + debased;
-      console.warn("[cms-preview] falling back to base URL", withBase);
-      return withBase;
-    }
-
-    console.warn("[cms-preview] no preview asset found", clean);
-    return "";
+    console.warn("[cms-preview] no draft asset, using clean path", clean);
+    return clean;
   }
 
   function imageFrame(src, getAsset, cropX, cropY, cropZoom, wide) {
