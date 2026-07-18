@@ -2,7 +2,7 @@ backend:
   name: github
   repo: dhbedkb/uostriathlon
   branch: main
-  base_url: https://TODO-your-worker-subdomain.workers.dev
+  base_url: https://uostriathlon-cms-auth.barnabytri.workers.dev
   auth_endpoint: auth
 
 media_folder: "assets/images/uploads"
