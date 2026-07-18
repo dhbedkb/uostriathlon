@@ -25,51 +25,50 @@ sections:
         role: President
         bio: Coordinates the club and supports committee activity.
         email: triathlon@sheffield.ac.uk
-        image:
-        favourite_place:
-        favourite_place_description:
-        extra_details:
-      - name: Secretary
+        image: null
+        favourite_place: null
+        favourite_place_description: null
+        extra_details: null
+      - name: Barnaby Read
         role: Secretary
         bio: Supports organisation, communication and administration.
         email: triathlon@sheffield.ac.uk
-        image:
-        favourite_place:
-        favourite_place_description:
-        extra_details:
+        image: /assets/images/uploads/img_9541.webp
+        favourite_place: null
+        favourite_place_description: null
+        extra_details: null
       - name: Treasurer
         role: Treasurer
         bio: Helps manage club finances and planning.
         email: triathlon@sheffield.ac.uk
-        image:
-        favourite_place:
-        favourite_place_description:
-        extra_details:
+        image: null
+        favourite_place: null
+        favourite_place_description: null
+        extra_details: null
       - name: Training Officer
         role: Training
         bio: Helps coordinate sessions and training information.
         email: triathlon@sheffield.ac.uk
-        image:
-        favourite_place:
-        favourite_place_description:
-        extra_details:
+        image: null
+        favourite_place: null
+        favourite_place_description: null
+        extra_details: null
       - name: Social Secretary
         role: Socials
         bio: Helps organise social events and community activities.
         email: triathlon@sheffield.ac.uk
-        image:
-        favourite_place:
-        favourite_place_description:
-        extra_details:
+        image: null
+        favourite_place: null
+        favourite_place_description: null
+        extra_details: null
       - name: Welfare Officer
         role: Welfare
         bio: Supports member wellbeing and inclusion.
         email: triathlon@sheffield.ac.uk
-        image:
-        favourite_place:
-        favourite_place_description:
-        extra_details:
-
+        image: null
+        favourite_place: null
+        favourite_place_description: null
+        extra_details: null
       - name: Barnaby Read
         role: Secretary
         bio: Supports organisation, communication and administration.
@@ -113,3 +112,6 @@ sections:
     primary_button:
       label: Email the Club
       url: mailto:triathlon@sheffield.ac.uk
+    secondary_button:
+      label: wut
+      url: wut
