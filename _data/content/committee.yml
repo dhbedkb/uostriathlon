@@ -23,7 +23,8 @@ sections:
     title: Current committee.
     subtitle: Replace these placeholders with the current committee.
     members:
-      - name: Jamie Thornton
+      - image_raw: /uostriathlon/assets/images/committee/raw/img_9541.jpg
+        name: Jamie Thornton
         role: President
         bio: Coordinates the club and supports committee activity.
         email: triathlon@sheffield.ac.uk
@@ -35,6 +36,8 @@ sections:
         role: Treasurer
         bio: Helps manage club finances and planning.
         email: triathlon@sheffield.ac.uk
+        image_raw: /uostriathlon/assets/images/committee/raw/img_9541.jpg
+        crop_zoom: 104
       - name: Kiera Dickinson
         role: Welfare Officer
         bio: Supports member wellbeing and inclusion.
