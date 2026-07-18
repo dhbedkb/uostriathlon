@@ -10,19 +10,26 @@
     {% if include.section.members %}
       <div class="committee-grid">
         {% for member in include.section.members %}
+          {% assign has_extra = false %}
+          {% if member.email or member.questions or member.extra_details %}
+            {% assign has_extra = true %}
+          {% endif %}
+
           <article class="profile-card committee-profile-card reveal-card">
             <div class="profile-image-wrap">
               {% if member.image %}
                 {{ member.image | relative_url }}
               {% else %}
                 <div class="profile-placeholder" aria-hidden="true">
-                  <span>{{ member.name | slice: 0 }}</span>
+                  <span>{{ member.name | default: '?' | slice: 0 }}</span>
                 </div>
               {% endif %}
             </div>
 
             <div class="profile-card-main">
-              <h3>{{ member.name }}</h3>
+              {% if member.name %}
+                <h3>{{ member.name }}</h3>
+              {% endif %}
 
               {% if member.role %}
                 <p class="card-label">{{ member.role }}</p>
@@ -32,19 +39,21 @@
                 <p class="profile-bio">{{ member.bio }}</p>
               {% endif %}
 
-              <details class="profile-details">
-                <summary>More about {{ member.name }}</summary>
-
-                <div class="profile-extra">
-                  {% if member.favourite_place %}
-                    <p>
-                      <strong>Favourite place in Sheffield:</strong>
-                      {{ member.favourite_place }}
-                    </p>
-                  {% endif %}
-
-                  {% if member.favourite_place_description %}
-                    <p>{{ member.favourite_place_description }}</p>
+              {% if has_extra %}
+                <div class="profile-extra profile-extra-desktop">
+                  {% if member.questions %}
+                    {% for item in member.questions %}
+                      {% if item.question or item.answer %}
+                        <p>
+                          {% if item.question %}
+                            <strong>{{ item.question }}</strong>
+                          {% endif %}
+                          {% if item.answer %}
+                            <span>{{ item.answer }}</span>
+                          {% endif %}
+                        </p>
+                      {% endif %}
+                    {% endfor %}
                   {% endif %}
 
                   {% if member.extra_details %}
@@ -59,7 +68,40 @@
                     </p>
                   {% endif %}
                 </div>
-              </details>
+
+                <details class="profile-details">
+                  <summary>More</summary>
+
+                  <div class="profile-extra profile-extra-mobile">
+                    {% if member.questions %}
+                      {% for item in member.questions %}
+                        {% if item.question or item.answer %}
+                          <p>
+                            {% if item.question %}
+                              <strong>{{ item.question }}</strong>
+                            {% endif %}
+                            {% if item.answer %}
+                              <span>{{ item.answer }}</span>
+                            {% endif %}
+                          </p>
+                        {% endif %}
+                      {% endfor %}
+                    {% endif %}
+
+                    {% if member.extra_details %}
+                      <div class="profile-extra-markdown">
+                        {{ member.extra_details | markdownify }}
+                      </div>
+                    {% endif %}
+
+                    {% if member.email %}
+                      <p>
+                        {{ member.email }}Email →</a>
+                      </p>
+                    {% endif %}
+                  </div>
+                </details>
+              {% endif %}
             </div>
           </article>
         {% endfor %}
