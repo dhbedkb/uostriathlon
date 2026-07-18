@@ -43,7 +43,15 @@
                       src="{{ member.image | relative_url }}"
                       alt="{{ member.name | default: 'Committee member' }}"
                       loading="lazy"
-                   .questions %}
+                    >
+                  </div>
+                {% endif %}
+
+                {% if member.bio %}
+                  <p class="committee-crop-bio">{{ member.bio }}</p>
+                {% endif %}
+
+                {% if member.questions %}
                   <div class="committee-crop-questions">
                     {% for item in member.questions %}
                       {% if item.question or item.answer %}
@@ -68,7 +76,7 @@
 
                 {% if member.email %}
                   <p class="committee-crop-email">
-                    {{ member.email }}Email →</a>
+                    <a class="text-link" href="mailto:{{ member.email }}">Email →</a>
                   </p>
                 {% endif %}
               </div>

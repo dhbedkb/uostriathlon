@@ -76,7 +76,6 @@ for section in data.get("sections", []):
             print(f"Skipping missing image: {image_ref}")
             continue
 
-        # Do not reprocess images that are already in profiles unless source is raw.
         if "/assets/images/committee/profiles/" in image_ref:
             continue
 
