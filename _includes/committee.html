@@ -8,7 +8,7 @@
     %}
 
     {% if include.section.members %}
-      <div class="committee-tile-list">
+      <div class="committee-grid committee-compact-grid">
         {% for member in include.section.members %}
           {% assign image_position = member.image_position | default: "center center" %}
           {% assign has_extra = false %}
@@ -16,71 +16,64 @@
             {% assign has_extra = true %}
           {% endif %}
 
-          <details class="committee-member-tile reveal-card">
+          <details class="committee-tile reveal-card">
             <summary class="committee-tile-summary">
-              <span class="committee-tile-main">
-                {% if member.name %}
-                  <span class="committee-tile-name">{{ member.name }}</span>
-                {% else %}
-                  <span class="committee-tile-name">Committee member</span>
-                {% endif %}
-
+              <span class="committee-tile-text">
+                <span class="committee-tile-name">{{ member.name | default: "Committee member" }}</span>
                 {% if member.role %}
                   <span class="committee-tile-role">{{ member.role }}</span>
                 {% endif %}
               </span>
 
-              <span class="committee-tile-action" aria-hidden="true">More</span>
+              <span class="committee-tile-toggle" aria-hidden="true"></span>
             </summary>
 
             {% if has_extra %}
-              <div class="committee-tile-expanded">
-                <div class="committee-expanded-grid">
-                  <div class="committee-expanded-image-wrap" style="--committee-image-position: {{ image_position }};">
-                    {% if member.image %}
-                      {{ member.image | relative_url }}
-                    {% else %}
-                      <div class="committee-expanded-placeholder" aria-hidden="true">
-                        <span>{{ member.name | default: '?' | slice: 0 }}</span>
-                      </div>
-                    {% endif %}
+              <div class="committee-tile-body">
+                {% if member.image %}
+                  <div class="committee-tile-image-wrap" style="--committee-image-position: {{ image_position }};">
+                    <img
+                      class="committee-tile-image"
+                      src="{{ member.image | relative_url }}"
+                      alt="{{ member.name | default: 'Committee member' }}"
+                      loading="lazy"
+                    >
                   </div>
+                {% endif %}
 
-                  <div class="committee-expanded-content">
-                    {% if member.bio %}
-                      <p class="committee-expanded-bio">{{ member.bio }}</p>
-                    {% endif %}
+                {% if member.bio %}
+                  <p class="committee-tile-bio">{{ member.bio }}</p>
+                {% endif %}
 
-                    {% if member.questions %}
-                      <div class="committee-question-list">
-                        {% for item in member.questions %}
-                          {% if item.question or item.answer %}
-                            <div class="committee-question">
-                              {% if item.question %}
-                                <strong>{{ item.question }}</strong>
-                              {% endif %}
-                              {% if item.answer %}
-                                <p>{{ item.answer }}</p>
-                              {% endif %}
-                            </div>
+                {% if member.questions %}
+                  <div class="committee-question-list">
+                    {% for item in member.questions %}
+                      {% if item.question or item.answer %}
+                        <div class="committee-question">
+                          {% if item.question %}
+                            <strong>{{ item.question }}</strong>
                           {% endif %}
-                        {% endfor %}
-                      </div>
-                    {% endif %}
 
-                    {% if member.extra_details %}
-                      <div class="committee-extra-details">
-                        {{ member.extra_details | markdownify }}
-                      </div>
-                    {% endif %}
-
-                    {% if member.email %}
-                      <p class="committee-email">
-                        {{ member.email }}Email →</a>
-                      </p>
-                    {% endif %}
+                          {% if item.answer %}
+                            <p>{{ item.answer }}</p>
+                          {% endif %}
+                        </div>
+                      {% endif %}
+                    {% endfor %}
                   </div>
-                </div>
+                {% endif %}
+
+                {% if member.extra_details %}
+                  <div class="committee-extra-details">
+                    {{ member.extra_details | markdownify }}
+                  </div>
+                {% endif %}
+
+                {% if member.email %}
+                  <p class="committee-email">
+                    <a class="text-link" href="mailto:{{ member.email }}">Email →</a>
+                  </p>
+                {% endif %}
               </div>
             {% endif %}
           </details>
@@ -88,34 +81,4 @@
       </div>
     {% endif %}
   </div>
-
-  <script>
-    (function () {
-      if (!window.matchMedia || !window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
-        return;
-      }
-
-      document.querySelectorAll("#{{ include.section_id }} .committee-member-tile").forEach(function (tile) {
-        tile.addEventListener("mouseenter", function () {
-          if (!tile.open) {
-            tile.dataset.hoverOpened = "true";
-            tile.open = true;
-          }
-        });
-
-        tile.addEventListener("mouseleave", function () {
-          if (tile.dataset.hoverOpened === "true") {
-            tile.open = false;
-            delete tile.dataset.hoverOpened;
-          }
-        });
-
-        tile.addEventListener("toggle", function () {
-          if (tile.open && tile.dataset.hoverOpened !== "true") {
-            delete tile.dataset.hoverOpened;
-          }
-        });
-      });
-    })();
-  </script>
 </section>
