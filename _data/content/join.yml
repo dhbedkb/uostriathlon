@@ -1,40 +1,36 @@
 title: Join Sheffield Triathlon
 description: Membership information for new and returning members.
-
 sections:
-  - type: hero
-    id: join-hero
-    eyebrow: Join
-    title: Join Sheffield Triathlon
-    subtitle: You do not need to be a triathlete to start.
-    body: Come along, try a session and become part of the club.
-    background_image: /assets/images/home/join.webp
-    primary_button:
-      label: Email the Club
-      url: mailto:triathlon@sheffield.ac.uk
-    secondary_button:
-      label: View Training
-      url: /training/
-
-  - type: timeline
-    id: joining-steps
-    eyebrow: Steps
-    title: How to join.
-    items:
-      - title: Follow updates
-        description: Check Instagram and club updates for freshers events and taster sessions.
-      - title: Ask questions
-        description: Email committee if you are unsure about kit, ability level or membership.
-      - title: Try training
-        description: Come along to a suitable beginner-friendly session.
-      - title: Buy membership
-        description: Add the official membership link once committee confirms it.
-
-  - type: cta
-    id: join-cta
-    eyebrow: Start
-    title: Come and give it a go.
-    body: Send the club a message or come along to a session.
-    primary_button:
-      label: Email the Club
-      url: mailto:triathlon@sheffield.ac.uk
+- type: hero
+  id: join-hero
+  eyebrow: Join
+  title: Join Sheffield Triathlon
+  subtitle: You do not need to be a triathlete to start.
+  body: Come along, try a session and become part of the club.
+  primary_button:
+    label: Email the Club
+    url: mailto:triathlon@sheffield.ac.uk
+  secondary_button:
+    label: View Training
+    url: /training/
+- type: timeline
+  id: joining-steps
+  eyebrow: Steps
+  title: How to join.
+  items:
+  - title: Follow updates
+    description: Check Instagram and club updates for freshers events and taster sessions.
+  - title: Ask questions
+    description: Email committee if you are unsure about kit, ability level or membership.
+  - title: Try training
+    description: Come along to a suitable beginner-friendly session.
+  - title: Buy membership
+    description: Add the official membership link once committee confirms it.
+- type: cta
+  id: join-cta
+  eyebrow: Start
+  title: Come and give it a go.
+  body: Send the club a message or come along to a session.
+  primary_button:
+    label: Email the Club
+    url: mailto:triathlon@sheffield.ac.uk

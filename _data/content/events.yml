@@ -1,43 +1,37 @@
 title: Events
 description: Events, races, socials and calendar link.
-
 sections:
-  - type: hero
-    id: events-hero
-    eyebrow: Events
-    title: Events
-    subtitle: Races, socials and Give it a Go.
-    body: Use this page to point members towards the live events calendar.
-    background_image: /assets/images/events/hero.webp
-    primary_button:
-      label: Open Events Calendar
-      url: "#"
-    secondary_button:
-      label: Join the Club
-      url: /join/
-
-  - type: cards
-    id: event-types
-    eyebrow: Club Calendar
-    title: What goes in the events calendar.
-    cards:
-      - title: Give it a Go
-        label: Beginners
-        description: Taster sessions and beginner-friendly multisport events.
-        image: /assets/images/events/give-it-a-go.jpg
-      - title: Races
-        label: Racing
-        description: Club-supported race opportunities and university competition.
-        image: /assets/images/events/races.jpg
-      - title: Socials
-        label: Social
-        description: Club nights, trips and community events.
-        image: /assets/images/events/socials.jpg
-
-  - type: embed
-    id: events-calendar
-    eyebrow: Calendar
-    title: Live events calendar.
-    subtitle: Replace the button URL with the club events Google Calendar link or embed code.
-    url: "#"
-    button_label: Open Events Calendar
+- type: hero
+  id: events-hero
+  eyebrow: Events
+  title: Events
+  subtitle: Races, socials and Give it a Go.
+  body: Use this page to point members towards the live events calendar.
+  primary_button:
+    label: Open Events Calendar
+    url: '#'
+  secondary_button:
+    label: Join the Club
+    url: /join/
+- type: cards
+  id: event-types
+  eyebrow: Club Calendar
+  title: What goes in the events calendar.
+  cards:
+  - title: Give it a Go
+    label: Beginners
+    description: Taster sessions and beginner-friendly multisport events.
+  - title: Races
+    label: Racing
+    description: Club-supported race opportunities and university competition.
+  - title: Socials
+    label: Social
+    description: Club nights, trips and community events.
+- type: embed
+  id: events-calendar
+  eyebrow: Calendar
+  title: Live events calendar.
+  subtitle: Replace the button URL with the club events Google Calendar link or embed
+    code.
+  url: '#'
+  button_label: Open Events Calendar
