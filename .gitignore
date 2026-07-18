@@ -4,6 +4,15 @@
 _site/
 .jekyll-cache/
 .sass-cache/
-.DS_Store
-_site/
-.DS_Store
+# Local backups and one-off migration files
+*.backup
+*.before-*
+*.tmp
+*.stage*
+admin/*before*
+scripts/*before*
+*.bak
+# Local archive
+.archive/
+# Local build/cache output
+.jekyll-metadata
