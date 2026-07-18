@@ -1,6 +1,11 @@
 (function () {
   CMS.registerPreviewStyle("./committee-preview.css");
 
+  function cleanPath(value) {
+    if (!value) return "";
+    return String(value).trim();
+  }
+
   function siteBasePath() {
     var path = window.location.pathname || "/";
     var adminIndex = path.indexOf("/admin");
@@ -10,32 +15,23 @@
     return "";
   }
 
-  function cleanPath(value) {
-    if (!value) return "";
-    return String(value).trim();
-  }
+  function assetUrl(src, getAsset) {
+    src = cleanPath(src);
 
-  function assetUrl(path, getAsset) {
-    path = cleanPath(path);
-
-    if (!path) {
+    if (!src) {
       return "";
     }
 
-    // Data/blob/external URLs can be used directly.
     if (
-      /^https?:\/\//i.test(path) ||
-      path.indexOf("blob:") === 0 ||
-      path.indexOf("data:") === 0
+      /^https?:\/\//i.test(src) ||
+      src.indexOf("blob:") === 0 ||
+      src.indexOf("data:") === 0
     ) {
-      return path;
+      return src;
     }
 
-    var basePath = siteBasePath();
-
-    // Try Decap's resolver first, useful for newly selected draft assets.
     try {
-      var asset = getAsset(path);
+      var asset = getAsset(src);
       if (asset) {
         var resolved = asset.toString ? asset.toString() : String(asset);
         if (resolved) {
@@ -44,93 +40,323 @@
       }
     } catch (e) {}
 
-    // If path already includes /uostriathlon, use it as-is.
-    if (basePath && path.indexOf(basePath + "/") === 0) {
-      return path;
+    var base = siteBasePath();
+
+    if (base && src.indexOf(base + "/") === 0) {
+      return src;
     }
 
-    // If path starts /assets/..., prefix /uostriathlon.
-    if (path.charAt(0) === "/") {
-      return basePath + path;
+    if (src.charAt(0) === "/") {
+      return base + src;
     }
 
-    return basePath + "/" + path.replace(/^\.\//, "");
+    return base + "/" + src.replace(/^\.\//, "");
   }
 
-  var CommitteePreview = createClass({
+  function imageFrame(src, getAsset, cropX, cropY, cropZoom, wide) {
+    var url = assetUrl(src, getAsset);
+
+    return h(
+      "div",
+      {
+        className: wide ? "cms-image-frame cms-wide" : "cms-image-frame",
+        style: {
+          "--crop-x": (cropX || 50) + "%",
+          "--crop-y": (cropY || 50) + "%",
+          "--crop-zoom": ((cropZoom || 100) / 100)
+        }
+      },
+      url
+        ? h("img", { src: url, alt: "" })
+        : h("div", { className: "cms-no-image" }, "No image selected")
+    );
+  }
+
+  function heading(section, label) {
+    return [
+      h("div", { className: "cms-tag" }, label || section.type || "Section"),
+      h("h2", { className: "cms-title" }, section.title || section.platform || section.type || "Untitled"),
+      section.subtitle ? h("p", { className: "cms-subtitle" }, section.subtitle) : null,
+      section.body ? h("p", { className: "cms-body" }, section.body) : null
+    ];
+  }
+
+  function renderHero(section, getAsset, key) {
+    return h(
+      "section",
+      { className: "cms-section", key: key },
+      heading(section, "Hero"),
+      section.background_image
+        ? imageFrame(
+            section.background_image,
+            getAsset,
+            section.background_crop_x,
+            section.background_crop_y,
+            section.background_crop_zoom,
+            true
+          )
+        : null
+    );
+  }
+
+  function renderStats(section, key) {
+    var items = section.items || [];
+
+    return h(
+      "section",
+      { className: "cms-section", key: key },
+      heading(section, "Stats"),
+      h(
+        "div",
+        { className: "cms-grid" },
+        items.map(function (item, i) {
+          return h(
+            "article",
+            { className: "cms-card", key: i },
+            h("div", { className: "cms-card-body" },
+              h("span", { className: "cms-card-name" }, item.number || ""),
+              item.label ? h("span", { className: "cms-card-role" }, item.label) : null
+            )
+          );
+        })
+      )
+    );
+  }
+
+  function renderCards(section, getAsset, key) {
+    var cards = section.cards || [];
+
+    return h(
+      "section",
+      { className: "cms-section", key: key },
+      heading(section, "Cards / boxes"),
+      h(
+        "div",
+        { className: "cms-grid cms-grid-3" },
+        cards.map(function (card, i) {
+          return h(
+            "article",
+            { className: "cms-card", key: i },
+            card.image
+              ? h("div", { className: "cms-card-body" },
+                  imageFrame(card.image, getAsset, card.crop_x, card.crop_y, card.crop_zoom, false)
+                )
+              : null,
+            h("div", { className: "cms-card-head" },
+              h("span", { className: "cms-card-title" }, card.title || "Box"),
+              card.label ? h("span", { className: "cms-card-label" }, card.label) : null
+            ),
+            h("div", { className: "cms-card-body" },
+              card.description ? h("p", null, card.description) : null,
+              card.location ? h("p", { className: "cms-muted" }, card.location) : null,
+              card.schedule ? h("p", { className: "cms-muted" }, card.schedule) : null
+            )
+          );
+        })
+      )
+    );
+  }
+
+  function renderGallery(section, getAsset, key) {
+    var images = section.images || [];
+
+    return h(
+      "section",
+      { className: "cms-section", key: key },
+      heading(section, "Gallery"),
+      h(
+        "div",
+        { className: "cms-grid cms-grid-3" },
+        images.map(function (item, i) {
+          return h(
+            "article",
+            { className: "cms-card", key: i },
+            h("div", { className: "cms-card-body" },
+              imageFrame(item.src, getAsset, item.crop_x, item.crop_y, item.crop_zoom, false),
+              item.caption ? h("p", null, item.caption) : null
+            )
+          );
+        })
+      )
+    );
+  }
+
+  function renderCommittee(section, getAsset, key) {
+    var members = section.members || [];
+
+    return h(
+      "section",
+      { className: "cms-section", key: key },
+      heading(section, "Committee"),
+      h(
+        "div",
+        { className: "cms-grid cms-grid-3" },
+        members.map(function (member, i) {
+          var source = cleanPath(member.image_raw || "");
+
+          return h(
+            "article",
+            { className: "cms-card", key: i },
+            h("div", { className: "cms-card-head" },
+              h("span", { className: "cms-card-name" }, member.name || "Committee member"),
+              member.role ? h("span", { className: "cms-card-role" }, member.role) : null
+            ),
+            h("div", { className: "cms-card-body" },
+              imageFrame(source, getAsset, member.crop_x, member.crop_y, member.crop_zoom, false),
+              source
+                ? h("div", { className: "cms-source-note" }, "Source photo: " + source)
+                : h("div", { className: "cms-source-note" }, "No Source photo selected"),
+              member.bio ? h("p", null, member.bio) : null,
+              member.questions && member.questions.length
+                ? member.questions.map(function (item, qIndex) {
+                    return h("div", { className: "cms-question", key: qIndex },
+                      item.question ? h("strong", null, item.question) : null,
+                      item.answer ? h("p", null, item.answer) : null
+                    );
+                  })
+                : null
+            )
+          );
+        })
+      )
+    );
+  }
+
+  function renderTimeline(section, key) {
+    var items = section.items || [];
+
+    return h(
+      "section",
+      { className: "cms-section", key: key },
+      heading(section, "Timeline"),
+      items.map(function (item, i) {
+        return h("div", { className: "cms-timeline-item", key: i },
+          h("strong", null, item.title || "Timeline item"),
+          item.description ? h("p", null, item.description) : null
+        );
+      })
+    );
+  }
+
+  function renderFAQ(section, key) {
+    var items = section.items || [];
+
+    return h(
+      "section",
+      { className: "cms-section", key: key },
+      heading(section, "FAQ"),
+      items.map(function (item, i) {
+        return h("div", { className: "cms-faq-item", key: i },
+          h("strong", null, item.question || "Question"),
+          item.answer ? h("p", null, item.answer) : null
+        );
+      })
+    );
+  }
+
+  function renderCTA(section, key) {
+    return h(
+      "section",
+      { className: "cms-section", key: key },
+      heading(section, "Call to action")
+    );
+  }
+
+  function renderSocials(section, getAsset, key) {
+    var items = section.items || [];
+
+    return h(
+      "section",
+      { className: "cms-section", key: key },
+      heading(section, "Socials"),
+      h(
+        "div",
+        { className: "cms-grid" },
+        items.map(function (item, i) {
+          return h(
+            "article",
+            { className: "cms-card", key: i },
+            item.icon
+              ? h("div", { className: "cms-card-body" },
+                  imageFrame(item.icon, getAsset, item.crop_x, item.crop_y, item.crop_zoom, false)
+                )
+              : null,
+            h("div", { className: "cms-card-head" },
+              h("span", { className: "cms-card-title" }, item.platform || item.title || "Social link")
+            )
+          );
+        })
+      )
+    );
+  }
+
+  function renderGeneric(section, key) {
+    return h("section", { className: "cms-section", key: key }, heading(section, section.type));
+  }
+
+  function renderSection(section, getAsset, index) {
+    if (!section || !section.type) {
+      return null;
+    }
+
+    switch (section.type) {
+      case "hero":
+        return renderHero(section, getAsset, index);
+      case "stats":
+        return renderStats(section, index);
+      case "cards":
+        return renderCards(section, getAsset, index);
+      case "gallery":
+        return renderGallery(section, getAsset, index);
+      case "committee":
+        return renderCommittee(section, getAsset, index);
+      case "timeline":
+        return renderTimeline(section, index);
+      case "faq":
+        return renderFAQ(section, index);
+      case "cta":
+        return renderCTA(section, index);
+      case "socials":
+        return renderSocials(section, getAsset, index);
+      default:
+        return renderGeneric(section, index);
+    }
+  }
+
+  var PagePreview = createClass({
     render: function () {
-      var entry = this.props.entry;
-      var getAsset = this.props.getAsset;
-      var data = entry.getIn(["data"]).toJS();
-
+      var data = this.props.entry.getIn(["data"]).toJS();
       var sections = data.sections || [];
-      var committee = sections.find(function (section) {
-        return section.type === "committee";
-      }) || {};
+      var getAsset = this.props.getAsset;
 
-      var members = committee.members || [];
-
-      return h("main", { className: "cms-preview-wrap" },
-        h("div", { className: "cms-preview-eyebrow" }, committee.eyebrow || "Team"),
-        h("h1", { className: "cms-preview-title" }, committee.title || "Current committee."),
-        h("p", { className: "cms-preview-subtitle" }, committee.subtitle || ""),
-        h("p", { className: "cms-crop-help" },
-          "This editor preview uses Source photo only. Optimised profile photo is generated later and is deliberately ignored here."
+      return h(
+        "main",
+        { className: "cms-page-preview" },
+        h("section", { className: "cms-section" },
+          h("div", { className: "cms-tag" }, "Page"),
+          h("h1", { className: "cms-title" }, data.title || "Untitled page"),
+          data.description ? h("p", { className: "cms-subtitle" }, data.description) : null
         ),
-
-        h("div", { className: "cms-preview-grid" },
-          members.map(function (member, index) {
-            // IMPORTANT:
-            // Do NOT fallback to image_profile or legacy image here.
-            // The editor preview should reflect the source image field only.
-            var source = cleanPath(member.image_raw || "");
-            var img = assetUrl(source, getAsset);
-
-            var cropX = member.crop_x || 50;
-            var cropY = member.crop_y || 50;
-            var cropZoom = (member.crop_zoom || 100) / 100;
-
-            return h("article", { className: "cms-card", key: index },
-              h("div", { className: "cms-card-head" },
-                h("span", { className: "cms-card-name" }, member.name || "Committee member"),
-                member.role ? h("span", { className: "cms-card-role" }, member.role) : null
-              ),
-
-              h("div", { className: "cms-card-body" },
-                h("div", {
-                  className: "cms-image-frame",
-                  style: {
-                    "--crop-x": cropX + "%",
-                    "--crop-y": cropY + "%",
-                    "--crop-zoom": cropZoom
-                  }
-                },
-                  img
-                    ? h("img", { src: img, alt: member.name || "" })
-                    : h("div", { className: "cms-no-image" }, "No Source photo selected")
-                ),
-
-                source
-                  ? h("div", { className: "cms-source-note" }, "Source photo: " + source)
-                  : h("div", { className: "cms-source-note" }, "No Source photo selected. The editor preview intentionally ignores Optimised profile photo."),
-
-                member.bio ? h("p", null, member.bio) : null,
-
-                member.questions && member.questions.length
-                  ? member.questions.map(function (item, qIndex) {
-                      return h("div", { className: "cms-question", key: qIndex },
-                        item.question ? h("strong", null, item.question) : null,
-                        item.answer ? h("p", null, item.answer) : null
-                      );
-                    })
-                  : null
-              )
-            );
-          })
-        )
+        sections.map(function (section, index) {
+          return renderSection(section, getAsset, index);
+        })
       );
     }
   });
 
-  CMS.registerPreviewTemplate("committee", CommitteePreview);
+  [
+    "home",
+    "training",
+    "events",
+    "races",
+    "socials",
+    "committee",
+    "gallery",
+    "about",
+    "join",
+    "members",
+    "news"
+  ].forEach(function (name) {
+    CMS.registerPreviewTemplate(name, PagePreview);
+  });
 })();

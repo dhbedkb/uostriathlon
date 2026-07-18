@@ -6,44 +6,51 @@ body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
-.cms-preview-wrap {
-  max-width: 1080px;
+.cms-page-preview {
+  max-width: 1120px;
   margin: 0 auto;
 }
 
-.cms-preview-eyebrow {
+.cms-section {
+  margin-bottom: 28px;
+  padding: 22px;
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at top right, rgba(247,211,93,0.11), transparent 240px),
+    #151515;
+}
+
+.cms-tag {
   color: #F7D35D;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 900;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.13em;
   text-transform: uppercase;
 }
 
-.cms-preview-title {
-  margin: 8px 0 10px;
-  font-size: clamp(32px, 6vw, 64px);
+.cms-title {
+  margin: 8px 0 8px;
+  font-size: clamp(28px, 5vw, 58px);
   line-height: 0.95;
   font-weight: 950;
 }
 
-.cms-preview-subtitle,
-.cms-crop-help {
+.cms-subtitle,
+.cms-body,
+.cms-muted {
   color: #cfcfcf;
 }
 
-.cms-crop-help {
-  margin-bottom: 28px;
-  font-size: 14px;
-}
-
-.cms-preview-grid {
+.cms-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+  margin-top: 18px;
 }
 
-@media (min-width: 950px) {
-  .cms-preview-grid {
+@media (min-width: 920px) {
+  .cms-grid.cms-grid-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
@@ -52,24 +59,27 @@ body {
   border: 1px solid rgba(255,255,255,0.14);
   border-radius: 18px;
   overflow: hidden;
-  background:
-    radial-gradient(circle at top right, rgba(247,211,93,0.13), transparent 180px),
-    #151515;
+  background: #101010;
 }
 
 .cms-card-head {
-  min-height: 76px;
   padding: 16px;
   border-bottom: 1px solid rgba(255,255,255,0.12);
 }
 
+.cms-card-body {
+  padding: 16px;
+}
+
+.cms-card-title,
 .cms-card-name {
   display: block;
   font-weight: 950;
-  font-size: 24px;
-  line-height: 1.02;
+  font-size: 22px;
+  line-height: 1.05;
 }
 
+.cms-card-label,
 .cms-card-role {
   display: block;
   margin-top: 6px;
@@ -78,10 +88,6 @@ body {
   font-weight: 900;
   letter-spacing: 0.09em;
   text-transform: uppercase;
-}
-
-.cms-card-body {
-  padding: 16px;
 }
 
 .cms-image-frame {
@@ -96,8 +102,12 @@ body {
   margin-bottom: 12px;
 }
 
+.cms-image-frame.cms-wide {
+  aspect-ratio: 16 / 9;
+}
+
 .cms-image-frame::before {
-  content: "Website crop frame";
+  content: "Crop frame";
   position: absolute;
   z-index: 2;
   top: 8px;
@@ -142,16 +152,17 @@ body {
   word-break: break-word;
 }
 
-.cms-card p {
-  color: #d0d0d0;
-  margin: 0 0 10px;
-}
-
-.cms-question {
+.cms-question,
+.cms-faq-item,
+.cms-timeline-item {
   margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255,255,255,0.12);
 }
 
-.cms-question strong {
+.cms-question strong,
+.cms-faq-item strong,
+.cms-timeline-item strong {
   display: block;
   color: #ffffff;
   margin-bottom: 3px;
