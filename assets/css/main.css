@@ -4890,3 +4890,34 @@ main > .section:nth-of-type(even):not(.section-hero) {
     grid-template-columns: 1fr !important;
   }
 }
+
+/* committee expanded tile visibility:start */
+.committee-crop-grid {
+  align-items: start;
+  overflow: visible;
+}
+
+.committee-crop-card {
+  scroll-margin-top: 96px;
+  scroll-margin-bottom: 96px;
+}
+
+.committee-crop-card[open] {
+  position: relative;
+  z-index: 3;
+}
+
+.committee-crop-card[open] .committee-crop-expanded {
+  overflow: visible;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .committee-crop-card summary {
+    cursor: pointer;
+  }
+
+  .committee-crop-card:hover {
+    z-index: 4;
+  }
+}
+/* committee expanded tile visibility:end */

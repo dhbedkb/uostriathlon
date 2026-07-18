@@ -60,3 +60,58 @@
   if (themeToggle) applyTheme(getPreferredTheme());
   setHeaderState();
 })();
+
+/* committee hover and resize fix:start */
+(function () {
+  function canHover() {
+    return window.matchMedia &&
+      window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  }
+
+  function refreshLayout(card) {
+    window.dispatchEvent(new Event("resize"));
+
+    if (card && card.open) {
+      requestAnimationFrame(function () {
+        card.scrollIntoView({
+          behavior: "smooth",
+          block: "nearest",
+          inline: "nearest"
+        });
+      });
+    }
+  }
+
+  function setupCommitteeCards() {
+    var cards = Array.prototype.slice.call(
+      document.querySelectorAll(".committee-crop-card")
+    );
+
+    if (!cards.length) return;
+
+    cards.forEach(function (card) {
+      if (card.dataset.committeeHoverReady === "true") return;
+      card.dataset.committeeHoverReady = "true";
+
+      card.addEventListener("toggle", function () {
+        refreshLayout(card);
+      });
+
+      if (canHover()) {
+        card.addEventListener("mouseenter", function () {
+          card.open = true;
+          refreshLayout(card);
+        });
+
+        card.addEventListener("mouseleave", function () {
+          card.open = false;
+          refreshLayout(card);
+        });
+      }
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", setupCommitteeCards);
+  window.addEventListener("resize", setupCommitteeCards);
+})();
+ /* committee hover and resize fix:end */
