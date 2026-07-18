@@ -1,52 +1,65 @@
 title: Committee
 description: Meet the student committee behind Sheffield Triathlon.
-
 sections:
-  - type: hero
-    id: committee-hero
+  - body: The club is run by students who organise training, racing, socials and
+      welfare.
     eyebrow: Committee
-    title: Meet the Committee
-    subtitle: Student-led. Community-focused.
-    body: The club is run by students who organise training, racing, socials and welfare.
     background_image: /assets/images/committee/hero.webp
     primary_button:
       label: Contact Us
       url: mailto:triathlon@sheffield.ac.uk
+    subtitle: Student-led. Community-focused.
+    title: Meet the Committee
+    type: hero
+    id: committee-hero
     secondary_button:
       label: Join the Club
       url: /join/
-
   - type: committee
     id: committee-grid
     eyebrow: Team
     title: Current committee.
     subtitle: Replace these placeholders with the current committee.
     members:
-      - name: President
+      - name: Jamie Thornton
         role: President
         bio: Coordinates the club and supports committee activity.
         email: triathlon@sheffield.ac.uk
-      - name: Secretary
+      - name: Barnaby Read
         role: Secretary
         bio: Supports organisation, communication and administration.
         email: triathlon@sheffield.ac.uk
-      - name: Treasurer
+      - name: Lorna Preston
         role: Treasurer
         bio: Helps manage club finances and planning.
         email: triathlon@sheffield.ac.uk
-      - name: Training Officer
-        role: Training
+      - name: Becky Smith
+        role: Swimming Training Officer
         bio: Helps coordinate sessions and training information.
         email: triathlon@sheffield.ac.uk
-      - name: Social Secretary
-        role: Socials
+      - name: Tom Seipp
+        role: Cycling Training Officer
+        bio: Helps coordinate sessions and training information.
+      - name: Micheál Kelly
+        role: Running Training Officer
+        bio: Helps coordinate sessions and training information.
+      - name: Gordon Turnor
+        role: Social Secretary
         bio: Helps organise social events and community activities.
         email: triathlon@sheffield.ac.uk
-      - name: Welfare Officer
-        role: Welfare
+      - name: Seamus Maclean
+        role: Social Secretary
+        bio: Helps organise social events and community activities.
+      - name: Kiera Dickinson
+        role: Welfare Officer
         bio: Supports member wellbeing and inclusion.
         email: triathlon@sheffield.ac.uk
-
+      - name: Ben O'Connor
+        role: Hallam Secretary
+      - name: Joseph Fields
+        role: Competitions Officer
+      - name: KJ Longstaff
+        role: Charities and Publicity Secretary
   - type: cta
     id: committee-cta
     eyebrow: Contact
