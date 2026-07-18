@@ -8,7 +8,7 @@ sections:
     primary_button:
       label: Contact Us
       url: mailto:triathlon@sheffield.ac.uk
-    background_image_raw: /assets/images/source/img_9541.jpg
+    background_image_raw: /uostriathlon/assets/images/source/img_9541.webp
     subtitle: Student-led. Community-focused.
     title: Meet the Committee
     type: hero
@@ -22,7 +22,7 @@ sections:
     title: Current committee.
     subtitle: Replace these placeholders with the current committee.
     members:
-      - image_raw: /assets/images/committee/raw/img_1783.jpg
+      - image_raw: /uostriathlon/assets/images/committee/raw/img_9541.jpg
         bio: Coordinates the club and supports committee activity.
         name: Jamie Thornton
         favourite_place_description: null
@@ -35,7 +35,8 @@ sections:
         role: Treasurer
         bio: Helps manage club finances and planning.
         email: triathlon@sheffield.ac.uk
-        image_raw: /assets/images/committee/raw/img_9541.jpg
+        image_raw: /uostriathlon/assets/images/committee/raw/img_9541.jpg
+        crop_zoom: 104
       - name: Kiera Dickinson
         role: Welfare Officer
         bio: Supports member wellbeing and inclusion.
