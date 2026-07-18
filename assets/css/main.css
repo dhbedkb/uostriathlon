@@ -3825,3 +3825,246 @@ main > .section:nth-of-type(even):not(.section-hero) {
     min-height: 70px;
   }
 }
+
+
+/* FINAL OVERRIDE V2: committee cards grid with constrained image framing */
+
+/*
+  This block intentionally overrides earlier committee/profile/tile styles.
+  Desired behaviour:
+  - Desktop: multi-column card grid.
+  - Initial card: compact tile showing name and role only.
+  - Role always sits below name.
+  - Expanded content grows vertically inside the same card width.
+  - Image is square and constrained to card width.
+  - Crop/framing comes from crop_x/crop_y fields in CMS.
+*/
+
+.section-committee .committee-card-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)) !important;
+  gap: 1rem !important;
+  align-items: start !important;
+  max-width: 1120px;
+  margin-inline: auto;
+}
+
+/* On wide desktop keep a clean 3-column layout */
+@media (min-width: 1050px) {
+  .section-committee .committee-card-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+}
+
+/* Undo old one-column/list tile assumptions */
+.section-committee .committee-tile-list,
+.section-committee .committee-compact-grid {
+  display: grid !important;
+  grid-template-columns: inherit !important;
+}
+
+.section-committee .committee-card-tile {
+  display: block !important;
+  width: 100% !important;
+  max-width: none !important;
+  border: 1px solid var(--color-border);
+  border-radius: 1.25rem;
+  background:
+    radial-gradient(circle at top right, rgba(247, 211, 93, 0.12), transparent 18rem),
+    var(--color-surface);
+  box-shadow: var(--shadow-soft);
+  overflow: hidden;
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.section-committee .committee-card-tile:hover,
+.section-committee .committee-card-tile:focus-within {
+  transform: translateY(-2px);
+  border-color: rgba(247, 211, 93, 0.45);
+  box-shadow: 0 22px 72px rgba(0, 0, 0, 0.25);
+}
+
+.section-committee .committee-card-tile[open] {
+  border-color: rgba(247, 211, 93, 0.55);
+}
+
+/* Compact initial tile */
+.section-committee .committee-card-summary {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 1rem !important;
+  min-height: 88px !important;
+  padding: 1rem 1.15rem !important;
+  cursor: pointer;
+  list-style: none;
+}
+
+.section-committee .committee-card-summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Name and role stacked vertically */
+.section-committee .committee-card-heading {
+  display: grid !important;
+  gap: 0.28rem !important;
+  min-width: 0;
+}
+
+.section-committee .committee-card-name {
+  display: block !important;
+  font-size: clamp(1.18rem, 2.2vw, 1.65rem) !important;
+  line-height: 1.05 !important;
+  font-weight: 950 !important;
+  color: var(--color-text);
+}
+
+.section-committee .committee-card-role {
+  display: block !important;
+  color: var(--color-gold) !important;
+  font-size: 0.78rem !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.08em !important;
+  line-height: 1.25 !important;
+  text-transform: uppercase !important;
+}
+
+/* Plus/minus control */
+.section-committee .committee-card-toggle {
+  position: relative;
+  flex: 0 0 auto;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+}
+
+.section-committee .committee-card-toggle::before,
+.section-committee .committee-card-toggle::after {
+  content: "";
+  position: absolute;
+  inset: 50% auto auto 50%;
+  width: 0.78rem;
+  height: 2px;
+  background: var(--color-gold);
+  transform: translate(-50%, -50%);
+}
+
+.section-committee .committee-card-toggle::after {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.section-committee .committee-card-tile[open] .committee-card-toggle {
+  background: var(--color-gold);
+  border-color: var(--color-gold);
+}
+
+.section-committee .committee-card-tile[open] .committee-card-toggle::before,
+.section-committee .committee-card-tile[open] .committee-card-toggle::after {
+  background: #000000;
+}
+
+.section-committee .committee-card-tile[open] .committee-card-toggle::after {
+  display: none;
+}
+
+/* Expanded body remains inside the tile width */
+.section-committee .committee-card-expanded {
+  width: 100% !important;
+  max-width: 100% !important;
+  border-top: 1px solid var(--color-border);
+  padding: 1rem 1.15rem 1.15rem !important;
+  box-sizing: border-box;
+}
+
+/* Image constrained to card width */
+.section-committee .committee-card-image-frame {
+  width: 100% !important;
+  max-width: 100% !important;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: 1rem;
+  margin: 0 0 1rem 0;
+  background:
+    radial-gradient(circle at top right, rgba(247, 211, 93, 0.24), transparent 14rem),
+    #101010;
+}
+
+.section-committee .committee-card-image {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  object-fit: cover !important;
+  object-position: var(--committee-crop-x, 50%) var(--committee-crop-y, 50%) !important;
+}
+
+.section-committee .committee-card-bio {
+  margin-top: 0;
+  color: var(--color-muted);
+}
+
+.section-committee .committee-card-questions {
+  display: grid;
+  gap: 0.85rem;
+  margin-top: 1rem;
+}
+
+.section-committee .committee-card-question strong {
+  display: block;
+  color: var(--color-text);
+  margin-bottom: 0.2rem;
+}
+
+.section-committee .committee-card-question p {
+  margin: 0;
+  color: var(--color-muted);
+}
+
+.section-committee .committee-card-extra {
+  margin-top: 1rem;
+  color: var(--color-muted);
+}
+
+.section-committee .committee-card-extra p:first-child {
+  margin-top: 0;
+}
+
+.section-committee .committee-card-extra p:last-child {
+  margin-bottom: 0;
+}
+
+.section-committee .committee-card-email {
+  margin-bottom: 0;
+}
+
+/* Light mode */
+[data-theme="light"] .section-committee .committee-card-tile {
+  background:
+    radial-gradient(circle at top right, rgba(247, 211, 93, 0.22), transparent 18rem),
+    #ffffff;
+}
+
+[data-theme="light"] .section-committee .committee-card-bio,
+[data-theme="light"] .section-committee .committee-card-question p,
+[data-theme="light"] .section-committee .committee-card-extra {
+  color: #3f3f3f;
+}
+
+[data-theme="light"] .section-committee .committee-card-question strong {
+  color: #000000;
+}
+
+/* Mobile: one column, tap to expand */
+@media (max-width: 760px) {
+  .section-committee .committee-card-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .section-committee .committee-card-summary {
+    min-height: 78px !important;
+  }
+}

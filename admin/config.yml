@@ -144,14 +144,8 @@ collections:
                     summary: "{{fields.name}} — {{fields.role}}"
                     fields:
                       - { label: Photo, name: image, widget: image, required: false }
-                      - label: Photo crop position
-                        name: image_position
-                        widget: select
-                        required: false
-                        options:
-                          - { label: Centre, value: "center center" }
-                          - { label: Top, value: "center top" }
-                          - { label: Bottom, value: "center bottom" }
+                      - { label: Crop focus horizontal percent, name: crop_x, widget: number, default: 50, min: 0, max: 100, value_type: int, required: false }
+                      - { label: Crop focus vertical percent, name: crop_y, widget: number, default: 50, min: 0, max: 100, value_type: int, required: false }
                       - { label: Name, name: name, widget: string, required: false }
                       - { label: Role, name: role, widget: string, required: false }
                       - { label: Bio, name: bio, widget: text, required: false }

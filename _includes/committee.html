@@ -8,32 +8,37 @@
     %}
 
     {% if include.section.members %}
-      <div class="committee-grid committee-compact-grid">
+      <div class="committee-grid committee-card-grid">
         {% for member in include.section.members %}
-          {% assign image_position = member.image_position | default: "center center" %}
+          {% assign crop_x = member.crop_x | default: 50 %}
+          {% assign crop_y = member.crop_y | default: 50 %}
+
           {% assign has_extra = false %}
           {% if member.image or member.bio or member.email or member.questions or member.extra_details %}
             {% assign has_extra = true %}
           {% endif %}
 
-          <details class="committee-tile reveal-card">
-            <summary class="committee-tile-summary">
-              <span class="committee-tile-text">
-                <span class="committee-tile-name">{{ member.name | default: "Committee member" }}</span>
+          <details class="committee-card-tile reveal-card">
+            <summary class="committee-card-summary">
+              <span class="committee-card-heading">
+                <span class="committee-card-name">{{ member.name | default: "Committee member" }}</span>
                 {% if member.role %}
-                  <span class="committee-tile-role">{{ member.role }}</span>
+                  <span class="committee-card-role">{{ member.role }}</span>
                 {% endif %}
               </span>
 
-              <span class="committee-tile-toggle" aria-hidden="true"></span>
+              <span class="committee-card-toggle" aria-hidden="true"></span>
             </summary>
 
             {% if has_extra %}
-              <div class="committee-tile-body">
+              <div class="committee-card-expanded">
                 {% if member.image %}
-                  <div class="committee-tile-image-wrap" style="--committee-image-position: {{ image_position }};">
+                  <div
+                    class="committee-card-image-frame"
+                    style="--committee-crop-x: {{ crop_x }}%; --committee-crop-y: {{ crop_y }}%;"
+                  >
                     <img
-                      class="committee-tile-image"
+                      class="committee-card-image"
                       src="{{ member.image | relative_url }}"
                       alt="{{ member.name | default: 'Committee member' }}"
                       loading="lazy"
@@ -42,18 +47,17 @@
                 {% endif %}
 
                 {% if member.bio %}
-                  <p class="committee-tile-bio">{{ member.bio }}</p>
+                  <p class="committee-card-bio">{{ member.bio }}</p>
                 {% endif %}
 
                 {% if member.questions %}
-                  <div class="committee-question-list">
+                  <div class="committee-card-questions">
                     {% for item in member.questions %}
                       {% if item.question or item.answer %}
-                        <div class="committee-question">
+                        <div class="committee-card-question">
                           {% if item.question %}
                             <strong>{{ item.question }}</strong>
                           {% endif %}
-
                           {% if item.answer %}
                             <p>{{ item.answer }}</p>
                           {% endif %}
@@ -64,13 +68,13 @@
                 {% endif %}
 
                 {% if member.extra_details %}
-                  <div class="committee-extra-details">
+                  <div class="committee-card-extra">
                     {{ member.extra_details | markdownify }}
                   </div>
                 {% endif %}
 
                 {% if member.email %}
-                  <p class="committee-email">
+                  <p class="committee-card-email">
                     <a class="text-link" href="mailto:{{ member.email }}">Email →</a>
                   </p>
                 {% endif %}
