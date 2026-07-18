@@ -19,15 +19,52 @@ def slugify(value):
 def normalise_ref(ref):
     if not ref:
         return None
-    ref = str(ref)
+
+    ref = str(ref).strip()
+
     if ref.startswith("/uostriathlon/"):
-        ref = ref[len("/uostriathlon"):]
+        ref = ref[len("/uostriathlon/"):]
+
+    if ref.startswith("uostriathlon/"):
+        ref = ref[len("uostriathlon/"):]
+
     return ref.lstrip("/")
 
 def source_path(ref):
     cleaned = normalise_ref(ref)
+
     if not cleaned:
         return None
+
+    candidates = [
+        ROOT / cleaned,
+        ROOT / "_data/content" / cleaned,
+    ]
+
+    name = Path(cleaned).name
+
+    candidates.extend([
+        ROOT / "assets/images/source" / name,
+        ROOT / "assets/images/uploads" / name,
+        ROOT / "assets/images/committee/raw" / name,
+        ROOT / "_data/content/assets/images/source" / name,
+        ROOT / "_data/content/assets/images/uploads" / name,
+        ROOT / "_data/content/assets/images/committee/raw" / name,
+    ])
+
+    for candidate in candidates:
+        if candidate.exists():
+            return candidate
+
+    # Last resort: case-insensitive search by filename.
+    lower_name = name.lower()
+    for candidate in ROOT.rglob("*"):
+        try:
+            if candidate.is_file() and candidate.name.lower() == lower_name:
+                return candidate
+        except OSError:
+            pass
+
     return ROOT / cleaned
 
 def ensure_supported(path):

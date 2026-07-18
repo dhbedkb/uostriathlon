@@ -33,7 +33,8 @@ jobs:
           if [[ -n "$(git status --porcelain)" ]]; then
             git config user.name "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
-            git add assets/images/generated assets/images/committee/profiles _data/content
+            mkdir -p assets/images/generated assets/images/committee/profiles
+            git add -A assets/images/generated assets/images/committee/profiles _data/content
             git commit -m "Optimise site images"
             git push
           else

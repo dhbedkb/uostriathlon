@@ -15,93 +15,25 @@
     return "";
   }
 
-  function getImageCandidates(src, getAsset) {
-    src = cleanPath(src);
+  function assetUrl(src, getAsset) {
+    var clean = (src || "").trim();
 
-    if (!src) {
-      return [];
+    if (!clean) {
+      return "";
     }
 
-    if (
-      /^https?:\/\//i.test(src) ||
-      src.indexOf("blob:") === 0 ||
-      src.indexOf("data:") === 0
-    ) {
-      return [src];
-    }
-
-    var base = siteBasePath();
-
-    function stripBase(value) {
-      if (base && value.indexOf(base + "/") === 0) {
-        return value.slice(base.length);
+    try {
+      var asset = getAsset(clean);
+      if (asset) {
+        return asset.toString ? asset.toString() : String(asset);
       }
-      return value;
-    }
+    } catch (e) {}
 
-    var noBase = stripBase(src);
-    var noSlash = noBase.charAt(0) === "/" ? noBase.slice(1) : noBase;
-
-    var candidates = [
-      src,
-      noBase,
-      "/" + noSlash,
-      noSlash,
-      base + "/" + noSlash,
-      base + noBase
-    ];
-
-    var resolvedCandidates = [];
-    var seen = {};
-
-    function add(value) {
-      if (!value || seen[value] || value.indexOf("[object Object]") !== -1) {
-        return;
-      }
-      seen[value] = true;
-      resolvedCandidates.push(value);
-    }
-
-    // First try Decap's asset resolver in several forms.
-    candidates.forEach(function(candidate) {
-      try {
-        var asset = getAsset(candidate);
-        if (asset) {
-          var resolved = asset.toString ? asset.toString() : String(asset);
-          add(resolved);
-        }
-      } catch (e) {}
-    });
-
-    // Then add direct browser paths.
-    candidates.forEach(add);
-
-    return resolvedCandidates;
+    return "";
   }
 
   function imageFrame(src, getAsset, cropX, cropY, cropZoom, wide) {
-    var candidates = getImageCandidates(src, getAsset);
-    var first = candidates.length ? candidates[0] : "";
-
-    function handleError(event) {
-      var img = event.currentTarget;
-      var index = parseInt(img.getAttribute("data-candidate-index") || "0", 10);
-      var nextIndex = index + 1;
-
-      if (nextIndex < candidates.length) {
-        img.setAttribute("data-candidate-index", String(nextIndex));
-        img.src = candidates[nextIndex];
-      } else {
-        img.style.display = "none";
-        var frame = img.parentNode;
-        if (frame && !frame.querySelector(".cms-no-image")) {
-          var fallback = document.createElement("div");
-          fallback.className = "cms-no-image";
-          fallback.textContent = "Image could not be loaded";
-          frame.appendChild(fallback);
-        }
-      }
-    }
+    var url = assetUrl(src, getAsset);
 
     return h(
       "div",
@@ -113,13 +45,8 @@
           "--crop-zoom": ((cropZoom || 100) / 100)
         }
       },
-      first
-        ? h("img", {
-            src: first,
-            alt: "",
-            "data-candidate-index": "0",
-            onError: handleError
-          })
+      url
+        ? h("img", { src: url, alt: "" })
         : h("div", { className: "cms-no-image" }, "No image selected")
     );
   }
@@ -136,16 +63,6 @@
   function renderHero(section, getAsset, key) {
     
 var source = section.background_image_raw || "";
-
-if (
-  source &&
-  source.indexOf("/uostriathlon/") !== 0 &&
-  source.indexOf("/assets/") === 0
-) {
-  source = "/uostriathlon" + source;
-}
-
-
     return h(
       "section",
       { className: "cms-section", key: key },
@@ -262,16 +179,6 @@ if (
         members.map(function (member, i) {
           
 var source = cleanPath(member.image_raw || "");
-
-if (
-  source &&
-  source.indexOf("/uostriathlon/") !== 0 &&
-  source.indexOf("/assets/") === 0
-) {
-  source = "/uostriathlon" + source;
-}
-
-
           return h(
             "article",
             { className: "cms-card", key: i },
