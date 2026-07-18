@@ -69,3 +69,16 @@ sections:
   secondary_button:
     label: Email the Club
     url: mailto:triathlon@sheffield.ac.uk
+- type: cta
+  id: join
+  eyebrow: Join
+  title: Join Sheffield Triathlon
+  subtitle: Ready to swim, bike, run and meet the club?
+  body: Use this section to add joining information, trial session details, membership
+    links, or a contact route for new members.
+  primary_button:
+    label: Email the Club
+    url: mailto:triathlon@sheffield.ac.uk
+  secondary_button:
+    label: Members Area
+    url: /members/
