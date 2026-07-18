@@ -132,7 +132,7 @@ collections:
                       - { label: URL, name: url, widget: string, required: false }
 
               - name: committee
-                label: Committee
+                label: Committee members
                 fields:
                   - { label: ID, name: id, widget: string, required: false }
                   - { label: Eyebrow, name: eyebrow, widget: string, required: false }
@@ -141,8 +141,8 @@ collections:
                   - label: Members
                     name: members
                     widget: list
+                    summary: "{{fields.name}} — {{fields.role}}"
                     fields:
-                      - { label: Image, name: image, widget: image, required: false }
                       - { label: Photo, name: image, widget: image, required: false }
                       - label: Photo crop position
                         name: image_position
@@ -164,9 +164,6 @@ collections:
                         fields:
                           - { label: Question, name: question, widget: string, required: false }
                           - { label: Answer, name: answer, widget: text, required: false }
-                      - { label: Extra details, name: extra_details, widget: markdown, required: false }
-                      - { label: Favourite place in Sheffield, name: favourite_place, widget: string, required: false }
-                      - { label: Favourite place description, name: favourite_place_description, widget: text, required: false }
                       - { label: Extra details, name: extra_details, widget: markdown, required: false }
 
               - name: sponsors
