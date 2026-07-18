@@ -9,7 +9,7 @@ sections:
       label: Contact Us
       url: mailto:triathlon@sheffield.ac.uk
     background_crop_zoom: 100
-    background_image_raw: ""
+    background_image_raw: /uostriathlon/assets/images/source/img_9541.webp
     subtitle: Student-led. Community-focused.
     title: Meet the Committee
     type: hero
