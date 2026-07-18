@@ -8,8 +8,8 @@ sections:
     primary_button:
       label: Contact Us
       url: mailto:triathlon@sheffield.ac.uk
-    background_crop_zoom: 100
-    background_image_raw: /uostriathlon/assets/images/source/img_9541.webp
+    background_crop_zoom: 220
+    background_image_raw: /uostriathlon/assets/images/source/img_1783.jpg
     subtitle: Student-led. Community-focused.
     title: Meet the Committee
     type: hero
@@ -23,7 +23,7 @@ sections:
     title: Current committee.
     subtitle: Replace these placeholders with the current committee.
     members:
-      - image_raw: /uostriathlon/assets/images/committee/raw/img_9541.jpg
+      - image_raw: /uostriathlon/assets/images/committee/raw/img_1783.jpg
         image_profile: /assets/images/committee/profiles/jamie-thornton-president.webp
         bio: Coordinates the club and supports committee activity.
         name: Jamie Thornton
@@ -37,7 +37,7 @@ sections:
         role: Treasurer
         bio: Helps manage club finances and planning.
         email: triathlon@sheffield.ac.uk
-        image_raw: /uostriathlon/assets/images/committee/raw/img_1783.jpg
+        image_raw: /uostriathlon/assets/images/committee/raw/img_9541.jpg
         crop_zoom: 104
         image_profile: /assets/images/committee/profiles/lorna-preston-treasurer.webp
       - name: Kiera Dickinson
@@ -46,7 +46,7 @@ sections:
         email: triathlon@sheffield.ac.uk
       - name: Joseph Fields
         role: Competitions Officer
-      - crop_zoom: 111
+      - crop_zoom: 220
         image_raw: /uostriathlon/assets/images/committee/raw/img_9541.jpg
         image_profile: /assets/images/committee/profiles/barnaby-read-secretary.webp
         bio: Supports organisation, communication and administration.
