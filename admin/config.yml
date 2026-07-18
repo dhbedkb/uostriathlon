@@ -5,7 +5,7 @@ backend:
   base_url: https://uostriathlon-cms-auth.barnabytri.workers.dev
   auth_endpoint: auth
 
-media_folder: "assets/images/uploads"
+media_folder: "/assets/images/uploads"
 public_folder: "/uostriathlon/assets/images/uploads"
 publish_mode: simple
 site_url: https://dhbedkb.github.io/uostriathlon/
@@ -40,7 +40,17 @@ collections:
                   - { label: Title, name: title, widget: string, required: false }
                   - { label: Subtitle, name: subtitle, widget: string, required: false }
                   - { label: Body, name: body, widget: text, required: false }
-                  - { label: Background image, name: background_image, widget: image, required: false }
+                  - label: Source background image
+                    name: background_image_raw
+                    widget: image
+                    required: false
+                    choose_url: false
+                    media_folder: /assets/images/source
+                    public_folder: /uostriathlon/assets/images/source
+                  - { label: Generated background WebP, name: background_image, widget: string, required: false, hint: "Generated automatically. Do not edit manually." }
+                  - { label: Background crop horizontal %, name: background_crop_x, widget: number, default: 50, min: 0, max: 100, value_type: int, required: false }
+                  - { label: Background crop vertical %, name: background_crop_y, widget: number, default: 50, min: 0, max: 100, value_type: int, required: false }
+                  - { label: Background crop zoom %, name: background_crop_zoom, widget: number, default: 100, min: 100, max: 220, value_type: int, required: false }
                   - label: Primary button
                     name: primary_button
                     widget: object
@@ -93,7 +103,17 @@ collections:
                       - { label: Title, name: title, widget: string }
                       - { label: Label, name: label, widget: string, required: false }
                       - { label: Description, name: description, widget: text, required: false }
-                      - { label: Image, name: image, widget: image, required: false }
+                      - label: Source image
+                        name: image_raw
+                        widget: image
+                        required: false
+                        choose_url: false
+                        media_folder: /assets/images/source
+                        public_folder: /uostriathlon/assets/images/source
+                      - { label: Generated card WebP, name: image, widget: string, required: false, hint: "Generated automatically. Do not edit manually." }
+                      - { label: Card crop horizontal %, name: crop_x, widget: number, default: 50, min: 0, max: 100, value_type: int, required: false }
+                      - { label: Card crop vertical %, name: crop_y, widget: number, default: 50, min: 0, max: 100, value_type: int, required: false }
+                      - { label: Card crop zoom %, name: crop_zoom, widget: number, default: 100, min: 100, max: 220, value_type: int, required: false }
                       - { label: URL, name: url, widget: string, required: false }
                       - { label: Schedule, name: schedule, widget: string, required: false }
                       - { label: Location, name: location, widget: string, required: false }
@@ -109,7 +129,17 @@ collections:
                     name: images
                     widget: list
                     fields:
-                      - { label: Image, name: src, widget: image }
+                      - label: Source image
+                        name: src_raw
+                        widget: image
+                        required: false
+                        choose_url: false
+                        media_folder: /assets/images/source
+                        public_folder: /uostriathlon/assets/images/source
+                      - { label: Generated gallery WebP, name: src, widget: string, required: false, hint: "Generated automatically. Do not edit manually." }
+                      - { label: Gallery crop horizontal %, name: crop_x, widget: number, default: 50, min: 0, max: 100, value_type: int, required: false }
+                      - { label: Gallery crop vertical %, name: crop_y, widget: number, default: 50, min: 0, max: 100, value_type: int, required: false }
+                      - { label: Gallery crop zoom %, name: crop_zoom, widget: number, default: 100, min: 100, max: 220, value_type: int, required: false }
                       - { label: Alt text, name: alt, widget: string, required: false }
                       - { label: Caption, name: caption, widget: string, required: false }
 
@@ -268,7 +298,17 @@ collections:
                     widget: list
                     fields:
                       - { label: Platform, name: platform, widget: string }
-                      - { label: Icon, name: icon, widget: image, required: false }
+                      - label: Source icon/image
+                        name: icon_raw
+                        widget: image
+                        required: false
+                        choose_url: false
+                        media_folder: /assets/images/source
+                        public_folder: /uostriathlon/assets/images/source
+                      - { label: Generated social WebP, name: icon, widget: string, required: false, hint: "Generated automatically. Do not edit manually." }
+                      - { label: Social image crop horizontal %, name: crop_x, widget: number, default: 50, min: 0, max: 100, value_type: int, required: false }
+                      - { label: Social image crop vertical %, name: crop_y, widget: number, default: 50, min: 0, max: 100, value_type: int, required: false }
+                      - { label: Social image crop zoom %, name: crop_zoom, widget: number, default: 100, min: 100, max: 220, value_type: int, required: false }
                       - { label: Title, name: title, widget: string, required: false }
                       - { label: Description, name: description, widget: text, required: false }
                       - { label: URL, name: url, widget: string }

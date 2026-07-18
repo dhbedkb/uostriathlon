@@ -15,11 +15,11 @@
     return "";
   }
 
-  function assetUrl(src, getAsset) {
+  function getImageCandidates(src, getAsset) {
     src = cleanPath(src);
 
     if (!src) {
-      return "";
+      return [];
     }
 
     if (
@@ -27,34 +27,81 @@
       src.indexOf("blob:") === 0 ||
       src.indexOf("data:") === 0
     ) {
-      return src;
+      return [src];
     }
-
-    try {
-      var asset = getAsset(src);
-      if (asset) {
-        var resolved = asset.toString ? asset.toString() : String(asset);
-        if (resolved) {
-          return resolved;
-        }
-      }
-    } catch (e) {}
 
     var base = siteBasePath();
 
-    if (base && src.indexOf(base + "/") === 0) {
-      return src;
+    function stripBase(value) {
+      if (base && value.indexOf(base + "/") === 0) {
+        return value.slice(base.length);
+      }
+      return value;
     }
 
-    if (src.charAt(0) === "/") {
-      return base + src;
+    var noBase = stripBase(src);
+    var noSlash = noBase.charAt(0) === "/" ? noBase.slice(1) : noBase;
+
+    var candidates = [
+      src,
+      noBase,
+      "/" + noSlash,
+      noSlash,
+      base + "/" + noSlash,
+      base + noBase
+    ];
+
+    var resolvedCandidates = [];
+    var seen = {};
+
+    function add(value) {
+      if (!value || seen[value] || value.indexOf("[object Object]") !== -1) {
+        return;
+      }
+      seen[value] = true;
+      resolvedCandidates.push(value);
     }
 
-    return base + "/" + src.replace(/^\.\//, "");
+    // First try Decap's asset resolver in several forms.
+    candidates.forEach(function(candidate) {
+      try {
+        var asset = getAsset(candidate);
+        if (asset) {
+          var resolved = asset.toString ? asset.toString() : String(asset);
+          add(resolved);
+        }
+      } catch (e) {}
+    });
+
+    // Then add direct browser paths.
+    candidates.forEach(add);
+
+    return resolvedCandidates;
   }
 
   function imageFrame(src, getAsset, cropX, cropY, cropZoom, wide) {
-    var url = assetUrl(src, getAsset);
+    var candidates = getImageCandidates(src, getAsset);
+    var first = candidates.length ? candidates[0] : "";
+
+    function handleError(event) {
+      var img = event.currentTarget;
+      var index = parseInt(img.getAttribute("data-candidate-index") || "0", 10);
+      var nextIndex = index + 1;
+
+      if (nextIndex < candidates.length) {
+        img.setAttribute("data-candidate-index", String(nextIndex));
+        img.src = candidates[nextIndex];
+      } else {
+        img.style.display = "none";
+        var frame = img.parentNode;
+        if (frame && !frame.querySelector(".cms-no-image")) {
+          var fallback = document.createElement("div");
+          fallback.className = "cms-no-image";
+          fallback.textContent = "Image could not be loaded";
+          frame.appendChild(fallback);
+        }
+      }
+    }
 
     return h(
       "div",
@@ -66,8 +113,13 @@
           "--crop-zoom": ((cropZoom || 100) / 100)
         }
       },
-      url
-        ? h("img", { src: url, alt: "" })
+      first
+        ? h("img", {
+            src: first,
+            alt: "",
+            "data-candidate-index": "0",
+            onError: handleError
+          })
         : h("div", { className: "cms-no-image" }, "No image selected")
     );
   }
@@ -82,20 +134,32 @@
   }
 
   function renderHero(section, getAsset, key) {
+    
+var source = section.background_image_raw || "";
+
+if (
+  source &&
+  source.indexOf("/uostriathlon/") !== 0 &&
+  source.indexOf("/assets/") === 0
+) {
+  source = "/uostriathlon" + source;
+}
+
+
     return h(
       "section",
       { className: "cms-section", key: key },
       heading(section, "Hero"),
-      section.background_image
+      source
         ? imageFrame(
-            section.background_image,
+            source,
             getAsset,
             section.background_crop_x,
             section.background_crop_y,
             section.background_crop_zoom,
             true
           )
-        : null
+        : h("p", { className: "cms-muted" }, "No hero image selected")
     );
   }
 
@@ -134,12 +198,14 @@
         "div",
         { className: "cms-grid cms-grid-3" },
         cards.map(function (card, i) {
+          var source = card.image_raw || "";
+
           return h(
             "article",
             { className: "cms-card", key: i },
-            card.image
+            source
               ? h("div", { className: "cms-card-body" },
-                  imageFrame(card.image, getAsset, card.crop_x, card.crop_y, card.crop_zoom, false)
+                  imageFrame(source, getAsset, card.crop_x, card.crop_y, card.crop_zoom, false)
                 )
               : null,
             h("div", { className: "cms-card-head" },
@@ -168,11 +234,13 @@
         "div",
         { className: "cms-grid cms-grid-3" },
         images.map(function (item, i) {
+          var source = item.src_raw || "";
+
           return h(
             "article",
             { className: "cms-card", key: i },
             h("div", { className: "cms-card-body" },
-              imageFrame(item.src, getAsset, item.crop_x, item.crop_y, item.crop_zoom, false),
+              imageFrame(source, getAsset, item.crop_x, item.crop_y, item.crop_zoom, false),
               item.caption ? h("p", null, item.caption) : null
             )
           );
@@ -192,7 +260,17 @@
         "div",
         { className: "cms-grid cms-grid-3" },
         members.map(function (member, i) {
-          var source = cleanPath(member.image_raw || "");
+          
+var source = cleanPath(member.image_raw || "");
+
+if (
+  source &&
+  source.indexOf("/uostriathlon/") !== 0 &&
+  source.indexOf("/assets/") === 0
+) {
+  source = "/uostriathlon" + source;
+}
+
 
           return h(
             "article",
@@ -273,12 +351,14 @@
         "div",
         { className: "cms-grid" },
         items.map(function (item, i) {
+          var source = item.icon_raw || "";
+
           return h(
             "article",
             { className: "cms-card", key: i },
-            item.icon
+            source
               ? h("div", { className: "cms-card-body" },
-                  imageFrame(item.icon, getAsset, item.crop_x, item.crop_y, item.crop_zoom, false)
+                  imageFrame(source, getAsset, item.crop_x, item.crop_y, item.crop_zoom, false)
                 )
               : null,
             h("div", { className: "cms-card-head" },
