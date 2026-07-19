@@ -4921,3 +4921,47 @@ main > .section:nth-of-type(even):not(.section-hero) {
   }
 }
 /* committee expanded tile visibility:end */
+
+/* brand logo circular no-outline rendering:start */
+.brand-mark,
+.brand-logo-wrap {
+  width: 56px !important;
+  height: 56px !important;
+  min-width: 56px !important;
+  min-height: 56px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  outline: 0 !important;
+  border-radius: 50% !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  overflow: hidden !important;
+}
+
+.brand-mark::before,
+.brand-mark::after,
+.brand-logo-wrap::before,
+.brand-logo-wrap::after {
+  display: none !important;
+  content: none !important;
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+}
+
+.brand-mark img,
+.brand-logo-wrap img {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  border: 0 !important;
+  outline: 0 !important;
+  border-radius: 50% !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+/* brand logo circular no-outline rendering:end */
+
