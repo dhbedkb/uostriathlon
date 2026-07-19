@@ -5575,3 +5575,25 @@ main > .section:nth-of-type(even):not(.section-hero) {
 .u-tile .button {
   align-self: flex-start;
 }
+
+
+
+/* =====================================================
+   UNIVERSAL TILE GRID GAP NORMALISATION V3
+   Uses one spacing token for tile-to-tile gaps across common grids.
+   ===================================================== */
+
+.content-grid,
+.cards-grid,
+.event-grid,
+.events-grid,
+.stats-grid,
+.social-grid,
+.gallery-grid,
+.cta-grid,
+.notice-grid,
+.sponsor-grid,
+.timeline-list,
+.card-grid {
+  gap: var(--u-tile-gap);
+}
