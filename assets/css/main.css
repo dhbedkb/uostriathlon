@@ -2297,15 +2297,15 @@ body main > .section:nth-of-type(even):not(.section-hero) {
 
 /* Mobile/tablet stack order keeps summary above activity */
 @media (max-width: 1100px) {
-  #*ocial-widgets .embed-grid-three {
-*   grid-template-columns: 1fr !imp*rtant;
-    grid-template-rows: aut* !important;
-    grid-template-are*s:
+  #social-widgets .embed-grid-three {
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto !important;
+    grid-template-areas:
       "summary"
-      "activity*
+      "activity"
       "facebook" !important;
   }
-*  #social-widgets .embed-grid-three > .embed-shell:nth-child(1) iframe {
+  #social-widgets .embed-grid-three > .embed-shell:nth-child(1) iframe {
     width: 500px !important;
     max-width: 100% !important;
     height: 680px !important;
@@ -2315,15 +2315,16 @@ body main > .section:nth-of-type(even):not(.section-hero) {
 
 /* Small screens */
 @media (max-width: 560px) {
-  #s*cial-widgets .embed-shell {
-    pa*ding: 1rem !important;
-    border-*adius: 1.25rem !important;
+  #social-widgets .embed-shell {
+    padding: 1rem !important;
+    border-radius: 1.25rem !important;
   }
 
-  *social-widgets .embed-grid-three >*.embed-shell:nth-child(1) iframe {*    height: 620px !important;
-    *in-height: 620px !important;
+  #social-widgets .embed-grid-three > .embed-shell:nth-child(1) iframe {
+    height: 620px !important;
+    min-height: 620px !important;
   }
-}*
+}
 
 /* =====================================================
    FINAL POLISH
