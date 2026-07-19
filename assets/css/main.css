@@ -1,10 +1,10 @@
 :root {
-  --color-navy: #07111F;
-  --color-deep-purple: #24135F;
+  --color-navy: #F8D45D;
+  --color-deep-purple: #F8D45D;
   --color-purple: #440099;
   --color-gold: #F2C94C;
-  --color-background: #07111F;
-  --color-surface: #0F172A;
+  --color-background: #F8D45D;
+  --color-surface: #F8D45D;
   --color-surface-soft: rgba(255, 255, 255, 0.06);
   --color-text: #F8FAFC;
   --color-muted: #CBD5E1;
@@ -19,8 +19,8 @@
   --color-background: #F8FAFC;
   --color-surface: #FFFFFF;
   --color-surface-soft: rgba(15, 23, 42, 0.045);
-  --color-text: #111827;
-  --color-muted: #64748B;
+  --color-text: #F8D45D;
+  --color-muted: #F8D45D;
   --color-border: rgba(15, 23, 42, 0.14);
   --shadow-soft: 0 20px 60px rgba(15, 23, 42, 0.12);
 }
@@ -729,21 +729,21 @@ a {
 .discipline-swimming .card-media {
   background:
     radial-gradient(circle at top left, rgba(56, 189, 248, 0.42), transparent 12rem),
-    linear-gradient(135deg, #075985, #0F172A);
+    linear-gradient(135deg, #F8D45D, #F8D45D);
 }
 
 .discipline-bike .card-media,
 .discipline-cycling .card-media {
   background:
     radial-gradient(circle at top left, rgba(34, 197, 94, 0.42), transparent 12rem),
-    linear-gradient(135deg, #14532D, #0F172A);
+    linear-gradient(135deg, #14532D, #F8D45D);
 }
 
 .discipline-run .card-media,
 .discipline-running .card-media {
   background:
     radial-gradient(circle at top left, rgba(249, 115, 22, 0.42), transparent 12rem),
-    linear-gradient(135deg, #7C2D12, #0F172A);
+    linear-gradient(135deg, #7C2D12, #F8D45D);
 }
 
 .card-meta {
@@ -2639,11 +2639,11 @@ body main > .section:nth-of-type(even):not(.section-hero) {
   position: relative;
   isolation: isolate;
   background: #000000 !important;
-  color: #ffffff;
+  color: #FFFFFF;
 }
 
 [data-theme="light"] .section {
-  background: #ffffff !important;
+  background: #FFFFFF !important;
   color: #000000;
 }
 
@@ -2830,7 +2830,7 @@ main > .section {
     padding-bottom: clamp(5rem, 8vw, 8rem) !important;
 
     background: #000000 !important;
-    color: #ffffff;
+    color: #FFFFFF;
 
     border-top-left-radius: clamp(2rem, 6vw, 5rem);
     border-top-right-radius: clamp(2rem, 6vw, 5rem);
@@ -2844,7 +2844,7 @@ main > .section {
   [data-theme="light"] body main > #social-integrations,
   [data-theme="light"] body main > #social-links,
   [data-theme="light"] body main > #socials-gallery {
-    background: #ffffff !important;
+    background: #FFFFFF !important;
     color: #000000;
     box-shadow: 0 -34px 95px rgba(0, 0, 0, 0.16);
   }
@@ -2918,7 +2918,7 @@ main > .section:nth-of-type(even):not(.section-hero) {
 [data-theme="light"] main > .section:nth-of-type(odd):not(.section-hero) {
   background:
     radial-gradient(circle at top right, rgba(247, 211, 93, 0.34), transparent 24rem),
-    #ffffff !important;
+    #FFFFFF !important;
 }
 
 [data-theme="light"] main > .section:nth-of-type(even):not(.section-hero) {
@@ -2998,7 +2998,7 @@ main > .section:nth-of-type(even):not(.section-hero) {
 
 .relay-bar .swim {
   width: 20%;
-  background: #2B5F7A;
+  background: #F8D45D;
 }
 
 .relay-bar .bike {
@@ -3029,7 +3029,7 @@ main > .section:nth-of-type(even):not(.section-hero) {
   border-radius: 2px;
 }
 
-.relay-key .swim i { background: #2B5F7A; }
+.relay-key .swim i { background: #F8D45D; }
 .relay-key .bike i { background: var(--color-gold); }
 .relay-key .run i  { background: #4F6B52; }
 
@@ -3186,7 +3186,7 @@ main > .section:nth-of-type(even):not(.section-hero) {
 [data-theme="light"] .profile-placeholder {
   background:
     radial-gradient(circle at top right, rgba(247, 211, 93, 0.36), transparent 14rem),
-    #ffffff;
+    #FFFFFF;
 }
 
 [data-theme="light"] .profile-bio,
@@ -3351,7 +3351,7 @@ main > .section:nth-of-type(even):not(.section-hero) {
 [data-theme="light"] .profile-placeholder {
   background:
     radial-gradient(circle at top right, rgba(247, 211, 93, 0.36), transparent 14rem),
-    #ffffff;
+    #FFFFFF;
 }
 
 [data-theme="light"] .profile-bio,
@@ -3585,7 +3585,7 @@ main > .section:nth-of-type(even):not(.section-hero) {
 [data-theme="light"] .committee-member-tile {
   background:
     radial-gradient(circle at top right, rgba(247, 211, 93, 0.24), transparent 18rem),
-    #ffffff;
+    #FFFFFF;
 }
 
 [data-theme="light"] .committee-expanded-content {
@@ -3797,7 +3797,7 @@ main > .section:nth-of-type(even):not(.section-hero) {
 [data-theme="light"] .committee-tile {
   background:
     radial-gradient(circle at top right, rgba(247, 211, 93, 0.22), transparent 18rem),
-    #ffffff;
+    #FFFFFF;
 }
 
 [data-theme="light"] .committee-tile-bio,
@@ -4045,7 +4045,7 @@ main > .section:nth-of-type(even):not(.section-hero) {
 [data-theme="light"] .section-committee .committee-card-tile {
   background:
     radial-gradient(circle at top right, rgba(247, 211, 93, 0.22), transparent 18rem),
-    #ffffff;
+    #FFFFFF;
 }
 
 [data-theme="light"] .section-committee .committee-card-bio,
@@ -4293,7 +4293,7 @@ main > .section:nth-of-type(even):not(.section-hero) {
 [data-theme="light"] .section-committee .committee-crop-card {
   background:
     radial-gradient(circle at top right, rgba(247, 211, 93, 0.22), transparent 18rem),
-    #ffffff;
+    #FFFFFF;
 }
 
 [data-theme="light"] .section-committee .committee-crop-bio,
@@ -4524,7 +4524,7 @@ main > .section:nth-of-type(even):not(.section-hero) {
 [data-theme="light"] .section-committee .committee-crop-card {
   background:
     radial-gradient(circle at top right, rgba(247, 211, 93, 0.22), transparent 18rem),
-    #ffffff;
+    #FFFFFF;
 }
 
 [data-theme="light"] .section-committee .committee-crop-bio,
@@ -4922,7 +4922,10 @@ main > .section:nth-of-type(even):not(.section-hero) {
 }
 /* committee expanded tile visibility:end */
 
-/* brand logo circular no-outline rendering:start */
+
+
+
+/* grok logo final fix:start */
 .brand-mark,
 .brand-logo-wrap {
   width: 56px !important;
@@ -4930,12 +4933,15 @@ main > .section:nth-of-type(even):not(.section-hero) {
   min-width: 56px !important;
   min-height: 56px !important;
   padding: 0 !important;
+  margin: 0 !important;
   border: 0 !important;
   outline: 0 !important;
   border-radius: 50% !important;
+  overflow: hidden !important;
   background: transparent !important;
   box-shadow: none !important;
-  overflow: hidden !important;
+  display: inline-block !important;
+  line-height: 0 !important;
 }
 
 .brand-mark::before,
@@ -4944,6 +4950,7 @@ main > .section:nth-of-type(even):not(.section-hero) {
 .brand-logo-wrap::after {
   display: none !important;
   content: none !important;
+  background: transparent !important;
   border: 0 !important;
   outline: 0 !important;
   box-shadow: none !important;
@@ -4951,17 +4958,15 @@ main > .section:nth-of-type(even):not(.section-hero) {
 
 .brand-mark img,
 .brand-logo-wrap img {
-  display: block !important;
   width: 100% !important;
   height: 100% !important;
-  max-width: none !important;
+  display: block !important;
   object-fit: cover !important;
   object-position: center !important;
+  border-radius: 50% !important;
   border: 0 !important;
   outline: 0 !important;
-  border-radius: 50% !important;
-  background: transparent !important;
   box-shadow: none !important;
+  background: transparent !important;
 }
-/* brand logo circular no-outline rendering:end */
-
+/* grok logo final fix:end */

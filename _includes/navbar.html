@@ -1,14 +1,20 @@
 <header class="site-header" data-header>
   <nav class="nav" aria-label="Main navigation">
-    <a class="brand" href="{{ '/' | relative_url }}">
-      <span class="brand-mark brand-logo-wrap" aria-hidden="true">
-        <img src="{{ brand_logo_clean | relative_url }}" alt="">
-      </span>
+    <a class="brand" href="{{ '/' | relative_url }}">{% assign brand_logo_raw = site.data.settings.brand.logo | default: "" %}
+      {% assign brand_logo_clean = brand_logo_raw | remove_first: "/uostriathlon" | remove_first: site.baseurl %}
+      {% assign brand_logo_asset = site.static_files | where: "path", brand_logo_clean | first %}
+      {% assign brand_logo_version = brand_logo_asset.modified_time | date: "%s" %}
+      {% if brand_logo_clean != "" %}
+        <span class="brand-mark brand-logo-wrap" aria-hidden="true">
+          {{ brand_logo_clean | relative_url }}{% if brand_logo_version %}?v={{ brand_logo_version }}{% endif %}
+        </span>
+      {% endif %}
       <span class="brand-text">
-        <span class="brand-name">{{ site.data.settings.brand.short_name }}</span>
-        <span class="brand-tagline">{{ site.data.settings.brand.tagline }}</span>
-      </span>
-    </a>
+        <span class="brand-name">{{ site.data.settings.brand.short_name | default: site.data.settings.brand.name | default: site.title }}</span>
+        {% if site.data.settings.brand.tagline %}
+          <span class="brand-tagline">{{ site.data.settings.brand.tagline }}</span>
+        {% endif %}
+      </span></a>
 
     <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="primary-navigation">
       <span class="sr-only">Toggle navigation</span>
