@@ -5213,3 +5213,25 @@ main > .section:nth-of-type(even):not(.section-hero) {
   background: rgba(255, 255, 255, 0.82);
   border: var(--tile-border-light);
 }
+
+/* =====================================================
+   SOCIAL WIDGET GRID CONTRACT V3
+   Prevents live widget tiles from stretching to match neighbours.
+   ===================================================== */
+
+#social-widgets .embed-*rid-three {
+  align-items: start !*mportant;
+  grid-template-areas:
+ *  "facebook summary"
+    ". activi*y" !important;
+}
+
+#social-widgets *embed-grid-three > .embed-shell {
+* align-self: start !important;
+  h*ight: auto !important;
+  min-heigh*: 0 !important;
+}
+
+#social-widgets*.embed-grid-three > .embed-shell.l*ve-widget-boundary {
+  align-self:*start !important;
+}
