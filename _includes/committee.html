@@ -9,27 +9,24 @@
 
     {% if include.section.members %}
       <div class="committee-grid committee-crop-grid">
-        {% for member in include.section.members %}
-          {% assign raw_image = member.image_raw | default: member.image %}
+        {% for member in include.section.members %}          {% assign raw_image = member.image_raw | default: member.image %}
           {% assign profile_image = member.image_profile %}
           {% assign display_image = nil %}
 
-          {% if raw_image and raw_image != "" %}
-            {% if profile_image and profile_image != "" %}
-              {% assign display_image = profile_image %}
-              {% assign crop_x = 50 %}
-              {% assign crop_y = 50 %}
-              {% assign crop_zoom = 100 %}
-            {% else %}
-              {% assign display_image = raw_image %}
-              {% assign crop_x = member.crop_x | default: 50 %}
-              {% assign crop_y = member.crop_y | default: 50 %}
-              {% assign crop_zoom = member.crop_zoom | default: 100 %}
-            {% endif %}
+          {% if profile_image and profile_image != "" %}
+            {% assign display_image = profile_image %}
+            {% assign crop_x = 50 %}
+            {% assign crop_y = 50 %}
+            {% assign crop_zoom = 100 %}
+          {% elsif raw_image and raw_image != "" %}
+            {% assign display_image = raw_image %}
+            {% assign crop_x = member.crop_x | default: 50 %}
+            {% assign crop_y = member.crop_y | default: 50 %}
+            {% assign crop_zoom = member.crop_zoom | default: 100 %}
           {% endif %}
 
           {% if display_image %}
-            {% assign display_image_clean = display_image | remove_first: site.baseurl %}
+            {% assign display_image_clean = display_image | replace_first: "/uostriathlon", "" | replace_first: site.baseurl | strip %}
           {% endif %}
 
           {% assign has_extra = false %}

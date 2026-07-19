@@ -4,6 +4,7 @@ sections:
   - body: The club is run by students who organise training, racing, socials and
       welfare.
     eyebrow: Committee
+    background_image: /assets/images/generated/committee/hero-committee-hero.webp
     primary_button:
       label: Contact Us
       url: mailto:triathlon@sheffield.ac.uk
@@ -30,6 +31,7 @@ sections:
         extra_details: null
         role: President
         email: triathlon@sheffield.ac.uk
+        image_raw: /uostriathlon/assets/images/committee/raw/subject.png
       - name: Lorna Preston
         role: Treasurer
         bio: Helps manage club finances and planning.
@@ -41,6 +43,7 @@ sections:
       - name: Joseph Fields
         role: Competitions Officer
       - image_raw: /uostriathlon/assets/images/committee/raw/img_9541.jpg
+        image_profile: /assets/images/committee/profiles/barnaby-read-secretary.webp
         bio: Supports organisation, communication and administration.
         name: Barnaby Read
         questions:

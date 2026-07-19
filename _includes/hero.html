@@ -1,9 +1,12 @@
-<section id="{{ include.section_id }}" class="hero section-hero {% if include.section.background_image %}has-photo{% endif %}" data-section-type="hero">
-  {% if include.section.background_image %}
-    {% assign hero_cache_key = include.section.background_image_raw | default: include.section.background_image | slugify %}
+{% assign hero_image = include.section.background_image | default: include.section.background_image_raw %}
+{% assign hero_image_clean = hero_image | replace_first: "/uostriathlon", "" | replace_first: site.baseurl | strip %}
+{% assign hero_cache_key = include.section.background_image_raw | default: hero_image | slugify %}
+
+<section id="{{ include.section_id }}" class="hero section-hero {% if hero_image_clean and hero_image_clean != "" %}has-photo{% endif %}" data-section-type="hero">
+  {% if hero_image_clean and hero_image_clean != "" %}
     <div
       class="hero-photo"
-      style="background-image: url('{{ include.section.background_image | relative_url }}?v={{ hero_cache_key }}-{{ include.section.background_crop_x | default: 50 }}-{{ include.section.background_crop_y | default: 50 }}-{{ include.section.background_crop_zoom | default: 100 }}')"
+      style="background-image: url('{{ hero_image_clean | relative_url }}?v={{ hero_cache_key }}-{{ include.section.background_crop_x | default: 50 }}-{{ include.section.background_crop_y | default: 50 }}-{{ include.section.background_crop_zoom | default: 100 }}')"
       aria-hidden="true"
     ></div>
   {% else %}

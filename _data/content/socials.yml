@@ -1,75 +1,75 @@
 title: Socials
 description: Instagram, Strava, Facebook and social life with Sheffield Triathlon.
 sections:
-  - type: hero
-    id: socials-hero
-    eyebrow: Socials
-    title: Socials
-    subtitle: The club beyond training.
-    body: Follow the club, see what members are doing and get involved.
-    primary_button:
-      label: Open Instagram
-      url: https://www.instagram.com/sheffunitri/
-    secondary_button:
-      label: Open Strava
-      url: https://www.strava.com/clubs/UoSTri
-  - type: socials
-    id: social-links
-    layout: logos
-    eyebrow: Live Channels
-    title: Follow the club.
-    subtitle: Instagram for photos, Strava for training, Facebook for updates.
-    items:
-      - platform: Instagram
-        url: https://www.instagram.com/sheffunitri/
-      - platform: Strava
-        url: https://www.strava.com/clubs/UoSTri
-      - platform: Facebook
-        url: https://www.facebook.com/UoSTriathlon
-  - type: gallery
-    id: socials-gallery
-    eyebrow: Social Moments
-    title: Social moments.
-    subtitle: Replace these placeholders with real club photos.
-    images:
-      - alt: Sheffield Triathlon club social placeholder image
-        caption: Club social placeholder.
-        src_raw: /uostriathlon/assets/images/source/708752699_1640993453798187_4377617180923485565_n.jpg
-      - alt: Sheffield Triathlon event placeholder image
-        caption: Event placeholder.
-      - alt: Sheffield Triathlon group placeholder image
-        caption: Group photo placeholder.
-  - type: embed
-    id: social-widgets
-    provider: social
-    eyebrow: Widgets
-    title: Club feeds.
-    subtitle: Strava activity and the public Facebook page feed in one section.
-    layout: three
-    embeds:
-      - provider: facebook
-        title: UoS Triathlon Facebook
-        description: Public club Facebook page feed.
-        embed_html: >
-          <iframe
-          src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FUoSTriathlon&tabs=timeline&width=500&height=760&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true"
-          width="500" height="760" style="border:none;overflow:hidden"
-          scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay;
-          clipboard-write; encrypted-media; picture-in-picture;
-          web-share"></iframe>
-      - provider: strava
-        title: Club summary
-        description: Compact club activity summary.
-        embed_html: >
-          <iframe allowtransparency="true" frameborder="0" height="160"
-          scrolling="no"
-          src="https://www.strava.com/clubs/38083/latest-rides/97b766cfeadabebb08915a50b58f75be63b8d0c1?show_rides=false"
-          width="300"></iframe>
-      - provider: strava
-        title: Latest club activity
-        description: Recent public activity from the club.
-        embed_html: >
-          <iframe allowtransparency="true" frameborder="0" height="454"
-          scrolling="no"
-          src="https://www.strava.com/clubs/38083/latest-rides/97b766cfeadabebb08915a50b58f75be63b8d0c1?show_rides=true"
-          width="300"></iframe>
+- type: hero
+  id: socials-hero
+  eyebrow: Socials
+  title: Socials
+  subtitle: The club beyond training.
+  body: Follow the club, see what members are doing and get involved.
+  primary_button:
+    label: Open Instagram
+    url: https://www.instagram.com/sheffunitri/
+  secondary_button:
+    label: Open Strava
+    url: https://www.strava.com/clubs/UoSTri
+- type: socials
+  id: social-links
+  layout: logos
+  eyebrow: Live Channels
+  title: Follow the club.
+  subtitle: Instagram for photos, Strava for training, Facebook for updates.
+  items:
+  - platform: Instagram
+    url: https://www.instagram.com/sheffunitri/
+  - platform: Strava
+    url: https://www.strava.com/clubs/UoSTri
+  - platform: Facebook
+    url: https://www.facebook.com/UoSTriathlon
+- type: gallery
+  id: socials-gallery
+  eyebrow: Social Moments
+  title: Social moments.
+  subtitle: Replace these placeholders with real club photos.
+  images:
+  - alt: Sheffield Triathlon club social placeholder image
+    caption: Club social placeholder.
+    src_raw: /uostriathlon/assets/images/source/708752699_1640993453798187_4377617180923485565_n.jpg
+    src: /assets/images/generated/socials/gallery-socials-gallery-0.webp
+  - alt: Sheffield Triathlon event placeholder image
+    caption: Event placeholder.
+  - alt: Sheffield Triathlon group placeholder image
+    caption: Group photo placeholder.
+- type: embed
+  id: social-widgets
+  provider: social
+  eyebrow: Widgets
+  title: Club feeds.
+  subtitle: Strava activity and the public Facebook page feed in one section.
+  layout: three
+  embeds:
+  - provider: facebook
+    title: UoS Triathlon Facebook
+    description: Public club Facebook page feed.
+    embed_html: '<iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FUoSTriathlon&tabs=timeline&width=500&height=760&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true"
+      width="500" height="760" style="border:none;overflow:hidden" scrolling="no"
+      frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media;
+      picture-in-picture; web-share"></iframe>
+
+      '
+  - provider: strava
+    title: Club summary
+    description: Compact club activity summary.
+    embed_html: '<iframe allowtransparency="true" frameborder="0" height="160" scrolling="no"
+      src="https://www.strava.com/clubs/38083/latest-rides/97b766cfeadabebb08915a50b58f75be63b8d0c1?show_rides=false"
+      width="300"></iframe>
+
+      '
+  - provider: strava
+    title: Latest club activity
+    description: Recent public activity from the club.
+    embed_html: '<iframe allowtransparency="true" frameborder="0" height="454" scrolling="no"
+      src="https://www.strava.com/clubs/38083/latest-rides/97b766cfeadabebb08915a50b58f75be63b8d0c1?show_rides=true"
+      width="300"></iframe>
+
+      '
