@@ -10,7 +10,7 @@
     {% if include.section.items %}
       <div class="faq-list">
         {% for item in include.section.items %}
-          <details class="faq-item reveal-card">
+          <details class="tile faq-item reveal-card">
             <summary>{{ item.question }}</summary>
             <div class="faq-answer">{{ item.answer | markdownify }}</div>
           </details>
