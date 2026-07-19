@@ -10,7 +10,7 @@
     {% if include.section.images %}
       <div class="gallery-grid">
         {% for image in include.section.images %}
-          <figure class="tile reveal gallery-item reveal-card" data-reveal-mode="hover">
+          <figure class="u-tile tile reveal gallery-item reveal-card" data-reveal-mode="hover">
             {% if image.src %}
               <img src="{{ image.src | relative_url }}" alt="{{ image.alt | default: image.caption | default: 'Sheffield Triathlon club photo' }}" loading="lazy">
             {% else %}

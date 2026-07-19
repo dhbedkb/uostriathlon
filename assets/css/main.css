@@ -5245,8 +5245,8 @@ main > .section:nth-of-type(even):not(.section-hero) {
 #social-widgets .embed-facebook iframe {
   width: 500px !important;
   max-width: 100% !important;
-  height: 840px !important;
-  min-height: 840px !important;
+  height: 760px !important;
+  min-height: 760px !important;
   margin: 0 auto !important;
   border: 0;
   box-sizing: border-box;
@@ -5367,4 +5367,134 @@ main > .section:nth-of-type(even):not(.section-hero) {
   .embed-facebook iframe { height: 650px !important; min-height: 650px !important; }
   .embed-mobile-cta { display: block !important; }
   .embed-frame { display: none !important; } /* fallback */
+}
+
+/* Universal tile aliases for existing components */
+.content-card,
+.event-card,
+.stat-card,
+.social-card,
+.gallery-item,
+.cta-card,
+.faq-item,
+.notice-card,
+.sponsor-card,
+.timeline-item,
+.committee-crop-card {
+  box-sizing: border-box;
+}
+
+.content-card,
+.event-card,
+.stat-card,
+.social-card,
+.gallery-item,
+.cta-card,
+.faq-item,
+.notice-card,
+.sponsor-card {
+  border-radius: var(--u-tile-radius);
+}
+
+.gallery-item img,
+.card-photo,
+.committee-crop-image-frame {
+  border-radius: var(--u-tile-frame-radius);
+}
+
+/* =====================================================
+   UNIVERSAL TILE SYSTEM V1
+   Shared tile spacing contract across cards, widgets, and media.
+   ===================================================== */
+
+:root {
+  --u-tile-gap: 1.5rem;
+  --u-tile-pad: clamp(1rem, 2.5vw, 1.5rem);
+  --u-tile-pad-compact: 1rem;
+  --u-tile-radius: 1.75rem;
+  --u-tile-frame-radius: 1rem;
+  --u-tile-border: 1px solid rgba(255, 255, 255, 0.14);
+  --u-tile-frame-border: 1px solid rgba(255, 255, 255, 0.12);
+  --u-tile-bg: rgba(255, 255, 255, 0.055);
+  --u-tile-frame-bg: rgba(0, 0, 0, 0.34);
+  --u-tile-shadow: 0 18px 50px rgba(0, 0, 0, 0.24);
+}
+
+.u-tile {
+  box-sizing: border-box;
+  padding: var(--u-tile-pad);
+  border-radius: var(--u-tile-radius);
+  border: var(--u-tile-border);
+  background: var(--u-tile-bg);
+  box-shadow: var(--u-tile-shadow);
+  overflow: hidden;
+}
+
+.u-tile-head {
+  margin: 0 0 var(--u-tile-pad-compact);
+}
+
+.u-tile-head > :first-child {
+  margin-top: 0;
+}
+
+.u-tile-head > :last-child {
+  margin-bottom: 0;
+}
+
+.u-tile-frame {
+  box-sizing: border-box;
+  width: fit-content;
+  max-width: 100%;
+  margin-inline: auto;
+  padding: var(--u-tile-pad-compact);
+  border-radius: var(--u-tile-frame-radius);
+  border: var(--u-tile-frame-border);
+  background: var(--u-tile-frame-bg);
+  overflow: hidden;
+  line-height: 0;
+}
+
+.u-tile-frame > iframe,
+.u-tile-frame > img,
+.u-tile-frame > video {
+  display: block;
+  max-width: 100%;
+  margin: 0;
+  border: 0;
+}
+
+/* Universal tile aliases for existing card-like components */
+.tile,
+.content-card,
+.event-card,
+.stat-card,
+.social-card,
+.gallery-item,
+.cta-card,
+.faq-item,
+.notice-card,
+.sponsor-card,
+.timeline-item,
+.committee-crop-card {
+  box-sizing: border-box;
+}
+
+.tile,
+.content-card,
+.event-card,
+.stat-card,
+.social-card,
+.gallery-item,
+.cta-card,
+.faq-item,
+.notice-card,
+.sponsor-card {
+  border-radius: var(--u-tile-radius);
+}
+
+.gallery-item img,
+.card-photo,
+.committee-crop-image-frame {
+  border-radius: var(--u-tile-frame-radius);
 }
