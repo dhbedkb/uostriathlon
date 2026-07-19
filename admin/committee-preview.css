@@ -167,3 +167,13 @@ body {
   color: #ffffff;
   margin-bottom: 3px;
 }
+
+/* stage 3c logo/settings preview square crop:start */
+.cms-image-frame {
+  border-radius: 0 !important;
+}
+
+.cms-image-frame img {
+  object-fit: cover !important;
+}
+/* stage 3c logo/settings preview square crop:end */

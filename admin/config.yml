@@ -5,7 +5,7 @@ backend:
   base_url: https://uostriathlon-cms-auth.barnabytri.workers.dev
   auth_endpoint: auth
 media_folder: /assets/images/uploads
-public_folder: /uostriathlon/assets/images/uploads
+public_folder: /assets/images/uploads
 publish_mode: simple
 site_url: https://dhbedkb.github.io/uostriathlon/
 collections:
@@ -57,7 +57,7 @@ collections:
           required: false
           choose_url: false
           media_folder: /assets/images/source
-          public_folder: /uostriathlon/assets/images/source
+          public_folder: /assets/images/source
         - label: Generated background WebP
           name: background_image
           widget: string
@@ -201,7 +201,7 @@ collections:
             required: false
             choose_url: false
             media_folder: /assets/images/source
-            public_folder: /uostriathlon/assets/images/source
+            public_folder: /assets/images/source
           - label: Generated card WebP
             name: image
             widget: string
@@ -272,7 +272,7 @@ collections:
             required: false
             choose_url: false
             media_folder: /assets/images/source
-            public_folder: /uostriathlon/assets/images/source
+            public_folder: /assets/images/source
           - label: Generated gallery WebP
             name: src
             widget: string
@@ -386,7 +386,7 @@ collections:
             required: false
             choose_url: false
             media_folder: /assets/images/committee/raw
-            public_folder: /uostriathlon/assets/images/committee/raw
+            public_folder: /assets/images/committee/raw
             hint: Upload the original photo here. The preview uses this immediately.
           - label: Optimised profile photo
             name: image_profile
@@ -683,7 +683,7 @@ collections:
             required: false
             choose_url: false
             media_folder: /assets/images/source
-            public_folder: /uostriathlon/assets/images/source
+            public_folder: /assets/images/source
           - label: Generated social WebP
             name: icon
             widget: string
@@ -789,6 +789,33 @@ collections:
       - label: Logo
         name: logo
         widget: image
+        choose_url: false
+        media_folder: /assets/images/brand
+        public_folder: /uostriathlon/assets/images/brand
+      - label: Logo crop horizontal %
+        name: logo_crop_x
+        widget: number
+        default: 50
+        min: 0
+        max: 100
+        value_type: int
+        required: false
+      - label: Logo crop vertical %
+        name: logo_crop_y
+        widget: number
+        default: 50
+        min: 0
+        max: 100
+        value_type: int
+        required: false
+      - label: Logo crop zoom %
+        name: logo_crop_zoom
+        widget: number
+        default: 100
+        min: 100
+        max: 220
+        value_type: int
+        required: false
     - label: Theme
       name: theme
       widget: object

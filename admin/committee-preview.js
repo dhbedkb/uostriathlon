@@ -14,33 +14,85 @@
     }
     return "";
   }
+function previewUrl(value) {
+    if (!value) return "";
+
+    var url = String(value);
+
+    if (
+      url.indexOf("blob:") === 0 ||
+      url.indexOf("data:") === 0 ||
+      /^https?:\/\//i.test(url)
+    ) {
+      return url;
+    }
+
+    var base = siteBasePath();
+
+    if (base && url.indexOf(base + "/") === 0) {
+      return url;
+    }
+
+    if (base && url.indexOf("/assets/") === 0) {
+      return base + url;
+    }
+
+    return url;
+  }
 
   function assetUrl(src, getAsset) {
-    var clean = (src || "").trim();
+    var value = cleanPath(src);
 
-    if (!clean) {
+    if (!value) {
       return "";
     }
 
     try {
-      var asset = getAsset(clean);
+      var asset = getAsset(value);
 
       if (asset) {
         var resolved = asset.toString ? asset.toString() : String(asset);
 
-        if (resolved && resolved.indexOf("[object") === -1) {
+        if (resolved && resolved.indexOf("[object Object]") === -1) {
+          console.log("[cms-preview] asset resolved", {
+            value: value,
+            resolved: resolved
+          });
           return resolved;
         }
       }
     } catch (error) {
-      console.warn("[cms-preview] getAsset failed (nested/draft)", clean, error);
+      console.warn("[cms-preview] getAsset failed", {
+        value: value,
+        error: error
+      });
     }
 
-    console.warn("[cms-preview] no draft asset, using clean path", clean);
-    return clean;
+    if (
+      /^https?:\/\//i.test(value) ||
+      value.indexOf("blob:") === 0 ||
+      value.indexOf("data:") === 0
+    ) {
+      return value;
+    }
+
+    var basePath = siteBasePath();
+    var clean = value.indexOf(basePath + "/") === 0
+      ? value.slice(basePath.length)
+      : value;
+
+    if (value.indexOf("/uostriathlon/assets/") === 0) {
+      return value;
+    }
+
+    if (value.indexOf("/assets/") === 0) {
+      return "/uostriathlon" + value;
+    }
+
+    return basePath + (clean.charAt(0) === "/" ? clean : "/" + clean);
   }
 
-  function imageFrame(src, getAsset, cropX, cropY, cropZoom, wide) {
+  function imageFrame(src, getAsset, cropX, cropY, cropZoom, wide, field) {
     var url = assetUrl(src, getAsset);
 
     return h(
@@ -323,8 +375,11 @@ var source = cleanPath(member.image_raw || "");
       var data = this.props.entry.getIn(["data"]).toJS();
       var sections = data.sections || [];
       var getAsset = this.props.getAsset;
-
-      return h(
+      if (brand.logo) {
+        console.log("[cms-preview] settings logo raw:", brand.logo);
+        console.log("[cms-preview] settings logo resolved:", assetUrl(brand.logo, getAsset));
+      }
+return h(
         "main",
         { className: "cms-page-preview" },
         h("section", { className: "cms-section" },
@@ -354,4 +409,41 @@ var source = cleanPath(member.image_raw || "");
   ].forEach(function (name) {
     CMS.registerPreviewTemplate(name, PagePreview);
   });
+
+  /* settings logo preview:start */
+  var SettingsPreview = createClass({
+    render: function () {
+      var data = this.props.entry.getIn(["data"]).toJS();
+      var brand = data.brand || {};
+      var getAsset = this.props.getAsset;
+
+      return h(
+        "main",
+        { className: "cms-page-preview" },
+        h(
+          "section",
+          { className: "cms-section" },
+          h("div", { className: "cms-tag" }, "Site settings"),
+          h("h1", { className: "cms-title" }, brand.short_name || brand.name || "Brand"),
+          brand.tagline ? h("p", { className: "cms-subtitle" }, brand.tagline) : null,
+          brand.logo
+            ? imageFrame(
+                brand.logo,
+                getAsset,
+                brand.logo_crop_x || 50,
+                brand.logo_crop_y || 50,
+                brand.logo_crop_zoom || 100,
+                false
+              )
+            : h("p", { className: "cms-muted" }, "No logo selected"),
+          h("div", { className: "cms-source-note" }, "Logo path: " + (brand.logo || "none")),
+          h("p", { className: "cms-muted" }, "Logo crop: X " + (brand.logo_crop_x || 50) + "%, Y " + (brand.logo_crop_y || 50) + "%, zoom " + (brand.logo_crop_zoom || 100) + "%")
+        )
+      );
+    }
+  });
+
+  CMS.registerPreviewTemplate("settings", SettingsPreview);
+  /* settings logo preview:end */
+
 })();

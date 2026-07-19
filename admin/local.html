@@ -7,7 +7,10 @@
   <link href="./config.local.yml" type="text/yaml" rel="cms-config-url">
 </head>
 <body>
+  <script>
+    console.warn("LOCAL CMS: make sure `npx decap-server` is running from the repo root.");
+  </script>
   <script src="https://unpkg.com/decap-cms@3.14.1/dist/decap-cms.js"></script>
-  <script src="./committee-preview.js?v=nested-draft-fix-1"></script>
+  <script src="./committee-preview.js?v=local-backend-check-1"></script>
 </body>
 </html>
