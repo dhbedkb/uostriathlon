@@ -67,6 +67,7 @@ sections:
       - name: Tom Seipp
         role: Cycling Training Officer
         bio: Helps coordinate sessions and training information.
+        image_raw: /uostriathlon/assets/images/committee/raw/logo-test-20260719.jpg
       - name: Micheál Kelly
         role: Running Training Officer
         bio: Helps coordinate sessions and training information.
