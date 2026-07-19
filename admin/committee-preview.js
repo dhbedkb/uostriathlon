@@ -53,7 +53,7 @@ function previewUrl(value) {
       if (asset) {
         var resolved = asset.toString ? asset.toString() : String(asset);
 
-        if (resolved && resolved.indexOf("[object Object]") === -1) {
+        if (resolved && resolved.indexOf("[object") === -1) {
           return previewUrl(resolved);
         }
       }
@@ -350,10 +350,6 @@ var source = cleanPath(member.image_raw || "");
       var data = this.props.entry.getIn(["data"]).toJS();
       var sections = data.sections || [];
       var getAsset = this.props.getAsset;
-      if (brand.logo) {
-        console.log("[cms-preview] settings logo raw:", brand.logo);
-        console.log("[cms-preview] settings logo resolved:", assetUrl(brand.logo, getAsset));
-      }
 return h(
         "main",
         { className: "cms-page-preview" },
@@ -385,40 +381,5 @@ return h(
     CMS.registerPreviewTemplate(name, PagePreview);
   });
 
-  /* settings logo preview:start */
-  var SettingsPreview = createClass({
-    render: function () {
-      var data = this.props.entry.getIn(["data"]).toJS();
-      var brand = data.brand || {};
-      var getAsset = this.props.getAsset;
-
-      return h(
-        "main",
-        { className: "cms-page-preview" },
-        h(
-          "section",
-          { className: "cms-section" },
-          h("div", { className: "cms-tag" }, "Site settings"),
-          h("h1", { className: "cms-title" }, brand.short_name || brand.name || "Brand"),
-          brand.tagline ? h("p", { className: "cms-subtitle" }, brand.tagline) : null,
-          brand.logo
-            ? imageFrame(
-                brand.logo,
-                getAsset,
-                brand.logo_crop_x || 50,
-                brand.logo_crop_y || 50,
-                brand.logo_crop_zoom || 100,
-                false
-              )
-            : h("p", { className: "cms-muted" }, "No logo selected"),
-          h("div", { className: "cms-source-note" }, "Logo path: " + (brand.logo || "none")),
-          h("p", { className: "cms-muted" }, "Logo crop: X " + (brand.logo_crop_x || 50) + "%, Y " + (brand.logo_crop_y || 50) + "%, zoom " + (brand.logo_crop_zoom || 100) + "%")
-        )
-      );
-    }
-  });
-
-  CMS.registerPreviewTemplate("settings", SettingsPreview);
-  /* settings logo preview:end */
 
 })();

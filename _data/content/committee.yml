@@ -8,7 +8,7 @@ sections:
       label: Contact Us
       url: mailto:triathlon@sheffield.ac.uk
     background_crop_zoom: 130
-    background_image_raw: /assets/images/source/img_1783.jpg
+    background_image_raw: /uostriathlon/assets/images/source/img_1783.jpg
     subtitle: Student-led. Community-focused.
     title: Meet the Committee
     background_crop_x: 48
@@ -40,7 +40,7 @@ sections:
         email: triathlon@sheffield.ac.uk
       - name: Joseph Fields
         role: Competitions Officer
-      - image_raw: /assets/images/committee/raw/img_9541.jpg
+      - image_raw: /uostriathlon/assets/images/committee/raw/img_9541.jpg
         bio: Supports organisation, communication and administration.
         name: Barnaby Read
         questions:

@@ -2,7 +2,7 @@ local_backend: true
 backend:
   name: git-gateway
 media_folder: /assets/images/uploads
-public_folder: /assets/images/uploads
+public_folder: /uostriathlon/assets/images/uploads
 publish_mode: simple
 site_url: https://dhbedkb.github.io/uostriathlon/
 collections:

@@ -34,7 +34,7 @@ sections:
     images:
       - alt: Sheffield Triathlon club social placeholder image
         caption: Club social placeholder.
-        src_raw: /assets/images/source/708752699_1640993453798187_4377617180923485565_n.jpg
+        src_raw: /uostriathlon/assets/images/source/708752699_1640993453798187_4377617180923485565_n.jpg
       - alt: Sheffield Triathlon event placeholder image
         caption: Event placeholder.
       - alt: Sheffield Triathlon group placeholder image
