@@ -5597,3 +5597,87 @@ main > .section:nth-of-type(even):not(.section-hero) {
 .card-grid {
   gap: var(--u-tile-gap);
 }
+
+/* =====================================================
+   COMMITTEE UNIVERSAL TILE HARD MIGRATION V5
+   Forces committee cards onto the universal tile spacing rhythm.
+   ===================================================== */
+
+.section-committee .committee-crop-card {
+  box-sizing: border-box !important;
+  padding: var(--u-tile-pad) !important;
+  border-radius: var(--u-tile-radius) !important;
+  overflow: hidden !important;
+}
+
+.section-committee .committee-crop-card > summary {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.section-committee .committee-crop-summary {
+  display: grid !important;
+  grid-template-columns: minmax(0, auto) auto !important;
+  align-items: center !important;
+  gap: var(--u-tile-pad-compact) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.section-committee .committee-crop-image-frame {
+  margin: 0 !important;
+  border-radius: var(--u-tile-frame-radius) !important;
+}
+
+.section-committee .committee-crop-image-frame img,
+.section-committee .committee-crop-image-frame picture,
+.section-committee .committee-crop-image-frame source {
+  margin: 0 !important;
+}
+
+.section-committee .committee-crop-info,
+.section-committee .committee-crop-meta,
+.section-committee .committee-crop-text {
+  margin: 0 !important;
+}
+
+.section-committee .committee-crop-info > *,
+.section-committee .committee-crop-meta > *,
+.section-committee .committee-crop-text > * {
+  margin-block-start: 0 !important;
+  margin-block-end: 0 !important;
+}
+
+.section-committee .committee-crop-info > * + *,
+.section-committee .committee-crop-meta > * + *,
+.section-committee .committee-crop-text > * + * {
+  margin-top: 0.35rem !important;
+}
+
+.section-committee .committee-crop-expanded {
+  margin-top: var(--u-tile-pad) !important;
+  padding-top: var(--u-tile-pad) !important;
+}
+
+.section-committee .committee-crop-expanded > * {
+  margin-block-start: 0 !important;
+  margin-block-end: 0 !important;
+}
+
+.section-committee .committee-crop-expanded > * + * {
+  margin-top: var(--u-tile-pad-compact) !important;
+}
+
+.section-committee .committee-crop-expanded > :last-child {
+  margin-bottom: 0 !important;
+}
+
+@media (max-width: 640px) {
+  .section-committee .committee-crop-summary {
+    gap: var(--u-tile-pad-compact) !important;
+  }
+
+  .section-committee .committee-crop-card {
+    padding: var(--u-tile-pad-compact) !important;
+  }
+}
