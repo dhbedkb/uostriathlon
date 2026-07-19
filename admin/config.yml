@@ -756,11 +756,11 @@ collections:
     file: _data/content/socials.yml
     fields: *id001
   - name: committee
-    label: Committee
+    label: Our Committee
     file: _data/content/committee.yml
     fields: *id001
   - name: members
-    label: Members
+    label: Members Area
     file: _data/content/members.yml
     fields: *id001
 - name: settings
