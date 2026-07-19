@@ -88,5 +88,5 @@ sections:
       label: Email the Club
       url: mailto:triathlon@sheffield.ac.uk
     secondary_button:
-      label: ffs
-      url: ffs
+      label: temp
+      url: temp
