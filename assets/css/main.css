@@ -5757,3 +5757,35 @@ main > .section:nth-of-type(even):not(.section-hero) {
 .u-tile .button {
   align-self: flex-start;
 }
+
+/* =====================================================
+   GALLERY TILE MIGRATION V1
+   Aligns gallery cards with the universal tile primitives.
+   ===================================================== */
+
+.gallery-grid.tile-grid {
+  gap: var(--tile-gap);
+}
+
+.gallery-item.tile {
+  display: flex;
+  flex-direction: column;
+  gap: var(--tile-pad-compact);
+  padding: var(--tile-pad);
+}
+
+.gallery-item.tile .tile-frame {
+  width: 100%;
+  max-width: 100%;
+}
+
+.gallery-item.tile img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  border-radius: var(--tile-frame-radius);
+}
+
+.gallery-item.tile .tile-body {
+  margin: 0;
+}

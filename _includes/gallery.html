@@ -8,7 +8,7 @@
     %}
 
     {% if include.section.images %}
-      <div class="gallery-grid">
+      <div class="tile-grid gallery-grid">
         {% for image in include.section.images %}
           <figure class="u-tile tile reveal gallery-item reveal-card" data-reveal-mode="hover">
             {% if image.src %}
@@ -17,7 +17,7 @@
               <div class="gallery-placeholder"><span>{{ image.category | default: "Club photo" }}</span></div>
             {% endif %}
             {% if image.caption %}
-              <figcaption class="reveal-body gallery-caption">{{ image.caption }}</figcaption>
+              <figcaption class="tile-body reveal-body gallery-caption">{{ image.caption }}</figcaption>
             {% endif %}
           </figure>
         {% endfor %}
