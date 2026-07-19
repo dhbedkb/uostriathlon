@@ -5156,34 +5156,56 @@ main > .section:nth-of-type(even):not(.section-hero) {
 }
 
 /* =====================================================
-   WIDGET TILE BOUNDARY V1
-   Consistent dead-space boundary for live embeds/widgets.
+   WIDGET FRAME CONTRACT V2
+   General tile-within-tile spacing for live embeds/widgets.
    ===================================================== */
 
 .embed-shell.live-widget-boundary {
-  padding: var(--tile-frame-pad);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: var(--tile-frame-pad);
+  padding: var(--tile-frame-pad) !important;
 }
 
 .embed-shell.live-widget-boundary .embed-card-heading {
-  margin: 0 0 var(--tile-frame-pad);
+  margin: 0 !important;
 }
 
 .embed-shell.live-widget-boundary .embed-frame,
 .embed-shell.live-widget-boundary .embed-placeholder {
+  box-sizing: border-box;
+  width: 100%;
+  padding: var(--tile-frame-pad) !important;
   border-radius: var(--tile-radius-inner);
-  overflow: hidden;
-  background: rgba(0, 0, 0, 0.38);
   border: var(--tile-border-dark);
-  padding: var(--tile-pad-tight);
+  background: rgba(0, 0, 0, 0.38);
+  overflow: hidden;
+}
+
+.embed-shell.live-widget-boundary .embed-frame {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
 }
 
 .embed-shell.live-widget-boundary .embed-frame iframe,
 .embed-shell.live-widget-boundary .embed-frame blockquote {
   display: block;
-  margin-inline: auto;
   max-width: 100%;
+  margin: 0 auto !important;
   border: 0;
   border-radius: calc(var(--tile-radius-inner) - 0.25rem);
+  box-sizing: border-box;
+}
+
+.embed-grid,
+#social-widgets .embed-grid-three {
+  align-items: start;
+}
+
+.embed-shell.live-widget-boundary {
+  align-self: start;
 }
 
 [data-theme="light"] .embed-shell.live-widget-boundary .embed-frame,
