@@ -84,7 +84,7 @@
 
   function setupCommitteeCards() {
     var cards = Array.prototype.slice.call(
-      document.querySelectorAll(".committee-crop-card")
+      document.querySelectorAll("[data-reveal-mode=\"hover\"], .committee-crop-card")
     );
 
     if (!cards.length) return;
