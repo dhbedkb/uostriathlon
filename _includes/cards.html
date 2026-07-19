@@ -8,7 +8,7 @@
     %}
 
     {% if include.section.cards %}
-      <div class="card-grid">
+      <div class="tile-grid card-grid">
         {% for card in include.section.cards %}
           <article class="u-tile tile content-card reveal-card discipline-{{ card.label | downcase | slugify }}">
             {% if card.image %}

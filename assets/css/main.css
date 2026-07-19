@@ -5681,3 +5681,79 @@ main > .section:nth-of-type(even):not(.section-hero) {
     padding: var(--u-tile-pad-compact) !important;
   }
 }
+
+/* =====================================================
+   TILE PRIMITIVE ALIAS AND SIMPLE CARD MIGRATION V1
+   Final .tile primitive names with temporary .u-tile aliases.
+   ===================================================== */
+
+:root {
+  --tile-gap: var(--u-tile-gap, 1.5rem);
+  --tile-pad: var(--u-tile-pad, 1.5rem);
+  --tile-pad-compact: var(--u-tile-pad-compact, 1rem);
+  --tile-radius: var(--u-tile-radius, 1.75rem);
+  --tile-frame-radius: var(--u-tile-frame-radius, 1rem);
+  --tile-frame-pad: var(--u-tile-pad-compact, 1rem);
+  --tile-border: var(--u-tile-border, 1px solid rgba(255, 255, 255, 0.14));
+  --tile-frame-border: var(--u-tile-frame-border, 1px solid rgba(255, 255, 255, 0.12));
+  --tile-bg: var(--u-tile-bg, rgba(255, 255, 255, 0.055));
+  --tile-frame-bg: var(--u-tile-frame-bg, rgba(0, 0, 0, 0.34));
+  --tile-shadow: var(--u-tile-shadow, 0 18px 50px rgba(0, 0, 0, 0.24));
+}
+
+.tile,
+.u-tile {
+  box-sizing: border-box;
+  padding: var(--tile-pad);
+  border-radius: var(--tile-radius);
+  border: var(--tile-border);
+  background: var(--tile-bg);
+  box-shadow: var(--tile-shadow);
+  overflow: hidden;
+}
+
+.tile-header,
+.u-tile-head {
+  margin: 0 0 var(--tile-pad-compact);
+}
+
+.tile-header > :first-child,
+.u-tile-head > :first-child {
+  margin-top: 0;
+}
+
+.tile-header > :last-child,
+.u-tile-head > :last-child {
+  margin-bottom: 0;
+}
+
+.tile-grid {
+  display: grid;
+  gap: var(--tile-gap);
+}
+
+.tile-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--tile-gap);
+}
+
+.tile.content-card,
+.tile.event-card,
+.tile.stat-card,
+.tile.cta-card,
+.tile.faq-item,
+.u-tile.content-card,
+.u-tile.event-card,
+.u-tile.stat-card,
+.u-tile.cta-card,
+.u-tile.faq-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--tile-pad-compact);
+}
+
+.tile .button,
+.u-tile .button {
+  align-self: flex-start;
+}
