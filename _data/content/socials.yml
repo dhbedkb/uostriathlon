@@ -51,25 +51,14 @@ sections:
   - provider: facebook
     title: UoS Triathlon Facebook
     description: Public club Facebook page feed.
-    embed_html: '<iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FUoSTriathlon&tabs=timeline&width=500&height=760&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true"
-      width="500" height="760" style="border:none;overflow:hidden" scrolling="no"
-      frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media;
-      picture-in-picture; web-share"></iframe>
-
-      '
+    url: https://www.facebook.com/UoSTriathlon
+    button_label: Open Facebook
+    embed_html: 'https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FUoSTriathlon&tabs=timeline&width=500&height=840&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true</iframe>'
   - provider: strava
     title: Club summary
     description: Compact club activity summary.
-    embed_html: '<iframe allowtransparency="true" frameborder="0" height="160" scrolling="no"
-      src="https://www.strava.com/clubs/38083/latest-rides/97b766cfeadabebb08915a50b58f75be63b8d0c1?show_rides=false"
-      width="300"></iframe>
-
-      '
+    embed_html: 'https://www.strava.com/clubs/38083/latest-rides/97b766cfeadabebb08915a50b58f75be63b8d0c1?show_rides=false</iframe>'
   - provider: strava
     title: Latest club activity
     description: Recent public activity from the club.
-    embed_html: '<iframe allowtransparency="true" frameborder="0" height="454" scrolling="no"
-      src="https://www.strava.com/clubs/38083/latest-rides/97b766cfeadabebb08915a50b58f75be63b8d0c1?show_rides=true"
-      width="300"></iframe>
-
-      '
+    embed_html: 'https://www.strava.com/clubs/38083/latest-rides/97b766cfeadabebb08915a50b58f75be63b8d0c1?show_rides=true</iframe>'

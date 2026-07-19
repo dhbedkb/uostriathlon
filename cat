@@ -78,6 +78,41 @@
             {% endfor %}
           </div>
         </div>
+            {% for embed in include.section.embeds offset:1 %}
+              <article class="embed-shell live-widget-boundary embed-{{ embed.provider | default: 'generic' }}">
+                <header class="embed-card-heading">
+                  {% if embed.provider %}
+                    <p class="card-label">{{ embed.provider }}</p>
+                  {% endif %}
+
+                  {% if embed.title %}
+                    <h3>{{ embed.title }}</h3>
+                  {% endif %}
+
+                  {% if embed.description %}
+                    <p>{{ embed.description }}</p>
+                  {% endif %}
+                </header>
+
+                {% if embed.embed_html %}
+                  <div class="embed-frame">
+                    {{ embed.embed_html }}
+                  </div>
+                {% elsif embed.url %}
+                  <div class="embed-placeholder">
+                    {{ embed.url }}
+                      {{ embed.button_label | default: "Open" }}
+                    </a>
+                  </div>
+                {% else %}
+                  <div class="embed-placeholder">
+                    <p>Embed not configured yet.</p>
+                  </div>
+                {% endif %}
+              </article>
+            {% endfor %}
+          </div>
+        </div>
       {% else %}
         <div class="embed-grid embed-grid-{{ include.section.layout | default: 'two' }}">
           {% for embed in include.section.embeds %}

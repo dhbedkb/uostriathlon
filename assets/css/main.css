@@ -1621,7 +1621,6 @@ main > .section:nth-of-type(even):not(.section-hero) {
 }
 
 
-/* FINAL V2: Apple sliding, opaque panels, widgets */
 
 /* Base solid panels */
 .section {
@@ -2017,7 +2016,6 @@ body main > .section:nth-of-type(even):not(.section-hero) {
 
 
 
-/* FINAL V3: carded feeds layout, facebook timeline only */
 
 #social-widgets .embed-grid-three {
   display: grid;
@@ -2164,7 +2162,6 @@ body main > .section:nth-of-type(even):not(.section-hero) {
 }
 
 
-/* FINAL V4: exact social feed card layout */
 
 /*
   Desired desktop layout:
@@ -2416,9 +2413,6 @@ body main > .section:nth-of-type(even):not(.section-hero) {
 
 
 
-/* FINAL V5: circular logo, logo-only socials, mobile feeds, image PNG placeholders */
-
-/* Circular cropped brand logo */
 .brand-logo-wrap {
   width: 48px !important;
   height: 48px !important;
@@ -5156,69 +5150,6 @@ main > .section:nth-of-type(even):not(.section-hero) {
 }
 
 /* =====================================================
-   WIDGET FRAME CONTRACT V2
-   General tile-within-tile spacing for live embeds/widgets.
-   ===================================================== */
-
-.embed-shell.live-widget-boundary {
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  gap: var(--tile-frame-pad);
-  padding: var(--tile-frame-pad) !important;
-}
-
-.embed-shell.live-widget-boundary .embed-card-heading {
-  margin: 0 !important;
-}
-
-.embed-shell.live-widget-boundary .embed-frame,
-.embed-shell.live-widget-boundary .embed-placeholder {
-  box-sizing: border-box;
-  width: 100%;
-  padding: var(--tile-frame-pad) !important;
-  border-radius: var(--tile-radius-inner);
-  border: var(--tile-border-dark);
-  background: rgba(0, 0, 0, 0.38);
-  overflow: hidden;
-}
-
-.embed-shell.live-widget-boundary .embed-frame {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-}
-
-.embed-shell.live-widget-boundary .embed-frame iframe,
-.embed-shell.live-widget-boundary .embed-frame blockquote {
-  display: block;
-  max-width: 100%;
-  margin: 0 auto !important;
-  border: 0;
-  border-radius: calc(var(--tile-radius-inner) - 0.25rem);
-  box-sizing: border-box;
-}
-
-.embed-grid,
-#social-widgets .embed-grid-three {
-  align-items: start;
-}
-
-.embed-shell.live-widget-boundary {
-  align-self: start;
-}
-
-[data-theme="light"] .embed-shell.live-widget-boundary .embed-frame,
-[data-theme="light"] .embed-shell.live-widget-boundary .embed-placeholder {
-  background: rgba(255, 255, 255, 0.82);
-  border: var(--tile-border-light);
-}
-
-/* =====================================================
-   SOCIAL WIDGET NATIVE WIDTH CONTRACT V6
-   Shrink-wraps live widget tiles around their native widget width
-   instead of stretching wide and leaving uneven internal gaps.
-   ===================================================== */
 
 #social-widgets .embed-grid-three {
   align-items: start !important;
@@ -5263,4 +5194,177 @@ main > .section:nth-of-type(even):not(.section-hero) {
     width: var(--widget-native-width, 500px) !important;
     max-width: none !important;
   }
+}
+
+/* =====================================================
+
+#social-widgets .embed-grid-balanced {
+  display: grid;
+  grid-template-columns: minmax(0, 640px) minmax(0, 420px) !important;
+  gap: 1.5rem !important;
+  align-items: start;
+  justify-content: center;
+}
+
+#social-widgets .embed-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-self: start;
+}
+
+#social-widgets .embed-stack .embed-shell {
+  flex: 0 0 auto !important;
+  height: auto !important;
+  min-height: 0 !important;
+}
+
+#social-widgets .embed-shell.live-widget-boundary {
+  box-sizing: border-box;
+  padding: var(--tile-frame-pad) !important;
+}
+
+#social-widgets .embed-shell.live-widget-boundary .embed-card-heading {
+  margin: 0 0 var(--tile-frame-pad) !important;
+}
+
+#social-widgets .embed-shell.live-widget-boundary .embed-frame,
+#social-widgets .embed-shell.live-widget-boundary .embed-placeholder {
+  box-sizing: border-box;
+  width: 100%;
+  padding: var(--tile-frame-pad) !important;
+  border-radius: var(--tile-radius-inner);
+  border: var(--tile-border-dark);
+  background: rgba(0, 0, 0, 0.38);
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+#social-widgets .embed-facebook iframe {
+  width: 500px !important;
+  max-width: 100% !important;
+  height: 840px !important;
+  min-height: 840px !important;
+  margin: 0 auto !important;
+  border: 0;
+  box-sizing: border-box;
+}
+
+#social-widgets .embed-strava iframe {
+  width: 300px !important;
+  max-width: 100% !important;
+  margin: 0 auto !important;
+  border: 0;
+  box-sizing: border-box;
+}
+
+#social-widgets .embed-mobile-cta {
+  display: none;
+}
+
+@media (max-width: 1100px) {
+  #social-widgets .embed-grid-balanced {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+}
+
+@media (max-width: 560px) {
+  #social-widgets .embed-facebook .embed-frame {
+    display: none !important;
+  }
+
+  #social-widgets .embed-facebook .embed-mobile-cta {
+    display: block;
+  }
+}
+/* FINAL SOCIAL WIDGETS BALANCED LAYOUT - Clean implementation */
+#social-widgets .embed-grid,
+#social-widgets .embed-grid-three {
+  display: grid !important;
+  gap: 1.5rem !important;
+  width: 100% !important;
+  align-items: stretch !important;
+  justify-content: center !important;
+}
+
+@media (min-width: 1101px) {
+  #social-widgets .embed-grid-three {
+    grid-template-columns: minmax(500px, 560px) minmax(320px, 420px) !important;
+    grid-template-rows: auto 1fr !important;
+    grid-template-areas:
+      "facebook summary"
+      "facebook activity" !important;
+  }
+
+  #social-widgets .embed-shell:nth-child(1) { grid-area: facebook !important; }
+  #social-widgets .embed-shell:nth-child(2) { grid-area: summary !important; }
+  #social-widgets .embed-shell:nth-child(3) { grid-area: activity !important; }
+}
+
+.embed-shell {
+  display: flex !important;
+  flex-direction: column !important;
+  border-radius: 2rem !important;
+  padding: 1.25rem !important;
+  overflow: hidden !important;
+  min-height: 0 !important;
+}
+
+.embed-card-heading { flex: 0 0 auto !important; margin-bottom: 1rem !important; }
+.embed-frame { flex: 1 1 auto !important; display: grid !important; place-items: center !important; width: 100% !important; overflow: hidden !important; }
+
+.embed-facebook iframe {
+  width: 500px !important; max-width: 100% !important; min-height: 720px !important; height: 720px !important;
+}
+.embed-strava iframe { width: 300px !important; max-width: 100% !important; }
+
+.embed-mobile-cta { display: none !important; margin-top: 1rem !important; }
+
+/* Mobile: stack + CTA fallback */
+@media (max-width: 1100px) {
+  #social-widgets .embed-grid-three {
+    grid-template-columns: 1fr !important;
+    grid-template-areas: none !important;
+  }
+  .embed-facebook iframe { height: 650px !important; min-height: 650px !important; }
+  .embed-mobile-cta { display: block !important; }
+  .embed-frame { display: none !important; } /* hide iframe on very small if needed */
+}
+/* FINAL SOCIAL WIDGETS BALANCED LAYOUT - Clean implementation */
+#social-widgets .embed-grid,
+#social-widgets .embed-grid-three {
+  display: grid !important;
+  gap: 1.5rem !important;
+  width: 100% !important;
+  align-items: stretch !important;
+  justify-content: center !important;
+}
+
+@media (min-width: 1101px) {
+  #social-widgets .embed-grid-three {
+    grid-template-columns: minmax(500px, 560px) minmax(320px, 420px) !important;
+    grid-template-rows: auto 1fr !important;
+    grid-template-areas: "facebook summary" "facebook activity" !important;
+  }
+  #social-widgets .embed-shell:nth-child(1) { grid-area: facebook !important; }
+  #social-widgets .embed-shell:nth-child(2) { grid-area: summary !important; }
+  #social-widgets .embed-shell:nth-child(3) { grid-area: activity !important; }
+}
+
+.embed-shell { display: flex !important; flex-direction: column !important; border-radius: 2rem !important; padding: 1.25rem !important; overflow: hidden !important; min-height: 0 !important; }
+.embed-card-heading { flex: 0 0 auto !important; margin-bottom: 1rem !important; }
+.embed-frame { flex: 1 1 auto !important; display: grid !important; place-items: center !important; width: 100% !important; overflow: hidden !important; }
+
+.embed-facebook iframe { width: 500px !important; max-width: 100% !important; min-height: 720px !important; height: 720px !important; }
+.embed-strava iframe { width: 300px !important; max-width: 100% !important; }
+
+.embed-mobile-cta { display: none !important; margin-top: 1rem !important; }
+
+@media (max-width: 1100px) {
+  #social-widgets .embed-grid-three { grid-template-columns: 1fr !important; }
+  .embed-facebook iframe { height: 650px !important; min-height: 650px !important; }
+  .embed-mobile-cta { display: block !important; }
+  .embed-frame { display: none !important; } /* fallback */
 }
