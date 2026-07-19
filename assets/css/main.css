@@ -4925,23 +4925,25 @@ main > .section:nth-of-type(even):not(.section-hero) {
 
 
 
-/* grok logo final fix:start */
+
+
+/* final single logo rendering:start */
 .brand-mark,
 .brand-logo-wrap {
   width: 56px !important;
   height: 56px !important;
   min-width: 56px !important;
   min-height: 56px !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  border: 0 !important;
-  outline: 0 !important;
   border-radius: 50% !important;
   overflow: hidden !important;
   background: transparent !important;
+  border: 0 !important;
+  outline: 0 !important;
   box-shadow: none !important;
   display: inline-block !important;
   line-height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
 }
 
 .brand-mark::before,
@@ -4950,10 +4952,6 @@ main > .section:nth-of-type(even):not(.section-hero) {
 .brand-logo-wrap::after {
   display: none !important;
   content: none !important;
-  background: transparent !important;
-  border: 0 !important;
-  outline: 0 !important;
-  box-shadow: none !important;
 }
 
 .brand-mark img,
@@ -4967,6 +4965,5 @@ main > .section:nth-of-type(even):not(.section-hero) {
   border: 0 !important;
   outline: 0 !important;
   box-shadow: none !important;
-  background: transparent !important;
 }
-/* grok logo final fix:end */
+/* final single logo rendering:end */
