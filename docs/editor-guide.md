@@ -134,3 +134,51 @@ Editors normally do not need to run these commands.
 ## Safe rule
 
 If something looks wrong, do not manually edit image paths. Ask the site maintainer to check the CMS field, uploaded file, and build output.
+
+## Known behaviour and troubleshooting
+
+### Image previews
+
+The CMS preview may not always show a newly uploaded image immediately before publishing.
+
+This is expected behaviour.
+
+If an image does not show in the preview:
+
+1. Publish the page.
+2. Wait for the site deployment to complete.
+3. Refresh the editor.
+4. Refresh the public page.
+5. If using the local CMS, check that `npx decap-server` is still running.
+
+### Image cleanup
+
+When an image is replaced or removed in the CMS, the old file may remain in the repository.
+
+This is expected.
+
+The site maintainer can run a safe dry-run cleanup with:
+
+    python3 scripts/cleanup_unreferenced_images.py
+
+Only after reviewing the dry-run output should cleanup be applied with:
+
+    python3 scripts/cleanup_unreferenced_images.py --apply
+
+### Generated images
+
+The site may create generated WebP images for performance.
+
+Editors should not manage generated images manually.
+
+Maintainers can run:
+
+    python3 scripts/optimise_site_images.py
+
+Optional generated-output pruning is available with:
+
+    python3 scripts/optimise_site_images.py --prune-generated
+
+### Golden rule
+
+If the CMS editor and the public page disagree, trust the public page after publishing and deployment. If the public page is wrong after deployment, ask the site maintainer to check the uploaded file, YAML reference, and build output.
