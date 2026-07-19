@@ -10,7 +10,7 @@
     {% if include.section.embeds %}
       <div class="embed-grid embed-grid-{{ include.section.layout | default: 'two' }}">
         {% for embed in include.section.embeds %}
-          <article class="embed-shell embed-{{ embed.provider | default: 'generic' }}">
+          <article class="embed-shell live-widget-boundary embed-{{ embed.provider | default: 'generic' }}">
             <header class="embed-card-heading">
               {% if embed.provider %}
                 <p class="card-label">{{ embed.provider }}</p>
@@ -44,7 +44,7 @@
         {% endfor %}
       </div>
     {% else %}
-      <div class="embed-shell embed-{{ include.section.provider | default: 'generic' }}">
+      <div class="embed-shell live-widget-boundary embed-{{ include.section.provider | default: 'generic' }}">
         {% if include.section.embed_html %}
           <div class="embed-frame">
             {{ include.section.embed_html }}
