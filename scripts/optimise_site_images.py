@@ -1,4 +1,5 @@
 from pathlib import Path
+import argparse
 import re
 import yaml
 from PIL import Image, ImageOps
@@ -12,6 +13,9 @@ GENERATED_DIR.mkdir(parents=True, exist_ok=True)
 COMMITTEE_DIR.mkdir(parents=True, exist_ok=True)
 
 SUPPORTED_EXTENSIONS = {".jpg", ".jpeg", ".png", ".webp", ".bmp", ".tif", ".tiff"}
+
+EXPECTED_OUTPUTS = set()
+PRUNE_GENERATED = False
 
 def slugify(value):
     value = str(value or "").lower()
@@ -136,6 +140,8 @@ def save_webp(src, dest, width, height, crop_x=50, crop_y=50, crop_zoom=100):
         )
         cropped = cropped.resize((width, height), Image.Resampling.LANCZOS)
         cropped.save(dest, "WEBP", quality=82, method=6)
+
+        EXPECTED_OUTPUTS.add(dest.resolve())
 
     return "/" + str(dest).replace("\\", "/")
 
@@ -280,5 +286,52 @@ def process_file(yml):
         yml.write_text(yaml.safe_dump(data, sort_keys=False, allow_unicode=True))
         print(f"Updated {yml}")
 
-for yml in CONTENT_DIR.glob("*.yml"):
-    process_file(yml)
+def prune_stale_generated():
+    if not PRUNE_GENERATED:
+        return
+
+    pruned = []
+
+    for prune_dir in (GENERATED_DIR, COMMITTEE_DIR):
+        if not prune_dir.exists():
+            continue
+
+        for path in prune_dir.rglob("*.webp"):
+            if path.resolve() not in EXPECTED_OUTPUTS:
+                path.unlink()
+                pruned.append(str(path))
+
+    if pruned:
+        print()
+        print(f"Pruned {len(pruned)} stale generated file(s):")
+        for item in pruned:
+            print("  " + item)
+    else:
+        print()
+        print("No stale generated files to prune.")
+
+
+def main():
+    global PRUNE_GENERATED
+
+    parser = argparse.ArgumentParser(
+        description="Optimise site images and optionally prune stale generated outputs."
+    )
+
+    parser.add_argument(
+        "--prune-generated",
+        action="store_true",
+        help="Delete stale .webp files from generated output folders.",
+    )
+
+    args = parser.parse_args()
+    PRUNE_GENERATED = args.prune_generated
+
+    for yml in CONTENT_DIR.glob("*.yml"):
+        process_file(yml)
+
+    prune_stale_generated()
+
+
+if __name__ == "__main__":
+    main()
