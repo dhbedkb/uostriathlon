@@ -5119,3 +5119,38 @@ main > .section:nth-of-type(even):not(.section-hero) {
 .tile.faq-item:focus-within {
   box-shadow: var(--tile-focus-ring);
 }
+
+/* =====================================================
+   REVEAL CAPTION SYSTEM V1
+   Reusable caption treatment for gallery/social carousel items.
+   ===================================================== */
+
+.reveal .gallery-caption,
+.reveal .reveal-caption {
+  margin-top: 0.75rem;
+  color: var(--color-muted);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.reveal[data-reveal-mode="hover"] .gallery-caption,
+.reveal[data-reveal-mode="hover"] .reveal-caption {
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .reveal[data-reveal-mode="hover"] .gallery-caption,
+  .reveal[data-reveal-mode="hover"] .reveal-caption {
+    opacity: 0.82;
+  }
+
+  .reveal[data-reveal-mode="hover"]:hover .gallery-caption,
+  .reveal[data-reveal-mode="hover"]:focus-within .gallery-caption,
+  .reveal[data-reveal-mode="hover"]:hover .reveal-caption,
+  .reveal[data-reveal-mode="hover"]:focus-within .reveal-caption {
+    opacity: 1;
+    transform: translateY(-2px);
+  }
+}
