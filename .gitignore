@@ -16,3 +16,10 @@ scripts/*before*
 .archive/
 # Local build/cache output
 .jekyll-metadata
+# macOS/system files
+**/.DS_Store
+# Local backups and temporary files
+*.log
+# Local/node dependencies
+node_modules/
+# Local archives
