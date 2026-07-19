@@ -68,6 +68,9 @@ sections:
         role: Cycling Training Officer
         bio: Helps coordinate sessions and training information.
         image_raw: /uostriathlon/assets/images/committee/raw/photo-2026-07-12-15-11-15.jpg
+        crop_y: 35
+        crop_zoom: 147
+        crop_x: 1
       - name: Micheál Kelly
         role: Running Training Officer
         bio: Helps coordinate sessions and training information.
