@@ -74,7 +74,14 @@ def ensure_supported(path):
     return path and path.exists() and path.suffix.lower() in SUPPORTED_EXTENSIONS
 
 def crop_to_aspect(img, aspect_w, aspect_h, crop_x=50, crop_y=50, crop_zoom=100):
-    img = ImageOps.exif_transpose(img).convert("RGB")
+    img = ImageOps.exif_transpose(img)
+
+    has_alpha = (
+        img.mode in ("RGBA", "LA")
+        or (img.mode == "P" and "transparency" in img.info)
+    )
+
+    img = img.convert("RGBA" if has_alpha else "RGB")
     w, h = img.size
 
     zoom = max(float(crop_zoom or 100) / 100.0, 1.0)
