@@ -5498,3 +5498,80 @@ main > .section:nth-of-type(even):not(.section-hero) {
 .committee-crop-image-frame {
   border-radius: var(--u-tile-frame-radius);
 }
+
+.u-tile img,
+.u-tile iframe,
+.u-tile video {
+  max-width: 100%;
+}
+
+.u-tile img {
+  display: block;
+}
+
+.u-tile.gallery-item img,
+.u-tile .card-photo {
+  border-radius: var(--u-tile-frame-radius);
+}
+
+.u-tile .button {
+  align-self: flex-start;
+}
+
+/* =====================================================
+   UNIVERSAL TILE SPACING NORMALISATION V2
+   Applies the universal tile spacing contract to common cards.
+   ===================================================== */
+
+.u-tile.content-card,
+.u-tile.event-card,
+.u-tile.stat-card,
+.u-tile.social-card,
+.u-tile.gallery-item,
+.u-tile.cta-card,
+.u-tile.notice-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--u-tile-pad-compact);
+  padding: var(--u-tile-pad);
+}
+
+.u-tile.content-card > *,
+.u-tile.event-card > *,
+.u-tile.stat-card > *,
+.u-tile.social-card > *,
+.u-tile.gallery-item > *,
+.u-tile.cta-card > *,
+.u-tile.notice-card > * {
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
+
+.u-tile.content-card > :last-child,
+.u-tile.event-card > :last-child,
+.u-tile.stat-card > :last-child,
+.u-tile.social-card > :last-child,
+.u-tile.gallery-item > :last-child,
+.u-tile.cta-card > :last-child,
+.u-tile.notice-card > :last-child {
+  margin-bottom: 0;
+}
+
+.u-tile img,
+.u-tile iframe,
+.u-tile video {
+  max-width: 100%;
+}
+
+.u-tile img {
+  display: block;
+}
+
+.u-tile.gallery-item img,
+.u-tile .card-photo {
+  border-radius: var(--u-tile-frame-radius);
+}
+
+.u-tile .button {
+  align-self: flex-start;
+}
