@@ -57,7 +57,7 @@ collections:
           required: false
           choose_url: false
           media_folder: /assets/images/source
-          public_folder: /assets/images/source
+          public_folder: /uostriathlon/assets/images/source
         - label: Generated background WebP
           name: background_image
           widget: string
@@ -201,7 +201,7 @@ collections:
             required: false
             choose_url: false
             media_folder: /assets/images/source
-            public_folder: /assets/images/source
+            public_folder: /uostriathlon/assets/images/source
           - label: Generated card WebP
             name: image
             widget: string
@@ -272,7 +272,7 @@ collections:
             required: false
             choose_url: false
             media_folder: /assets/images/source
-            public_folder: /assets/images/source
+            public_folder: /uostriathlon/assets/images/source
           - label: Generated gallery WebP
             name: src
             widget: string
@@ -386,7 +386,7 @@ collections:
             required: false
             choose_url: false
             media_folder: /assets/images/committee/raw
-            public_folder: /assets/images/committee/raw
+            public_folder: /uostriathlon/assets/images/committee/raw
             hint: Upload the original photo here. The preview uses this immediately.
           - label: Optimised profile photo
             name: image_profile
@@ -683,7 +683,7 @@ collections:
             required: false
             choose_url: false
             media_folder: /assets/images/source
-            public_folder: /assets/images/source
+            public_folder: /uostriathlon/assets/images/source
           - label: Generated social WebP
             name: icon
             widget: string

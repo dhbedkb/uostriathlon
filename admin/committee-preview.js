@@ -54,11 +54,7 @@ function previewUrl(value) {
         var resolved = asset.toString ? asset.toString() : String(asset);
 
         if (resolved && resolved.indexOf("[object Object]") === -1) {
-          console.log("[cms-preview] asset resolved", {
-            value: value,
-            resolved: resolved
-          });
-          return resolved;
+          return previewUrl(resolved);
         }
       }
     } catch (error) {
@@ -68,28 +64,7 @@ function previewUrl(value) {
       });
     }
 
-    if (
-      /^https?:\/\//i.test(value) ||
-      value.indexOf("blob:") === 0 ||
-      value.indexOf("data:") === 0
-    ) {
-      return value;
-    }
-
-    var basePath = siteBasePath();
-    var clean = value.indexOf(basePath + "/") === 0
-      ? value.slice(basePath.length)
-      : value;
-
-    if (value.indexOf("/uostriathlon/assets/") === 0) {
-      return value;
-    }
-
-    if (value.indexOf("/assets/") === 0) {
-      return "/uostriathlon" + value;
-    }
-
-    return basePath + (clean.charAt(0) === "/" ? clean : "/" + clean);
+    return previewUrl(value);
   }
 
   function imageFrame(src, getAsset, cropX, cropY, cropZoom, wide, field) {
