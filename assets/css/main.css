@@ -5078,3 +5078,44 @@ main > .section:nth-of-type(even):not(.section-hero) {
   overflow: hidden;
   border-radius: var(--tile-radius-inner);
 }
+
+/* =====================================================
+   TILE ROLLOUT TUNING V1
+   Small guardrails for components that now opt into .tile.
+   ===================================================== */
+
+.tile.reveal-card {
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.tile.reveal-card:hover {
+  border-color: rgba(248, 212, 93, 0.32);
+}
+
+.tile.content-card,
+.tile.event-card,
+.tile.stat-card,
+.tile.social-card,
+.tile.gallery-item,
+.tile.cta-card,
+.tile.faq-item,
+.tile.notice-card {
+  min-width: 0;
+}
+
+.tile img,
+.tile iframe,
+.tile video {
+  max-width: 100%;
+}
+
+.tile.faq-item summary {
+  outline: none;
+}
+
+.tile.faq-item:focus-within {
+  box-shadow: var(--tile-focus-ring);
+}
