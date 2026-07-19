@@ -10,7 +10,7 @@
     {% if include.section.items %}
       <div class="event-grid">
         {% for event in include.section.items %}
-          <article class="event-card reveal-card">
+          <article class="tile event-card reveal-card">
             <div class="event-date">
               <span>{{ event.date | default: "TBC" }}</span>
             </div>

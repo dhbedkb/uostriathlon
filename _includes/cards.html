@@ -10,7 +10,7 @@
     {% if include.section.cards %}
       <div class="card-grid">
         {% for card in include.section.cards %}
-          <article class="content-card reveal-card discipline-{{ card.label | downcase | slugify }}">
+          <article class="tile content-card reveal-card discipline-{{ card.label | downcase | slugify }}">
             {% if card.image %}
               <div class="card-photo" style="background-image: url('{{ card.image | relative_url }}')" aria-hidden="true"></div>
             {% else %}

@@ -22,7 +22,7 @@
     {% else %}
       <div class="social-grid">
         {% for item in include.section.items %}
-          <article class="social-card reveal-card social-{{ item.platform | downcase | slugify }}">
+          <article class="tile social-card reveal-card social-{{ item.platform | downcase | slugify }}">
             <p class="card-label">{{ item.platform }}</p>
             <h3>{{ item.title }}</h3>
             {% if item.description %}
