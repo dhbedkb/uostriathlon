@@ -5024,3 +5024,57 @@ main > .section:nth-of-type(even):not(.section-hero) {
 }
 /* stage 3 logo crop controls:end */
 
+/* =====================================================
+   TILE + REVEAL SYSTEM V1
+   Additive design language. Existing components can opt in
+   gradually by adding these classes alongside existing classes.
+   ===================================================== */
+
+:root {
+  --brand-black: #000000;
+  --brand-white: #FFFFFF;
+  --brand-silver: #D6D6D6;
+  --brand-gold: #F8D45D;
+
+  --tile-radius-outer: 1.75rem;
+  --tile-radius-inner: 1.1rem;
+  --tile-pad: clamp(1rem, 2.5vw, 1.5rem);
+  --tile-pad-tight: 0.75rem;
+  --tile-gap: 1rem;
+  --tile-frame-pad: 1rem;
+
+  --tile-bg-dark: rgba(255, 255, 255, 0.06);
+  --tile-bg-light: rgba(0, 0, 0, 0.045);
+  --tile-border-dark: 1px solid rgba(255, 255, 255, 0.14);
+  --tile-border-light: 1px solid rgba(0, 0, 0, 0.14);
+  --tile-shadow: 0 18px 50px rgba(0, 0, 0, 0.26);
+  --tile-focus-ring: 0 0 0 3px rgba(248, 212, 93, 0.32);
+}
+
+.tile {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--tile-radius-outer);
+  border: var(--tile-border-dark);
+  background: var(--tile-bg-dark);
+  box-shadow: var(--tile-shadow);
+  color: inherit;
+}
+
+.tile-inner {
+  padding: var(--tile-pad);
+}
+
+.tile-nested {
+  border-radius: var(--tile-radius-inner);
+  border: var(--tile-border-dark);
+  background: rgba(255, 255, 255, 0.045);
+  padding: var(--tile-pad-tight);
+}
+
+.tile-media {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  border-radius: var(--tile-radius-inner);
+}
