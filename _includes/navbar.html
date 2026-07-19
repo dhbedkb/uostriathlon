@@ -1,41 +1,31 @@
-<header class="site-header" data-header>
-  <nav class="nav" aria-label="Main navigation">
+<header class="site-header">
+  <div class="container nav-wrap">
     <a class="brand" href="{{ '/' | relative_url }}">
-      <span class="brand-mark brand-logo-wrap" aria-hidden="true">
-        <img src="{{ site.data.settings.brand.logo | relative_url }}" alt="">
-      </span>
-      <span class="brand-text">
-        <span class="brand-name">{{ site.data.settings.brand.short_name }}</span>
-        <span class="brand-tagline">{{ site.data.settings.brand.tagline }}</span>
-      </span>
+      {% if site.data.settings.brand.logo %}
+        <span class="brand-mark">
+          <img src="{{ site.data.settings.brand.logo | relative_url }}" alt="">
+        </span>
+      {% endif %}
+      <span class="brand-text">{{ site.data.settings.brand.name | default: site.title }}</span>
     </a>
 
-    <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="primary-navigation">
-      <span class="sr-only">Toggle navigation</span>
-      <span class="nav-toggle-line"></span>
-      <span class="nav-toggle-line"></span>
-      <span class="nav-toggle-line"></span>
+    <button class="nav-toggle" type="button" aria-label="Open navigation" data-nav-toggle>
+      <span></span>
+      <span></span>
+      <span></span>
     </button>
 
-    <div class="nav-panel" id="primary-navigation" data-nav-panel>
-      <div class="nav-links">
-        {% for item in site.data.navigation.items %}
-          {% assign current_url = page.url | replace: 'index.html', '' %}
-          <a href="{{ item.url | relative_url }}" {% if current_url == item.url %}aria-current="page"{% endif %}>{{ item.label }}</a>
-        {% endfor %}
-      </div>
+    <nav class="site-nav" data-site-nav>
+      {% assign current_url = page.url %}
+      {% for item in site.data.navigation.items %}
+        <a href="{{ item.url | relative_url }}" {% if current_url == item.url %}aria-current="page"{% endif %}>{{ item.label }}</a>
+      {% endfor %}
+    </nav>
 
-      <div class="nav-actions">
-        {% if site.data.settings.features.dark_mode %}
-          <button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark and light mode">
-            <span data-theme-icon>☾</span>
-          </button>
-        {% endif %}
-
-        {% if site.data.navigation.cta %}
-          <a class="nav-cta" href="{{ site.data.navigation.cta.url | relative_url }}">{{ site.data.navigation.cta.label }}</a>
-        {% endif %}
-      </div>
-    </div>
-  </nav>
+    {% if site.data.navigation.cta %}
+      <a class="nav-cta" href="{{ site.data.navigation.cta.url | relative_url }}">
+        {{ site.data.navigation.cta.label }}
+      </a>
+    {% endif %}
+  </div>
 </header>

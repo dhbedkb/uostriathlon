@@ -16,7 +16,7 @@ sections:
     url: /training/
 - type: text
   id: about-club
-  eyebrow: About
+  eyebrow: Welcome
   title: Triathlon sounds intense. Joining us does not have to be.
   body: 'Triathlon is three sports back to back — swim, bike and run — but you do
     not need to arrive as a triathlete. Sheffield Triathlon welcomes complete beginners,
@@ -36,10 +36,10 @@ sections:
     label: Train
     description: Swim, bike and run sessions for a range of abilities.
     url: /training/
-  - title: Events
-    label: Events
+  - title: Races
+    label: Races
     description: Race opportunities, Give it a Go sessions and club activities.
-    url: /events/
+    url: /races/
   - title: Socials
     label: Social
     description: Instagram, Strava, Facebook and student community.
