@@ -5154,3 +5154,40 @@ main > .section:nth-of-type(even):not(.section-hero) {
     transform: translateY(-2px);
   }
 }
+
+/* =====================================================
+   WIDGET TILE BOUNDARY V1
+   Consistent dead-space boundary for live embeds/widgets.
+   ===================================================== */
+
+.embed-shell.live-widget-boundary {
+  padding: var(--tile-frame-pad);
+}
+
+.embed-shell.live-widget-boundary .embed-card-heading {
+  margin: 0 0 var(--tile-frame-pad);
+}
+
+.embed-shell.live-widget-boundary .embed-frame,
+.embed-shell.live-widget-boundary .embed-placeholder {
+  border-radius: var(--tile-radius-inner);
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.38);
+  border: var(--tile-border-dark);
+  padding: var(--tile-pad-tight);
+}
+
+.embed-shell.live-widget-boundary .embed-frame iframe,
+.embed-shell.live-widget-boundary .embed-frame blockquote {
+  display: block;
+  margin-inline: auto;
+  max-width: 100%;
+  border: 0;
+  border-radius: calc(var(--tile-radius-inner) - 0.25rem);
+}
+
+[data-theme="light"] .embed-shell.live-widget-boundary .embed-frame,
+[data-theme="light"] .embed-shell.live-widget-boundary .embed-placeholder {
+  background: rgba(255, 255, 255, 0.82);
+  border: var(--tile-border-light);
+}
