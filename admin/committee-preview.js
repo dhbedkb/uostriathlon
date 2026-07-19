@@ -68,6 +68,7 @@ function previewUrl(value) {
   }
 
   function imageFrame(src, getAsset, cropX, cropY, cropZoom, wide, field) {
+    var original = cleanPath(src);
     var url = assetUrl(src, getAsset);
 
     return h(
@@ -81,8 +82,25 @@ function previewUrl(value) {
         }
       },
       url
-        ? h("img", { src: url, alt: "" })
-        : h("div", { className: "cms-no-image" }, "No image selected")
+        ? h("img", {
+            src: url,
+            alt: "",
+            onError: function (event) {
+              console.warn("[cms-preview] image failed", {
+                original: original,
+                resolved: url
+              });
+
+              if (event && event.currentTarget) {
+                event.currentTarget.className =
+                  (event.currentTarget.className || "") + " cms-image-error";
+              }
+            }
+          })
+        : h("div", { className: "cms-no-image" }, "No image selected"),
+      url
+        ? h("div", { className: "cms-image-debug" }, "Preview path: " + url)
+        : null
     );
   }
 
