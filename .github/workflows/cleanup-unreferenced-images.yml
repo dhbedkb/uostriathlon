@@ -1,0 +1,43 @@
+name: Clean up unreferenced source images
+
+on:
+  workflow_dispatch:
+    inputs:
+      apply:
+        description: "Actually delete files. Leave unchecked for dry run only."
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Dry run cleanup
+        if: ${{ !inputs.apply }}
+        run: python scripts/cleanup_unreferenced_images.py
+
+      - name: Apply cleanup
+        if: ${{ inputs.apply }}
+        run: |
+          python scripts/cleanup_unreferenced_images.py --apply
+
+          if [[ -n "$(git status --porcelain)" ]]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add assets/images
+            git commit -m "Remove unreferenced source images"
+            git push
+          else
+            echo "No unreferenced source images to remove."
+          fi
