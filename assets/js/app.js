@@ -111,6 +111,7 @@
     });
   }
 
+
   document.addEventListener("DOMContentLoaded", setupCommitteeCards);
   window.addEventListener("resize", setupCommitteeCards);
 })();
