@@ -1,4 +1,4 @@
-{% assign hero_image = include.section.background_image | default: include.section.background_image_raw %}
+{% assign hero_image = include.section.background_image_raw | default: include.section.background_image %}
 {% assign hero_image_clean = hero_image | replace_first: "/uostriathlon", "" | replace_first: site.baseurl | strip %}
 {% assign hero_cache_key = include.section.background_image_raw | default: hero_image | slugify %}
 
