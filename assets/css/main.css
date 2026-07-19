@@ -5215,23 +5215,29 @@ main > .section:nth-of-type(even):not(.section-hero) {
 }
 
 /* =====================================================
-   SOCIAL WIDGET GRID CONTRACT V3
-   Prevents live widget tiles from stretching to match neighbours.
+   SOCIAL WIDGET STRETCH FIX V1
+   Prevents live widget tiles from stretching vertically
+   to match neighbouring grid rows.
    ===================================================== */
 
-#social-widgets .embed-*rid-three {
-  align-items: start !*mportant;
-  grid-template-areas:
- *  "facebook summary"
-    ". activi*y" !important;
+#social-widgets .embed-grid-three {
+  align-items: start !important;
 }
 
-#social-widgets *embed-grid-three > .embed-shell {
-* align-self: start !important;
-  h*ight: auto !important;
-  min-heigh*: 0 !important;
+#social-widgets .embed-grid-three > .embed-shell {
+  align-self: start !important;
+  height: auto !important;
+  min-height: 0 !important;
 }
 
-#social-widgets*.embed-grid-three > .embed-shell.l*ve-widget-boundary {
-  align-self:*start !important;
+#social-widgets .embed-grid-three > .embed-shell.live-widget-boundary {
+  align-self: start !important;
+  height: auto !important;
+  min-height: 0 !important;
+}
+
+.live-widget-boundary {
+  align-self: start;
+  height: auto;
+  min-height: 0;
 }
