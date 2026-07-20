@@ -10,28 +10,14 @@
     {% if include.section.items %}
       <div class="tile-grid tile-grid-three-up">
         {% for event in include.section.items %}
-          <article class="tile tile-surface tile-date-context reveal-card">
-            <div class="tile-date-badge">
-              <span>{{ event.date | default: "TBC" }}</span>
-            </div>
+          <article class="tile tile-surface tile-date-context">
+            <div class="tile-date-badge"><span>{{ event.date | default: "TBC" }}</span></div>
 
-            {% if event.type %}
-              <p class="tile-subtitle tile-meta">{{ event.type }}</p>
-            {% endif %}
-
+            {% if event.type %}<p class="tile-subtitle tile-meta">{{ event.type }}</p>{% endif %}
             <h3 class="tile-title">{{ event.title }}</h3>
-
-            {% if event.location %}
-              <p class="tile-text tile-muted">{{ event.location }}</p>
-            {% endif %}
-
-            {% if event.description %}
-              <p class="tile-text">{{ event.description }}</p>
-            {% endif %}
-
-            {% if event.url %}
-              <a class="text-link" href="{{ event.url | relative_url }}">View details →</a>
-            {% endif %}
+            {% if event.location %}<p class="tile-text tile-muted">{{ event.location }}</p>{% endif %}
+            {% if event.description %}<p class="tile-text">{{ event.description }}</p>{% endif %}
+            {% if event.url %}<a class="text-link" href="{{ event.url | relative_url }}">View details →</a>{% endif %}
           </article>
         {% endfor %}
       </div>

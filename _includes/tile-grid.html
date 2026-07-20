@@ -1,4 +1,4 @@
-<section id="{{ include.section_id }}" class="section section-tile-grid apple-panel" data-section-type="tile_grid">
+<section id="{{ include.section_id }}" class="section section-tile-grid" data-section-type="tile_grid">
   <div class="container">
     {% include section-heading.html
       eyebrow=include.section.eyebrow
@@ -7,52 +7,28 @@
       alignment=include.section.alignment
     %}
 
-    {% assign tile_layout = include.section.layout | default: "grid" %}
     {% if include.section.tiles %}
-      <div class="tile-grid tile-grid-dynamic tile-grid-{{ tile_layout }}">
+      <div class="tile-grid">
         {% for tile in include.section.tiles %}
-          <article class="tile tile-grid-item{% if tile.children %} tile-has-children{% endif %}">
-            {% if tile.eyebrow or tile.label or tile.title or tile.subtitle %}
-              <header class="tile-header">
-                {% if tile.eyebrow or tile.label %}<p class="card-label">{{ tile.eyebrow | default: tile.label }}</p>{% endif %}
-                {% if tile.title %}<h3>{{ tile.title }}</h3>{% endif %}
-                {% if tile.subtitle %}<p>{{ tile.subtitle }}</p>{% endif %}
-              </header>
+          <article class="tile tile-surface">
+            {% if tile.eyebrow or tile.title or tile.subtitle %}
+              <div class="tile-header">
+                {% if tile.eyebrow %}<p class="tile-subtitle tile-meta">{{ tile.eyebrow }}</p>{% endif %}
+                {% if tile.title %}<h3 class="tile-title">{{ tile.title }}</h3>{% endif %}
+                {% if tile.subtitle %}<p class="tile-text tile-muted">{{ tile.subtitle }}</p>{% endif %}
+              </div>
             {% endif %}
 
             {% if tile.body %}
-              <div class="tile-body">
-                {{ tile.body | markdownify }}
-              </div>
-            {% endif %}
-
-            {% assign tile_image = tile.image | default: tile.image_raw | default: tile.src %}
-            {% if tile.embed_html or tile_image %}
-              <div class="tile-frame">
-                {% if tile.embed_html %}
-                  {{ tile.embed_html }}
-                {% elsif tile_image %}
-                  <img src="{{ tile_image | relative_url }}" alt="{{ tile.alt | default: tile.title | default: 'Tile image' }}" loading="lazy">
-                {% endif %}
-              </div>
-            {% endif %}
-
-            {% if tile.buttons %}
-              <div class="button-row tile-buttons">
-                {% for button in tile.buttons %}
-                  {% if button.url and button.label %}
-                    <a class="button primary" href="{{ button.url | relative_url }}">{{ button.label }}</a>
-                  {% endif %}
-                {% endfor %}
-              </div>
+              <div class="tile-body">{{ tile.body | markdownify }}</div>
             {% endif %}
 
             {% if tile.children %}
               <div class="tile-grid tile-grid-nested">
                 {% for child in tile.children %}
                   <article class="tile tile-nested">
-                    {% if child.title %}<header class="tile-header"><h4>{{ child.title }}</h4></header>{% endif %}
-                    {% if child.body %}<div class="tile-body">{{ child.body | markdownify }}</div>{% endif %}
+                    {% if child.title %}<h4 class="tile-title">{{ child.title }}</h4>{% endif %}
+                    {% if child.body %}<div class="tile-body tile-text tile-muted">{{ child.body | markdownify }}</div>{% endif %}
                   </article>
                 {% endfor %}
               </div>

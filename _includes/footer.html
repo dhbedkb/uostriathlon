@@ -1,20 +1,7 @@
 <footer class="site-footer">
   <div class="container footer-grid">
     <div class="footer-brand">
-      <a class="brand footer-logo" href="{{ '/' | relative_url }}">{% assign logo_raw = site.data.settings.brand.logo | default: "" %}
-        {% assign logo_clean = logo_raw | replace_first: "/uostriathlon", "" | replace_first: site.baseurl, "" | strip %}
-        {% if logo_clean != "" %}
-          <span class="brand-mark brand-logo-wrap" aria-hidden="true" style="--logo-crop-x: {{ site.data.settings.brand.logo_crop_x | default: 50 }}%; --logo-crop-y: {{ site.data.settings.brand.logo_crop_y | default: 50 }}%; --logo-crop-zoom: {{ site.data.settings.brand.logo_crop_zoom | default: 100 | divided_by: 100.0 }};">
-            <img src="{{ logo_clean | relative_url }}?v={{ site.time | date: '%s' }}" alt="{{ site.data.settings.brand.short_name | default: site.data.settings.brand.name | default: site.title | escape }}" loading="lazy">
-          </span>
-        {% endif %}
-        <span class="brand-text">
-          <span class="brand-name">{{ site.data.settings.brand.short_name | default: site.data.settings.brand.name | default: site.title }}</span>
-          {% if site.data.settings.brand.tagline %}
-            <span class="brand-tagline">{{ site.data.settings.brand.tagline }}</span>
-          {% endif %}
-        </span></a>
-
+      <p class="brand-name">{{ site.data.settings.brand.short_name | default: site.title }}</p>
       <p>{{ site.data.settings.footer.description }}</p>
       <p class="footer-small">{{ site.data.settings.footer.affiliation }}</p>
     </div>
@@ -25,15 +12,6 @@
         {% for item in site.data.navigation.items %}
           <li><a href="{{ item.url | relative_url }}">{{ item.label }}</a></li>
         {% endfor %}
-      </ul>
-    </div>
-
-    <div class="footer-column">
-      <h2>Training</h2>
-      <ul>
-        <li><a href="{{ '/training/#swimming' | relative_url }}">Swimming</a></li>
-        <li><a href="{{ '/training/#cycling' | relative_url }}">Cycling</a></li>
-        <li><a href="{{ '/training/#running' | relative_url }}">Running</a></li>
       </ul>
     </div>
 

@@ -1,26 +1,20 @@
 <section id="{{ include.section_id }}" class="section section-cta" data-section-type="cta">
   <div class="container">
-    <div class="tile tile-surface-accent tile-cta reveal-card">
-      {% if include.section.eyebrow %}
-        <p class="eyebrow">{{ include.section.eyebrow }}</p>
-      {% endif %}
+    <div class="tile tile-surface-accent tile-cta">
+      {% if include.section.eyebrow %}<p class="eyebrow">{{ include.section.eyebrow }}</p>{% endif %}
+      {% if include.section.title %}<h2 class="tile-cta-title">{{ include.section.title }}</h2>{% endif %}
+      {% if include.section.body %}<p class="lede tile-text tile-muted">{{ include.section.body }}</p>{% endif %}
 
-      {% if include.section.title %}
-        <h2 class="tile-cta-title">{{ include.section.title }}</h2>
+      {% if include.section.primary_button or include.section.secondary_button %}
+        <div class="actions tile-actions-center">
+          {% if include.section.primary_button %}
+            <a class="button primary" href="{{ include.section.primary_button.url | relative_url }}">{{ include.section.primary_button.label }}</a>
+          {% endif %}
+          {% if include.section.secondary_button %}
+            <a class="button secondary" href="{{ include.section.secondary_button.url | relative_url }}">{{ include.section.secondary_button.label }}</a>
+          {% endif %}
+        </div>
       {% endif %}
-
-      {% if include.section.body %}
-        <p class="lede tile-text tile-muted">{{ include.section.body }}</p>
-      {% endif %}
-
-      <div class="actions tile-actions-center">
-        {% if include.section.primary_button %}
-          <a class="button primary" href="{{ include.section.primary_button.url | relative_url }}">{{ include.section.primary_button.label }}</a>
-        {% endif %}
-        {% if include.section.secondary_button %}
-          <a class="button secondary" href="{{ include.section.secondary_button.url | relative_url }}">{{ include.section.secondary_button.label }}</a>
-        {% endif %}
-      </div>
     </div>
   </div>
 </section>

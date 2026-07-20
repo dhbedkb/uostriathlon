@@ -1,35 +1,44 @@
+/* =====================================================
+   1. TOKENS
+   ===================================================== */
+
 :root {
-  --color-navy: #F8D45D;
-  --color-deep-purple: #F8D45D;
-  --color-purple: #440099;
-  --color-gold: #F2C94C;
-  --color-background: #F8D45D;
-  --color-surface: #F8D45D;
-  --color-surface-soft: rgba(255, 255, 255, 0.06);
-  --color-text: #F8FAFC;
-  --color-muted: #CBD5E1;
+  --color-background: #000000;
+  --color-surface: #101010;
+  --color-surface-soft: rgba(255, 255, 255, 0.07);
+  --color-text: #FFFFFF;
+  --color-muted: #C9C9C9;
+  --color-gold: #F7D35D;
   --color-border: rgba(255, 255, 255, 0.14);
-  --shadow-soft: 0 20px 60px rgba(0, 0, 0, 0.25);
-  --radius-xl: 2rem;
+  --shadow-soft: 0 18px 50px rgba(0, 0, 0, 0.28);
   --radius-full: 999px;
   --nav-height: 76px;
+
+  /* Universal tile system */
+  --tile-gap: 1.5rem;
+  --tile-pad: clamp(1.25rem, 3vw, 1.75rem);
+  --tile-pad-compact: 1rem;
+  --tile-radius: 1.5rem;
+  --tile-frame-radius: 1rem;
+  --tile-inner-gap: 1rem;
+  --tile-grid-min: 260px;
 }
 
 [data-theme="light"] {
-  --color-background: #F8FAFC;
-  --color-surface: #FFFFFF;
-  --color-surface-soft: rgba(15, 23, 42, 0.045);
-  --color-text: #F8D45D;
-  --color-muted: #F8D45D;
-  --color-border: rgba(15, 23, 42, 0.14);
-  --shadow-soft: 0 20px 60px rgba(15, 23, 42, 0.12);
+  --color-background: #FFFFFF;
+  --color-surface: #F7F7F5;
+  --color-surface-soft: rgba(0, 0, 0, 0.045);
+  --color-text: #000000;
+  --color-muted: #4A4A4A;
+  --color-border: rgba(0, 0, 0, 0.14);
+  --shadow-soft: 0 18px 50px rgba(0, 0, 0, 0.1);
 }
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
+/* =====================================================
+   2. RESET & BASE
+   ===================================================== */
+
+*, *::before, *::after { box-sizing: border-box; }
 
 html {
   min-height: 100%;
@@ -40,21 +49,17 @@ html {
 body {
   margin: 0;
   min-height: 100%;
-  background:
-    radial-gradient(circle at top left, rgba(68, 0, 153, 0.3), transparent 34rem),
-    var(--color-background);
+  background: var(--color-background);
   color: var(--color-text);
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   line-height: 1.6;
 }
 
-body.nav-open {
-  overflow: hidden;
-}
+body.nav-open { overflow: hidden; }
 
-a {
-  color: inherit;
-}
+a { color: inherit; }
+
+img { max-width: 100%; display: block; }
 
 :focus-visible {
   outline: 3px solid var(--color-gold);
@@ -68,15 +73,13 @@ a {
   z-index: 999;
   transform: translateY(-150%);
   background: var(--color-gold);
-  color: var(--color-navy);
+  color: #000000;
   padding: 0.75rem 1rem;
   border-radius: var(--radius-full);
   font-weight: 800;
 }
 
-.skip-link:focus {
-  transform: translateY(0);
-}
+.skip-link:focus { transform: translateY(0); }
 
 .sr-only {
   position: absolute;
@@ -87,27 +90,99 @@ a {
   white-space: nowrap;
 }
 
-.container,
-.container-narrow {
+.container, .container-narrow {
   width: min(1120px, calc(100% - 2rem));
   margin-inline: auto;
 }
 
-.container-narrow {
-  width: min(760px, calc(100% - 2rem));
+.container-narrow { width: min(760px, calc(100% - 2rem)); }
+
+/* =====================================================
+   3. TYPOGRAPHY
+   ===================================================== */
+
+.section h1, .section h2 {
+  margin-top: 0;
+  font-size: clamp(2.2rem, 6vw, 4.4rem);
+  line-height: 0.98;
+  letter-spacing: -0.03em;
 }
+
+.eyebrow {
+  margin: 0 0 0.85rem;
+  color: var(--color-gold);
+  font-size: 0.75rem;
+  font-weight: 850;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.lede {
+  max-width: 720px;
+  color: var(--color-muted);
+  font-size: clamp(1.05rem, 2vw, 1.3rem);
+}
+
+.text-link {
+  color: var(--color-gold);
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.text-link:hover { text-decoration: underline; }
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  border-radius: var(--radius-full);
+  padding: 0.75rem 1.25rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.button.primary { background: var(--color-gold); color: #000000; }
+
+.button.secondary {
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-soft);
+  color: var(--color-text);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+/* =====================================================
+   4. LAYOUT — SECTIONS
+   ===================================================== */
 
 .section {
-  padding-block: clamp(4rem, 8vw, 7rem);
+  padding-block: clamp(3.5rem, 7vw, 6rem);
+  background: var(--color-background);
 }
 
-.section h1,
-.section h2 {
-  margin-top: 0;
-  font-size: clamp(2.4rem, 7vw, 5rem);
-  line-height: 0.95;
-  letter-spacing: -0.06em;
+.section:nth-of-type(even):not(.section-hero) {
+  background: var(--color-surface);
 }
+
+.section-heading {
+  max-width: 720px;
+  margin-bottom: 2rem;
+}
+
+.section-heading-center {
+  margin-inline: auto;
+  text-align: center;
+}
+
+/* =====================================================
+   5. NAVBAR
+   ===================================================== */
 
 .site-header {
   position: sticky;
@@ -115,17 +190,11 @@ a {
   z-index: 50;
   min-height: var(--nav-height);
   border-bottom: 1px solid var(--color-border);
-  background: rgba(7, 17, 31, 0.76);
-  backdrop-filter: blur(20px);
+  background: rgba(0, 0, 0, 0.78);
+  backdrop-filter: blur(18px);
 }
 
-[data-theme="light"] .site-header {
-  background: rgba(255, 255, 255, 0.88);
-}
-
-.site-header.is-scrolled {
-  box-shadow: var(--shadow-soft);
-}
+[data-theme="light"] .site-header { background: rgba(255, 255, 255, 0.9); }
 
 .nav {
   width: min(1280px, calc(100% - 2rem));
@@ -145,78 +214,62 @@ a {
 }
 
 .brand-mark {
-  display: grid;
-  width: 42px;
-  height: 42px;
-  place-items: center;
-  border-radius: 14px;
-  background: linear-gradient(135deg, var(--color-gold), #F59E0B);
-  color: var(--color-navy);
-  font-weight: 950;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--color-gold);
+  flex: 0 0 auto;
 }
 
-.brand-text {
-  display: grid;
+.brand-mark img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: var(--crop-x, 50%) var(--crop-y, 50%);
+  transform: scale(var(--crop-zoom, 1));
+  transform-origin: var(--crop-x, 50%) var(--crop-y, 50%);
 }
 
-.brand-name {
-  font-weight: 900;
-  letter-spacing: -0.03em;
-}
+.brand-name { font-weight: 900; letter-spacing: -0.02em; }
 
 .brand-tagline {
+  display: block;
   color: var(--color-muted);
   font-size: 0.75rem;
   font-weight: 650;
 }
 
-.nav-panel {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-}
+.nav-panel { display: flex; align-items: center; gap: 1rem; }
+.nav-links { display: flex; align-items: center; gap: 0.25rem; }
 
 .nav-links a {
   border-radius: var(--radius-full);
   color: var(--color-muted);
-  padding: 0.65rem 0.85rem;
+  padding: 0.6rem 0.85rem;
   font-weight: 750;
   text-decoration: none;
 }
 
-.nav-links a:hover,
-.nav-links a[aria-current="page"] {
+.nav-links a:hover, .nav-links a[aria-current="page"] {
   background: var(--color-surface-soft);
   color: var(--color-gold);
 }
 
-.nav-actions {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
+.nav-actions { display: flex; align-items: center; gap: 0.75rem; }
 
-.theme-toggle,
-.nav-toggle {
+.theme-toggle, .nav-toggle {
   display: inline-grid;
   place-items: center;
-  width: 46px;
-  height: 46px;
+  width: 44px;
+  height: 44px;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-full);
   background: var(--color-surface-soft);
   color: var(--color-text);
 }
 
-.nav-toggle {
-  display: none;
-}
+.nav-toggle { display: none; }
 
 .nav-toggle-line {
   display: block;
@@ -226,67 +279,74 @@ a {
   background: currentColor;
 }
 
-.nav-toggle-line + .nav-toggle-line {
-  margin-top: 4px;
-}
+.nav-toggle-line + .nav-toggle-line { margin-top: 4px; }
 
 .nav-cta {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  min-height: 46px;
+  min-height: 44px;
   border-radius: var(--radius-full);
   background: var(--color-gold);
-  color: var(--color-navy);
-  padding: 0.75rem 1.1rem;
+  color: #000000;
+  padding: 0.7rem 1.1rem;
   font-weight: 850;
   text-decoration: none;
 }
 
-.site-footer {
-  border-top: 1px solid var(--color-border);
-  padding-block: 4rem 2rem;
-  background: rgba(0, 0, 0, 0.12);
+@media (max-width: 980px) {
+  .nav-toggle { display: inline-grid; }
+
+  .nav-panel {
+    position: fixed;
+    inset: var(--nav-height) 1rem auto 1rem;
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    border: 1px solid var(--color-border);
+    border-radius: 1.25rem;
+    background: var(--color-surface);
+    padding: 1rem;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .nav-panel.is-open { display: flex; }
+  .nav-links { display: grid; }
+
+  .nav-actions {
+    justify-content: space-between;
+    border-top: 1px solid var(--color-border);
+    padding-top: 1rem;
+  }
 }
 
-[data-theme="light"] .site-footer {
-  background: #FFFFFF;
+/* =====================================================
+   6. FOOTER
+   ===================================================== */
+
+.site-footer {
+  border-top: 1px solid var(--color-border);
+  padding-block: 3.5rem 2rem;
+  background: var(--color-background);
 }
 
 .footer-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.5fr) repeat(3, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1.5fr) repeat(2, minmax(0, 1fr));
   gap: 2rem;
 }
 
-.footer-brand p,
-.footer-bottom {
-  color: var(--color-muted);
-}
+.footer-brand p, .footer-bottom { color: var(--color-muted); }
 
 .footer-column h2 {
   margin: 0 0 1rem;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
 }
 
-.footer-column ul {
-  display: grid;
-  gap: 0.65rem;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.footer-column a {
-  color: var(--color-muted);
-  text-decoration: none;
-}
-
-.footer-column a:hover {
-  color: var(--color-gold);
-}
+.footer-column ul { display: grid; gap: 0.6rem; margin: 0; padding: 0; list-style: none; }
+.footer-column a { color: var(--color-muted); text-decoration: none; }
+.footer-column a:hover { color: var(--color-gold); }
 
 .footer-bottom {
   display: flex;
@@ -298,71 +358,15 @@ a {
   font-size: 0.9rem;
 }
 
-@media (max-width: 980px) {
-  .nav-toggle {
-    display: inline-grid;
-  }
-
-  .nav-panel {
-    position: fixed;
-    inset: var(--nav-height) 1rem auto 1rem;
-    display: none;
-    flex-direction: column;
-    align-items: stretch;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-xl);
-    background: var(--color-surface);
-    padding: 1rem;
-    box-shadow: var(--shadow-soft);
-  }
-
-  .nav-panel.is-open {
-    display: flex;
-  }
-
-  .nav-links {
-    display: grid;
-  }
-
-  .nav-actions {
-    justify-content: space-between;
-    border-top: 1px solid var(--color-border);
-    padding-top: 1rem;
-  }
-
-  .footer-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .footer-brand {
-    grid-column: 1 / -1;
-  }
+@media (max-width: 700px) {
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .footer-brand { grid-column: 1 / -1; }
+  .footer-bottom { flex-direction: column; }
 }
 
-@media (max-width: 640px) {
-  .brand-tagline {
-    display: none;
-  }
-
-  .footer-grid,
-  .footer-bottom {
-    grid-template-columns: 1fr;
-    flex-direction: column;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.001ms !important;
-    animation-iteration-count: 1 !important;
-    scroll-behavior: auto !important;
-    transition-duration: 0.001ms !important;
-  }
-}
-
-/* Stage 5 section rendering styles */
+/* =====================================================
+   7. HERO
+   ===================================================== */
 
 .hero {
   position: relative;
@@ -370,1353 +374,359 @@ a {
   display: grid;
   align-items: center;
   overflow: hidden;
-  background:
-    radial-gradient(circle at 20% 20%, rgba(242, 201, 76, 0.18), transparent 18rem),
-    linear-gradient(135deg, var(--color-navy), var(--color-deep-purple));
+  background: radial-gradient(circle at 20% 15%, rgba(247, 211, 93, 0.14), transparent 32rem), #000000;
 }
 
-.hero-content {
-  position: relative;
-  z-index: 1;
-  padding-block: clamp(5rem, 12vw, 9rem);
-}
+[data-theme="light"] .hero { background: radial-gradient(circle at 20% 15%, rgba(247, 211, 93, 0.28), transparent 32rem), #FFFFFF; }
 
-.hero h1 {
-  max-width: 980px;
-  margin: 0;
-  font-size: clamp(3rem, 9vw, 7.5rem);
-  line-height: 0.9;
-  letter-spacing: -0.07em;
-  text-transform: uppercase;
-}
-
-.hero-subtitle {
-  margin: 1.25rem 0 0;
-  color: var(--color-gold);
-  font-size: clamp(1.6rem, 5vw, 4rem);
-  font-weight: 950;
-  line-height: 0.95;
-  letter-spacing: -0.05em;
-}
-
-.eyebrow {
-  margin: 0 0 1rem;
-  color: var(--color-gold);
-  font-size: 0.75rem;
-  font-weight: 850;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-}
-
-.lede {
-  max-width: 760px;
-  color: var(--color-muted);
-  font-size: clamp(1.1rem, 2vw, 1.35rem);
-}
-
-.actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin-top: 2rem;
-}
-
-.button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 48px;
-  border-radius: var(--radius-full);
-  padding: 0.8rem 1.25rem;
-  font-weight: 850;
-  text-decoration: none;
-}
-
-.button.primary {
-  background: var(--color-gold);
-  color: var(--color-navy);
-}
-
-.button.secondary {
-  border: 1px solid var(--color-border);
-  background: var(--color-surface-soft);
-  color: var(--color-text);
-}
-
-.section-heading {
-  max-width: 760px;
-  margin-bottom: 2rem;
-}
-
-.section-heading-center {
-  margin-inline: auto;
-  text-align: center;
-}
-
-.notice-card,
-.profile-card,
-.sponsor-card {
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-xl);
-  background: var(--color-surface-soft);
-  box-shadow: var(--shadow-soft);
-}
-
-.notice-card,
-.profile-card,
-.sponsor-card {
-  padding: 1.5rem;
-}
-
-.sponsor-grid {
-  display: grid;
-  gap: 1rem;
-}
-
-.sponsor-grid {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-}
-
-.card-label {
-  margin: 0 0 0.75rem;
-  color: var(--color-gold);
-  font-size: 0.75rem;
-  font-weight: 850;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-}
-
-.profile-card,
-.sponsor-card {
-  overflow: hidden;
-}
-
-.profile-card h3,
-.sponsor-card h3 {
-  margin-top: 0;
-  font-size: 1.35rem;
-  line-height: 1.15;
-}
-
-.text-link {
-  color: var(--color-gold);
-  font-weight: 850;
-  text-decoration: none;
-}
-
-.text-link:hover {
-  text-decoration: underline;
-}
-
-.profile-placeholder {
-  display: grid;
-  min-height: 180px;
-  place-items: center;
-  background: linear-gradient(135deg, rgba(68, 0, 153, 0.55), rgba(242, 201, 76, 0.18));
-  color: var(--color-gold);
-  font-weight: 900;
-}
-
-.profile-placeholder {
-  min-height: 140px;
-  font-size: 3rem;
-}
-
-.timeline-list {
-  display: grid;
-  gap: 1rem;
-}
-
-.timeline-list {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.timeline-list li {
-  border-left: 3px solid var(--color-gold);
-  padding: 1rem 0 1rem 1.25rem;
-}
-
-@media (max-width: 980px) {.committee-grid,
-.sponsor-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-@media (max-width: 640px) {.committee-grid,
-.sponsor-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* Stage 6 component polish */
-
-.section {
-  position: relative;
-}
-
-.section:nth-of-type(even) {
-  background: rgba(255, 255, 255, 0.025);
-}
-
-.hero-bg {
+.hero-photo, .hero-bg {
   position: absolute;
   inset: 0;
-  background:
-    radial-gradient(circle at 75% 20%, rgba(242, 201, 76, 0.2), transparent 18rem),
-    radial-gradient(circle at 25% 75%, rgba(56, 189, 248, 0.18), transparent 18rem);
-  opacity: 0.9;
+}
+
+.hero-photo {
+  background-size: cover;
+  background-position: var(--crop-x, 50%) var(--crop-y, 50%);
+  background-repeat: no-repeat;
+  transform: scale(var(--crop-zoom, 1));
+  transform-origin: var(--crop-x, 50%) var(--crop-y, 50%);
 }
 
 .hero-overlay {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(90deg, rgba(7, 17, 31, 0.98), rgba(7, 17, 31, 0.72), rgba(36, 19, 95, 0.55));
+    linear-gradient(90deg, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.7) 45%, rgba(0, 0, 0, 0.28) 100%);
 }
 
-.hero-body {
-  max-width: 700px;
-  color: var(--color-muted);
-  font-size: clamp(1.15rem, 2vw, 1.45rem);
+[data-theme="light"] .hero-overlay {
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.78) 45%, rgba(255, 255, 255, 0.32) 100%);
 }
 
-.hero-scroll {
-  position: absolute;
-  bottom: 1.5rem;
-  left: 50%;
-  transform: translateX(-50%);
-  color: var(--color-muted);
-  font-size: 0.75rem;
-  font-weight: 800;
-  letter-spacing: 0.2em;
+.hero-content {
+  position: relative;
+  z-index: 1;
+  padding-block: clamp(4rem, 10vw, 7rem);
+}
+
+.hero h1 {
+  max-width: 900px;
+  margin: 0;
+  font-size: clamp(2.75rem, 8vw, 6.5rem);
+  line-height: 0.92;
+  letter-spacing: -0.05em;
   text-transform: uppercase;
 }
+
+.hero-subtitle {
+  margin: 1.1rem 0 0;
+  color: var(--color-gold);
+  font-size: clamp(1.4rem, 4vw, 3rem);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+[data-theme="light"] .hero-subtitle { color: #8A6A00; }
+
+.hero-body {
+  max-width: 640px;
+  margin-top: 1rem;
+  color: var(--color-muted);
+  font-size: clamp(1.05rem, 2vw, 1.3rem);
+}
+
+@media (max-width: 760px) {
+  .hero { min-height: auto; display: grid; align-items: end; }
+  .hero-content { padding-top: clamp(7rem, 20vh, 10rem); padding-bottom: clamp(3.5rem, 10vh, 6rem); }
+}
+
+/* =====================================================
+   8. UNIVERSAL TILE SYSTEM
+   The single spacing/shape contract for every card-like block
+   on the site: cards, events, committee, gallery, faq, cta, etc.
+   ===================================================== */
+
+.tile-grid {
+  display: grid;
+  gap: var(--tile-gap);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--tile-grid-min)), 1fr));
+  align-items: start;
+}
+
+.tile-grid-three-up { --tile-grid-min: 280px; }
+.tile-grid-four-up { --tile-grid-min: 220px; }
+
+.tile-grid-nested {
+  margin-top: var(--tile-pad-compact);
+  --tile-grid-min: 200px;
+}
+
+.tile-stack { display: flex; flex-direction: column; gap: var(--tile-gap); }
+.tile-stack-narrow { width: min(100%, 760px); margin-inline: auto; }
+
+.tile {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: var(--tile-inner-gap);
+  padding: var(--tile-pad);
+  border: 1px solid var(--color-border);
+  border-radius: var(--tile-radius);
+  background: var(--color-surface-soft);
+  box-shadow: var(--shadow-soft);
+  overflow: hidden;
+  color: inherit;
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.tile:hover { border-color: rgba(247, 211, 93, 0.4); }
+
+.tile-nested {
+  padding: var(--tile-pad-compact);
+  border-radius: var(--tile-frame-radius);
+  background: var(--color-surface-soft);
+  box-shadow: none;
+}
+
+.tile-header { margin: 0; }
+.tile-header > :first-child { margin-top: 0; }
+.tile-header > :last-child { margin-bottom: 0; }
+
+.tile-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.tile-header-text { display: flex; flex-direction: column; gap: 0.3rem; min-width: 0; }
+
+.tile-body { display: flex; flex-direction: column; gap: var(--tile-inner-gap); margin: 0; }
+.tile-body > * { margin-block: 0; }
+
+.tile-frame {
+  display: block;
+  width: 100%;
+  border-radius: var(--tile-frame-radius);
+  overflow: hidden;
+  margin: calc(var(--tile-pad) * -1) calc(var(--tile-pad) * -1) 0;
+  width: calc(100% + var(--tile-pad) * 2);
+}
+
+.tile-frame img { width: 100%; display: block; }
+
+.tile-frame-cover, .tile-frame-placeholder {
+  min-height: 190px;
+  display: grid;
+  place-items: center;
+}
+
+.tile-frame-cover { background-size: cover; background-position: center; }
+
+.tile-frame-placeholder {
+  background: radial-gradient(circle at top left, rgba(247, 211, 93, 0.28), transparent 14rem), var(--color-surface);
+  color: var(--color-gold);
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+}
+
+/* Crop frame: a fixed-aspect box for images that need reframing (committee photos, hero). */
+.tile-frame-crop {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: #101010;
+}
+
+.tile-media-crop {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: var(--crop-x, 50%) var(--crop-y, 50%);
+  transform: scale(var(--crop-zoom, 1));
+  transform-origin: var(--crop-x, 50%) var(--crop-y, 50%);
+}
+
+.tile-title {
+  margin: 0;
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  font-weight: 900;
+  line-height: 1.1;
+}
+
+.tile-subtitle, .tile-meta {
+  margin: 0;
+  color: var(--color-gold);
+  font-size: 0.78rem;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.tile-text { margin: 0; color: var(--color-text); line-height: 1.55; }
+.tile-muted { color: var(--color-muted); }
+
+.tile-meta-list { gap: 0.4rem; color: var(--color-muted); font-size: 0.95rem; }
+.tile-meta-list strong { color: var(--color-text); }
+
+.tile-stat-value {
+  display: block;
+  color: var(--color-gold);
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  line-height: 1;
+}
+
+.tile-date-context { position: relative; padding-top: 4.5rem; }
+
+.tile-date-badge {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  border: 1px solid rgba(247, 211, 93, 0.35);
+  border-radius: var(--radius-full);
+  background: rgba(247, 211, 93, 0.1);
+  color: var(--color-gold);
+  padding: 0.3rem 0.65rem;
+  font-size: 0.82rem;
+  font-weight: 850;
+}
+
+/* Accent variant for CTAs and expandable committee cards */
+.tile-surface-accent {
+  background: radial-gradient(circle at top right, rgba(247, 211, 93, 0.14), transparent 18rem), var(--color-surface);
+}
+
+.tile-cta { padding: clamp(2rem, 6vw, 3.5rem); text-align: center; align-items: center; }
+
+.tile-cta-title {
+  margin: 0;
+  font-size: clamp(2.2rem, 6vw, 4rem);
+  line-height: 0.98;
+  letter-spacing: -0.04em;
+}
+
+.tile-actions-center { justify-content: center; }
+
+/* Expandable (details/summary) tiles: FAQ + committee */
+.tile-reveal-summary {
+  cursor: pointer;
+  list-style: none;
+}
+
+.tile-reveal-summary::-webkit-details-marker { display: none; }
+
+.tile-reveal-toggle {
+  position: relative;
+  flex: 0 0 auto;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+}
+
+.tile-reveal-toggle::before, .tile-reveal-toggle::after {
+  content: "";
+  position: absolute;
+  inset: 50% auto auto 50%;
+  width: 0.8rem;
+  height: 2px;
+  background: var(--color-gold);
+  transform: translate(-50%, -50%);
+}
+
+.tile-reveal-toggle::after { transform: translate(-50%, -50%) rotate(90deg); }
+
+details[open] .tile-reveal-toggle {
+  background: var(--color-gold);
+  border-color: var(--color-gold);
+}
+
+details[open] .tile-reveal-toggle::before,
+details[open] .tile-reveal-toggle::after { background: #000000; }
+
+details[open] .tile-reveal-toggle::after { display: none; }
+
+.tile-reveal-body {
+  border-top: 1px solid var(--color-border);
+  padding-top: var(--tile-inner-gap);
+}
+
+/* Embed widgets (Facebook/Strava iframes etc) */
+.tile-frame-embed {
+  width: fit-content;
+  max-width: 100%;
+  margin-inline: auto;
+  overflow: hidden;
+  border-radius: var(--tile-frame-radius);
+  border: 1px solid var(--color-border);
+  background: rgba(0, 0, 0, 0.3);
+  padding: var(--tile-pad-compact);
+  line-height: 0;
+}
+
+.tile-frame-embed iframe {
+  display: block;
+  width: min(100%, var(--tile-embed-width, 500px));
+  max-width: 100%;
+  border: 0;
+}
+
+/* Text prose panel */
+.text-panel .prose p:first-child, .prose p:first-child { margin-top: 0; }
+.text-panel .prose p:last-child, .prose p:last-child { margin-bottom: 0; }
 
 .text-layout {
   display: grid;
   grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-  gap: clamp(2rem, 6vw, 5rem);
+  gap: clamp(2rem, 5vw, 4rem);
   align-items: start;
 }
 
-.text-panel {
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-xl);
-  background: var(--color-surface-soft);
-  padding: clamp(1.5rem, 4vw, 2.5rem);
+@media (max-width: 860px) {
+  .text-layout { grid-template-columns: 1fr; }
 }
 
-.reveal-card {
-  transition:
-    transform 220ms ease,
-    border-color 220ms ease,
-    background 220ms ease,
-    box-shadow 220ms ease;
+.notice-card code {
+  display: inline-block;
+  margin-top: 0.5rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.4rem;
+  background: rgba(255, 255, 255, 0.08);
 }
 
-.reveal-card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(242, 201, 76, 0.45);
-  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.24);
-}
+/* Sections that must not be squeezed by the tile grid auto-fit (iframes) */
+.section-normal-flow { overflow: visible; }
 
-.card-media {
-  display: grid;
-  min-height: 170px;
-  place-items: center;
-  background:
-    radial-gradient(circle at top left, rgba(242, 201, 76, 0.28), transparent 12rem),
-    linear-gradient(135deg, rgba(68, 0, 153, 0.72), rgba(15, 23, 42, 0.96));
-  color: var(--color-gold);
-  font-size: 0.85rem;
-  font-weight: 950;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-}
-
-.discipline-swim .card-media,
-.discipline-swimming .card-media {
-  background:
-    radial-gradient(circle at top left, rgba(56, 189, 248, 0.42), transparent 12rem),
-    linear-gradient(135deg, #F8D45D, #F8D45D);
-}
-
-.discipline-bike .card-media,
-.discipline-cycling .card-media {
-  background:
-    radial-gradient(circle at top left, rgba(34, 197, 94, 0.42), transparent 12rem),
-    linear-gradient(135deg, #14532D, #F8D45D);
-}
-
-.discipline-run .card-media,
-.discipline-running .card-media {
-  background:
-    radial-gradient(circle at top left, rgba(249, 115, 22, 0.42), transparent 12rem),
-    linear-gradient(135deg, #7C2D12, #F8D45D);
-}
-
-.card-meta {
-  display: grid;
-  gap: 0.4rem;
-  margin: 1rem 0;
-  color: var(--color-muted);
-  font-size: 0.95rem;
-}
-
-.card-meta strong {
-  color: var(--color-text);
-}
-
-.event-date {
-  position: absolute;
-  top: 1.25rem;
-  right: 1.25rem;
-  border: 1px solid rgba(242, 201, 76, 0.35);
-  border-radius: 999px;
-  background: rgba(242, 201, 76, 0.1);
-  color: var(--color-gold);
-  padding: 0.35rem 0.7rem;
-  font-size: 0.85rem;
-  font-weight: 850;
-}
-
-.event-location {
-  color: var(--color-muted);
-  font-weight: 750;
-}
-
-.profile-card {
-  text-align: center;
-}
-
-.profile-placeholder {
-  border-bottom: 1px solid var(--color-border);
-}
-
-.profile-placeholder span {
-  display: grid;
-  width: 72px;
-  height: 72px;
-  place-items: center;
-  border-radius: 50%;
-  background: var(--color-gold);
-  color: var(--color-navy);
-  font-weight: 950;
-}
-
-.sponsor-logo {
-  display: grid;
-  width: 64px;
-  height: 64px;
-  place-items: center;
-  border-radius: 20px;
-  background: var(--color-gold);
-  color: var(--color-navy);
-  font-size: 1.5rem;
-  font-weight: 950;
-  margin-bottom: 1rem;
-}
-
-.timeline-list {
-  position: relative;
-}
+/* =====================================================
+   9. TIMELINE
+   ===================================================== */
 
 .timeline-item {
-  display: grid;
-  grid-template-columns: auto 1fr;
+  flex-direction: row;
+  align-items: flex-start;
   gap: 1rem;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-xl);
-  background: var(--color-surface-soft);
-  padding: 1.25rem;
 }
 
 .timeline-number {
   display: grid;
-  width: 42px;
-  height: 42px;
+  width: 40px;
+  height: 40px;
+  flex: 0 0 auto;
   place-items: center;
   border-radius: 50%;
   background: var(--color-gold);
-  color: var(--color-navy);
-  font-weight: 950;
-}
-
-.prose p:first-child {
-  margin-top: 0;
-}
-
-.prose p:last-child {
-  margin-bottom: 0;
-}
-
-@media (max-width: 900px) {
-  .text-layout {
-    grid-template-columns: 1fr;
-  }
-
-  .hero-scroll {
-    display: none;
-  }
-}
-
-/* Revised structure: Sport Sheffield-style black/gold/photo system */
-
-:root {
-  --color-navy: #050505;
-  --color-deep-purple: #101010;
-  --color-purple: #222222;
-  --color-gold: #FFD100;
-  --color-background: #050505;
-  --color-surface: #101010;
-  --color-surface-soft: rgba(255, 255, 255, 0.065);
-  --color-text: #FFFFFF;
-  --color-muted: #C7C7C7;
-  --color-border: rgba(255, 255, 255, 0.14);
-}
-
-[data-theme="light"] {
-  --color-background: #F7F7F3;
-  --color-surface: #FFFFFF;
-  --color-surface-soft: rgba(5, 5, 5, 0.045);
-  --color-text: #050505;
-  --color-muted: #5F5F5F;
-  --color-border: rgba(5, 5, 5, 0.14);
-}
-
-.hero-photo,
-.card-photo {
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-
-.hero-photo {
-  position: absolute;
-  inset: 0;
-  transform: scale(1.02);
-}
-
-.has-photo .hero-overlay {
-  background:
-    linear-gradient(90deg, rgba(5, 5, 5, 0.95), rgba(5, 5, 5, 0.68), rgba(5, 5, 5, 0.28)),
-    linear-gradient(0deg, rgba(5, 5, 5, 0.62), transparent 55%);
-}
-
-.card-photo {
-  min-height: 220px;
-  background-color: #161616;
-}
-
-.embed-card,
-.social-card {
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-xl);
-  background: var(--color-surface-soft);
-  box-shadow: var(--shadow-soft);
-  padding: clamp(1.5rem, 4vw, 2.5rem);
-}
-
-.social-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1rem;
-}
-
-@media (max-width: 700px) {
-  .social-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* Official palette, embeds and Apple-inspired overlap */
-
-:root {
-  --color-navy: #000000;
-  --color-deep-purple: #111111;
-  --color-purple: #202020;
-  --color-gold: #F7D35D;
-  --color-background: #000000;
-  --color-surface: #101010;
-  --color-surface-soft: rgba(255, 255, 255, 0.075);
-  --color-text: #FFFFFF;
-  --color-muted: #D6D6D6;
-  --color-border: rgba(255, 255, 255, 0.16);
-}
-
-[data-theme="light"] {
-  --color-background: #FFFFFF;
-  --color-surface: #F7F7F7;
-  --color-surface-soft: rgba(0, 0, 0, 0.045);
-  --color-text: #000000;
-  --color-muted: #3F3F3F;
-  --color-border: rgba(0, 0, 0, 0.16);
-}
-
-body {
-  background:
-    radial-gradient(circle at 20% 0%, rgba(247, 211, 93, 0.16), transparent 28rem),
-    var(--color-background);
-}
-
-[data-theme="light"] body {
-  background:
-    radial-gradient(circle at 20% 0%, rgba(247, 211, 93, 0.35), transparent 28rem),
-    var(--color-background);
-}
-
-.section-overlap {
-  margin-top: -2rem;
-  border-top-left-radius: clamp(2rem, 5vw, 4rem);
-  border-top-right-radius: clamp(2rem, 5vw, 4rem);
-  overflow: hidden;
-}
-
-.section-overlap + .section-overlap {
-  margin-top: -1rem;
-}
-
-.hero {
-  isolation: isolate;
-}
-
-.hero-photo {
-  filter: saturate(1.05) contrast(1.05);
-}
-
-.has-photo .hero-overlay {
-  background:
-    linear-gradient(90deg, rgba(0, 0, 0, 0.96), rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.32)),
-    linear-gradient(0deg, rgba(0, 0, 0, 0.72), transparent 60%);
-}
-
-[data-theme="light"] .has-photo .hero-overlay {
-  background:
-    linear-gradient(90deg, rgba(255, 255, 255, 0.94), rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.18)),
-    linear-gradient(0deg, rgba(255, 255, 255, 0.68), transparent 60%);
-}
-
-[data-theme="light"] .hero h1,
-[data-theme="light"] .hero-body {
   color: #000000;
+  font-weight: 900;
 }
 
-[data-theme="light"] .hero-subtitle,
-[data-theme="light"] .eyebrow {
-  color: #8A6A00;
-}
-
-.button.primary,
-.nav-cta {
-  background: #F7D35D;
-  color: #000000;
-}
-
-.button.secondary {
-  border-color: var(--color-border);
-  background: var(--color-surface-soft);
-}
-
-.embed-shell {
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-xl);
-  background:
-    radial-gradient(circle at top right, rgba(247, 211, 93, 0.16), transparent 18rem),
-    var(--color-surface-soft);
-  box-shadow: var(--shadow-soft);
-  padding: clamp(1rem, 3vw, 2rem);
-}
-
-.embed-frame {
-  overflow: hidden;
-  border-radius: calc(var(--radius-xl) - 0.75rem);
-}
-
-.embed-frame iframe,
-.embed-frame blockquote {
-  width: 100% !important;
-  max-width: 100% !important;
-}
-
-.embed-placeholder {
-  display: grid;
-  gap: 1rem;
-  min-height: 260px;
-  align-content: center;
-  justify-items: start;
-  padding: clamp(1.5rem, 4vw, 3rem);
-}
-
-.embed-instagram {
-  background:
-    radial-gradient(circle at top left, rgba(247, 211, 93, 0.16), transparent 16rem),
-    linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(32, 32, 32, 0.9));
-}
-
-.embed-strava {
-  background:
-    radial-gradient(circle at top left, rgba(252, 76, 2, 0.22), transparent 16rem),
-    linear-gradient(135deg, rgba(0, 0, 0, 0.85), rgba(32, 32, 32, 0.9));
-}
-
-[data-theme="light"] .embed-instagram,
-[data-theme="light"] .embed-strava {
-  background:
-    radial-gradient(circle at top left, rgba(247, 211, 93, 0.3), transparent 16rem),
-    #FFFFFF;
-}
-
-.social-card {
-  min-height: 260px;
-  display: grid;
-  align-content: space-between;
-}
-
-.social-instagram {
-  background:
-    radial-gradient(circle at top left, rgba(247, 211, 93, 0.16), transparent 14rem),
-    var(--color-surface-soft);
-}
-
-.social-strava {
-  background:
-    radial-gradient(circle at top left, rgba(252, 76, 2, 0.22), transparent 14rem),
-    var(--color-surface-soft);
-}
-
-@supports (animation-timeline: view()) {
-  .reveal-card {
-    animation: subtle-rise linear both;
-    animation-timeline: view();
-    animation-range: entry 0% cover 22%;
-  }
-
-  @keyframes subtle-rise {
-    from {
-      opacity: 0.72;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .section-overlap {
-    margin-top: 0;
-    border-radius: 0;
-  }
-
-  .reveal-card {
-    animation: none !important;
-  }
-}
-
-/* Strong Apple-style section sliding and social embeds */
-
-@media (min-width: 960px) and (prefers-reduced-motion: no-preference) {
-  .page-home main,
-  .page-socials main,
-  .page-training main,
-  .page-events main {
-    isolation: isolate;
-  }
-
-  .page-home main > .section,
-  .page-socials main > .section,
-  .page-training main > .section,
-  .page-events main > .section {
-    position: sticky;
-    top: var(--nav-height);
-    min-height: calc(100vh - var(--nav-height));
-    display: grid;
-    align-items: center;
-    border-top-left-radius: clamp(2rem, 5vw, 5rem);
-    border-top-right-radius: clamp(2rem, 5vw, 5rem);
-    box-shadow: 0 -28px 90px rgba(0, 0, 0, 0.35);
-    transform: translateZ(0);
-  }
-
-  .page-home main > .section-hero,
-  .page-socials main > .section-hero,
-  .page-training main > .section-hero,
-  .page-events main > .section-hero {
-    position: relative;
-    top: auto;
-    border-radius: 0;
-    box-shadow: none;
-  }
-
-  .page-home main > .section:nth-of-type(2),
-  .page-socials main > .section:nth-of-type(2),
-  .page-training main > .section:nth-of-type(2),
-  .page-events main > .section:nth-of-type(2) {
-    z-index: 2;
-  }
-
-  .page-home main > .section:nth-of-type(3),
-  .page-socials main > .section:nth-of-type(3),
-  .page-training main > .section:nth-of-type(3),
-  .page-events main > .section:nth-of-type(3) {
-    z-index: 3;
-  }
-
-  .page-home main > .section:nth-of-type(4),
-  .page-socials main > .section:nth-of-type(4),
-  .page-training main > .section:nth-of-type(4),
-  .page-events main > .section:nth-of-type(4) {
-    z-index: 4;
-  }
-
-  .page-home main > .section:nth-of-type(5),
-  .page-socials main > .section:nth-of-type(5),
-  .page-training main > .section:nth-of-type(5),
-  .page-events main > .section:nth-of-type(5) {
-    z-index: 5;
-  }
-
-  .page-home main > .section:nth-of-type(6),
-  .page-socials main > .section:nth-of-type(6),
-  .page-training main > .section:nth-of-type(6),
-  .page-events main > .section:nth-of-type(6) {
-    z-index: 6;
-  }
-
-  .page-home main > .section:nth-of-type(7),
-  .page-socials main > .section:nth-of-type(7),
-  .page-training main > .section:nth-of-type(7),
-  .page-events main > .section:nth-of-type(7) {
-    z-index: 7;
-  }
-}
-
-@media (max-width: 959px), (prefers-reduced-motion: reduce) {
-  .section {
-    position: relative !important;
-    top: auto !important;
-    min-height: auto !important;
-    border-radius: 0 !important;
-  }
-}
-
-.embed-grid {
-  display: grid;
-  gap: 1.25rem;
-}
-
-.embed-grid-two {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.embed-grid-one {
-  grid-template-columns: minmax(0, 1fr);
-}
-
-.embed-card-heading {
-  margin-bottom: 1rem;
-}
-
-.embed-card-heading h3 {
-  margin: 0;
-  font-size: clamp(1.4rem, 3vw, 2rem);
-}
-
-.embed-card-heading p:not(.card-label) {
-  color: var(--color-muted);
-}
-
-.embed-frame {
-  display: grid;
-  place-items: center;
-  width: 100%;
-  overflow: hidden;
-}
-
-.embed-frame iframe {
-  display: block;
-  max-width: 100%;
-  border-radius: 1rem;
-  background: #FFFFFF;
-}
-
-.embed-facebook iframe {
-  width: 100%;
-  max-width: 500px;
-}
-
-.embed-strava iframe {
-  width: 300px;
-  max-width: 100%;
-}
-
-.social-facebook {
-  background:
-    radial-gradient(circle at top left, rgba(24, 119, 242, 0.2), transparent 14rem),
-    var(--color-surface-soft);
-}
-
-.embed-facebook {
-  background:
-    radial-gradient(circle at top left, rgba(24, 119, 242, 0.18), transparent 18rem),
-    var(--color-surface-soft);
-}
-
-@media (max-width: 800px) {
-  .embed-grid-two {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* Panel stack fix */
-
-.section {
-  background: var(--color-background);
-}
-
-.site-footer {
-  position: relative;
-  z-index: 999;
-  background: var(--color-background);
-}
-
-@media (min-width: 1000px) and (prefers-reduced-motion: no-preference) {
-
-  main > .section {
-    position: sticky;
-    top: var(--nav-height);
-    min-height: calc(100vh - var(--nav-height));
-
-    background: var(--color-background);
-
-    border-top-left-radius: 3rem;
-    border-top-right-radius: 3rem;
-
-    overflow: hidden;
-
-    box-shadow:
-      0 -20px 80px rgba(0,0,0,.25);
-
-    isolation: isolate;
-  }
-
-  main > .section-hero {
-    position: relative;
-    top: auto;
-    min-height: 100vh;
-    border-radius: 0;
-    box-shadow: none;
-  }
-}
-
-.embed-grid,
-.embed-shell {
-  width: 100%;
-}
-
-.embed-grid {
-  display: grid;
-  gap: 1.5rem;
-}
-
-.embed-shell {
-  background: var(--color-surface);
-  border-radius: 2rem;
-  padding: 1rem;
-}
-
-.embed-shell iframe {
-  max-width: 100%;
-  display: block;
-  margin-inline: auto;
-}
-
-.embed-shell iframe[src*="facebook"] {
-  width: 100%;
-}
-
-.embed-shell iframe[src*="strava"] {
-  width: 100%;
-}
-
-.social-facebook {
-  background:
-    linear-gradient(
-      135deg,
-      rgba(24,119,242,.15),
-      transparent
-    );
-}
-
-.social-instagram {
-  background:
-    linear-gradient(
-      135deg,
-      rgba(247,211,93,.15),
-      transparent
-    );
-}
-
-.social-strava {
-  background:
-    linear-gradient(
-      135deg,
-      rgba(252,76,2,.15),
-      transparent
-    );
-}
-
-/* FINAL: solid Apple panels and working embeds */
-
-/* Kill earlier sticky behaviour completely. It caused text bleed/overlap. */
-main > .section,
-.page-home main > .section,
-.page-socials main > .section,
-.page-training main > .section,
-.page-events main > .section {
-  position: relative !important;
-  top: auto !important;
-  min-height: auto !important;
-  display: block !important;
-  overflow: visible !important;
-}
-
-/* Every section is now a solid panel. No transparency behind text. */
-.section {
-  background: var(--color-background) !important;
-  color: var(--color-text);
-  position: relative;
-  z-index: 1;
-}
-
-/* Apple-style stacked panels: overlap visually, but remain normal document flow. */
-main > .section:not(.section-hero) {
-  margin-top: clamp(-4rem, -5vw, -2rem);
-  padding-top: clamp(6rem, 10vw, 9rem);
-  border-top-left-radius: clamp(2rem, 6vw, 5rem);
-  border-top-right-radius: clamp(2rem, 6vw, 5rem);
-  box-shadow: 0 -28px 90px rgba(0, 0, 0, 0.38);
-  isolation: isolate;
-}
-
-/* Alternating solid panel colours using official colours. */
-main > .section:nth-of-type(odd):not(.section-hero) {
-  background:
-    radial-gradient(circle at top right, rgba(247, 211, 93, 0.12), transparent 22rem),
-    #000000 !important;
-}
-
-main > .section:nth-of-type(even):not(.section-hero) {
-  background:
-    radial-gradient(circle at top left, rgba(247, 211, 93, 0.1), transparent 22rem),
-    #101010 !important;
-}
-
-[data-theme="light"] main > .section:nth-of-type(odd):not(.section-hero) {
-  background:
-    radial-gradient(circle at top right, rgba(247, 211, 93, 0.34), transparent 22rem),
-    #FFFFFF !important;
-}
-
-[data-theme="light"] main > .section:nth-of-type(even):not(.section-hero) {
-  background:
-    radial-gradient(circle at top left, rgba(247, 211, 93, 0.24), transparent 22rem),
-    #F7F7F3 !important;
-}
-
-/* Hero remains full and clean. */
-.section-hero {
-  margin-top: 0 !important;
-  border-radius: 0 !important;
-  overflow: hidden !important;
-}
-
-/* Footer should sit above panels cleanly. */
-.site-footer {
-  position: relative;
-  z-index: 20;
-  background: var(--color-background) !important;
-}
-
-/* Embed layout */
-.embed-grid {
-  display: grid;
-  gap: 1.5rem;
-  width: 100%;
-}
-
-.embed-grid-two {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.embed-grid-one {
-  grid-template-columns: minmax(0, 1fr);
-}
-
-.embed-shell {
-  width: 100%;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-xl);
-  background: var(--color-surface) !important;
-  color: var(--color-text);
-  box-shadow: var(--shadow-soft);
-  padding: clamp(1rem, 3vw, 2rem);
-  overflow: hidden;
-}
-
-.embed-card-heading {
-  margin-bottom: 1rem;
-}
-
-.embed-card-heading h3 {
-  margin: 0;
-  font-size: clamp(1.4rem, 3vw, 2rem);
-}
-
-.embed-card-heading p:not(.card-label) {
-  color: var(--color-muted);
-}
-
-.embed-frame {
-  width: 100%;
-  display: grid;
-  place-items: center;
-  overflow: hidden;
-  border-radius: 1rem;
-}
-
-.embed-frame iframe {
-  display: block;
-  max-width: 100%;
-  border-radius: 1rem;
-  background: #FFFFFF;
-}
-
-/* Facebook plugin wants a fixed max width but can sit centred. */
-.embed-facebook iframe {
-  width: 500px;
-  max-width: 100%;
-  min-height: 600px;
-}
-
-/* Strava widgets are 300px fixed from source, centred in cards. */
-.embed-strava iframe {
-  width: 300px;
-  max-width: 100%;
-}
-
-/* Stronger provider visual distinction */
-.embed-facebook {
-  background:
-    radial-gradient(circle at top left, rgba(24, 119, 242, 0.22), transparent 18rem),
-    var(--color-surface) !important;
-}
-
-.embed-strava {
-  background:
-    radial-gradient(circle at top left, rgba(252, 76, 2, 0.22), transparent 18rem),
-    var(--color-surface) !important;
-}
-
-.embed-instagram {
-  background:
-    radial-gradient(circle at top left, rgba(247, 211, 93, 0.22), transparent 18rem),
-    var(--color-surface) !important;
-}
-
-/* The screenshot showed the Facebook card without iframe. This makes missing embeds obvious. */
-.embed-placeholder {
-  min-height: 220px;
-  display: grid;
-  align-content: center;
-  gap: 1rem;
-}
-
-/* Make the social links grid accommodate 3 cards. */
-.social-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1rem;
-}
-
-/* Mobile: reduce panel overlap to avoid cramped layout. */
-@media (max-width: 900px) {
-  main > .section:not(.section-hero) {
-    margin-top: -1.5rem;
-    padding-top: 4rem;
-    border-top-left-radius: 2rem;
-    border-top-right-radius: 2rem;
-  }
-
-  .embed-grid-two,
-  .social-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* Accessibility: no aggressive panel motion for reduced motion users. */
-@media (prefers-reduced-motion: reduce) {
-  main > .section:not(.section-hero) {
-    margin-top: 0;
-    border-radius: 0;
-    box-shadow: none;
-  }
-}
-
-/* Base solid panels */
-.section {
-  background: #000000 !important;
-  color: #FFFFFF;
-  isolation: isolate;
-}
-
-[data-theme="light"] .section {
-  background: #FFFFFF !important;
-  color: #000000;
-}
-
-/* Restore the stronger Apple-style sticky slide, but with opaque panels. */
-@media (min-width: 1000px) and (prefers-reduced-motion: no-preference) {
-  body main {
-    isolation: isolate;
-  }
-
-  body main > .section {
-    position: sticky !important;
-    top: var(--nav-height) !important;
-    min-height: calc(100vh - var(--nav-height)) !important;
-    display: grid !important;
-    align-items: center !important;
-    overflow: hidden !important;
-
-    margin-top: 0 !important;
-    padding-top: clamp(5rem, 8vw, 8rem) !important;
-    padding-bottom: clamp(5rem, 8vw, 8rem) !important;
-
-    border-top-left-radius: clamp(2rem, 6vw, 5rem);
-    border-top-right-radius: clamp(2rem, 6vw, 5rem);
-    box-shadow: 0 -34px 95px rgba(0, 0, 0, 0.5);
-  }
-
-  body main > .section-hero {
-    position: relative !important;
-    top: auto !important;
-    min-height: calc(100vh - var(--nav-height)) !important;
-    border-radius: 0 !important;
-    box-shadow: none !important;
-    z-index: 1;
-  }
-
-  body main > .section:nth-of-type(2) { z-index: 2; }
-  body main > .section:nth-of-type(3) { z-index: 3; }
-  body main > .section:nth-of-type(4) { z-index: 4; }
-  body main > .section:nth-of-type(5) { z-index: 5; }
-  body main > .section:nth-of-type(6) { z-index: 6; }
-  body main > .section:nth-of-type(7) { z-index: 7; }
-  body main > .section:nth-of-type(8) { z-index: 8; }
-  body main > .section:nth-of-type(9) { z-index: 9; }
-}
-
-/* Opaque alternating panels */
-body main > .section:nth-of-type(odd):not(.section-hero) {
-  background:
-    radial-gradient(circle at top right, rgba(247, 211, 93, 0.12), transparent 22rem),
-    #000000 !important;
-}
-
-body main > .section:nth-of-type(even):not(.section-hero) {
-  background:
-    radial-gradient(circle at top left, rgba(247, 211, 93, 0.10), transparent 22rem),
-    #101010 !important;
-}
-
-[data-theme="light"] body main > .section:nth-of-type(odd):not(.section-hero) {
-  background:
-    radial-gradient(circle at top right, rgba(247, 211, 93, 0.34), transparent 22rem),
-    #FFFFFF !important;
-}
-
-[data-theme="light"] body main > .section:nth-of-type(even):not(.section-hero) {
-  background:
-    radial-gradient(circle at top left, rgba(247, 211, 93, 0.24), transparent 22rem),
-    #F7F7F3 !important;
-}
-
-/* Explicit text contrast fixes */
-[data-theme="light"] .hero h1,
-[data-theme="light"] .hero-subtitle,
-[data-theme="light"] .hero-body,
-[data-theme="light"] .section h1,
-[data-theme="light"] .section h2,
-[data-theme="light"] .section h3,
-[data-theme="light"] .section p {
-  color: #000000;
-}
-
-[data-theme="light"] .eyebrow,
-[data-theme="light"] .card-label,
-[data-theme="light"] .text-link {
-  color: #7A5E00;
-}
-
-/* Hero image overlay contrast */
-[data-theme="light"] .has-photo .hero-overlay {
-  background:
-    linear-gradient(90deg, rgba(255,255,255,0.96), rgba(255,255,255,0.78), rgba(255,255,255,0.26)),
-    linear-gradient(0deg, rgba(255,255,255,0.72), transparent 60%) !important;
-}
-
-.has-photo .hero-overlay {
-  background:
-    linear-gradient(90deg, rgba(0,0,0,0.96), rgba(0,0,0,0.72), rgba(0,0,0,0.30)),
-    linear-gradient(0deg, rgba(0,0,0,0.70), transparent 60%) !important;
-}
-
-/* Widgets: one section, three cards */
-.embed-grid-three {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
-.embed-grid-two {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.embed-grid-one {
-  grid-template-columns: minmax(0, 1fr);
-}
-
-.embed-grid {
-  display: grid;
-  gap: 1.25rem;
-  width: 100%;
-}
-
-.embed-shell {
-  background: var(--color-surface) !important;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-xl);
-  padding: clamp(1rem, 2vw, 1.5rem);
-  overflow: hidden;
-  min-width: 0;
-}
-
-[data-theme="light"] .embed-shell {
-  background: #FFFFFF !important;
-}
-
-.embed-frame {
-  display: grid;
-  place-items: center;
-  width: 100%;
-  overflow: hidden;
-}
-
-.embed-frame iframe {
-  display: block;
-  max-width: 100%;
-  border-radius: 1rem;
-  background: #FFFFFF;
-}
-
-.embed-strava iframe {
-  width: 300px;
-  max-width: 100%;
-}
-
-.embed-facebook iframe {
-  width: 500px;
-  max-width: 100%;
-  min-height: 600px;
-}
-
-/* If Facebook iframe is blocked by browser/privacy, at least card remains readable. */
-.embed-facebook {
-  background:
-    radial-gradient(circle at top left, rgba(24, 119, 242, 0.20), transparent 18rem),
-    var(--color-surface) !important;
-}
-
-.embed-strava {
-  background:
-    radial-gradient(circle at top left, rgba(252, 76, 2, 0.20), transparent 18rem),
-    var(--color-surface) !important;
-}
-
-/* Placeholder SVG images */
-.card-photo {
-  background-color: #111111;
-}
-
-/* Mobile and reduced motion: no sticky stack */
-@media (max-width: 999px), (prefers-reduced-motion: reduce) {
-  body main > .section {
-    position: relative !important;
-    top: auto !important;
-    min-height: auto !important;
-    display: block !important;
-    border-radius: 0 !important;
-    box-shadow: none !important;
-  }
-
-  .embed-grid-three,
-  .embed-grid-two {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* Footer above stack */
-.site-footer {
-  position: relative;
-  z-index: 100;
-  background: var(--color-background) !important;
-}
-
-/* ----------------------------------------------------- */
-/* Mobile */
-/* ----------------------------------------------------- */
-
-/* Make the right-hand column visually match the Facebook card height */
-
-/* Mobile/tablet stack order */
-
-/* Small screens */
-
-/* Make the right column visually balance the Facebook card */
-
-/* Mobile/tablet stack order keeps summary above activity */
-
-/* Small screens */
-
-/*
-  Unfortunately Facebook and Strava iframes control
-  their own internal white backgrounds.
-
-  Browsers do not allow us to reliably restyle
-  iframe contents from another site.
-*/
-
-.brand-logo-wrap {
-  width: 48px !important;
-  height: 48px !important;
-  min-width: 48px !important;
-  border-radius: 50% !important;
-  overflow: hidden !important;
-  background: #F7D35D !important;
-  padding: 0 !important;
-  box-shadow: 0 0 0 2px rgba(247, 211, 93, 0.35);
-}
-
-.brand-logo-wrap img {
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: cover !important;
-  display: block !important;
-}
+/* =====================================================
+   10. SOCIAL LOGO STRIP + RELAY BAR
+   ===================================================== */
 
-/* Logo-only follow section */
 .social-logo-strip {
   display: flex;
   flex-wrap: wrap;
@@ -1728,449 +738,35 @@ body main > .section:nth-of-type(even):not(.section-hero) {
 
 .social-logo-link {
   display: grid;
-  width: clamp(74px, 10vw, 112px);
-  height: clamp(74px, 10vw, 112px);
+  width: clamp(72px, 9vw, 104px);
+  height: clamp(72px, 9vw, 104px);
   place-items: center;
   border: 1px solid var(--color-border);
   border-radius: 50%;
-  background:
-    radial-gradient(circle at top left, rgba(247, 211, 93, 0.18), transparent 60%),
-    var(--color-surface);
+  background: var(--color-surface);
   box-shadow: var(--shadow-soft);
   text-decoration: none;
-  transition:
-    transform 180ms ease,
-    border-color 180ms ease,
-    box-shadow 180ms ease;
+  transition: transform 180ms ease, border-color 180ms ease;
 }
 
-.social-logo-link:hover {
-  transform: translateY(-4px);
-  border-color: rgba(247, 211, 93, 0.55);
-}
+.social-logo-link:hover { transform: translateY(-4px); border-color: rgba(247, 211, 93, 0.5); }
 
-.social-logo-link img {
-  width: 58%;
-  height: 58%;
-  object-fit: cover;
-  border-radius: 50%;
-  display: block;
-}
+.social-logo-link img { width: 58%; height: 58%; object-fit: cover; border-radius: 50%; }
 
-.social-logo-link span {
-  color: var(--color-gold);
-  font-size: 1.4rem;
-  font-weight: 950;
-}
-
-/* Facebook plugin max width is 500px;
-
-/* Mobile logic:
-   Facebook first, then Strava summary, then Strava latest activity.
-*/
-
-@media (max-width: 560px) {
-  .brand-logo-wrap {
-    width: 42px !important;
-    height: 42px !important;
-    min-width: 42px !important;
-  }
-
-  .social-logo-link {
-    width: 74px;
-    height: 74px;
-  }
-
-}
-
-/* =====================================================
-   FINAL HERO MOBILE + PARTIAL APPLE SLIDING REFINEMENT
-   ===================================================== */
-
-/*
-  This patch intentionally avoids making every section sticky.
-
-  Apple-style sliding is applied only to visually suitable sections:
-  - hero
-  - intro/showcase/card/social-logo/gallery style sections
-
-  It is NOT applied to:
-  - embed/widget sections
-  - FAQ sections
-  - committee grids
-  - long text-heavy utility sections
-
-  This prevents text overlap while keeping the premium sliding-panel feel.
-*/
-
-/* -----------------------------------------------------
-   1. Solid section foundations
-   ----------------------------------------------------- */
-
-.section {
-  position: relative;
-  isolation: isolate;
-  background: #000000 !important;
-  color: #FFFFFF;
-}
-
-[data-theme="light"] .section {
-  background: #FFFFFF !important;
-  color: #000000;
-}
-
-.section > .container,
-.hero-content {
-  position: relative;
-  z-index: 2;
-}
-
-/* -----------------------------------------------------
-   2. Hero photo handling
-   ----------------------------------------------------- */
-
-.hero {
-  position: relative;
-  overflow: hidden;
-  background: #000000 !important;
-}
-
-.hero-photo {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
-
-  transform: scale(1.01);
-}
-
-.hero-bg {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-}
-
-/* Stronger dark-mode gradient for readability */
-.has-photo .hero-overlay,
-.hero-overlay {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-
-  background:
-    linear-gradient(
-      90deg,
-      rgba(0, 0, 0, 0.96) 0%,
-      rgba(0, 0, 0, 0.76) 42%,
-      rgba(0, 0, 0, 0.42) 100%
-    ),
-    linear-gradient(
-      0deg,
-      rgba(0, 0, 0, 0.82) 0%,
-      rgba(0, 0, 0, 0.28) 52%,
-      rgba(0, 0, 0, 0.45) 100%
-    ) !important;
-}
-
-/* Light mode: use white wash, but keep enough contrast */
-[data-theme="light"] .has-photo .hero-overlay,
-[data-theme="light"] .hero-overlay {
-  background:
-    linear-gradient(
-      90deg,
-      rgba(255, 255, 255, 0.96) 0%,
-      rgba(255, 255, 255, 0.82) 42%,
-      rgba(255, 255, 255, 0.42) 100%
-    ),
-    linear-gradient(
-      0deg,
-      rgba(255, 255, 255, 0.84) 0%,
-      rgba(255, 255, 255, 0.28) 54%,
-      rgba(255, 255, 255, 0.56) 100%
-    ) !important;
-}
-
-[data-theme="light"] .hero h1,
-[data-theme="light"] .hero-subtitle,
-[data-theme="light"] .hero-body {
-  color: #000000 !important;
-}
-
-[data-theme="light"] .hero .eyebrow {
-  color: #7a5e00 !important;
-}
-
-/* -----------------------------------------------------
-   3. Mobile hero image behaviour
-   ----------------------------------------------------- */
-
-@media (max-width: 760px) {
-  .hero {
-    min-height: auto !important;
-    display: grid;
-    align-items: end;
-  }
-
-  .hero-content {
-    padding-top: clamp(7rem, 18vh, 10rem) !important;
-    padding-bottom: clamp(4rem, 12vh, 7rem) !important;
-  }
-
-  .hero-photo {
-    background-size: cover !important;
-    background-position: center top !important;
-    transform: none;
-  }
-
-  /*
-    On mobile, images often need stronger shading because the text
-    stacks over more of the photo.
-  */
-  .has-photo .hero-overlay,
-  .hero-overlay {
-    background:
-      linear-gradient(
-        180deg,
-        rgba(0, 0, 0, 0.78) 0%,
-        rgba(0, 0, 0, 0.52) 36%,
-        rgba(0, 0, 0, 0.92) 100%
-      ) !important;
-  }
-
-  [data-theme="light"] .has-photo .hero-overlay,
-  [data-theme="light"] .hero-overlay {
-    background:
-      linear-gradient(
-        180deg,
-        rgba(255, 255, 255, 0.86) 0%,
-        rgba(255, 255, 255, 0.56) 38%,
-        rgba(255, 255, 255, 0.94) 100%
-      ) !important;
-  }
-
-  .hero h1 {
-    font-size: clamp(2.75rem, 16vw, 5rem) !important;
-  }
-
-  .hero-subtitle {
-    font-size: clamp(1.7rem, 9vw, 3rem) !important;
-  }
-}
-
-/* -----------------------------------------------------
-   4. Partial Apple-style sliding panels
-   ----------------------------------------------------- */
-
-/*
-  First disable any previous global sticky behaviour.
-  This prevents accidental overlap from older patches.
-*/
-
-main > .section {
-  position: relative !important;
-  top: auto !important;
-  min-height: auto !important;
-  overflow: visible !important;
-}
-
-/*
-  Apple-style effect: only selected visual sections.
-  These sections are opaque, full-panel, and safe to slide.
-*/
-
-@media (min-width: 1000px) and (prefers-reduced-motion: no-preference) {
-  body main > .section-hero,
-  body main > #about-club,
-  body main > #highlights,
-  body main > #social-integrations,
-  body main > #social-links,
-  body main > #socials-gallery {
-    position: sticky !important;
-    top: var(--nav-height) !important;
-
-    min-height: calc(100vh - var(--nav-height)) !important;
-
-    display: grid !important;
-    align-items: center !important;
-
-    overflow: hidden !important;
-
-    padding-top: clamp(5rem, 8vw, 8rem) !important;
-    padding-bottom: clamp(5rem, 8vw, 8rem) !important;
-
-    background: #000000 !important;
-    color: #FFFFFF;
-
-    border-top-left-radius: clamp(2rem, 6vw, 5rem);
-    border-top-right-radius: clamp(2rem, 6vw, 5rem);
-
-    box-shadow: 0 -34px 95px rgba(0, 0, 0, 0.48);
-  }
-
-  [data-theme="light"] body main > .section-hero,
-  [data-theme="light"] body main > #about-club,
-  [data-theme="light"] body main > #highlights,
-  [data-theme="light"] body main > #social-integrations,
-  [data-theme="light"] body main > #social-links,
-  [data-theme="light"] body main > #socials-gallery {
-    background: #FFFFFF !important;
-    color: #000000;
-    box-shadow: 0 -34px 95px rgba(0, 0, 0, 0.16);
-  }
-
-  body main > .section-hero {
-    top: 0 !important;
-    border-radius: 0 !important;
-    box-shadow: none !important;
-    z-index: 1;
-  }
-
-  body main > #about-club {
-    z-index: 2;
-  }
-
-  body main > #highlights {
-    z-index: 3;
-  }
-
-  body main > #social-integrations,
-  body main > #social-links {
-    z-index: 4;
-  }
-
-  body main > #socials-gallery {
-    z-index: 5;
-  }
-
-  /*
-    The widget section stays normal-flow because iframes are tall and
-    external widgets do not behave well inside sticky viewport panels.
-  */
-}
-
-/* -----------------------------------------------------
-   5. Non-sticky sections still get the premium overlapping card look
-   ----------------------------------------------------- */
-
-main > .section:not(.section-hero) {
-  margin-top: clamp(-3rem, -4vw, -1.5rem);
-  padding-top: clamp(5rem, 8vw, 7rem);
-  border-top-left-radius: clamp(2rem, 6vw, 4rem);
-  border-top-right-radius: clamp(2rem, 6vw, 4rem);
-  box-shadow: 0 -22px 72px rgba(0, 0, 0, 0.28);
-}
-
-[data-theme="light"] main > .section:not(.section-hero) {
-  box-shadow: 0 -22px 72px rgba(0, 0, 0, 0.12);
-}
-
-/* Opaque alternating panel backgrounds */
-main > .section:nth-of-type(odd):not(.section-hero) {
-  background:
-    radial-gradient(circle at top right, rgba(247, 211, 93, 0.12), transparent 24rem),
-    #000000 !important;
-}
-
-main > .section:nth-of-type(even):not(.section-hero) {
-  background:
-    radial-gradient(circle at top left, rgba(247, 211, 93, 0.10), transparent 24rem),
-    #101010 !important;
-}
-
-[data-theme="light"] main > .section:nth-of-type(odd):not(.section-hero) {
-  background:
-    radial-gradient(circle at top right, rgba(247, 211, 93, 0.34), transparent 24rem),
-    #FFFFFF !important;
-}
-
-[data-theme="light"] main > .section:nth-of-type(even):not(.section-hero) {
-  background:
-    radial-gradient(circle at top left, rgba(247, 211, 93, 0.24), transparent 24rem),
-    #f7f7f3 !important;
-}
-
-/* -----------------------------------------------------
-   6. Mobile: no sticky Apple effect, but keep overlapping cards
-   ----------------------------------------------------- */
-
-@media (max-width: 999px), (prefers-reduced-motion: reduce) {
-  body main > .section {
-    position: relative !important;
-    top: auto !important;
-    min-height: auto !important;
-    display: block !important;
-    overflow: visible !important;
-  }
-
-  main > .section:not(.section-hero) {
-    margin-top: -1.5rem;
-    padding-top: 4rem;
-    border-top-left-radius: 2rem;
-    border-top-right-radius: 2rem;
-    box-shadow: 0 -14px 40px rgba(0, 0, 0, 0.24);
-  }
-
-  [data-theme="light"] main > .section:not(.section-hero) {
-    box-shadow: 0 -14px 40px rgba(0, 0, 0, 0.10);
-  }
-}
-
-/* -----------------------------------------------------
-   7. Extra contrast guardrails
-   ----------------------------------------------------- */
-
-[data-theme="light"] .section h1,
-[data-theme="light"] .section h2,
-[data-theme="light"] .section h3,
-[data-theme="light"] .section p,
-[data-theme="light"] .section li,
-[data-theme="light"] .section summary {
-  color: #000000;
-}[data-theme="light"] .section .lede,
-[data-theme="light"] .section .hero-body,
-[data-theme="light"] .section .card-meta,
-[data-theme="light"] .section .event-location {
-  color: #3f3f3f;
-}
-
-[data-theme="light"] .section .eyebrow,
-[data-theme="light"] .section .card-label,
-[data-theme="light"] .section .text-link {
-  color: #7a5e00;
-}
-
-/* ---- Relay bar signature component ---- */
+.social-logo-link span { color: var(--color-gold); font-size: 1.3rem; font-weight: 900; }
 
 .relay-bar {
   display: flex;
   width: 100%;
   height: 10px;
-  border-radius: 999px;
+  border-radius: var(--radius-full);
   overflow: hidden;
 }
 
-.relay-bar span {
-  display: block;
-  height: 100%;
-}
-
-.relay-bar .swim {
-  width: 20%;
-  background: #F8D45D;
-}
-
-.relay-bar .bike {
-  width: 55%;
-  background: var(--color-gold);
-}
-
-.relay-bar .run {
-  width: 25%;
-  background: #4F6B52;
-}
+.relay-bar span { display: block; height: 100%; }
+.relay-bar .swim { width: 20%; background: #38BDF8; }
+.relay-bar .bike { width: 55%; background: var(--color-gold); }
+.relay-bar .run { width: 25%; background: #4ADE80; }
 
 .relay-key {
   display: flex;
@@ -2182,1076 +778,20 @@ main > .section:nth-of-type(even):not(.section-hero) {
   color: var(--color-muted);
 }
 
-.relay-key i {
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  margin-right: 0.4rem;
-  border-radius: 2px;
-}
-
-.relay-key .swim i { background: #F8D45D; }
+.relay-key i { display: inline-block; width: 10px; height: 10px; margin-right: 0.4rem; border-radius: 2px; }
+.relay-key .swim i { background: #38BDF8; }
 .relay-key .bike i { background: var(--color-gold); }
-.relay-key .run i  { background: #4F6B52; }
-
-/* FINAL RAW PROFILE IMAGE PIPELINE: committee cards */
-
-/* stage 2 final square logo rendering:start */
-.brand-mark,
-.brand-logo-wrap {
-  width: 44px !important;
-  height: 44px !important;
-  min-width: 44px !important;
-  min-height: 44px !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  border: 0 !important;
-  outline: 0 !important;
-  border-radius: 0 !important;
-  overflow: hidden !important;
-  background: transparent !important;
-  box-shadow: none !important;
-  display: inline-block !important;
-  line-height: 0 !important;
-}
-
-.brand-mark::before,
-.brand-mark::after,
-.brand-logo-wrap::before,
-.brand-logo-wrap::after {
-  display: none !important;
-  content: none !important;
-  background: transparent !important;
-  border: 0 !important;
-  outline: 0 !important;
-  box-shadow: none !important;
-}
-
-.brand-mark img,
-.brand-logo-wrap img {
-  width: 100% !important;
-  height: 100% !important;
-  display: block !important;
-  object-fit: cover !important;
-  object-position: center !important;
-  border-radius: 0 !important;
-  border: 0 !important;
-  outline: 0 !important;
-  box-shadow: none !important;
-  background: transparent !important;
-}
-/* stage 2 final square logo rendering:end */
-
-/* stage 3 logo crop controls:start */
-.brand-mark,
-.brand-logo-wrap {
-  width: 44px !important;
-  height: 44px !important;
-  min-width: 44px !important;
-  min-height: 44px !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  border: 0 !important;
-  outline: 0 !important;
-  border-radius: 0 !important;
-  overflow: hidden !important;
-  background: transparent !important;
-  box-shadow: none !important;
-  display: inline-block !important;
-  line-height: 0 !important;
-}
-
-.brand-mark::before,
-.brand-mark::after,
-.brand-logo-wrap::before,
-.brand-logo-wrap::after {
-  display: none !important;
-  content: none !important;
-  background: transparent !important;
-  border: 0 !important;
-  outline: 0 !important;
-  box-shadow: none !important;
-}
-
-.brand-mark img,
-.brand-logo-wrap img {
-  width: 100% !important;
-  height: 100% !important;
-  display: block !important;
-  object-fit: cover !important;
-  object-position: var(--logo-crop-x, 50%) var(--logo-crop-y, 50%) !important;
-  transform: scale(var(--logo-crop-zoom, 1)) !important;
-  transform-origin: var(--logo-crop-x, 50%) var(--logo-crop-y, 50%) !important;
-  border-radius: 0 !important;
-  border: 0 !important;
-  outline: 0 !important;
-  box-shadow: none !important;
-  background: transparent !important;
-}
-/* stage 3 logo crop controls:end */
+.relay-key .run i { background: #4ADE80; }
 
 /* =====================================================
-   TILE + REVEAL SYSTEM V1
-   Additive design language. Existing components can opt in
-   gradually by adding these classes alongside existing classes.
+   11. MOTION
    ===================================================== */
 
-:root {
-  --brand-black: #000000;
-  --brand-white: #FFFFFF;
-  --brand-silver: #D6D6D6;
-  --brand-gold: #F8D45D;
-
-  --tile-radius-outer: 1.75rem;
-  --tile-radius-inner: 1.1rem;
-  --tile-pad: clamp(1rem, 2.5vw, 1.5rem);
-  --tile-pad-tight: 0.75rem;
-  --tile-gap: 1rem;
-  --tile-frame-pad: 1rem;
-
-  --tile-bg-dark: rgba(255, 255, 255, 0.06);
-  --tile-bg-light: rgba(0, 0, 0, 0.045);
-  --tile-border-dark: 1px solid rgba(255, 255, 255, 0.14);
-  --tile-border-light: 1px solid rgba(0, 0, 0, 0.14);
-  --tile-shadow: 0 18px 50px rgba(0, 0, 0, 0.26);
-  --tile-focus-ring: 0 0 0 3px rgba(248, 212, 93, 0.32);
-}
-
-.tile {
-  position: relative;
-  overflow: hidden;
-  border-radius: var(--tile-radius-outer);
-  border: var(--tile-border-dark);
-  background: var(--tile-bg-dark);
-  box-shadow: var(--tile-shadow);
-  color: inherit;
-}
-
-.tile-inner {
-  padding: var(--tile-pad);
-}
-
-.tile-nested {
-  border-radius: var(--tile-radius-inner);
-  border: var(--tile-border-dark);
-  background: rgba(255, 255, 255, 0.045);
-  padding: var(--tile-pad-tight);
-}
-
-.tile-media {
-  display: block;
-  width: 100%;
-  overflow: hidden;
-  border-radius: var(--tile-radius-inner);
-}
-
-/* =====================================================
-   TILE ROLLOUT TUNING V1
-   Small guardrails for components that now opt into .tile.
-   ===================================================== */
-
-.tile.reveal-card {
-  transition:
-    transform 180ms ease,
-    border-color 180ms ease,
-    box-shadow 180ms ease;
-}
-
-.tile.reveal-card:hover {
-  border-color: rgba(248, 212, 93, 0.32);
-}.tile.social-card,
-.tile.notice-card {
-  min-width: 0;
-}
-
-.tile img,
-.tile iframe,
-.tile video {
-  max-width: 100%;
-}
-
-/* =====================================================
-   REVEAL CAPTION SYSTEM V1
-   Reusable caption treatment for gallery/social carousel items.
-   ===================================================== */
-
-.reveal .reveal-caption {
-  margin-top: 0.75rem;
-  color: var(--color-muted);
-  font-size: 0.95rem;
-  line-height: 1.5;
-}
-
-.reveal[data-reveal-mode="hover"] .reveal-caption {
-  transition:
-    opacity 180ms ease,
-    transform 180ms ease;
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .reveal[data-reveal-mode="hover"] .reveal-caption {
-    opacity: 0.82;
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.001ms !important;
   }
-
-  .reveal[data-reveal-mode="hover"]:hover .reveal-caption,
-.reveal[data-reveal-mode="hover"]:focus-within .reveal-caption {
-    opacity: 1;
-    transform: translateY(-2px);
-  }
-}
-
-/* Mobile: stack + CTA fallback */
-@media (max-width: 1100px) {
-  .embed-facebook iframe { height: 650px !important; min-height: 650px !important; }
-  .embed-mobile-cta { display: block !important; }
-  .embed-frame { display: none !important; } /* hide iframe on very small if needed */
-}
-
-/* fallback */
-}.social-card,
-.notice-card,
-.sponsor-card,
-.timeline-item {
-  box-sizing: border-box;
-}.social-card,
-.notice-card,
-.sponsor-card {
-  border-radius: var(--u-tile-radius);
-}
-
-.card-photo {
-  border-radius: var(--u-tile-frame-radius);
-}
-
-/* =====================================================
-   UNIVERSAL TILE SYSTEM V1
-   Shared tile spacing contract across cards, widgets, and media.
-   ===================================================== */
-
-:root {
-  --u-tile-gap: 1.5rem;
-  --u-tile-pad: clamp(1rem, 2.5vw, 1.5rem);
-  --u-tile-pad-compact: 1rem;
-  --u-tile-radius: 1.75rem;
-  --u-tile-frame-radius: 1rem;
-  --u-tile-border: 1px solid rgba(255, 255, 255, 0.14);
-  --u-tile-frame-border: 1px solid rgba(255, 255, 255, 0.12);
-  --u-tile-bg: rgba(255, 255, 255, 0.055);
-  --u-tile-frame-bg: rgba(0, 0, 0, 0.34);
-  --u-tile-shadow: 0 18px 50px rgba(0, 0, 0, 0.24);
-}
-
-.u-tile {
-  box-sizing: border-box;
-  padding: var(--u-tile-pad);
-  border-radius: var(--u-tile-radius);
-  border: var(--u-tile-border);
-  background: var(--u-tile-bg);
-  box-shadow: var(--u-tile-shadow);
-  overflow: hidden;
-}
-
-.u-tile-head {
-  margin: 0 0 var(--u-tile-pad-compact);
-}
-
-.u-tile-head > :first-child {
-  margin-top: 0;
-}
-
-.u-tile-head > :last-child {
-  margin-bottom: 0;
-}
-
-.u-tile-frame {
-  box-sizing: border-box;
-  width: fit-content;
-  max-width: 100%;
-  margin-inline: auto;
-  padding: var(--u-tile-pad-compact);
-  border-radius: var(--u-tile-frame-radius);
-  border: var(--u-tile-frame-border);
-  background: var(--u-tile-frame-bg);
-  overflow: hidden;
-  line-height: 0;
-}
-
-.u-tile-frame > iframe,
-.u-tile-frame > img,
-.u-tile-frame > video {
-  display: block;
-  max-width: 100%;
-  margin: 0;
-  border: 0;
-}/* Universal tile aliases for existing card-like components */
-.tile,
-.social-card,
-.notice-card,
-.sponsor-card,
-.timeline-item {
-  box-sizing: border-box;
-}.tile,
-.social-card,
-.notice-card,
-.sponsor-card {
-  border-radius: var(--u-tile-radius);
-}
-
-.card-photo {
-  border-radius: var(--u-tile-frame-radius);
-}
-
-.u-tile img,
-.u-tile iframe,
-.u-tile video {
-  max-width: 100%;
-}
-
-.u-tile img {
-  display: block;
-}
-
-.u-tile .card-photo {
-  border-radius: var(--u-tile-frame-radius);
-}
-
-.u-tile .button {
-  align-self: flex-start;
-}.u-tile.social-card,
-.u-tile.notice-card {
-  display: flex;
-  flex-direction: column;
-  gap: var(--u-tile-pad-compact);
-  padding: var(--u-tile-pad);
-}.u-tile.social-card > *,
-.u-tile.notice-card > * {
-  margin-block-start: 0;
-  margin-block-end: 0;
-}.u-tile.social-card > :last-child,
-.u-tile.notice-card > :last-child {
-  margin-bottom: 0;
-}
-
-.u-tile img,
-.u-tile iframe,
-.u-tile video {
-  max-width: 100%;
-}
-
-.u-tile img {
-  display: block;
-}
-
-.u-tile .card-photo {
-  border-radius: var(--u-tile-frame-radius);
-}
-
-.u-tile .button {
-  align-self: flex-start;
-}/* =====================================================
-   UNIVERSAL TILE GRID GAP NORMALISATION V3
-   Uses one spacing token for tile-to-tile gaps across common grids.
-   ===================================================== */
-
-.content-grid,
-.cards-grid,
-.events-grid,
-.social-grid,
-.cta-grid,
-.notice-grid,
-.sponsor-grid,
-.timeline-list {
-  gap: var(--u-tile-gap);
-}
-
-/* =====================================================
-   TILE PRIMITIVE ALIAS AND SIMPLE CARD MIGRATION V1
-   Final .tile primitive names with temporary .u-tile aliases.
-   ===================================================== */
-
-:root {
-  --tile-gap: var(--u-tile-gap, 1.5rem);
-  --tile-pad: var(--u-tile-pad, 1.5rem);
-  --tile-pad-compact: var(--u-tile-pad-compact, 1rem);
-  --tile-radius: var(--u-tile-radius, 1.75rem);
-  --tile-frame-radius: var(--u-tile-frame-radius, 1rem);
-  --tile-frame-pad: var(--u-tile-pad-compact, 1rem);
-  --tile-border: var(--u-tile-border, 1px solid rgba(255, 255, 255, 0.14));
-  --tile-frame-border: var(--u-tile-frame-border, 1px solid rgba(255, 255, 255, 0.12));
-  --tile-bg: var(--u-tile-bg, rgba(255, 255, 255, 0.055));
-  --tile-frame-bg: var(--u-tile-frame-bg, rgba(0, 0, 0, 0.34));
-  --tile-shadow: var(--u-tile-shadow, 0 18px 50px rgba(0, 0, 0, 0.24));
-}
-
-.tile,
-.u-tile {
-  box-sizing: border-box;
-  padding: var(--tile-pad);
-  border-radius: var(--tile-radius);
-  border: var(--tile-border);
-  background: var(--tile-bg);
-  box-shadow: var(--tile-shadow);
-  overflow: hidden;
-}
-
-.tile-header,
-.u-tile-head {
-  margin: 0 0 var(--tile-pad-compact);
-}
-
-.tile-header > :first-child,
-.u-tile-head > :first-child {
-  margin-top: 0;
-}
-
-.tile-header > :last-child,
-.u-tile-head > :last-child {
-  margin-bottom: 0;
-}
-
-.tile-grid {
-  display: grid;
-  gap: var(--tile-gap);
-}
-
-.tile-stack {
-  display: flex;
-  flex-direction: column;
-  gap: var(--tile-gap);
-}
-
-.tile .button,
-.u-tile .button {
-  align-self: flex-start;
-}
-
-/* =====================================================
-   GALLERY TILE MIGRATION V1
-   Aligns gallery cards with the universal tile primitives.
-   ===================================================== */
-
-/* =====================================================
-   SOCIAL WIDGET VERTICAL TILE STACK V1
-   Renders Facebook and Strava widgets as universal stacked tiles.
-   ===================================================== */
-
-#social-widgets .social-widget-stack {
-  width: min(100%, 720px);
-  margin-inline: auto;
-}
-
-#social-widgets .social-widget-tile {
-  width: 100%;
-}
-
-#social-widgets .social-widget-frame {
-  width: fit-content;
-  max-width: 100%;
-  margin-inline: auto;
-}
-
-#social-widgets .social-widget-frame iframe {
-  display: block;
-  max-width: 100%;
-  border: 0;
-}
-
-#social-widgets .social-widget-frame-facebook iframe {
-  width: 500px !important;
-  max-width: 100% !important;
-  height: 840px !important;
-  min-height: 840px !important;
-}
-
-#social-widgets .social-widget-frame-strava iframe {
-  width: 300px !important;
-  max-width: 100% !important;
-}
-
-#social-widgets .social-widget-fallback-link {
-  margin: var(--tile-pad-compact) 0 0;
-}
-
-@media (max-width: 560px) {
-  #social-widgets .social-widget-frame-facebook iframe {
-    width: 100% !important;
-  }
-}
-
-/* =====================================================
-   DYNAMIC TILE GRID SUPPORT V1
-   Runtime support for CMS-driven tile_grid sections.
-   ===================================================== */
-
-.tile-grid-dynamic {
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
-}
-
-.tile-grid-nested {
-  margin-top: var(--tile-pad-compact);
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
-}
-
-.tile-nested {
-  padding: var(--tile-pad-compact);
-  box-shadow: none;
-}
-
-.tile-buttons {
-  margin-top: var(--tile-pad-compact);
-}
-
-/* =====================================================
-   PERSISTENT HERO OPT-IN V1
-   Desktop-only scoped hero background polish for tile sections.
-   ===================================================== */
-
-.section-hero.hero-persistent-anchor {
-  isolation: isolate;
-}
-
-.section-hero.hero-persistent-anchor .hero-photo,
-.section-hero.hero-persistent-anchor .hero-bg,
-.section-hero.hero-persistent-anchor .hero-overlay {
-  will-change: transform;
-}
-
-@media (min-width: 1000px) and (prefers-reduced-motion: no-preference) {
-  .section-hero.hero-persistent-anchor.has-photo .hero-photo {
-    background-attachment: fixed;
-    background-position: center center;
-  }
-
-  .section-hero.hero-persistent-anchor + .section {
-    position: relative;
-    z-index: 2;
-  }
-}
-
-@media (max-width: 999px), (prefers-reduced-motion: reduce) {
-  .section-hero.hero-persistent-anchor.has-photo .hero-photo {
-    background-attachment: scroll;
-  }
-}
-
-/* =====================================================
-   TILE BODY AND FRAME MARKUP CONSISTENCY V1
-   Supports migrated gallery frames and simple card body wrappers.
-   ===================================================== */
-
-.tile-body {
-  margin: 0;
-}
-
-.tile-body > :first-child {
-  margin-top: 0;
-}
-
-.tile-body > :last-child {
-  margin-bottom: 0;
-}
-
-/* =====================================================
-   UNIVERSAL TILE LAYOUT CONTRACT V1
-   Enforces content-driven tile spacing, title rhythm, and shrink-to-content behaviour.
-   ===================================================== */
-
-:root {
-  --tile-gap: 1.5rem;
-  --tile-pad: 1.5rem;
-  --tile-pad-compact: 1rem;
-  --tile-radius: 1.75rem;
-  --tile-frame-radius: 1rem;
-  --tile-frame-pad: 1rem;
-  --tile-inner-gap: 1rem;
-  --tile-title-gap: 0.35rem;
-  --tile-title-line: 1.15;
-  --tile-header-gap: 0.75rem;
-}
-
-.tile {
-  display: flex;
-  flex-direction: column;
-  gap: var(--tile-inner-gap);
-  height: auto;
-  min-height: 0 !important;
-  box-sizing: border-box;
-}
-
-.tile-header {
-  margin: 0;
-  min-height: 0 !important;
-}
-
-.tile-header-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--tile-header-gap);
-  margin: 0;
-  min-height: 0 !important;
-}
-
-.tile-header-text {
-  display: flex;
-  flex-direction: column;
-  gap: var(--tile-title-gap);
-  min-width: 0;
-}
-
-.tile-header-text > .tile-title,
-.tile-header-text > h2,
-.tile-header-text > h3,
-.tile-header-text > h4 {
-  line-height: var(--tile-title-line);
-}
-
-.tile-body {
-  display: flex;
-  flex-direction: column;
-  gap: var(--tile-inner-gap);
-  width: 100%;
-  margin: 0;
-  min-height: 0 !important;
-  box-sizing: border-box;
-}
-
-.tile-body > * {
-  margin-block-start: 0;
-  margin-block-end: 0;
-}
-
-.tile-frame {
-  display: block;
-  width: 100%;
-  max-width: none;
-  margin: 0;
-  overflow: hidden;
-  border-radius: var(--tile-frame-radius);
-  box-sizing: border-box;
-}
-
-.tile-frame > img,
-.tile-frame > picture,
-.tile-frame > iframe,
-.tile-frame > video {
-  display: block;
-  width: 100%;
-  max-width: none;
-}
-
-.tile-grid {
-  display: grid;
-  gap: var(--tile-gap);
-  align-items: start;
-  grid-template-columns: var(--tile-grid-columns, repeat(auto-fit, minmax(min(100%, var(--tile-grid-min, 260px)), 1fr)));
-  max-width: var(--tile-grid-max, none);
-  margin-inline: var(--tile-grid-margin-inline, 0);
-}
-
-.tile-stack {
-  gap: var(--tile-gap);
-}
-
-.tile-nested {
-  padding: var(--tile-pad-compact);
-  border-radius: var(--tile-frame-radius);
-  box-shadow: none;
-}
-
-/* Reusable tile text roles. */
-.tile-title {
-  margin: 0;
-  color: var(--tile-title-color, var(--color-text));
-  font-size: var(--tile-title-size, clamp(1.12rem, 2vw, 1.5rem));
-  line-height: var(--tile-title-line);
-  font-weight: var(--tile-title-weight, 900);
-}
-
-.tile-subtitle,
-.tile-meta {
-  margin: 0;
-  color: var(--tile-subtitle-color, var(--color-muted));
-  font-size: var(--tile-subtitle-size, 0.82rem);
-  line-height: var(--tile-subtitle-line, 1.2);
-  font-weight: var(--tile-subtitle-weight, 800);
-  letter-spacing: var(--tile-subtitle-letter-spacing, 0.06em);
-  text-transform: var(--tile-subtitle-transform, none);
-}
-
-.tile-text {
-  margin: 0;
-  color: var(--tile-text-color, var(--color-text));
-  line-height: var(--tile-text-line, 1.55);
-}
-
-.tile-muted {
-  color: var(--tile-muted-color, var(--color-muted));
-}
-
-.tile-question > strong {
-  display: block;
-  color: var(--tile-question-title-color, var(--color-text));
-  margin-bottom: var(--tile-question-title-gap, 0.2rem);
-}
-
-.tile-question > p {
-  margin: 0;
-  color: var(--tile-question-text-color, var(--tile-muted-color, var(--color-muted)));
-}
-
-/* Reusable crop frame primitive for any tile media. */
-.tile-frame-crop {
-  position: relative;
-  aspect-ratio: var(--tile-frame-aspect, 1 / 1);
-  overflow: hidden;
-  background: var(--tile-frame-bg, #101010);
-}
-
-.tile-frame-crop > img,
-.tile-frame-crop > picture,
-.tile-frame-crop > picture > img,
-.tile-frame-crop > .tile-media-crop {
-  display: block;
-  width: 100%;
-  height: 100%;
-  max-width: none;
-}
-
-.tile-media-crop,
-.tile-frame-crop > img,
-.tile-frame-crop > picture > img {
-  object-fit: cover;
-  object-position: var(--crop-x, 50%) var(--crop-y, 50%);
-  transform: scale(var(--crop-zoom, 1));
-  transform-origin: var(--crop-x, 50%) var(--crop-y, 50%);
-}
-
-/* Reusable reveal/expand primitive for tile details. */
-.tile-reveal {
-  scroll-margin-top: var(--tile-reveal-scroll-margin, 96px);
-  scroll-margin-bottom: var(--tile-reveal-scroll-margin, 96px);
-}
-
-.tile-reveal[open] {
-  position: relative;
-  z-index: var(--tile-reveal-open-z, 3);
-  border-color: var(--tile-reveal-open-border-color, currentColor);
-}
-
-.tile-reveal-summary {
-  cursor: pointer;
-  list-style: none;
-}
-
-.tile-reveal-summary::-webkit-details-marker {
-  display: none;
-}
-
-.tile-reveal-body {
-  overflow: visible;
-  border-top: var(--tile-reveal-body-border, 0);
-  padding-top: var(--tile-reveal-body-pad, 0);
-}
-
-.tile-reveal-toggle {
-  position: relative;
-  flex: 0 0 auto;
-  width: var(--tile-reveal-toggle-size, 2rem);
-  height: var(--tile-reveal-toggle-size, 2rem);
-  border: var(--tile-reveal-toggle-border, 1px solid var(--color-border));
-  border-radius: 999px;
-}
-
-.tile-reveal-toggle::before,
-.tile-reveal-toggle::after {
-  content: "";
-  position: absolute;
-  inset: 50% auto auto 50%;
-  width: var(--tile-reveal-toggle-line-width, 0.78rem);
-  height: var(--tile-reveal-toggle-line-height, 2px);
-  background: var(--tile-reveal-toggle-color, var(--color-gold));
-  transform: translate(-50%, -50%);
-}
-
-.tile-reveal-toggle::after {
-  transform: translate(-50%, -50%) rotate(90deg);
-}
-
-.tile-reveal[open] .tile-reveal-toggle {
-  background: var(--tile-reveal-toggle-open-bg, var(--color-gold));
-  border-color: var(--tile-reveal-toggle-open-border, var(--color-gold));
-}
-
-.tile-reveal[open] .tile-reveal-toggle::before,
-.tile-reveal[open] .tile-reveal-toggle::after {
-  background: var(--tile-reveal-toggle-open-color, #000000);
-}
-
-.tile-reveal[open] .tile-reveal-toggle::after {
-  display: none;
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .tile-reveal:hover {
-    z-index: var(--tile-reveal-hover-z, 4);
-  }
-}
-
-/* Reusable embed tile modifiers. */
-.tile-stack-narrow {
-  width: min(100%, 760px);
-  margin-inline: auto;
-}
-
-.tile-embed {
-  align-items: stretch;
-  gap: var(--tile-inner-gap);
-}
-
-.tile-frame-embed {
-  width: fit-content;
-  max-width: 100%;
-  margin-inline: auto;
-  padding: var(--tile-frame-pad);
-  border: var(--tile-frame-border);
-  background: var(--tile-frame-bg);
-  line-height: 0;
-  overflow: hidden;
-}
-
-.tile-frame-embed > iframe,
-.tile-frame-embed > blockquote {
-  display: block;
-  max-width: 100%;
-  margin: 0;
-  border: 0;
-}
-
-.tile-frame-embed > iframe {
-  width: min(100%, var(--tile-embed-width, 500px));
-  max-height: var(--tile-embed-max-height, none);
-}
-
-.tile-actions-center {
-  justify-content: center;
-  text-align: center;
-  margin-top: var(--tile-inner-gap);
-}
-
-/* Reusable simple tile modifiers. */
-.tile-surface {
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-}
-
-.tile-frame-cover,
-.tile-frame-placeholder {
-  display: grid;
-  min-height: var(--tile-frame-min-height, 170px);
-  place-items: center;
-}
-
-.tile-frame-cover {
-  background-size: cover;
-  background-position: center;
-}
-
-.tile-frame-placeholder {
-  background:
-    radial-gradient(circle at top left, rgba(242, 201, 76, 0.28), transparent 12rem),
-    linear-gradient(135deg, rgba(68, 0, 153, 0.72), rgba(15, 23, 42, 0.96));
-  color: var(--color-gold);
-  font-size: 0.85rem;
-  font-weight: 950;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-}
-
-.discipline-swim .tile-discipline-media,
-.discipline-swimming .tile-discipline-media {
-  background:
-    radial-gradient(circle at top left, rgba(14, 165, 233, 0.4), transparent 12rem),
-    linear-gradient(135deg, #0F172A, #0369A1);
-}
-
-.discipline-bike .tile-discipline-media,
-.discipline-cycling .tile-discipline-media {
-  background:
-    radial-gradient(circle at top left, rgba(248, 212, 93, 0.38), transparent 12rem),
-    linear-gradient(135deg, #24135F, #F8D45D);
-}
-
-.discipline-run .tile-discipline-media,
-.discipline-running .tile-discipline-media {
-  background:
-    radial-gradient(circle at top left, rgba(249, 115, 22, 0.42), transparent 12rem),
-    linear-gradient(135deg, #7C2D12, #F8D45D);
-}
-
-.tile-meta-list {
-  gap: 0.4rem;
-  margin: 1rem 0;
-  color: var(--tile-muted-color, var(--color-muted));
-  font-size: 0.95rem;
-}
-
-.tile-meta-list strong {
-  color: var(--color-text);
-}
-
-.tile-date-context {
-  position: relative;
-  padding-top: 5rem;
-}
-
-.tile-date-badge {
-  position: absolute;
-  top: 1.25rem;
-  right: 1.25rem;
-  border: 1px solid rgba(242, 201, 76, 0.35);
-  border-radius: 999px;
-  background: rgba(242, 201, 76, 0.1);
-  color: var(--color-gold);
-  padding: 0.35rem 0.7rem;
-  font-size: 0.85rem;
-  font-weight: 850;
-}
-
-.tile-grid-four-up {
-  --tile-grid-columns: repeat(4, minmax(0, 1fr));
-}
-
-@media (max-width: 980px) {
-  .tile-grid-four-up,
-  .tile-grid-three-up {
-    --tile-grid-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-@media (max-width: 640px) {
-  .tile-grid-four-up,
-  .tile-grid-three-up {
-    --tile-grid-columns: 1fr;
-  }
-}
-
-.tile-stat-value {
-  display: block;
-  color: var(--color-gold);
-  font-size: clamp(2.4rem, 6vw, 4.5rem);
-  line-height: 1;
-}
-
-.tile-stat-label {
-  font-weight: 750;
-}
-
-.tile-cta {
-  padding: clamp(2rem, 6vw, 4rem);
-  text-align: center;
-}
-
-.tile-cta-title {
-  margin: 0;
-  font-size: clamp(2.6rem, 8vw, 5.5rem);
-  line-height: 0.95;
-  letter-spacing: -0.06em;
-}
-
-.tile-actions-center {
-  justify-content: center;
-}
-
-.tile-reveal-split {
-  --tile-reveal-body-border: 1px solid var(--color-border);
-  --tile-reveal-body-pad: var(--tile-pad-compact);
-}
-
-/* Reusable tile configuration modifiers. */
-.tile-grid-centered {
-  --tile-grid-margin-inline: auto;
-}
-
-.tile-grid-three-up {
-  --tile-grid-min: 260px;
-  --tile-grid-max: 1120px;
-}
-
-@media (min-width: 1050px) {
-  .tile-grid-three-up {
-    --tile-grid-columns: repeat(3, minmax(0, 1fr));
-  }
-}
-
-@media (max-width: 760px) {
-  .tile-grid-three-up {
-    --tile-grid-columns: 1fr;
-  }
-}
-
-.tile-surface-accent {
-  --tile-reveal-open-border-color: rgba(247, 211, 93, 0.55);
-  --tile-title-size: clamp(1.18rem, 2.2vw, 1.62rem);
-  --tile-title-weight: 950;
-  --tile-title-line: 1.05;
-  --tile-subtitle-color: var(--color-gold);
-  --tile-subtitle-size: 0.78rem;
-  --tile-subtitle-weight: 900;
-  --tile-subtitle-letter-spacing: 0.08em;
-  --tile-subtitle-transform: uppercase;
-  --tile-muted-color: var(--color-muted);
-  --tile-reveal-body-border: 1px solid var(--color-border);
-  --tile-reveal-body-pad: var(--tile-inner-gap);
-  display: block;
-  width: 100%;
-  max-width: none;
-  overflow: hidden;
-  border: 1px solid var(--color-border);
-  border-radius: var(--tile-radius);
-  background:
-    radial-gradient(circle at top right, rgba(247, 211, 93, 0.12), transparent 18rem),
-    var(--color-surface);
-  box-shadow: var(--shadow-soft);
-}
-
-.tile-frame-accent {
-  --tile-frame-bg:
-    radial-gradient(circle at top right, rgba(247, 211, 93, 0.24), transparent 14rem),
-    #101010;
-}
-
-.tile-frame-accent::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border: 2px solid rgba(247, 211, 93, 0.7);
-  border-radius: inherit;
-  pointer-events: none;
-}
-
-/* Temporary legacy neutralisation: committee cards must obey the tile contract. */
-
-/* Expanded committee content is a tile body: no bespoke horizontal inset. */
-
-/* The image frame is the media frame; crop logic remains separate. */
-
-/* Reusable normal-flow section modifier.
-   Use for iframe/embed sections that should not participate in sticky panel stacking. */
-body main > .section.section-normal-flow,
-body main > .section.section-embed {
-  position: relative !important;
-  top: auto !important;
-  min-height: auto !important;
-  display: block !important;
-  align-items: initial !important;
-  overflow: visible !important;
-  transform: none !important;
-}
-
-body main > .section.section-normal-flow > .container,
-body main > .section.section-embed > .container {
-  position: relative;
-  z-index: 1;
 }

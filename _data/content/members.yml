@@ -1,25 +1,9 @@
-title: Members Area
-description: Future private area for members, alumni and committee.
-
+title: Members
+description: ""
 sections:
   - type: hero
     id: members-hero
-    eyebrow: Future
-    title: Members Area
-    subtitle: Planned for a future phase.
-    body: This will eventually become a logged-in area for members, alumni and committee resources.
-    primary_button:
-      label: Back to Home
-      url: /
-
-  - type: text
-    id: members-plan
-    eyebrow: Future Architecture
-    title: Planned login and file access.
-    body: >
-      Future idea: use a proper authentication provider, ideally Google login with
-      university email eligibility, then link members to shared resources such as
-      committee minutes and photo folders stored in Google Drive.
-
-      This cannot be made secure with plain static GitHub Pages alone, so this should
-      be implemented later using a suitable auth layer or external member platform.
+    eyebrow: ""
+    title: Members
+    subtitle: ""
+    body: ""

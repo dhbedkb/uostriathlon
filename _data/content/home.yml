@@ -1,85 +1,9 @@
-title: University of Sheffield Triathlon Club
-description: Swim, bike and run with Sheffield’s student triathlon club.
+title: Home
+description: ""
 sections:
-- type: hero
-  id: home-hero
-  eyebrow: University of Sheffield
-  title: Sheffield Triathlon
-  subtitle: Swim. Bike. Run. Belong.
-  body: A student-led triathlon club for complete beginners, social athletes and experienced
-    racers.
-  primary_button:
-    label: Join Today
-    url: /join/
-  secondary_button:
-    label: View Training
-    url: /training/
-  persistent_hero: true
-- type: text
-  id: about-club
-  eyebrow: Welcome
-  title: Triathlon sounds intense. Joining us does not have to be.
-  body: 'Triathlon is three sports back to back — swim, bike and run — but you do
-    not need to arrive as a triathlete. Sheffield Triathlon welcomes complete beginners,
-    people from single-sport backgrounds, social members and experienced racers.
-
-    The club trains across swimming, cycling and running, with a strong student community
-    and routes that make the most of Sheffield and the Peak District.
-
-    '
-- type: cards
-  id: highlights
-  eyebrow: Club Life
-  title: Train, race, socialise.
-  subtitle: Replace the placeholders with real club photos when ready.
-  cards:
-  - title: Training
-    label: Train
-    description: Swim, bike and run sessions for a range of abilities.
-    url: /training/
-  - title: Races
-    label: Races
-    description: Race opportunities, Give it a Go sessions and club activities.
-    url: /races/
-  - title: Socials
-    label: Social
-    description: Instagram, Strava, Facebook and student community.
-    url: /socials/
-- type: socials
-  id: social-integrations
-  layout: logos
-  eyebrow: Follow
-  title: Follow the club.
-  subtitle: Instagram for club life. Strava for training. Facebook for updates.
-  items:
-  - platform: Instagram
-    url: https://www.instagram.com/sheffunitri/
-  - platform: Strava
-    url: https://www.strava.com/clubs/UoSTri
-  - platform: Facebook
-    url: https://www.facebook.com/UoSTriathlon
-- type: cta
-  id: final-join-cta
-  eyebrow: Join
-  title: Ready to give triathlon a go?
-  body: You do not need to be a triathlete to start. Come along, meet the club and
-    try a session.
-  primary_button:
-    label: Join Now
-    url: /join/
-  secondary_button:
-    label: Email the Club
-    url: mailto:triathlon@sheffield.ac.uk
-- type: cta
-  id: join
-  eyebrow: Join
-  title: Join Sheffield Triathlon
-  subtitle: Ready to swim, bike, run and meet the club?
-  body: Use this section to add joining information, trial session details, membership
-    links, or a contact route for new members.
-  primary_button:
-    label: Email the Club
-    url: mailto:triathlon@sheffield.ac.uk
-  secondary_button:
-    label: Members Area
-    url: /members/
+  - type: hero
+    id: home-hero
+    eyebrow: ""
+    title: Home
+    subtitle: ""
+    body: ""

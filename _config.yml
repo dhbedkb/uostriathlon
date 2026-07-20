@@ -1,7 +1,6 @@
 title: University of Sheffield Triathlon Club
 email: triathlon@sheffield.ac.uk
-description: Swim, bike and run with the University of Sheffield Triathlon Club. Training,
-  racing and socials for complete beginners and experienced athletes alike.
+description: Swim, bike and run with the University of Sheffield Triathlon Club.
 baseurl: /uostriathlon
 url: https://dhbedkb.github.io
 lang: en-GB
@@ -9,17 +8,14 @@ timezone: Europe/London
 markdown: kramdown
 permalink: pretty
 future: false
+
 plugins:
-- jekyll-feed
 - jekyll-sitemap
 - jekyll-seo-tag
-collections:
-  posts:
-    output: true
-feed:
-  path: feed.xml
+
 sass:
   style: compressed
+
 exclude:
 - README.md
 - node_modules
@@ -28,20 +24,17 @@ exclude:
 - package-lock.json
 - bin/
 - scripts/
+- docs/
+- oauth-worker/
 - .archive/
-- node_modules/
 - _site/
 - .jekyll-cache/
 - .sass-cache/
 - .jekyll-metadata
+
 defaults:
 - scope:
     path: ''
     type: pages
   values:
     layout: page
-- scope:
-    path: ''
-    type: posts
-  values:
-    layout: post

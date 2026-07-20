@@ -1,79 +1,9 @@
 title: Training
-description: Training information and calendar link.
+description: ""
 sections:
-- type: hero
-  id: training-hero
-  eyebrow: Training
-  title: Training
-  subtitle: Swim. Bike. Run.
-  body: Use this page to explain the training structure and link members to the live
-    calendar.
-  primary_button:
-    label: Open Training Calendar
-    url: '#'
-  secondary_button:
-    label: Ask a Question
-    url: mailto:triathlon@sheffield.ac.uk
-- type: cards
-  id: training-types
-  eyebrow: Sessions
-  title: What training includes.
-  cards:
-  - title: Swimming
-    label: Swim
-    description: Pool sessions for a range of abilities.
-  - title: Cycling
-    label: Bike
-    description: Social and structured rides around Sheffield and towards the Peaks.
-  - title: Running
-    label: Run
-    description: Group runs and structured efforts for different paces.
-- type: embed
-  id: training-calendar
-  eyebrow: Calendar
-  title: Live training calendar.
-  subtitle: Replace the button URL with the club Google Calendar link or embed code.
-  url: '#'
-  button_label: Open Training Calendar
-- type: faq
-  id: training-faq
-  eyebrow: FAQ
-  title: Training questions.
-  items:
-  - question: Can beginners attend training?
-    answer: Yes. The club is built to welcome a range of abilities.
-  - question: Where is the live timetable?
-    answer: Use the training calendar link once committee has added the current calendar.
-  - question: What should I bring?
-    answer: Bring the kit needed for the session and ask committee if unsure.
-- type: tile_grid
-  id: training-overview-tiles
-  eyebrow: Training structure
-  title: How training works.
-  subtitle: A simple overview of swim, bike and run training.
-  layout: grid
-  tiles:
-  - eyebrow: Swim
-    title: Pool sessions
-    body: Structured pool sessions for technique, endurance, and confidence.
-    children:
-    - title: Technique
-      body: Drills, body position, and pacing.
-    - title: Endurance
-      body: Steady aerobic sets and progression.
-  - eyebrow: Bike
-    title: Group rides
-    body: Outdoor and indoor riding opportunities for different abilities.
-    children:
-    - title: Skills
-      body: Handling, communication, and group awareness.
-    - title: Fitness
-      body: Aerobic volume and interval work.
-  - eyebrow: Run
-    title: Run training
-    body: Sessions for speed, consistency, and race preparation.
-    children:
-    - title: Intervals
-      body: Shorter controlled efforts.
-    - title: Steady running
-      body: Longer controlled aerobic runs.
+  - type: hero
+    id: training-hero
+    eyebrow: ""
+    title: Training
+    subtitle: ""
+    body: ""

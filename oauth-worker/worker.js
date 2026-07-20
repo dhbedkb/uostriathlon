@@ -1,6 +1,3 @@
-const CLIENT_ID = "%%GITHUB_OAUTH_CLIENT_ID%%";
-const CLIENT_SECRET = "%%GITHUB_OAUTH_CLIENT_SECRET%%";
-
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);

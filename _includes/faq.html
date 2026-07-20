@@ -10,7 +10,7 @@
     {% if include.section.items %}
       <div class="tile-stack">
         {% for item in include.section.items %}
-          <details class="tile tile-reveal tile-reveal-split tile-surface reveal-card">
+          <details class="tile tile-reveal tile-surface">
             <summary class="tile-header tile-reveal-summary tile-title">{{ item.question }}</summary>
             <div class="tile-body tile-reveal-body tile-text tile-muted">{{ item.answer | markdownify }}</div>
           </details>

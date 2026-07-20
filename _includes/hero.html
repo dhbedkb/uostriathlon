@@ -1,12 +1,23 @@
-{% assign hero_image = include.section.background_image_raw | default: include.section.background_image %}
-{% assign hero_image_clean = hero_image | replace_first: "/uostriathlon", "" | replace_first: site.baseurl | strip %}
-{% assign hero_cache_key = include.section.background_image_raw | default: hero_image | slugify %}
+{% assign hero_image = include.section.background_image | default: include.section.background_image_raw %}
+{% assign using_generated = false %}
+{% if include.section.background_image and include.section.background_image != "" %}
+  {% assign using_generated = true %}
+{% endif %}
 
-<section id="{{ include.section_id }}" class="hero section-hero {% if hero_image_clean and hero_image_clean != "" %}has-photo{% endif %}{% if include.section.persistent_hero %} hero-persistent-anchor{% endif %}" data-section-type="hero">
-  {% if hero_image_clean and hero_image_clean != "" %}
+{% assign crop_x = include.section.background_crop_x | default: 50 %}
+{% assign crop_y = include.section.background_crop_y | default: 50 %}
+{% assign crop_zoom = include.section.background_crop_zoom | default: 100 %}
+{% if using_generated %}
+  {% assign crop_x = 50 %}
+  {% assign crop_y = 50 %}
+  {% assign crop_zoom = 100 %}
+{% endif %}
+
+<section id="{{ include.section_id }}" class="hero section-hero {% if hero_image and hero_image != "" %}has-photo{% endif %}{% if include.section.persistent_hero %} hero-persistent{% endif %}" data-section-type="hero">
+  {% if hero_image and hero_image != "" %}
     <div
       class="hero-photo"
-      style="background-image: url('{{ hero_image_clean | relative_url }}?v={{ site.time | date: '%s' }}-{{ hero_cache_key }}-{{ include.section.background_crop_x | default: 50 }}-{{ include.section.background_crop_y | default: 50 }}-{{ include.section.background_crop_zoom | default: 100 }}')"
+      style="--crop-x: {{ crop_x }}%; --crop-y: {{ crop_y }}%; --crop-zoom: {{ crop_zoom | divided_by: 100.0 }}; background-image: url('{{ hero_image | relative_url }}')"
       aria-hidden="true"
     ></div>
   {% else %}

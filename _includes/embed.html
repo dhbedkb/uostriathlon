@@ -7,53 +7,23 @@
       alignment=include.section.alignment
     %}
 
-    {% if include.section.embeds and include.section.layout == "stack" %}
+    {% if include.section.embeds %}
       <div class="tile-stack tile-stack-narrow">
         {% for embed in include.section.embeds %}
-          <article class="tile tile-surface tile-embed reveal-card">
-            <header class="tile-header tile-stack">
+          <article class="tile tile-surface tile-embed">
+            <div class="tile-header">
               {% if embed.provider %}<p class="tile-subtitle tile-meta">{{ embed.provider }}</p>{% endif %}
               {% if embed.title %}<h3 class="tile-title">{{ embed.title }}</h3>{% endif %}
               {% if embed.description %}<p class="tile-text tile-muted">{{ embed.description }}</p>{% endif %}
-            </header>
+            </div>
 
             {% if embed.embed_html %}
-              <div class="tile-frame tile-frame-embed" style="--tile-embed-width: {{ embed.frame_width | default: "500px" }}; --tile-embed-max-height: {{ embed.frame_max_height | default: "none" }};">
+              <div class="tile-frame-embed" style="--tile-embed-width: {{ embed.frame_width | default: '500px' }};">
                 {{ embed.embed_html }}
               </div>
             {% elsif embed.url %}
-              <div class="tile-frame tile-frame-embed">
+              <div class="tile-actions-center">
                 <a class="button secondary" href="{{ embed.url }}" target="_blank" rel="noopener noreferrer">
-                  {{ embed.button_label | default: "Open" }}
-                </a>
-              </div>
-            {% endif %}
-
-            {% if embed.embed_html and embed.url %}
-              <p class="tile-text tile-muted tile-actions-center">
-                <a class="button secondary" href="{{ embed.url }}" target="_blank" rel="noopener noreferrer">
-                  {{ embed.button_label | default: "Open" }}
-                </a>
-              </p>
-            {% endif %}
-          </article>
-        {% endfor %}
-      </div>
-
-    {% elsif include.section.embeds %}
-      <div class="embed-grid embed-grid-{{ include.section.layout | default: 'two' }}">
-        {% for embed in include.section.embeds %}
-          <article class="embed-shell embed-{{ embed.provider | default: 'generic' }}">
-            <header class="embed-card-heading">
-              {% if embed.provider %}<p class="card-label">{{ embed.provider }}</p>{% endif %}
-              {% if embed.title %}<h3>{{ embed.title }}</h3>{% endif %}
-              {% if embed.description %}<p>{{ embed.description }}</p>{% endif %}
-            </header>
-            {% if embed.embed_html %}
-              <div class="embed-frame">{{ embed.embed_html }}</div>
-            {% elsif embed.url %}
-              <div class="embed-placeholder">
-                <a class="button primary" href="{{ embed.url }}" target="_blank" rel="noopener noreferrer">
                   {{ embed.button_label | default: "Open" }}
                 </a>
               </div>
@@ -61,15 +31,8 @@
           </article>
         {% endfor %}
       </div>
-
-    {% else %}
-      <div class="embed-shell embed-{{ include.section.provider | default: 'generic' }}">
-        {% if include.section.embed_html %}
-          <div class="embed-frame">{{ include.section.embed_html }}</div>
-        {% else %}
-          <div class="embed-placeholder"><p>Embed not configured yet.</p></div>
-        {% endif %}
-      </div>
+    {% elsif include.section.embed_html %}
+      <div class="tile-frame-embed">{{ include.section.embed_html }}</div>
     {% endif %}
   </div>
 </section>

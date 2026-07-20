@@ -3,28 +3,12 @@ brand:
   short_name: Sheffield Triathlon
   tagline: Swim. Bike. Run. Belong.
   email: triathlon@sheffield.ac.uk
-  logo: /uostriathlon/assets/images/brand/subject.png
+  logo: ""
   logo_crop_x: 50
   logo_crop_y: 50
   logo_crop_zoom: 100
 theme:
   default: dark
-  colors:
-    gold: "#F7D35D"
-    silver: "#D6D6D6"
-    white: "#FFFFFF"
-    black: "#000000"
-features:
-  dark_mode: true
-  animations: true
-  gallery_lightbox: true
-links:
-  training_calendar: "#"
-  events_calendar: "#"
-  instagram: https://www.instagram.com/sheffunitri/
-  strava: https://www.strava.com/clubs/UoSTri?utm_campaign=club_share&utm_content=38083&utm_medium=widget&utm_source=www-uostriathlon-co-uk.filesusr.com
-  facebook: https://www.facebook.com/UoSTriathlon
-  membership: "#"
 footer:
   description: >
     Swim, bike and run with Sheffield Triathlon. Training, racing and socials

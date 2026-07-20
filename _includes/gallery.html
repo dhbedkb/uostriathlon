@@ -10,16 +10,16 @@
     {% if include.section.images %}
       <div class="tile-grid tile-grid-three-up">
         {% for image in include.section.images %}
-          <figure class="tile tile-surface reveal reveal-card" data-reveal-mode="hover">
+          <figure class="tile tile-surface">
             <div class="tile-frame">
-            {% if image.src %}
-              <img src="{{ image.src | relative_url }}" alt="{{ image.alt | default: image.caption | default: 'Sheffield Triathlon club photo' }}" loading="lazy">
-            {% else %}
-              <div class="tile-frame-placeholder"><span>{{ image.category | default: "Club photo" }}</span></div>
-            {% endif %}
+              {% if image.src and image.src != "" %}
+                <img src="{{ image.src | relative_url }}" alt="{{ image.alt | default: image.caption | default: 'Club photo' }}" loading="lazy">
+              {% else %}
+                <div class="tile-frame-placeholder"><span>Photo</span></div>
+              {% endif %}
             </div>
             {% if image.caption %}
-              <figcaption class="tile-body reveal-body reveal-caption tile-text tile-muted">{{ image.caption }}</figcaption>
+              <figcaption class="tile-body tile-text tile-muted">{{ image.caption }}</figcaption>
             {% endif %}
           </figure>
         {% endfor %}

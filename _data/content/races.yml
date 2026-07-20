@@ -1,80 +1,9 @@
 title: Races
-description: Race opportunities, beginner events and competitive university racing.
-
+description: ""
 sections:
   - type: hero
     id: races-hero
-    eyebrow: Racing
-    title: Race With Sheffield
-    subtitle: First finish lines to university competition.
-    body: Discover beginner-friendly races, club events and competitive opportunities.
-    primary_button:
-      label: Join the Club
-      url: /join/
-    secondary_button:
-      label: View Training
-      url: /training/
-
-  - type: text
-    id: racing-intro
-    eyebrow: Race Culture
-    title: Racing is optional, but supported.
-    body: >
-      Some members join to race. Some join to train socially. Some join with no race plans
-      and decide later. The race page should help members understand what opportunities
-      exist and how to get involved.
-
-  - type: events
-    id: race-calendar
-    eyebrow: Calendar
-    title: Race calendar preview.
-    subtitle: Replace these placeholders with confirmed events.
-    items:
-      - title: Give it a Go Duathlon
-        date: Start of year
-        location: Sheffield
-        type: Beginner Event
-        description: A friendly introduction to multisport.
-        url: /join/
-      - title: BUCS Events
-        date: TBC
-        location: TBC
-        type: University Racing
-        description: Competitive university race opportunities.
-        url: /races/
-      - title: Local Race Opportunity
-        date: TBC
-        location: Yorkshire
-        type: Club Race
-        description: Placeholder for a club-supported race.
-        url: /races/
-
-  - type: cards
-    id: race-types
-    eyebrow: Opportunities
-    title: Ways to race.
-    cards:
-      - title: Beginner Events
-        label: Start
-        description: Friendly events for people new to multisport.
-        url: /join/
-      - title: Club Races
-        label: Team
-        description: Events where members can race together and support each other.
-        url: /races/
-      - title: University Competition
-        label: BUCS
-        description: Competitive racing opportunities for university athletes.
-        url: /races/
-
-  - type: cta
-    id: races-cta
-    eyebrow: Race
-    title: Interested in racing?
-    body: Ask committee which events are best for your experience level.
-    primary_button:
-      label: Contact Us
-      url: mailto:triathlon@sheffield.ac.uk
-    secondary_button:
-      label: View Training
-      url: /training/
+    eyebrow: ""
+    title: Races
+    subtitle: ""
+    body: ""

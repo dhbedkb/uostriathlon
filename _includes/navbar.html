@@ -1,18 +1,19 @@
 <header class="site-header" data-header>
   <nav class="nav" aria-label="Main navigation">
-    <a class="brand" href="{{ '/' | relative_url }}">{% assign logo_raw = site.data.settings.brand.logo | default: "" %}
-      {% assign logo_clean = logo_raw | replace_first: "/uostriathlon", "" | replace_first: site.baseurl, "" | strip %}
-      {% if logo_clean != "" %}
-        <span class="brand-mark brand-logo-wrap" aria-hidden="true" style="--logo-crop-x: {{ site.data.settings.brand.logo_crop_x | default: 50 }}%; --logo-crop-y: {{ site.data.settings.brand.logo_crop_y | default: 50 }}%; --logo-crop-zoom: {{ site.data.settings.brand.logo_crop_zoom | default: 100 | divided_by: 100.0 }};">
-          <img src="{{ logo_clean | relative_url }}?v={{ site.time | date: '%s' }}" alt="{{ site.data.settings.brand.short_name | default: site.data.settings.brand.name | default: site.title | escape }}" loading="eager">
+    <a class="brand" href="{{ '/' | relative_url }}">
+      {% assign logo = site.data.settings.brand.logo %}
+      {% if logo and logo != "" %}
+        <span class="brand-mark" aria-hidden="true" style="--crop-x: {{ site.data.settings.brand.logo_crop_x | default: 50 }}%; --crop-y: {{ site.data.settings.brand.logo_crop_y | default: 50 }}%; --crop-zoom: {{ site.data.settings.brand.logo_crop_zoom | default: 100 | divided_by: 100.0 }};">
+          <img src="{{ logo | relative_url }}" alt="{{ site.data.settings.brand.short_name | default: site.title | escape }}" loading="eager">
         </span>
       {% endif %}
       <span class="brand-text">
-        <span class="brand-name">{{ site.data.settings.brand.short_name | default: site.data.settings.brand.name | default: site.title }}</span>
+        <span class="brand-name">{{ site.data.settings.brand.short_name | default: site.title }}</span>
         {% if site.data.settings.brand.tagline %}
           <span class="brand-tagline">{{ site.data.settings.brand.tagline }}</span>
         {% endif %}
-      </span></a>
+      </span>
+    </a>
 
     <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="primary-navigation">
       <span class="sr-only">Toggle navigation</span>
@@ -30,11 +31,9 @@
       </div>
 
       <div class="nav-actions">
-        {% if site.data.settings.features.dark_mode %}
-          <button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark and light mode">
-            <span data-theme-icon>☾</span>
-          </button>
-        {% endif %}
+        <button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark and light mode">
+          <span data-theme-icon>☾</span>
+        </button>
 
         {% if site.data.navigation.cta %}
           <a class="nav-cta" href="{{ site.data.navigation.cta.url | relative_url }}">{{ site.data.navigation.cta.label }}</a>

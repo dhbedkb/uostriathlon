@@ -1,4 +1,4 @@
-<section id="{{ include.section_id }}" class="section section-socials section-overlap" data-section-type="socials">
+<section id="{{ include.section_id }}" class="section section-socials" data-section-type="socials">
   <div class="container">
     {% include section-heading.html
       eyebrow=include.section.eyebrow
@@ -8,10 +8,10 @@
     %}
 
     {% if include.section.layout == "logos" %}
-      <div class="social-logo-strip" aria-label="Club social links">
+      <div class="social-logo-strip">
         {% for item in include.section.items %}
-          <a class="social-logo-link social-{{ item.platform | downcase | slugify }}" href="{{ item.url }}" target="_blank" rel="noopener" aria-label="{{ item.platform }}">
-            {% if item.icon %}
+          <a class="social-logo-link" href="{{ item.url }}" target="_blank" rel="noopener" aria-label="{{ item.platform }}">
+            {% if item.icon and item.icon != "" %}
               <img src="{{ item.icon | relative_url }}" alt="">
             {% else %}
               <span>{{ item.platform | slice: 0 }}</span>
@@ -20,19 +20,19 @@
         {% endfor %}
       </div>
     {% else %}
-      <div class="social-grid">
+      <div class="tile-grid">
         {% for item in include.section.items %}
-          <article class="tile social-card reveal-card social-{{ item.platform | downcase | slugify }}">
-            <p class="card-label">{{ item.platform }}</p>
-            <h3>{{ item.title }}</h3>
-            {% if item.description %}
-              <p>{{ item.description }}</p>
-            {% endif %}
-            {% if item.url %}
-              <a class="button secondary" href="{{ item.url }}" target="_blank" rel="noopener">
-                {{ item.button | default: "Open" }}
-              </a>
-            {% endif %}
+          <article class="tile tile-surface">
+            <div class="tile-body">
+              <p class="tile-subtitle tile-meta">{{ item.platform }}</p>
+              <h3 class="tile-title">{{ item.title }}</h3>
+              {% if item.description %}<p class="tile-text tile-muted">{{ item.description }}</p>{% endif %}
+              {% if item.url %}
+                <a class="button secondary" href="{{ item.url }}" target="_blank" rel="noopener">
+                  {{ item.button | default: "Open" }}
+                </a>
+              {% endif %}
+            </div>
           </article>
         {% endfor %}
       </div>
