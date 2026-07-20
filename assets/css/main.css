@@ -2461,17 +2461,14 @@ main > .section:nth-of-type(even):not(.section-hero) {
 /* FINAL RAW PROFILE IMAGE PIPELINE: committee cards */
 
 .section-committee .committee-crop-grid {
-  display: grid !important;
-  gap: 1rem !important;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)) !important;
-  align-items: start !important;
-  max-width: 1120px;
-  margin-inline: auto;
+  --tile-grid-min: 260px;
+  --tile-grid-max: 1120px;
+  --tile-grid-margin-inline: auto;
 }
 
 @media (min-width: 1050px) {
   .section-committee .committee-crop-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    --tile-grid-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
@@ -2599,7 +2596,7 @@ main > .section:nth-of-type(even):not(.section-hero) {
 
 @media (max-width: 760px) {
   .section-committee .committee-crop-grid {
-    grid-template-columns: 1fr !important;
+    --tile-grid-columns: 1fr;
   }
 }
 
@@ -3466,7 +3463,9 @@ main > .section:nth-of-type(even):not(.section-hero) {
   display: grid;
   gap: var(--tile-gap);
   align-items: start;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--tile-grid-min, 260px)), 1fr));
+  grid-template-columns: var(--tile-grid-columns, repeat(auto-fit, minmax(min(100%, var(--tile-grid-min, 260px)), 1fr)));
+  max-width: var(--tile-grid-max, none);
+  margin-inline: var(--tile-grid-margin-inline, 0);
 }
 
 .tile-stack {
