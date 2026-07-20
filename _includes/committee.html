@@ -8,7 +8,7 @@
     %}
 
     {% if include.section.members %}
-      <div class="tile-grid committee-grid committee-crop-grid">
+      <div class="tile-grid tile-grid-centered tile-grid-three-up committee-grid committee-crop-grid">
         {% for member in include.section.members %}
           {% assign raw_image = member.image_raw | default: member.image %}
           {% assign profile_image = member.image_profile %}
@@ -35,7 +35,7 @@
             {% assign has_extra = true %}
           {% endif %}
 
-          <details class="tile tile-reveal reveal committee-crop-card reveal-card" data-reveal-mode="hover">
+          <details class="tile tile-reveal tile-surface-accent reveal committee-crop-card reveal-card" data-reveal-mode="hover">
             <summary class="tile-header tile-header-row tile-reveal-summary reveal-summary committee-crop-summary">
               <span class="tile-header-text committee-crop-title">
                 <span class="tile-title committee-crop-name">{{ member.name | default: "Committee member" }}</span>
@@ -51,7 +51,7 @@
               <div class="tile-body tile-reveal-body reveal-body committee-crop-expanded">
                 {% if display_image %}
                   <div
-                    class="tile-frame tile-frame-crop committee-crop-image-frame"
+                    class="tile-frame tile-frame-crop tile-frame-accent committee-crop-image-frame"
                     style="--crop-x: {{ crop_x }}%; --crop-y: {{ crop_y }}%; --crop-zoom: {{ crop_zoom | divided_by: 100.0 }};"
                   >
                     <img
