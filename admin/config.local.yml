@@ -240,6 +240,85 @@ collections:
             name: location
             widget: string
             required: false
+      - name: tile_grid
+        label: Tile grid
+        fields:
+        - label: ID
+          name: id
+          widget: string
+          required: false
+        - label: Eyebrow
+          name: eyebrow
+          widget: string
+          required: false
+        - label: Title
+          name: title
+          widget: string
+          required: false
+        - label: Subtitle
+          name: subtitle
+          widget: string
+          required: false
+        - label: Layout
+          name: layout
+          widget: select
+          options:
+          - grid
+          - stack
+          default: grid
+        - label: Tiles
+          name: tiles
+          widget: list
+          required: false
+          summary: '{{fields.title}}'
+          fields:
+          - label: Eyebrow
+            name: eyebrow
+            widget: string
+            required: false
+          - label: Title
+            name: title
+            widget: string
+            required: false
+          - label: Subtitle
+            name: subtitle
+            widget: string
+            required: false
+          - label: Body
+            name: body
+            widget: text
+            required: false
+          - label: Embed HTML
+            name: embed_html
+            widget: text
+            required: false
+          - label: Buttons
+            name: buttons
+            widget: list
+            required: false
+            fields:
+            - label: Label
+              name: label
+              widget: string
+              required: false
+            - label: URL
+              name: url
+              widget: string
+              required: false
+          - label: Nested tiles
+            name: children
+            widget: list
+            required: false
+            summary: '{{fields.title}}'
+            fields:
+            - label: Title
+              name: title
+              widget: string
+              required: false
+            - label: Body
+              name: body
+              widget: text
+              required: false
       - name: gallery
         label: Gallery
         fields:
