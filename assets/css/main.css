@@ -4758,3 +4758,36 @@ main > .section:nth-of-type(even):not(.section-hero) {
 .tile-buttons {
   margin-top: var(--tile-pad-compact);
 }
+
+/* =====================================================
+   PERSISTENT HERO OPT-IN V1
+   Desktop-only scoped hero background polish for tile sections.
+   ===================================================== */
+
+.section-hero.hero-persistent-anchor {
+  isolation: isolate;
+}
+
+.section-hero.hero-persistent-anchor .hero-photo,
+.section-hero.hero-persistent-anchor .hero-bg,
+.section-hero.hero-persistent-anchor .hero-overlay {
+  will-change: transform;
+}
+
+@media (min-width: 1000px) and (prefers-reduced-motion: no-preference) {
+  .section-hero.hero-persistent-anchor.has-photo .hero-photo {
+    background-attachment: fixed;
+    background-position: center center;
+  }
+
+  .section-hero.hero-persistent-anchor + .section {
+    position: relative;
+    z-index: 2;
+  }
+}
+
+@media (max-width: 999px), (prefers-reduced-motion: reduce) {
+  .section-hero.hero-persistent-anchor.has-photo .hero-photo {
+    background-attachment: scroll;
+  }
+}

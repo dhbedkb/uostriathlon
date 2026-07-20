@@ -2,7 +2,7 @@
 {% assign hero_image_clean = hero_image | replace_first: "/uostriathlon", "" | replace_first: site.baseurl | strip %}
 {% assign hero_cache_key = include.section.background_image_raw | default: hero_image | slugify %}
 
-<section id="{{ include.section_id }}" class="hero section-hero {% if hero_image_clean and hero_image_clean != "" %}has-photo{% endif %}" data-section-type="hero">
+<section id="{{ include.section_id }}" class="hero section-hero {% if hero_image_clean and hero_image_clean != "" %}has-photo{% endif %}{% if include.section.persistent_hero %} hero-persistent-anchor{% endif %}" data-section-type="hero">
   {% if hero_image_clean and hero_image_clean != "" %}
     <div
       class="hero-photo"
