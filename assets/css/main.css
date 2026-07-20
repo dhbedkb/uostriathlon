@@ -1832,164 +1832,25 @@ body main > .section:nth-of-type(even):not(.section-hero) {
 }
 
 
-/* ========================================================
-   Social widgets layout refresh
-   ======================================================== */
 
-#social-widgets .embed-grid-three {
-  display: grid;
-  grid-template-columns: minmax(320px, 520px);
-  justify-content: center;
-  gap: 1.5rem;
-}
 
-#social-widgets .embed-strava {
-  width: 100%;
-}
 
-#social-widgets .embed-facebook {
-  width: min(100%, 900px);
-  margin-inline: auto;
-}
 
-#social-widgets .embed-facebook iframe {
-  width: 100% !important;
-  min-width: 100% !important;
-  max-width: 100% !important;
-  height: 850px !important;
-}
-
-#social-widgets .embed-strava iframe {
-  width: 100% !important;
-  max-width: 100% !important;
-}
-
-#social-widgets .embed-shell {
-  min-height: auto;
-}
 
 @media (max-width: 900px) {
 
-  #social-widgets .embed-grid-three {
-    grid-template-columns: 1fr;
-  }
 
-  #social-widgets .embed-facebook {
-    width: 100%;
-  }
 }
 
 
 
-/* =====================================================
-   FINAL FEEDS LAYOUT
-   ===================================================== */
 
-#social-widgets .embed-grid-three {
 
-  display: grid;
 
-  grid-template-columns:
-      minmax(560px, 2fr)
-      minmax(320px, 1fr);
 
-  grid-template-rows:
-      auto
-      1fr;
 
-  grid-template-areas:
-      "facebook summary"
-      "facebook activity";
 
-  gap: 1.5rem;
 
-  align-items: stretch;
-}
-
-/* ----------------------------------------------------- */
-/* Assign cards to areas */
-/* ----------------------------------------------------- */
-
-#social-widgets .embed-facebook {
-  grid-area: facebook;
-}
-
-#social-widgets .embed-strava:nth-of-type(1) {
-  grid-area: activity;
-}
-
-#social-widgets .embed-strava:nth-of-type(2) {
-  grid-area: summary;
-}
-
-/* ----------------------------------------------------- */
-/* Preserve card appearance */
-/* ----------------------------------------------------- */
-
-#social-widgets .embed-shell {
-
-  display: flex;
-  flex-direction: column;
-
-  border-radius: 2rem;
-
-  padding: 1.5rem;
-
-  overflow: hidden;
-}
-
-/* ----------------------------------------------------- */
-/* Facebook card */
-/* ----------------------------------------------------- */
-
-#social-widgets .embed-facebook iframe {
-
-  width: 100% !important;
-
-  min-height: 900px !important;
-
-  height: 900px !important;
-
-  display: block;
-}
-
-#social-widgets .embed-facebook {
-
-  height: 100%;
-}
-
-/* ----------------------------------------------------- */
-/* Summary card */
-/* ----------------------------------------------------- */
-
-#social-widgets .embed-strava:nth-of-type(2) {
-
-  align-self: start;
-}
-
-/* ----------------------------------------------------- */
-/* Activity card */
-/* ----------------------------------------------------- */
-
-#social-widgets .embed-strava:nth-of-type(1) {
-
-  align-self: start;
-}
-
-/* ----------------------------------------------------- */
-/* Strava responsiveness */
-/* ----------------------------------------------------- */
-
-#social-widgets .embed-strava iframe {
-
-  display: block;
-
-  margin-inline: auto;
-
-  width: 100% !important;
-
-  max-width: 100%;
-}
 
 /* ----------------------------------------------------- */
 /* Mobile */
@@ -1997,411 +1858,78 @@ body main > .section:nth-of-type(even):not(.section-hero) {
 
 @media (max-width: 1100px) {
 
-  #social-widgets .embed-grid-three {
 
-    grid-template-columns: 1fr;
-
-    grid-template-areas:
-      "summary"
-      "activity"
-      "facebook";
-  }
-
-  #social-widgets .embed-facebook iframe {
-
-    height: 750px !important;
-    min-height: 750px !important;
-  }
 }
 
 
 
 
-#social-widgets .embed-grid-three {
-  display: grid;
-  grid-template-columns:
-    minmax(500px, 560px)
-    minmax(320px, 420px);
-  grid-template-rows:
-    minmax(250px, auto)
-    minmax(0, 1fr);
-  grid-template-areas:
-    "facebook summary"
-    "facebook activity";
-  gap: 1.5rem;
-  align-items: stretch;
-  justify-content: center;
-}
 
-/* Card order */
-#social-widgets .embed-facebook {
-  grid-area: facebook;
-}
 
-#social-widgets .embed-strava:nth-of-type(1) {
-  grid-area: summary;
-}
 
-#social-widgets .embed-strava:nth-of-type(2) {
-  grid-area: activity;
-}
 
-/* Preserve the card look */
-#social-widgets .embed-shell {
-  display: flex;
-  flex-direction: column;
-  border-radius: 2rem;
-  padding: 1.5rem;
-  overflow: hidden;
-  min-height: 0;
-}
 
-/* Keep headings compact so widgets use the vertical space */
-#social-widgets .embed-card-heading {
-  margin-bottom: 1rem;
-  flex: 0 0 auto;
-}
 
-#social-widgets .embed-card-heading h3 {
-  margin: 0;
-}
 
-#social-widgets .embed-card-heading p:not(.card-label) {
-  margin-bottom: 0;
-}
 
-/* Iframe area fills remaining card space */
-#social-widgets .embed-frame {
-  flex: 1 1 auto;
-  display: grid;
-  place-items: start center;
-  min-height: 0;
-  width: 100%;
-}
 
-/* Facebook: use the maximum Page Plugin width cleanly */
-#social-widgets .embed-facebook iframe {
-  width: 500px !important;
-  max-width: 100% !important;
-  height: 820px !important;
-  min-height: 820px !important;
-  display: block;
-  margin-inline: auto;
-}
 
-/* Strava summary: no dead space */
-#social-widgets .embed-strava:nth-of-type(1) {
-  align-self: stretch;
-}
 
-#social-widgets .embed-strava:nth-of-type(1) .embed-frame {
-  align-content: start;
-}
-
-#social-widgets .embed-strava:nth-of-type(1) iframe {
-  width: 300px !important;
-  max-width: 100% !important;
-  height: 160px !important;
-  min-height: 160px !important;
-}
-
-/* Strava activity: fills the lower-right card neatly */
-#social-widgets .embed-strava:nth-of-type(2) {
-  align-self: stretch;
-}
-
-#social-widgets .embed-strava:nth-of-type(2) iframe {
-  width: 300px !important;
-  max-width: 100% !important;
-  height: 454px !important;
-  min-height: 454px !important;
-}
 
 /* Make the right-hand column visually match the Facebook card height */
 @media (min-width: 1101px) {
-  #social-widgets .embed-facebook {
-    min-height: 100%;
-  }
 
-  #social-widgets .embed-strava:nth-of-type(1),
-  #social-widgets .embed-strava:nth-of-type(2) {
-    min-height: 0;
-  }
 }
 
 /* Mobile/tablet stack order */
 @media (max-width: 1100px) {
-  #social-widgets .embed-grid-three {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto;
-    grid-template-areas:
-      "summary"
-      "activity"
-      "facebook";
-  }
 
-  #social-widgets .embed-facebook iframe {
-    width: 500px !important;
-    max-width: 100% !important;
-    height: 720px !important;
-    min-height: 720px !important;
-  }
 }
 
 /* Small screens */
 @media (max-width: 560px) {
-  #social-widgets .embed-shell {
-    padding: 1rem;
-    border-radius: 1.25rem;
-  }
 
-  #social-widgets .embed-facebook iframe {
-    height: 650px !important;
-    min-height: 650px !important;
-  }
 }
 
 
 
-/*
-  Desired desktop layout:
 
-  ┌──────────────────────┬──────────────────┐
-  │                      │  Strava Summary  │
-  │   Facebook Feed      ├──────────────────┤
-  │                      │  Latest Activity │
-  │                      │                  │
-  └──────────────────────┴──────────────────┘
-*/
 
-#social-widgets .embed-grid-three {
-  display: grid !important;
-  grid-template-columns:
-    minmax(500px, 560px)
-    minmax(320px, 420px) !important;
-  grid-template-rows:
-    auto
-    1fr !important;
-  grid-template-areas:
-    "facebook summary"
-    "facebook activity" !important;
-  gap: 1.5rem !important;
-  align-items: stretch !important;
-  justify-content: center !important;
-}
 
-/* Exact card placement based on real YAML order */
-#social-widgets .embed-grid-three > .embed-shell:nth-child(1) {
-  grid-area: facebook !important;
-}
 
-#social-widgets .embed-grid-three > .embed-shell:nth-child(2) {
-  grid-area: summary !important;
-}
 
-#social-widgets .embed-grid-three > .embed-shell:nth-child(3) {
-  grid-area: activity !important;
-}
 
-/* Preserve cards */
-#social-widgets .embed-shell {
-  display: flex !important;
-  flex-direction: column !important;
-  border-radius: 2rem !important;
-  padding: 1.5rem !important;
-  overflow: hidden !important;
-  min-height: 0 !important;
-  height: auto !important;
-}
 
-/* Compact headings */
-#social-widgets .embed-card-heading {
-  flex: 0 0 auto !important;
-  margin-bottom: 1rem !important;
-}
 
-#social-widgets .embed-card-heading h3 {
-  margin: 0 !important;
-  line-height: 1.05 !important;
-}
 
-#social-widgets .embed-card-heading p:not(.card-label) {
-  margin-bottom: 0 !important;
-}
 
-/* Iframe area */
-#social-widgets .embed-frame {
-  flex: 0 0 auto !important;
-  display: grid !important;
-  place-items: start center !important;
-  width: 100% !important;
-  min-height: 0 !important;
-  overflow: hidden !important;
-}
 
-/* Facebook card: left, full-height feel, no Events tab, maximised plugin width */
-#social-widgets .embed-grid-three > .embed-shell:nth-child(1) {
-  height: 100% !important;
-}
 
-#social-widgets .embed-grid-three > .embed-shell:nth-child(1) .embed-frame {
-  flex: 1 1 auto !important;
-}
 
-#social-widgets .embed-grid-three > .embed-shell:nth-child(1) iframe {
-  width: 500px !important;
-  max-width: 100% !important;
-  height: 760px !important;
-  min-height: 760px !important;
-  display: block !important;
-  margin-inline: auto !important;
-}
-
-/* Strava summary: top-right, intentionally compact */
-#social-widgets .embed-grid-three > .embed-shell:nth-child(2) {
-  align-self: start !important;
-}
-
-#social-widgets .embed-grid-three > .embed-shell:nth-child(2) iframe {
-  width: 300px !important;
-  max-width: 100% !important;
-  height: 160px !important;
-  min-height: 160px !important;
-  display: block !important;
-  margin-inline: auto !important;
-}
-
-/* Latest activity: bottom-right */
-#social-widgets .embed-grid-three > .embed-shell:nth-child(3) {
-  align-self: stretch !important;
-}
-
-#social-widgets .embed-grid-three > .embed-shell:nth-child(3) iframe {
-  width: 300px !important;
-  max-width: 100% !important;
-  height: 454px !important;
-  min-height: 454px !important;
-  display: block !important;
-  margin-inline: auto !important;
-}
 
 /* Make the right column visually balance the Facebook card */
 @media (min-width: 1101px) {
-  #social-widgets .embed-grid-three > .embed-shell:nth-child(3) {
-    min-height: 0 !important;
-  }
 }
 
 /* Mobile/tablet stack order keeps summary above activity */
 @media (max-width: 1100px) {
-  #social-widgets .embed-grid-three {
-    grid-template-columns: 1fr !important;
-    grid-template-rows: auto !important;
-    grid-template-areas:
-      "summary"
-      "activity"
-      "facebook" !important;
-  }
-  #social-widgets .embed-grid-three > .embed-shell:nth-child(1) iframe {
-    width: 500px !important;
-    max-width: 100% !important;
-    height: 680px !important;
-    min-height: 680px !important;
-  }
 }
 
 /* Small screens */
 @media (max-width: 560px) {
-  #social-widgets .embed-shell {
-    padding: 1rem !important;
-    border-radius: 1.25rem !important;
-  }
 
-  #social-widgets .embed-grid-three > .embed-shell:nth-child(1) iframe {
-    height: 620px !important;
-    min-height: 620px !important;
-  }
 }
 
-/* =====================================================
-   FINAL POLISH
-   ===================================================== */
 
-/* Narrow Strava column slightly */
 
-#social-widgets .embed-grid-three {
 
-  grid-template-columns:
-      minmax(500px, 540px)
-      minmax(330px, 360px) !important;
-}
 
-/* Facebook slightly shorter */
 
-#social-widgets .embed-grid-three > .embed-shell:nth-child(1) iframe {
 
-  height: 700px !important;
-  min-height: 700px !important;
-}
 
-/* Right-hand side should visually match Facebook height */
 
-#social-widgets .embed-grid-three {
 
-  align-items: stretch !important;
-}
 
-/* Summary card stays compact */
-
-#social-widgets .embed-grid-three > .embed-shell:nth-child(2) {
-
-  align-self: start !important;
-}
-
-#social-widgets .embed-grid-three > .embed-shell:nth-child(2) iframe {
-
-  height: 160px !important;
-  min-height: 160px !important;
-}
-
-/* Remove excess dead space below summary */
-
-#social-widgets .embed-grid-three > .embed-shell:nth-child(2) .embed-frame {
-
-  flex: 0 0 auto !important;
-}
-
-/* Activity card fills remaining vertical space */
-
-#social-widgets .embed-grid-three > .embed-shell:nth-child(3) {
-
-  height: 100% !important;
-}
-
-#social-widgets .embed-grid-three > .embed-shell:nth-child(3) .embed-frame {
-
-  flex: 1 1 auto !important;
-}
-
-#social-widgets .embed-grid-three > .embed-shell:nth-child(3) iframe {
-
-  height: 454px !important;
-  min-height: 454px !important;
-}
-
-/* Slightly tighten internal card padding */
-
-#social-widgets .embed-shell {
-
-  padding: 1.25rem !important;
-}
-
-/* Give Facebook card more visual importance */
-
-#social-widgets .embed-facebook {
-
-  border-color: rgba(247,211,93,.22) !important;
-}
 
 /*
   Unfortunately Facebook and Strava iframes control
@@ -2478,108 +2006,25 @@ body main > .section:nth-of-type(even):not(.section-hero) {
   font-weight: 950;
 }
 
-/* Feed grid: desktop keeps Facebook left and Stravas right */
-#social-widgets .embed-grid-three {
-  display: grid !important;
-  grid-template-columns:
-    minmax(500px, 560px)
-    minmax(300px, 352px) !important;
-  grid-template-rows:
-    auto
-    auto !important;
-  grid-template-areas:
-    "facebook summary"
-    "facebook activity" !important;
-  gap: 1.25rem !important;
-  align-items: start !important;
-  justify-content: center !important;
-}
 
-#social-widgets .embed-grid-three > .embed-shell:nth-child(1) {
-  grid-area: facebook !important;
-}
 
-#social-widgets .embed-grid-three > .embed-shell:nth-child(2) {
-  grid-area: summary !important;
-}
 
-#social-widgets .embed-grid-three > .embed-shell:nth-child(3) {
-  grid-area: activity !important;
-}
 
-/* Tighter cards around iframes */
-#social-widgets .embed-shell {
-  display: flex !important;
-  flex-direction: column !important;
-  padding: 1rem !important;
-  border-radius: 1.75rem !important;
-  min-height: 0 !important;
-  overflow: hidden !important;
-}
 
-#social-widgets .embed-card-heading {
-  margin-bottom: 0.8rem !important;
-}
 
-#social-widgets .embed-card-heading h3 {
-  margin: 0 !important;
-  line-height: 1.05 !important;
-}
 
-#social-widgets .embed-card-heading p:not(.card-label) {
-  margin-bottom: 0 !important;
-}
 
-#social-widgets .embed-frame {
-  display: grid !important;
-  place-items: start center !important;
-  min-height: 0 !important;
-  width: 100% !important;
-  overflow: hidden !important;
-}
 
-/* Facebook plugin max width is 500px; card is sized around that. */
-#social-widgets .embed-grid-three > .embed-shell:nth-child(1) iframe {
-  width: 500px !important;
-  max-width: 100% !important;
-  height: 760px !important;
-  min-height: 760px !important;
-}
+/* Facebook plugin max width is 500px;
 
-/* Strava summary compact */
-#social-widgets .embed-grid-three > .embed-shell:nth-child(2) iframe {
-  width: 300px !important;
-  max-width: 100% !important;
-  height: 160px !important;
-  min-height: 160px !important;
-}
 
-/* Strava activity compact but complete */
-#social-widgets .embed-grid-three > .embed-shell:nth-child(3) iframe {
-  width: 300px !important;
-  max-width: 100% !important;
-  height: 454px !important;
-  min-height: 454px !important;
-}
+
 
 /* Mobile logic:
    Facebook first, then Strava summary, then Strava latest activity.
 */
 @media (max-width: 1100px) {
-  #social-widgets .embed-grid-three {
-    grid-template-columns: 1fr !important;
-    grid-template-areas:
-      "facebook"
-      "summary"
-      "activity" !important;
-  }
 
-  #social-widgets .embed-grid-three > .embed-shell:nth-child(1) iframe {
-    width: 500px !important;
-    max-width: 100% !important;
-    height: 680px !important;
-    min-height: 680px !important;
-  }
 }
 
 @media (max-width: 560px) {
@@ -2594,15 +2039,7 @@ body main > .section:nth-of-type(even):not(.section-hero) {
     height: 74px;
   }
 
-  #social-widgets .embed-shell {
-    padding: 0.85rem !important;
-    border-radius: 1.25rem !important;
-  }
 
-  #social-widgets .embed-grid-three > .embed-shell:nth-child(1) iframe {
-    height: 620px !important;
-    min-height: 620px !important;
-  }
 }
 
 
@@ -2872,13 +2309,6 @@ main > .section {
     The widget section stays normal-flow because iframes are tall and
     external widgets do not behave well inside sticky viewport panels.
   */
-  body main > #social-widgets {
-    position: relative !important;
-    top: auto !important;
-    z-index: 6;
-    min-height: auto !important;
-    overflow: visible !important;
-  }
 }
 
 /* -----------------------------------------------------
@@ -4081,143 +3511,37 @@ main > .section:nth-of-type(even):not(.section-hero) {
   }
 }
 
-/* =====================================================
 
-#social-widgets .embed-grid-three {
-  align-items: start !important;
-  justify-content: center;
-}
 
-#social-widgets .embed-facebook {
-  --widget-native-width: 500px;
-}
 
-#social-widgets .embed-strava {
-  --widget-native-width: 300px;
-}
 
-#social-widgets .embed-grid-three > .embed-shell.live-widget-boundary {
-  justify-self: center;
-  align-self: start !important;
-  width: min(100%, calc(var(--widget-native-width, 100%) + 4rem));
-  height: auto !important;
-  min-height: 0 !important;
-}
 
-#social-widgets .embed-shell.live-widget-boundary .embed-frame {
-  width: 100%;
-  justify-content: center;
-}
-
-#social-widgets .embed-shell.live-widget-boundary .embed-frame iframe {
-  width: var(--widget-native-width, 100%) !important;
-  max-width: 100% !important;
-  margin: 0 auto !important;
-  box-sizing: border-box;
-}
 
 @media (max-width: 560px) {
-  #social-widgets .embed-facebook.live-widget-boundary .embed-frame {
-    overflow-x: auto;
-    justify-content: flex-start;
-  }
 
-  #social-widgets .embed-facebook.live-widget-boundary .embed-frame iframe {
-    width: var(--widget-native-width, 500px) !important;
-    max-width: none !important;
-  }
+
 }
 
-/* =====================================================
 
-#social-widgets .embed-grid-balanced {
-  display: grid;
-  grid-template-columns: minmax(0, 640px) minmax(0, 420px) !important;
-  gap: 1.5rem !important;
-  align-items: start;
-  justify-content: center;
-}
 
-#social-widgets .embed-stack {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  align-self: start;
-}
 
-#social-widgets .embed-stack .embed-shell {
-  flex: 0 0 auto !important;
-  height: auto !important;
-  min-height: 0 !important;
-}
 
-#social-widgets .embed-shell.live-widget-boundary {
-  box-sizing: border-box;
-  padding: var(--tile-frame-pad) !important;
-}
 
-#social-widgets .embed-shell.live-widget-boundary .embed-card-heading {
-  margin: 0 0 var(--tile-frame-pad) !important;
-}
 
-#social-widgets .embed-shell.live-widget-boundary .embed-frame,
-#social-widgets .embed-shell.live-widget-boundary .embed-placeholder {
-  box-sizing: border-box;
-  width: 100%;
-  padding: var(--tile-frame-pad) !important;
-  border-radius: var(--tile-radius-inner);
-  border: var(--tile-border-dark);
-  background: rgba(0, 0, 0, 0.38);
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-}
 
-#social-widgets .embed-facebook iframe {
-  width: 500px !important;
-  max-width: 100% !important;
-  height: 760px !important;
-  min-height: 760px !important;
-  margin: 0 auto !important;
-  border: 0;
-  box-sizing: border-box;
-}
 
-#social-widgets .embed-strava iframe {
-  width: 300px !important;
-  max-width: 100% !important;
-  margin: 0 auto !important;
-  border: 0;
-  box-sizing: border-box;
-}
-
-#social-widgets .embed-mobile-cta {
-  display: none;
-}
 
 @media (max-width: 1100px) {
-  #social-widgets .embed-grid-balanced {
-    grid-template-columns: minmax(0, 1fr) !important;
-  }
+
 }
 
 @media (max-width: 560px) {
-  #social-widgets .embed-facebook .embed-frame {
-    display: none !important;
-  }
 
-  #social-widgets .embed-facebook .embed-mobile-cta {
-    display: block;
-  }
+
 }
 
 /* Mobile: stack + CTA fallback */
 @media (max-width: 1100px) {
-  #social-widgets .embed-grid-three {
-    grid-template-columns: 1fr !important;
-    grid-template-areas: none !important;
-  }
   .embed-facebook iframe { height: 650px !important; min-height: 650px !important; }
   .embed-mobile-cta { display: block !important; }
   .embed-frame { display: none !important; } /* hide iframe on very small if needed */
