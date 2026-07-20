@@ -10,7 +10,7 @@
     {% if include.section.embeds and include.section.layout == "stack" %}
       <div class="tile-stack social-widget-stack">
         {% for embed in include.section.embeds %}
-          <article class="tile social-widget-tile social-widget-{{ embed.provider | default: "generic" }}">
+          <article class="tile social-widget-tile social-widget-{{ embed.provider | default: 'generic' }}">
             <header class="tile-header social-widget-header">
               {% if embed.provider %}<p class="card-label">{{ embed.provider }}</p>{% endif %}
               {% if embed.title %}<h3>{{ embed.title }}</h3>{% endif %}
@@ -18,12 +18,12 @@
             </header>
 
             {% if embed.embed_html %}
-              <div class="tile-frame social-widget-frame social-widget-frame-{{ embed.provider | default: "generic" }}">
+              <div class="tile-frame social-widget-frame social-widget-frame-{{ embed.provider | default: 'generic' }}">
                 {{ embed.embed_html }}
               </div>
             {% elsif embed.url %}
               <div class="tile-frame social-widget-frame">
-                {{ embed.url }}
+                <a class="button primary" href="{{ embed.url }}" target="_blank" rel="noopener noreferrer">
                   {{ embed.button_label | default: "Open" }}
                 </a>
               </div>
@@ -31,7 +31,7 @@
 
             {% if embed.provider == "facebook" and embed.url %}
               <p class="social-widget-fallback-link">
-                {{ embed.url }}
+                <a class="button secondary" href="{{ embed.url }}" target="_blank" rel="noopener noreferrer">
                   {{ embed.button_label | default: "Open Facebook" }}
                 </a>
               </p>
@@ -53,7 +53,7 @@
               <div class="embed-frame">{{ embed.embed_html }}</div>
             {% elsif embed.url %}
               <div class="embed-placeholder">
-                {{ embed.url }}
+                <a class="button primary" href="{{ embed.url }}" target="_blank" rel="noopener noreferrer">
                   {{ embed.button_label | default: "Open" }}
                 </a>
               </div>
