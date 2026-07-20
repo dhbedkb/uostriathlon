@@ -2569,14 +2569,7 @@ main > .section:nth-of-type(even):not(.section-hero) {
 }
 
 .section-committee .committee-crop-image-frame {
-  position: relative;
-  width: 100% !important;
-  max-width: 100% !important;
-  aspect-ratio: 1 / 1;
-  overflow: hidden;
-  border-radius: 1rem;
-  margin: 0 0 1rem 0;
-  background:
+  --tile-frame-bg:
     radial-gradient(circle at top right, rgba(247, 211, 93, 0.24), transparent 14rem),
     #101010;
 }
@@ -2590,16 +2583,7 @@ main > .section:nth-of-type(even):not(.section-hero) {
   pointer-events: none;
 }
 
-.section-committee .committee-crop-image {
-  display: block !important;
-  width: 100% !important;
-  height: 100% !important;
-  max-width: none !important;
-  object-fit: cover !important;
-  object-position: var(--crop-x, 50%) var(--crop-y, 50%) !important;
-  transform: scale(var(--crop-zoom, 1));
-  transform-origin: var(--crop-x, 50%) var(--crop-y, 50%);
-}
+
 
 .section-committee .committee-crop-bio,
 .section-committee .committee-crop-question p,
@@ -3176,16 +3160,9 @@ main > .section:nth-of-type(even):not(.section-hero) {
   padding: 0 !important;
 }
 
-.section-committee .committee-crop-image-frame {
-  margin: 0 !important;
-  border-radius: var(--u-tile-frame-radius) !important;
-}
 
-.section-committee .committee-crop-image-frame img,
-.section-committee .committee-crop-image-frame picture,
-.section-committee .committee-crop-image-frame source {
-  margin: 0 !important;
-}
+
+
 
 .section-committee .committee-crop-info,
 .section-committee .committee-crop-meta,
@@ -3358,12 +3335,7 @@ main > .section:nth-of-type(even):not(.section-hero) {
   gap: var(--tile-pad-compact) !important;
 }
 
-.section-committee .committee-crop-image-frame.tile-frame {
-  box-sizing: border-box !important;
-  margin: 0 !important;
-  padding: var(--tile-frame-pad) !important;
-  border-radius: var(--tile-frame-radius) !important;
-}
+
 
 .section-committee .committee-crop-expanded.tile-body {
   margin-top: var(--tile-pad) !important;
@@ -3701,22 +3673,3 @@ main > .section:nth-of-type(even):not(.section-hero) {
 }
 
 /* The image frame is the media frame; crop logic remains separate. */
-.section-committee .committee-crop-image-frame,
-.section-committee .committee-crop-image-frame.tile-frame {
-  width: 100% !important;
-  max-width: none !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  box-sizing: border-box !important;
-  aspect-ratio: 1 / 1;
-  overflow: hidden !important;
-  border-radius: var(--tile-frame-radius) !important;
-}
-
-.section-committee .committee-crop-image {
-  display: block !important;
-  width: 100% !important;
-  height: 100% !important;
-  max-width: none !important;
-  object-fit: cover !important;
-}
