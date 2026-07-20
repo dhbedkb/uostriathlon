@@ -8,7 +8,7 @@
     %}
 
     {% if include.section.members %}
-      <div class="tile-grid tile-grid-centered tile-grid-three-up committee-grid committee-crop-grid">
+      <div class="tile-grid tile-grid-centered tile-grid-three-up">
         {% for member in include.section.members %}
           {% assign raw_image = member.image_raw | default: member.image %}
           {% assign profile_image = member.image_profile %}
@@ -35,27 +35,27 @@
             {% assign has_extra = true %}
           {% endif %}
 
-          <details class="tile tile-reveal tile-surface-accent reveal committee-crop-card reveal-card" data-reveal-mode="hover">
-            <summary class="tile-header tile-header-row tile-reveal-summary reveal-summary committee-crop-summary">
-              <span class="tile-header-text committee-crop-title">
-                <span class="tile-title committee-crop-name">{{ member.name | default: "Committee member" }}</span>
+          <details class="tile tile-reveal tile-surface-accent reveal reveal-card" data-reveal-mode="hover">
+            <summary class="tile-header tile-header-row tile-reveal-summary reveal-summary">
+              <span class="tile-header-text">
+                <span class="tile-title">{{ member.name | default: "Committee member" }}</span>
                 {% if member.role %}
-                  <span class="tile-subtitle tile-meta committee-crop-role">{{ member.role }}</span>
+                  <span class="tile-subtitle tile-meta">{{ member.role }}</span>
                 {% endif %}
               </span>
 
-              <span class="tile-reveal-toggle committee-crop-toggle" aria-hidden="true"></span>
+              <span class="tile-reveal-toggle" aria-hidden="true"></span>
             </summary>
 
             {% if has_extra %}
-              <div class="tile-body tile-reveal-body reveal-body committee-crop-expanded">
+              <div class="tile-body tile-reveal-body reveal-body">
                 {% if display_image %}
                   <div
-                    class="tile-frame tile-frame-crop tile-frame-accent committee-crop-image-frame"
+                    class="tile-frame tile-frame-crop tile-frame-accent"
                     style="--crop-x: {{ crop_x }}%; --crop-y: {{ crop_y }}%; --crop-zoom: {{ crop_zoom | divided_by: 100.0 }};"
                   >
                     <img
-                      class="tile-media-crop committee-crop-image"
+                      class="tile-media-crop"
                       src="{{ display_image_clean | relative_url }}?v={{ site.time | date: '%s' }}-{{ crop_x }}-{{ crop_y }}-{{ crop_zoom }}"
                       alt="{{ member.name | default: 'Committee member' }}"
                       loading="lazy"
@@ -64,14 +64,14 @@
                 {% endif %}
 
                 {% if member.bio %}
-                  <p class="tile-text tile-muted committee-crop-bio">{{ member.bio }}</p>
+                  <p class="tile-text tile-muted">{{ member.bio }}</p>
                 {% endif %}
 
                 {% if member.questions %}
-                  <div class="committee-crop-questions">
+                  <div class="tile-stack">
                     {% for item in member.questions %}
                       {% if item.question or item.answer %}
-                        <div class="tile-nested tile-question committee-crop-question">
+                        <div class="tile-nested tile-question">
                           {% if item.question %}
                             <strong>{{ item.question }}</strong>
                           {% endif %}
@@ -85,13 +85,13 @@
                 {% endif %}
 
                 {% if member.extra_details %}
-                  <div class="tile-text tile-muted committee-crop-extra">
+                  <div class="tile-text tile-muted">
                     {{ member.extra_details | markdownify }}
                   </div>
                 {% endif %}
 
                 {% if member.email %}
-                  <p class="tile-text committee-crop-email">
+                  <p class="tile-text">
                     {{ member.email }}Email →</a>
                   </p>
                 {% endif %}
