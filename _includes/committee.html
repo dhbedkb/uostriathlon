@@ -36,8 +36,8 @@
           {% endif %}
 
           <details class="tile reveal committee-crop-card reveal-card" data-reveal-mode="hover">
-            <summary class="tile-header reveal-summary committee-crop-summary">
-              <span class="committee-crop-title">
+            <summary class="tile-header tile-header-row reveal-summary committee-crop-summary">
+              <span class="tile-header-text committee-crop-title">
                 <span class="committee-crop-name">{{ member.name | default: "Committee member" }}</span>
                 {% if member.role %}
                   <span class="committee-crop-role">{{ member.role }}</span>

@@ -4142,3 +4142,183 @@ main > .section:nth-of-type(even):not(.section-hero) {
   display: block;
   width: 100%;
 }
+
+/* =====================================================
+   UNIVERSAL TILE LAYOUT CONTRACT V1
+   Enforces content-driven tile spacing, title rhythm, and shrink-to-content behaviour.
+   ===================================================== */
+
+:root {
+  --tile-gap: 1.5rem;
+  --tile-pad: 1.5rem;
+  --tile-pad-compact: 1rem;
+  --tile-radius: 1.75rem;
+  --tile-frame-radius: 1rem;
+  --tile-frame-pad: 1rem;
+  --tile-inner-gap: 1rem;
+  --tile-title-gap: 0.35rem;
+  --tile-title-line: 1.15;
+  --tile-header-gap: 0.75rem;
+}
+
+.tile {
+  display: flex;
+  flex-direction: column;
+  gap: var(--tile-inner-gap);
+  height: auto;
+  min-height: 0 !important;
+  box-sizing: border-box;
+}
+
+.tile-header {
+  margin: 0;
+  min-height: 0 !important;
+}
+
+.tile-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--tile-header-gap);
+  margin: 0;
+  min-height: 0 !important;
+}
+
+.tile-header-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--tile-title-gap);
+  min-width: 0;
+}
+
+.tile-header-text > .tile-title,
+.tile-header-text > h2,
+.tile-header-text > h3,
+.tile-header-text > h4 {
+  line-height: var(--tile-title-line);
+}
+
+.tile-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--tile-inner-gap);
+  width: 100%;
+  margin: 0;
+  min-height: 0 !important;
+  box-sizing: border-box;
+}
+
+.tile-body > * {
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
+
+.tile-frame {
+  display: block;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  overflow: hidden;
+  border-radius: var(--tile-frame-radius);
+  box-sizing: border-box;
+}
+
+.tile-frame > img,
+.tile-frame > picture,
+.tile-frame > iframe,
+.tile-frame > video {
+  display: block;
+  width: 100%;
+  max-width: none;
+}
+
+.tile-grid {
+  gap: var(--tile-gap);
+  align-items: start;
+}
+
+.tile-stack {
+  gap: var(--tile-gap);
+}
+
+.tile-nested {
+  padding: var(--tile-pad-compact);
+  border-radius: var(--tile-frame-radius);
+  box-shadow: none;
+}
+
+/* Temporary legacy neutralisation: committee cards must obey the tile contract. */
+.section-committee .committee-crop-card {
+  height: auto !important;
+  min-height: 0 !important;
+  padding: var(--tile-pad) !important;
+  border-radius: var(--tile-radius) !important;
+}
+
+.section-committee .committee-crop-summary,
+.section-committee .committee-crop-summary.tile-header-row {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: var(--tile-header-gap) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  min-height: 0 !important;
+  list-style: none;
+}
+
+.section-committee .committee-crop-summary::-webkit-details-marker {
+  display: none;
+}
+
+.section-committee .committee-crop-title,
+.section-committee .committee-crop-title.tile-header-text {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: var(--tile-title-gap) !important;
+  min-width: 0;
+}
+
+.section-committee .committee-crop-name,
+.section-committee .committee-crop-role {
+  line-height: var(--tile-title-line);
+}
+
+/* Expanded committee content is a tile body: no bespoke horizontal inset. */
+.section-committee .committee-crop-expanded,
+.section-committee .committee-crop-expanded.tile-body {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: var(--tile-inner-gap) !important;
+  width: 100% !important;
+  max-width: none !important;
+  margin-top: var(--tile-inner-gap) !important;
+  padding: var(--tile-inner-gap) 0 0 !important;
+  box-sizing: border-box !important;
+}
+
+.section-committee .committee-crop-expanded > * {
+  margin-block-start: 0 !important;
+  margin-block-end: 0 !important;
+}
+
+/* The image frame is the media frame; crop logic remains separate. */
+.section-committee .committee-crop-image-frame,
+.section-committee .committee-crop-image-frame.tile-frame {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+  aspect-ratio: 1 / 1;
+  overflow: hidden !important;
+  border-radius: var(--tile-frame-radius) !important;
+}
+
+.section-committee .committee-crop-image {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  object-fit: cover !important;
+}
