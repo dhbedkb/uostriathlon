@@ -2460,40 +2460,6 @@ main > .section:nth-of-type(even):not(.section-hero) {
 
 /* FINAL RAW PROFILE IMAGE PIPELINE: committee cards */
 
-.section-committee .committee-crop-grid {
-  --tile-grid-min: 260px;
-  --tile-grid-max: 1120px;
-  --tile-grid-margin-inline: auto;
-}
-
-@media (min-width: 1050px) {
-  .section-committee .committee-crop-grid {
-    --tile-grid-columns: repeat(3, minmax(0, 1fr));
-  }
-}
-
-.section-committee .committee-crop-card {
-  --tile-reveal-open-border-color: rgba(247, 211, 93, 0.55);
-  --tile-title-size: clamp(1.18rem, 2.2vw, 1.62rem);
-  --tile-title-weight: 950;
-  --tile-title-line: 1.05;
-  --tile-subtitle-color: var(--color-gold);
-  --tile-subtitle-size: 0.78rem;
-  --tile-subtitle-weight: 900;
-  --tile-subtitle-letter-spacing: 0.08em;
-  --tile-subtitle-transform: uppercase;
-  --tile-muted-color: var(--color-muted);
-  display: block !important;
-  width: 100% !important;
-  max-width: none !important;
-  overflow: hidden !important;
-  border: 1px solid var(--color-border);
-  border-radius: 1.25rem;
-  background:
-    radial-gradient(circle at top right, rgba(247, 211, 93, 0.12), transparent 18rem),
-    var(--color-surface);
-  box-shadow: var(--shadow-soft);
-}
 
 
 
@@ -2519,28 +2485,6 @@ main > .section:nth-of-type(even):not(.section-hero) {
 
 
 
-.section-committee .committee-crop-expanded {
-  width: 100% !important;
-  max-width: 100% !important;
-  box-sizing: border-box;
-  border-top: 1px solid var(--color-border);
-  padding: 1rem 1.15rem 1.15rem !important;
-}
-
-.section-committee .committee-crop-image-frame {
-  --tile-frame-bg:
-    radial-gradient(circle at top right, rgba(247, 211, 93, 0.24), transparent 14rem),
-    #101010;
-}
-
-.section-committee .committee-crop-image-frame::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border: 2px solid rgba(247, 211, 93, 0.7);
-  border-radius: inherit;
-  pointer-events: none;
-}
 
 
 
@@ -2548,11 +2492,17 @@ main > .section:nth-of-type(even):not(.section-hero) {
 
 
 
-@media (max-width: 760px) {
-  .section-committee .committee-crop-grid {
-    --tile-grid-columns: 1fr;
-  }
-}
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2837,8 +2787,7 @@ main > .section:nth-of-type(even):not(.section-hero) {
 .faq-item,
 .notice-card,
 .sponsor-card,
-.timeline-item,
-.committee-crop-card {
+.timeline-item {
   box-sizing: border-box;
 }
 
@@ -2855,8 +2804,7 @@ main > .section:nth-of-type(even):not(.section-hero) {
 }
 
 .gallery-item img,
-.card-photo,
-.committee-crop-image-frame {
+.card-photo {
   border-radius: var(--u-tile-frame-radius);
 }
 
@@ -2933,8 +2881,7 @@ main > .section:nth-of-type(even):not(.section-hero) {
 .faq-item,
 .notice-card,
 .sponsor-card,
-.timeline-item,
-.committee-crop-card {
+.timeline-item {
   box-sizing: border-box;
 }
 
@@ -2952,8 +2899,7 @@ main > .section:nth-of-type(even):not(.section-hero) {
 }
 
 .gallery-item img,
-.card-photo,
-.committee-crop-image-frame {
+.card-photo {
   border-radius: var(--u-tile-frame-radius);
 }
 
@@ -3494,6 +3440,8 @@ main > .section:nth-of-type(even):not(.section-hero) {
 
 .tile-reveal-body {
   overflow: visible;
+  border-top: var(--tile-reveal-body-border, 0);
+  padding-top: var(--tile-reveal-body-pad, 0);
 }
 
 .tile-reveal-toggle {
@@ -3573,6 +3521,8 @@ main > .section:nth-of-type(even):not(.section-hero) {
   --tile-subtitle-letter-spacing: 0.08em;
   --tile-subtitle-transform: uppercase;
   --tile-muted-color: var(--color-muted);
+  --tile-reveal-body-border: 1px solid var(--color-border);
+  --tile-reveal-body-pad: var(--tile-inner-gap);
   display: block;
   width: 100%;
   max-width: none;
@@ -3601,24 +3551,9 @@ main > .section:nth-of-type(even):not(.section-hero) {
 }
 
 /* Temporary legacy neutralisation: committee cards must obey the tile contract. */
-.section-committee .committee-crop-card {
-  height: auto !important;
-  min-height: 0 !important;
-  padding: var(--tile-pad) !important;
-  border-radius: var(--tile-radius) !important;
-}
 
-.section-committee .committee-crop-summary,
-.section-committee .committee-crop-summary.tile-header-row {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: space-between !important;
-  gap: var(--tile-header-gap) !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  min-height: 0 !important;
-  list-style: none;
-}
+
+
 
 
 
@@ -3627,21 +3562,8 @@ main > .section:nth-of-type(even):not(.section-hero) {
 
 
 /* Expanded committee content is a tile body: no bespoke horizontal inset. */
-.section-committee .committee-crop-expanded,
-.section-committee .committee-crop-expanded.tile-body {
-  display: flex !important;
-  flex-direction: column !important;
-  gap: var(--tile-inner-gap) !important;
-  width: 100% !important;
-  max-width: none !important;
-  margin-top: var(--tile-inner-gap) !important;
-  padding: var(--tile-inner-gap) 0 0 !important;
-  box-sizing: border-box !important;
-}
 
-.section-committee .committee-crop-expanded > * {
-  margin-block-start: 0 !important;
-  margin-block-end: 0 !important;
-}
+
+
 
 /* The image frame is the media frame; crop logic remains separate. */
