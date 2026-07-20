@@ -51,11 +51,11 @@
               <div class="tile-body reveal-body committee-crop-expanded">
                 {% if display_image %}
                   <div
-                    class="tile-frame committee-crop-image-frame"
+                    class="tile-frame tile-frame-crop committee-crop-image-frame"
                     style="--crop-x: {{ crop_x }}%; --crop-y: {{ crop_y }}%; --crop-zoom: {{ crop_zoom | divided_by: 100.0 }};"
                   >
                     <img
-                      class="committee-crop-image"
+                      class="tile-media-crop committee-crop-image"
                       src="{{ display_image_clean | relative_url }}?v={{ site.time | date: '%s' }}-{{ crop_x }}-{{ crop_y }}-{{ crop_zoom }}"
                       alt="{{ member.name | default: 'Committee member' }}"
                       loading="lazy"
