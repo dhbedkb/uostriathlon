@@ -46,7 +46,7 @@ sections:
   eyebrow: Widgets
   title: Club feeds.
   subtitle: Strava activity and the public Facebook page feed in one section.
-  layout: three
+  layout: stack
   embeds:
   - provider: facebook
     title: UoS Triathlon Facebook

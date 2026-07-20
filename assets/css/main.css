@@ -4762,3 +4762,51 @@ main > .section:nth-of-type(even):not(.section-hero) {
 .section-committee .committee-crop-expanded.tile-body > * + * {
   margin-top: var(--tile-pad-compact) !important;
 }
+
+/* =====================================================
+   SOCIAL WIDGET VERTICAL TILE STACK V1
+   Renders Facebook and Strava widgets as universal stacked tiles.
+   ===================================================== */
+
+#social-widgets .social-widget-stack {
+  width: min(100%, 720px);
+  margin-inline: auto;
+}
+
+#social-widgets .social-widget-tile {
+  width: 100%;
+}
+
+#social-widgets .social-widget-frame {
+  width: fit-content;
+  max-width: 100%;
+  margin-inline: auto;
+}
+
+#social-widgets .social-widget-frame iframe {
+  display: block;
+  max-width: 100%;
+  border: 0;
+}
+
+#social-widgets .social-widget-frame-facebook iframe {
+  width: 500px !important;
+  max-width: 100% !important;
+  height: 840px !important;
+  min-height: 840px !important;
+}
+
+#social-widgets .social-widget-frame-strava iframe {
+  width: 300px !important;
+  max-width: 100% !important;
+}
+
+#social-widgets .social-widget-fallback-link {
+  margin: var(--tile-pad-compact) 0 0;
+}
+
+@media (max-width: 560px) {
+  #social-widgets .social-widget-frame-facebook iframe {
+    width: 100% !important;
+  }
+}

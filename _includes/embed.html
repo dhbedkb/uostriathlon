@@ -7,67 +7,37 @@
       alignment=include.section.alignment
     %}
 
-    {% if include.section.id == "social-widgets" and include.section.embeds %}
-      {% assign facebook_embed = include.section.embeds | first %}
+    {% if include.section.embeds and include.section.layout == "stack" %}
+      <div class="tile-stack social-widget-stack">
+        {% for embed in include.section.embeds %}
+          <article class="tile social-widget-tile social-widget-{{ embed.provider | default: "generic" }}">
+            <header class="tile-header social-widget-header">
+              {% if embed.provider %}<p class="card-label">{{ embed.provider }}</p>{% endif %}
+              {% if embed.title %}<h3>{{ embed.title }}</h3>{% endif %}
+              {% if embed.description %}<p>{{ embed.description }}</p>{% endif %}
+            </header>
 
-      <div class="social-widget-grid">
-        <article class="u-tile social-widget-tile social-widget-facebook">
-          <header class="u-tile-head social-widget-head">
-            {% if facebook_embed.provider %}
-              <p class="card-label">{{ facebook_embed.provider }}</p>
+            {% if embed.embed_html %}
+              <div class="tile-frame social-widget-frame social-widget-frame-{{ embed.provider | default: "generic" }}">
+                {{ embed.embed_html }}
+              </div>
+            {% elsif embed.url %}
+              <div class="tile-frame social-widget-frame">
+                {{ embed.url }}
+                  {{ embed.button_label | default: "Open" }}
+                </a>
+              </div>
             {% endif %}
-            {% if facebook_embed.title %}
-              <h3>{{ facebook_embed.title }}</h3>
+
+            {% if embed.provider == "facebook" and embed.url %}
+              <p class="social-widget-fallback-link">
+                {{ embed.url }}
+                  {{ embed.button_label | default: "Open Facebook" }}
+                </a>
+              </p>
             {% endif %}
-            {% if facebook_embed.description %}
-              <p>{{ facebook_embed.description }}</p>
-            {% endif %}
-          </header>
-
-          {% if facebook_embed.embed_html %}
-            <div class="u-tile-frame social-widget-frame social-widget-frame-facebook">
-              {{ facebook_embed.embed_html }}
-            </div>
-          {% endif %}
-
-          {% if facebook_embed.url %}
-            <div class="social-widget-mobile-cta">
-              {{ facebook_embed.url }}
-                {{ facebook_embed.button_label | default: "Open Facebook" }}
-              </a>
-            </div>
-          {% endif %}
-        </article>
-
-        <div class="social-widget-stack">
-          {% for embed in include.section.embeds offset:1 %}
-            <article class="u-tile social-widget-tile social-widget-strava">
-              <header class="u-tile-head social-widget-head">
-                {% if embed.provider %}
-                  <p class="card-label">{{ embed.provider }}</p>
-                {% endif %}
-                {% if embed.title %}
-                  <h3>{{ embed.title }}</h3>
-                {% endif %}
-                {% if embed.description %}
-                  <p>{{ embed.description }}</p>
-                {% endif %}
-              </header>
-
-              {% if embed.embed_html %}
-                <div class="u-tile-frame social-widget-frame social-widget-frame-strava">
-                  {{ embed.embed_html }}
-                </div>
-              {% elsif embed.url %}
-                <div class="u-tile-frame social-widget-frame">
-                  {{ embed.url }}
-                    {{ embed.button_label | default: "Open" }}
-                  </a>
-                </div>
-              {% endif %}
-            </article>
-          {% endfor %}
-        </div>
+          </article>
+        {% endfor %}
       </div>
 
     {% elsif include.section.embeds %}
@@ -75,21 +45,12 @@
         {% for embed in include.section.embeds %}
           <article class="embed-shell embed-{{ embed.provider | default: 'generic' }}">
             <header class="embed-card-heading">
-              {% if embed.provider %}
-                <p class="card-label">{{ embed.provider }}</p>
-              {% endif %}
-              {% if embed.title %}
-                <h3>{{ embed.title }}</h3>
-              {% endif %}
-              {% if embed.description %}
-                <p>{{ embed.description }}</p>
-              {% endif %}
+              {% if embed.provider %}<p class="card-label">{{ embed.provider }}</p>{% endif %}
+              {% if embed.title %}<h3>{{ embed.title }}</h3>{% endif %}
+              {% if embed.description %}<p>{{ embed.description }}</p>{% endif %}
             </header>
-
             {% if embed.embed_html %}
-              <div class="embed-frame">
-                {{ embed.embed_html }}
-              </div>
+              <div class="embed-frame">{{ embed.embed_html }}</div>
             {% elsif embed.url %}
               <div class="embed-placeholder">
                 {{ embed.url }}
@@ -104,13 +65,9 @@
     {% else %}
       <div class="embed-shell embed-{{ include.section.provider | default: 'generic' }}">
         {% if include.section.embed_html %}
-          <div class="embed-frame">
-            {{ include.section.embed_html }}
-          </div>
+          <div class="embed-frame">{{ include.section.embed_html }}</div>
         {% else %}
-          <div class="embed-placeholder">
-            <p>Embed not configured yet.</p>
-          </div>
+          <div class="embed-placeholder"><p>Embed not configured yet.</p></div>
         {% endif %}
       </div>
     {% endif %}
