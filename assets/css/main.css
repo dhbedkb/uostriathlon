@@ -2501,29 +2501,11 @@ main > .section:nth-of-type(even):not(.section-hero) {
 
 
 
-.section-committee .committee-crop-title {
-  display: grid !important;
-  gap: 0.32rem !important;
-  min-width: 0;
-}
 
-.section-committee .committee-crop-name {
-  display: block !important;
-  color: var(--color-text);
-  font-size: clamp(1.18rem, 2.2vw, 1.62rem) !important;
-  line-height: 1.05 !important;
-  font-weight: 950 !important;
-}
 
-.section-committee .committee-crop-role {
-  display: block !important;
-  color: var(--color-gold) !important;
-  font-size: 0.78rem !important;
-  font-weight: 900 !important;
-  letter-spacing: 0.08em !important;
-  line-height: 1.25 !important;
-  text-transform: uppercase !important;
-}
+
+
+
 
 
 
@@ -2562,17 +2544,9 @@ main > .section:nth-of-type(even):not(.section-hero) {
 
 
 
-.section-committee .committee-crop-bio,
-.section-committee .committee-crop-question p,
-.section-committee .committee-crop-extra {
-  color: var(--color-muted);
-}
 
-.section-committee .committee-crop-question strong {
-  display: block;
-  color: var(--color-text);
-  margin-bottom: 0.2rem;
-}
+
+
 
 @media (max-width: 760px) {
   .section-committee .committee-crop-grid {
@@ -3588,18 +3562,9 @@ main > .section:nth-of-type(even):not(.section-hero) {
 
 
 
-.section-committee .committee-crop-title,
-.section-committee .committee-crop-title.tile-header-text {
-  display: flex !important;
-  flex-direction: column !important;
-  gap: var(--tile-title-gap) !important;
-  min-width: 0;
-}
 
-.section-committee .committee-crop-name,
-.section-committee .committee-crop-role {
-  line-height: var(--tile-title-line);
-}
+
+
 
 /* Expanded committee content is a tile body: no bespoke horizontal inset. */
 .section-committee .committee-crop-expanded,
