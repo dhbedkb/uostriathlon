@@ -1,4 +1,4 @@
-<section id="{{ include.section_id }}" class="section section-embed apple-panel" data-section-type="embed">
+<section id="{{ include.section_id }}" class="section section-embed section-normal-flow" data-section-type="embed">
   <div class="container">
     {% include section-heading.html
       eyebrow=include.section.eyebrow
@@ -8,31 +8,31 @@
     %}
 
     {% if include.section.embeds and include.section.layout == "stack" %}
-      <div class="tile-stack social-widget-stack">
+      <div class="tile-stack tile-stack-narrow">
         {% for embed in include.section.embeds %}
-          <article class="tile social-widget-tile social-widget-{{ embed.provider | default: 'generic' }}">
-            <header class="tile-header social-widget-header">
-              {% if embed.provider %}<p class="card-label">{{ embed.provider }}</p>{% endif %}
-              {% if embed.title %}<h3>{{ embed.title }}</h3>{% endif %}
-              {% if embed.description %}<p>{{ embed.description }}</p>{% endif %}
+          <article class="tile tile-surface tile-embed reveal-card">
+            <header class="tile-header tile-stack">
+              {% if embed.provider %}<p class="tile-subtitle tile-meta">{{ embed.provider }}</p>{% endif %}
+              {% if embed.title %}<h3 class="tile-title">{{ embed.title }}</h3>{% endif %}
+              {% if embed.description %}<p class="tile-text tile-muted">{{ embed.description }}</p>{% endif %}
             </header>
 
             {% if embed.embed_html %}
-              <div class="tile-frame social-widget-frame social-widget-frame-{{ embed.provider | default: 'generic' }}">
+              <div class="tile-frame tile-frame-embed" style="--tile-embed-width: {{ embed.frame_width | default: "500px" }}; --tile-embed-max-height: {{ embed.frame_max_height | default: "none" }};">
                 {{ embed.embed_html }}
               </div>
             {% elsif embed.url %}
-              <div class="tile-frame social-widget-frame">
-                <a class="button primary" href="{{ embed.url }}" target="_blank" rel="noopener noreferrer">
+              <div class="tile-frame tile-frame-embed">
+                <a class="button secondary" href="{{ embed.url }}" target="_blank" rel="noopener noreferrer">
                   {{ embed.button_label | default: "Open" }}
                 </a>
               </div>
             {% endif %}
 
-            {% if embed.provider == "facebook" and embed.url %}
-              <p class="social-widget-fallback-link">
+            {% if embed.embed_html and embed.url %}
+              <p class="tile-text tile-muted tile-actions-center">
                 <a class="button secondary" href="{{ embed.url }}" target="_blank" rel="noopener noreferrer">
-                  {{ embed.button_label | default: "Open Facebook" }}
+                  {{ embed.button_label | default: "Open" }}
                 </a>
               </p>
             {% endif %}

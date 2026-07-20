@@ -2998,6 +2998,47 @@ main > .section:nth-of-type(even):not(.section-hero) {
   }
 }
 
+/* Reusable embed tile modifiers. */
+.tile-stack-narrow {
+  width: min(100%, 760px);
+  margin-inline: auto;
+}
+
+.tile-embed {
+  align-items: stretch;
+  gap: var(--tile-inner-gap);
+}
+
+.tile-frame-embed {
+  width: fit-content;
+  max-width: 100%;
+  margin-inline: auto;
+  padding: var(--tile-frame-pad);
+  border: var(--tile-frame-border);
+  background: var(--tile-frame-bg);
+  line-height: 0;
+  overflow: hidden;
+}
+
+.tile-frame-embed > iframe,
+.tile-frame-embed > blockquote {
+  display: block;
+  max-width: 100%;
+  margin: 0;
+  border: 0;
+}
+
+.tile-frame-embed > iframe {
+  width: min(100%, var(--tile-embed-width, 500px));
+  max-height: var(--tile-embed-max-height, none);
+}
+
+.tile-actions-center {
+  justify-content: center;
+  text-align: center;
+  margin-top: var(--tile-inner-gap);
+}
+
 /* Reusable simple tile modifiers. */
 .tile-surface {
   display: flex;
@@ -3195,3 +3236,22 @@ main > .section:nth-of-type(even):not(.section-hero) {
 /* Expanded committee content is a tile body: no bespoke horizontal inset. */
 
 /* The image frame is the media frame; crop logic remains separate. */
+
+/* Reusable normal-flow section modifier.
+   Use for iframe/embed sections that should not participate in sticky panel stacking. */
+body main > .section.section-normal-flow,
+body main > .section.section-embed {
+  position: relative !important;
+  top: auto !important;
+  min-height: auto !important;
+  display: block !important;
+  align-items: initial !important;
+  overflow: visible !important;
+  transform: none !important;
+}
+
+body main > .section.section-normal-flow > .container,
+body main > .section.section-embed > .container {
+  position: relative;
+  z-index: 1;
+}
