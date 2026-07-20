@@ -12,7 +12,7 @@
         {% for item in include.section.items %}
           <details class="tile faq-item reveal-card">
             <summary>{{ item.question }}</summary>
-            <div class="faq-answer">{{ item.answer | markdownify }}</div>
+            <div class="tile-body faq-answer">{{ item.answer | markdownify }}</div>
           </details>
         {% endfor %}
       </div>

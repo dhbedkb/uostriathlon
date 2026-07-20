@@ -11,11 +11,13 @@
       <div class="tile-grid gallery-grid">
         {% for image in include.section.images %}
           <figure class="tile reveal gallery-item reveal-card" data-reveal-mode="hover">
+            <div class="tile-frame gallery-frame">
             {% if image.src %}
               <img src="{{ image.src | relative_url }}" alt="{{ image.alt | default: image.caption | default: 'Sheffield Triathlon club photo' }}" loading="lazy">
             {% else %}
               <div class="gallery-placeholder"><span>{{ image.category | default: "Club photo" }}</span></div>
             {% endif %}
+            </div>
             {% if image.caption %}
               <figcaption class="tile-body reveal-body gallery-caption">{{ image.caption }}</figcaption>
             {% endif %}

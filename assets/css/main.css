@@ -4791,3 +4791,30 @@ main > .section:nth-of-type(even):not(.section-hero) {
     background-attachment: scroll;
   }
 }
+
+/* =====================================================
+   TILE BODY AND FRAME MARKUP CONSISTENCY V1
+   Supports migrated gallery frames and simple card body wrappers.
+   ===================================================== */
+
+.tile-body {
+  margin: 0;
+}
+
+.tile-body > :first-child {
+  margin-top: 0;
+}
+
+.tile-body > :last-child {
+  margin-bottom: 0;
+}
+
+.gallery-item .tile-frame.gallery-frame {
+  width: 100%;
+}
+
+.gallery-item .tile-frame.gallery-frame > img,
+.gallery-item .tile-frame.gallery-frame > .gallery-placeholder {
+  display: block;
+  width: 100%;
+}
