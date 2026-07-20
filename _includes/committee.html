@@ -35,8 +35,8 @@
             {% assign has_extra = true %}
           {% endif %}
 
-          <details class="u-tile reveal committee-crop-card reveal-card" data-reveal-mode="hover">
-            <summary class="reveal-summary committee-crop-summary">
+          <details class="tile u-tile reveal committee-crop-card reveal-card" data-reveal-mode="hover">
+            <summary class="tile-header reveal-summary committee-crop-summary">
               <span class="committee-crop-title">
                 <span class="committee-crop-name">{{ member.name | default: "Committee member" }}</span>
                 {% if member.role %}
@@ -48,10 +48,10 @@
             </summary>
 
             {% if has_extra %}
-              <div class="reveal-body committee-crop-expanded">
+              <div class="tile-body reveal-body committee-crop-expanded">
                 {% if display_image %}
                   <div
-                    class="committee-crop-image-frame"
+                    class="tile-frame committee-crop-image-frame"
                     style="--crop-x: {{ crop_x }}%; --crop-y: {{ crop_y }}%; --crop-zoom: {{ crop_zoom | divided_by: 100.0 }};"
                   >
                     <img
@@ -71,7 +71,7 @@
                   <div class="committee-crop-questions">
                     {% for item in member.questions %}
                       {% if item.question or item.answer %}
-                        <div class="committee-crop-question">
+                        <div class="tile-nested committee-crop-question">
                           {% if item.question %}
                             <strong>{{ item.question }}</strong>
                           {% endif %}

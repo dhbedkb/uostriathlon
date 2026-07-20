@@ -5789,3 +5789,44 @@ main > .section:nth-of-type(even):not(.section-hero) {
 .gallery-item.tile .tile-body {
   margin: 0;
 }
+
+/* =====================================================
+   COMMITTEE TILE PRIMITIVE COMPAT V1
+   Bridges committee markup onto the universal tile primitives.
+   ===================================================== */
+
+.section-committee .committee-crop-card.tile {
+  padding: var(--tile-pad) !important;
+  border-radius: var(--tile-radius) !important;
+}
+
+.section-committee .committee-crop-summary.tile-header {
+  margin: 0 0 var(--tile-pad-compact) !important;
+  padding: 0 !important;
+  gap: var(--tile-pad-compact) !important;
+}
+
+.section-committee .committee-crop-image-frame.tile-frame {
+  box-sizing: border-box !important;
+  margin: 0 !important;
+  padding: var(--tile-frame-pad) !important;
+  border-radius: var(--tile-frame-radius) !important;
+}
+
+.section-committee .committee-crop-expanded.tile-body {
+  margin-top: var(--tile-pad) !important;
+  padding-top: var(--tile-pad) !important;
+}
+
+.section-committee .committee-crop-question.tile-nested {
+  padding: var(--tile-pad-compact) !important;
+  border-radius: var(--tile-frame-radius) !important;
+}
+
+.section-committee .committee-crop-expanded.tile-body > * {
+  margin-block-start: 0 !important;
+}
+
+.section-committee .committee-crop-expanded.tile-body > * + * {
+  margin-top: var(--tile-pad-compact) !important;
+}
