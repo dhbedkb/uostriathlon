@@ -3505,6 +3505,74 @@ main > .section:nth-of-type(even):not(.section-hero) {
   transform-origin: var(--crop-x, 50%) var(--crop-y, 50%);
 }
 
+/* Reusable reveal/expand primitive for tile details. */
+.tile-reveal {
+  scroll-margin-top: var(--tile-reveal-scroll-margin, 96px);
+  scroll-margin-bottom: var(--tile-reveal-scroll-margin, 96px);
+}
+
+.tile-reveal[open] {
+  position: relative;
+  z-index: var(--tile-reveal-open-z, 3);
+}
+
+.tile-reveal-summary {
+  cursor: pointer;
+  list-style: none;
+}
+
+.tile-reveal-summary::-webkit-details-marker {
+  display: none;
+}
+
+.tile-reveal-body {
+  overflow: visible;
+}
+
+.tile-reveal-toggle {
+  position: relative;
+  flex: 0 0 auto;
+  width: var(--tile-reveal-toggle-size, 2rem);
+  height: var(--tile-reveal-toggle-size, 2rem);
+  border: var(--tile-reveal-toggle-border, 1px solid var(--color-border));
+  border-radius: 999px;
+}
+
+.tile-reveal-toggle::before,
+.tile-reveal-toggle::after {
+  content: "";
+  position: absolute;
+  inset: 50% auto auto 50%;
+  width: var(--tile-reveal-toggle-line-width, 0.78rem);
+  height: var(--tile-reveal-toggle-line-height, 2px);
+  background: var(--tile-reveal-toggle-color, var(--color-gold));
+  transform: translate(-50%, -50%);
+}
+
+.tile-reveal-toggle::after {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.tile-reveal[open] .tile-reveal-toggle {
+  background: var(--tile-reveal-toggle-open-bg, var(--color-gold));
+  border-color: var(--tile-reveal-toggle-open-border, var(--color-gold));
+}
+
+.tile-reveal[open] .tile-reveal-toggle::before,
+.tile-reveal[open] .tile-reveal-toggle::after {
+  background: var(--tile-reveal-toggle-open-color, #000000);
+}
+
+.tile-reveal[open] .tile-reveal-toggle::after {
+  display: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .tile-reveal:hover {
+    z-index: var(--tile-reveal-hover-z, 4);
+  }
+}
+
 /* Temporary legacy neutralisation: committee cards must obey the tile contract. */
 .section-committee .committee-crop-card {
   height: auto !important;

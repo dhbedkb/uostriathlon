@@ -35,8 +35,8 @@
             {% assign has_extra = true %}
           {% endif %}
 
-          <details class="tile reveal committee-crop-card reveal-card" data-reveal-mode="hover">
-            <summary class="tile-header tile-header-row reveal-summary committee-crop-summary">
+          <details class="tile tile-reveal reveal committee-crop-card reveal-card" data-reveal-mode="hover">
+            <summary class="tile-header tile-header-row tile-reveal-summary reveal-summary committee-crop-summary">
               <span class="tile-header-text committee-crop-title">
                 <span class="committee-crop-name">{{ member.name | default: "Committee member" }}</span>
                 {% if member.role %}
@@ -44,11 +44,11 @@
                 {% endif %}
               </span>
 
-              <span class="committee-crop-toggle" aria-hidden="true"></span>
+              <span class="tile-reveal-toggle committee-crop-toggle" aria-hidden="true"></span>
             </summary>
 
             {% if has_extra %}
-              <div class="tile-body reveal-body committee-crop-expanded">
+              <div class="tile-body tile-reveal-body reveal-body committee-crop-expanded">
                 {% if display_image %}
                   <div
                     class="tile-frame tile-frame-crop committee-crop-image-frame"
