@@ -7,49 +7,54 @@ sections:
     title: Run by members, for members
     subtitle: Meet this year's committee
     body: >
-      Every session, race trip and social is organised by a team of
-      volunteer members. Get in touch with any of them directly, or use
-      the club email for anything general.
-
+      Every session, race trip and social is organised by a team of volunteer
+      members. Get in touch with any of them directly, or use the club email for
+      anything general.
+    secondary_button:
+      label: "1"
+      url: "1"
+    primary_button:
+      label: "1"
+      url: "1"
   - type: committee
     id: committee-members
     eyebrow: This year's committee
     title: Your committee
     subtitle: Click a name to read more and get in touch.
     members:
-      - name: "Add name"
+      - name: Add name
         role: Club Captain
         bio: Add a short bio here — a sentence or two is plenty.
         email: triathlon@sheffield.ac.uk
-      - name: "Add name"
-        role: Vice Captain (Training)
+      - name: Barnaby Read
+        role: Secretary
         bio: Add a short bio here — a sentence or two is plenty.
         email: ""
-      - name: "Add name"
+        image_raw: /uostriathlon/assets/images/committee/raw/img_9541.jpg
+      - name: Add name
         role: Vice Captain (Social)
         bio: Add a short bio here — a sentence or two is plenty.
         email: ""
-      - name: "Add name"
+      - name: Add name
         role: Treasurer
         bio: Add a short bio here — a sentence or two is plenty.
         email: ""
-      - name: "Add name"
+      - name: Add name
         role: Beginners Coordinator
         bio: Add a short bio here — a sentence or two is plenty.
         email: ""
-      - name: "Add name"
+      - name: Add name
         role: Welfare & Inclusion Officer
         bio: Add a short bio here — a sentence or two is plenty.
         email: ""
-      - name: "Add name"
+      - name: Add name
         role: Kit Secretary
         bio: Add a short bio here — a sentence or two is plenty.
         email: ""
-      - name: "Add name"
+      - name: Add name
         role: Social Secretary
         bio: Add a short bio here — a sentence or two is plenty.
         email: ""
-
   - type: faq
     id: committee-faq
     eyebrow: Getting involved
@@ -63,6 +68,5 @@ sections:
           email.
       - question: Do I need previous committee experience?
         answer: >
-          No — most of our committee members' first role was on this
-          committee. Outgoing members hand over notes and are always happy
-          to help.
+          No — most of our committee members' first role was on this committee.
+          Outgoing members hand over notes and are always happy to help.
