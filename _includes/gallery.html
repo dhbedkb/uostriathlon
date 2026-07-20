@@ -8,18 +8,18 @@
     %}
 
     {% if include.section.images %}
-      <div class="tile-grid gallery-grid">
+      <div class="tile-grid tile-grid-three-up">
         {% for image in include.section.images %}
-          <figure class="tile reveal gallery-item reveal-card" data-reveal-mode="hover">
-            <div class="tile-frame gallery-frame">
+          <figure class="tile tile-surface reveal reveal-card" data-reveal-mode="hover">
+            <div class="tile-frame">
             {% if image.src %}
               <img src="{{ image.src | relative_url }}" alt="{{ image.alt | default: image.caption | default: 'Sheffield Triathlon club photo' }}" loading="lazy">
             {% else %}
-              <div class="gallery-placeholder"><span>{{ image.category | default: "Club photo" }}</span></div>
+              <div class="tile-frame-placeholder"><span>{{ image.category | default: "Club photo" }}</span></div>
             {% endif %}
             </div>
             {% if image.caption %}
-              <figcaption class="tile-body reveal-body gallery-caption">{{ image.caption }}</figcaption>
+              <figcaption class="tile-body reveal-body reveal-caption tile-text tile-muted">{{ image.caption }}</figcaption>
             {% endif %}
           </figure>
         {% endfor %}
