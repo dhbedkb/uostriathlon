@@ -46,3 +46,34 @@ sections:
     answer: Use the training calendar link once committee has added the current calendar.
   - question: What should I bring?
     answer: Bring the kit needed for the session and ask committee if unsure.
+- type: tile_grid
+  id: tile-system-test
+  eyebrow: Tile system
+  title: Training tile test.
+  subtitle: A temporary test section for the universal tile grid renderer.
+  layout: grid
+  tiles:
+  - eyebrow: Swim
+    title: Pool sessions
+    body: Structured pool sessions for technique, endurance, and confidence.
+    children:
+    - title: Technique
+      body: Drills, body position, and pacing.
+    - title: Endurance
+      body: Steady aerobic sets and progression.
+  - eyebrow: Bike
+    title: Group rides
+    body: Outdoor and indoor riding opportunities for different abilities.
+    children:
+    - title: Skills
+      body: Handling, communication, and group awareness.
+    - title: Fitness
+      body: Aerobic volume and interval work.
+  - eyebrow: Run
+    title: Run training
+    body: Sessions for speed, consistency, and race preparation.
+    children:
+    - title: Intervals
+      body: Shorter controlled efforts.
+    - title: Steady running
+      body: Longer controlled aerobic runs.
