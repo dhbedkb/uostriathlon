@@ -3463,8 +3463,10 @@ main > .section:nth-of-type(even):not(.section-hero) {
 }
 
 .tile-grid {
+  display: grid;
   gap: var(--tile-gap);
   align-items: start;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--tile-grid-min, 260px)), 1fr));
 }
 
 .tile-stack {

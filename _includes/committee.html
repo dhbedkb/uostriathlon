@@ -8,7 +8,7 @@
     %}
 
     {% if include.section.members %}
-      <div class="committee-grid committee-crop-grid">
+      <div class="tile-grid committee-grid committee-crop-grid">
         {% for member in include.section.members %}
           {% assign raw_image = member.image_raw | default: member.image %}
           {% assign profile_image = member.image_profile %}
