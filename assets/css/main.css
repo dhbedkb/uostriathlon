@@ -2474,6 +2474,15 @@ main > .section:nth-of-type(even):not(.section-hero) {
 
 .section-committee .committee-crop-card {
   --tile-reveal-open-border-color: rgba(247, 211, 93, 0.55);
+  --tile-title-size: clamp(1.18rem, 2.2vw, 1.62rem);
+  --tile-title-weight: 950;
+  --tile-title-line: 1.05;
+  --tile-subtitle-color: var(--color-gold);
+  --tile-subtitle-size: 0.78rem;
+  --tile-subtitle-weight: 900;
+  --tile-subtitle-letter-spacing: 0.08em;
+  --tile-subtitle-transform: uppercase;
+  --tile-muted-color: var(--color-muted);
   display: block !important;
   width: 100% !important;
   max-width: none !important;
@@ -3418,6 +3427,47 @@ main > .section:nth-of-type(even):not(.section-hero) {
   padding: var(--tile-pad-compact);
   border-radius: var(--tile-frame-radius);
   box-shadow: none;
+}
+
+/* Reusable tile text roles. */
+.tile-title {
+  margin: 0;
+  color: var(--tile-title-color, var(--color-text));
+  font-size: var(--tile-title-size, clamp(1.12rem, 2vw, 1.5rem));
+  line-height: var(--tile-title-line);
+  font-weight: var(--tile-title-weight, 900);
+}
+
+.tile-subtitle,
+.tile-meta {
+  margin: 0;
+  color: var(--tile-subtitle-color, var(--color-muted));
+  font-size: var(--tile-subtitle-size, 0.82rem);
+  line-height: var(--tile-subtitle-line, 1.2);
+  font-weight: var(--tile-subtitle-weight, 800);
+  letter-spacing: var(--tile-subtitle-letter-spacing, 0.06em);
+  text-transform: var(--tile-subtitle-transform, none);
+}
+
+.tile-text {
+  margin: 0;
+  color: var(--tile-text-color, var(--color-text));
+  line-height: var(--tile-text-line, 1.55);
+}
+
+.tile-muted {
+  color: var(--tile-muted-color, var(--color-muted));
+}
+
+.tile-question > strong {
+  display: block;
+  color: var(--tile-question-title-color, var(--color-text));
+  margin-bottom: var(--tile-question-title-gap, 0.2rem);
+}
+
+.tile-question > p {
+  margin: 0;
+  color: var(--tile-question-text-color, var(--tile-muted-color, var(--color-muted)));
 }
 
 /* Reusable crop frame primitive for any tile media. */
