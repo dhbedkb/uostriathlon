@@ -468,14 +468,9 @@ a {
   padding: 1.5rem;
 }
 
-.gallery-grid,
 .sponsor-grid {
   display: grid;
   gap: 1rem;
-}
-
-.gallery-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .sponsor-grid {
@@ -492,8 +487,7 @@ a {
 }
 
 .profile-card,
-.sponsor-card,
-.gallery-item {
+.sponsor-card {
   overflow: hidden;
 }
 
@@ -514,13 +508,6 @@ a {
   text-decoration: underline;
 }
 
-.gallery-item {
-  margin: 0;
-  border-radius: var(--radius-xl);
-  background: var(--color-surface-soft);
-}
-
-.gallery-placeholder,
 .profile-placeholder {
   display: grid;
   min-height: 180px;
@@ -535,10 +522,7 @@ a {
   font-size: 3rem;
 }
 
-.gallery-item figcaption {
-  padding: 1rem;
-  color: var(--color-muted);
-}.timeline-list {
+.timeline-list {
   display: grid;
   gap: 1rem;
 }
@@ -554,15 +538,13 @@ a {
   padding: 1rem 0 1rem 1.25rem;
 }
 
-@media (max-width: 980px) {.gallery-grid,
-.committee-grid,
+@media (max-width: 980px) {.committee-grid,
 .sponsor-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
-@media (max-width: 640px) {.gallery-grid,
-.committee-grid,
+@media (max-width: 640px) {.committee-grid,
 .sponsor-grid {
     grid-template-columns: 1fr;
   }
@@ -705,21 +687,6 @@ a {
   font-weight: 750;
 }
 
-.gallery-placeholder {
-  min-height: 240px;
-  font-size: 0.9rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-}
-
-.gallery-item:nth-child(2) .gallery-placeholder {
-  background: linear-gradient(135deg, rgba(34, 197, 94, 0.35), rgba(68, 0, 153, 0.6));
-}
-
-.gallery-item:nth-child(3) .gallery-placeholder {
-  background: linear-gradient(135deg, rgba(249, 115, 22, 0.35), rgba(68, 0, 153, 0.6));
-}
-
 .profile-card {
   text-align: center;
 }
@@ -841,13 +808,6 @@ a {
 .card-photo {
   min-height: 220px;
   background-color: #161616;
-}
-
-.gallery-item img {
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
-  display: block;
 }
 
 .embed-card,
@@ -1686,7 +1646,6 @@ body main > .section:nth-of-type(even):not(.section-hero) {
 }
 
 /* Placeholder SVG images */
-.gallery-item img,
 .card-photo {
   background-color: #111111;
 }
@@ -2401,7 +2360,6 @@ main > .section:nth-of-type(even):not(.section-hero) {
 .tile.reveal-card:hover {
   border-color: rgba(248, 212, 93, 0.32);
 }.tile.social-card,
-.tile.gallery-item,
 .tile.notice-card {
   min-width: 0;
 }
@@ -2417,7 +2375,6 @@ main > .section:nth-of-type(even):not(.section-hero) {
    Reusable caption treatment for gallery/social carousel items.
    ===================================================== */
 
-.reveal .gallery-caption,
 .reveal .reveal-caption {
   margin-top: 0.75rem;
   color: var(--color-muted);
@@ -2425,7 +2382,6 @@ main > .section:nth-of-type(even):not(.section-hero) {
   line-height: 1.5;
 }
 
-.reveal[data-reveal-mode="hover"] .gallery-caption,
 .reveal[data-reveal-mode="hover"] .reveal-caption {
   transition:
     opacity 180ms ease,
@@ -2433,15 +2389,12 @@ main > .section:nth-of-type(even):not(.section-hero) {
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .reveal[data-reveal-mode="hover"] .gallery-caption,
   .reveal[data-reveal-mode="hover"] .reveal-caption {
     opacity: 0.82;
   }
 
-  .reveal[data-reveal-mode="hover"]:hover .gallery-caption,
-  .reveal[data-reveal-mode="hover"]:focus-within .gallery-caption,
   .reveal[data-reveal-mode="hover"]:hover .reveal-caption,
-  .reveal[data-reveal-mode="hover"]:focus-within .reveal-caption {
+.reveal[data-reveal-mode="hover"]:focus-within .reveal-caption {
     opacity: 1;
     transform: translateY(-2px);
   }
@@ -2456,19 +2409,16 @@ main > .section:nth-of-type(even):not(.section-hero) {
 
 /* fallback */
 }.social-card,
-.gallery-item,
 .notice-card,
 .sponsor-card,
 .timeline-item {
   box-sizing: border-box;
 }.social-card,
-.gallery-item,
 .notice-card,
 .sponsor-card {
   border-radius: var(--u-tile-radius);
 }
 
-.gallery-item img,
 .card-photo {
   border-radius: var(--u-tile-frame-radius);
 }
@@ -2536,20 +2486,17 @@ main > .section:nth-of-type(even):not(.section-hero) {
 }/* Universal tile aliases for existing card-like components */
 .tile,
 .social-card,
-.gallery-item,
 .notice-card,
 .sponsor-card,
 .timeline-item {
   box-sizing: border-box;
 }.tile,
 .social-card,
-.gallery-item,
 .notice-card,
 .sponsor-card {
   border-radius: var(--u-tile-radius);
 }
 
-.gallery-item img,
 .card-photo {
   border-radius: var(--u-tile-frame-radius);
 }
@@ -2564,7 +2511,6 @@ main > .section:nth-of-type(even):not(.section-hero) {
   display: block;
 }
 
-.u-tile.gallery-item img,
 .u-tile .card-photo {
   border-radius: var(--u-tile-frame-radius);
 }
@@ -2572,19 +2518,16 @@ main > .section:nth-of-type(even):not(.section-hero) {
 .u-tile .button {
   align-self: flex-start;
 }.u-tile.social-card,
-.u-tile.gallery-item,
 .u-tile.notice-card {
   display: flex;
   flex-direction: column;
   gap: var(--u-tile-pad-compact);
   padding: var(--u-tile-pad);
 }.u-tile.social-card > *,
-.u-tile.gallery-item > *,
 .u-tile.notice-card > * {
   margin-block-start: 0;
   margin-block-end: 0;
 }.u-tile.social-card > :last-child,
-.u-tile.gallery-item > :last-child,
 .u-tile.notice-card > :last-child {
   margin-bottom: 0;
 }
@@ -2599,7 +2542,6 @@ main > .section:nth-of-type(even):not(.section-hero) {
   display: block;
 }
 
-.u-tile.gallery-item img,
 .u-tile .card-photo {
   border-radius: var(--u-tile-frame-radius);
 }
@@ -2615,7 +2557,6 @@ main > .section:nth-of-type(even):not(.section-hero) {
 .cards-grid,
 .events-grid,
 .social-grid,
-.gallery-grid,
 .cta-grid,
 .notice-grid,
 .sponsor-grid,
@@ -2688,33 +2629,6 @@ main > .section:nth-of-type(even):not(.section-hero) {
    GALLERY TILE MIGRATION V1
    Aligns gallery cards with the universal tile primitives.
    ===================================================== */
-
-.gallery-grid.tile-grid {
-  gap: var(--tile-gap);
-}
-
-.gallery-item.tile {
-  display: flex;
-  flex-direction: column;
-  gap: var(--tile-pad-compact);
-  padding: var(--tile-pad);
-}
-
-.gallery-item.tile .tile-frame {
-  width: 100%;
-  max-width: 100%;
-}
-
-.gallery-item.tile img {
-  display: block;
-  width: 100%;
-  max-width: 100%;
-  border-radius: var(--tile-frame-radius);
-}
-
-.gallery-item.tile .tile-body {
-  margin: 0;
-}
 
 /* =====================================================
    SOCIAL WIDGET VERTICAL TILE STACK V1
@@ -2835,16 +2749,6 @@ main > .section:nth-of-type(even):not(.section-hero) {
 
 .tile-body > :last-child {
   margin-bottom: 0;
-}
-
-.gallery-item .tile-frame.gallery-frame {
-  width: 100%;
-}
-
-.gallery-item .tile-frame.gallery-frame > img,
-.gallery-item .tile-frame.gallery-frame > .gallery-placeholder {
-  display: block;
-  width: 100%;
 }
 
 /* =====================================================
