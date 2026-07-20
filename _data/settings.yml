@@ -6,7 +6,7 @@ brand:
   logo: /uostriathlon/assets/images/brand/subject.png
   logo_crop_x: 50
   logo_crop_y: 50
-  logo_crop_zoom: 100
+  logo_crop_zoom: 101
 theme:
   default: dark
 footer:
