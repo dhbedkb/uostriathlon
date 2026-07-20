@@ -1,9 +1,85 @@
 title: Members
-description: ""
+description: What membership includes, and how to join Sheffield Triathlon Club.
 sections:
   - type: hero
     id: members-hero
-    eyebrow: ""
-    title: Members
+    eyebrow: Members Area
+    title: Everything your membership includes
+    subtitle: One membership, every session
+    body: >
+      Membership covers coached training across all three disciplines,
+      discounted race entries, and access to club kit — plus a place in
+      Sheffield's friendliest multisport community.
+
+  - type: stats
+    id: members-stats
+    eyebrow: What you get
+    title: Membership at a glance
     subtitle: ""
-    body: ""
+    items:
+      - number: "6"
+        label: Coached sessions a week
+      - number: "£"
+        label: Discounted race entries
+      - number: "1"
+        label: Free taster session before joining
+      - number: "365"
+        label: Days of club community
+
+  - type: tile_grid
+    id: members-benefits
+    eyebrow: Membership benefits
+    title: What's included
+    subtitle: ""
+    tiles:
+      - title: Coached training
+        body: >
+          Access to all weekly swim, bike and run sessions, plus the
+          Couch to Tri beginner pathway.
+      - title: Race support
+        body: >
+          Block-booked entries, discounted fees, and an experienced member
+          on hand at every club-supported race.
+      - title: Club kit
+        body: >
+          Discounted club tri suits and training kit, ordered each term
+          through the Kit Secretary.
+      - title: Socials
+        body: >
+          Full access to the social calendar, from weekly coffee catch-ups
+          to end-of-season trips.
+
+  - type: cta
+    id: members-join
+    eyebrow: Ready to join?
+    title: Membership starts with a free taster session
+    body: >
+      Come to any beginner-friendly session before committing — membership
+      is only required once you've decided the club's for you.
+    primary_button:
+      label: Join via the Students' Union
+      url: https://www.sheffieldstudentsunion.com/activities/societies/
+    secondary_button:
+      label: See the training schedule
+      url: /training/
+
+  - type: faq
+    id: members-faq
+    eyebrow: Questions
+    title: Membership FAQs
+    subtitle: ""
+    items:
+      - question: Is membership only for University of Sheffield students?
+        answer: >
+          Membership is open to current students and staff of the
+          University of Sheffield. Contact the committee if you're unsure
+          whether you're eligible.
+      - question: Can I try a session before joining?
+        answer: >
+          Yes — come to any beginner-friendly session listed on the
+          training page first, no membership required.
+      - question: How do I renew my membership each year?
+        answer: >
+          Membership runs through the Students' Union and renews annually
+          — you'll get a reminder from the committee before your renewal
+          date.

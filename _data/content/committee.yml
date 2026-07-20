@@ -1,9 +1,68 @@
 title: Committee
-description: ""
+description: Meet the committee running Sheffield Triathlon Club this year.
 sections:
   - type: hero
     id: committee-hero
-    eyebrow: ""
-    title: Committee
+    eyebrow: Committee
+    title: Run by members, for members
+    subtitle: Meet this year's committee
+    body: >
+      Every session, race trip and social is organised by a team of
+      volunteer members. Get in touch with any of them directly, or use
+      the club email for anything general.
+
+  - type: committee
+    id: committee-members
+    eyebrow: This year's committee
+    title: Your committee
+    subtitle: Click a name to read more and get in touch.
+    members:
+      - name: "Add name"
+        role: Club Captain
+        bio: Add a short bio here — a sentence or two is plenty.
+        email: triathlon@sheffield.ac.uk
+      - name: "Add name"
+        role: Vice Captain (Training)
+        bio: Add a short bio here — a sentence or two is plenty.
+        email: ""
+      - name: "Add name"
+        role: Vice Captain (Social)
+        bio: Add a short bio here — a sentence or two is plenty.
+        email: ""
+      - name: "Add name"
+        role: Treasurer
+        bio: Add a short bio here — a sentence or two is plenty.
+        email: ""
+      - name: "Add name"
+        role: Beginners Coordinator
+        bio: Add a short bio here — a sentence or two is plenty.
+        email: ""
+      - name: "Add name"
+        role: Welfare & Inclusion Officer
+        bio: Add a short bio here — a sentence or two is plenty.
+        email: ""
+      - name: "Add name"
+        role: Kit Secretary
+        bio: Add a short bio here — a sentence or two is plenty.
+        email: ""
+      - name: "Add name"
+        role: Social Secretary
+        bio: Add a short bio here — a sentence or two is plenty.
+        email: ""
+
+  - type: faq
+    id: committee-faq
+    eyebrow: Getting involved
+    title: Want to join the committee?
     subtitle: ""
-    body: ""
+    items:
+      - question: When are committee elections held?
+        answer: >
+          Elections are held at the club's AGM, usually in the spring term.
+          Details are shared with members ahead of time on Instagram and by
+          email.
+      - question: Do I need previous committee experience?
+        answer: >
+          No — most of our committee members' first role was on this
+          committee. Outgoing members hand over notes and are always happy
+          to help.

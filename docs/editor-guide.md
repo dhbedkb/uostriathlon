@@ -5,7 +5,9 @@ This site uses Jekyll, GitHub Pages, and Decap CMS.
 ## Editing
 
 1. Open `/admin` on the live site (or `/admin/local.html` when testing locally).
-2. Open a page and add/edit sections.
+2. Open a page and add/edit sections. Each section in the list shows its
+   type and title in the collapsed view, so it's easy to find the one you
+   want without opening every item.
 3. Publish. GitHub Pages rebuilds automatically — this takes a minute or two.
 
 ## Images: upload, crop, compress

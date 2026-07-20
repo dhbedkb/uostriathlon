@@ -14,9 +14,13 @@
   --radius-full: 999px;
   --nav-height: 76px;
 
-  /* Universal tile system */
+  /* Universal tile system — every card-like block on the site (cards,
+     events, committee, gallery, faq, cta, stats…) is built from these
+     same tokens, so spacing and dead space stay identical everywhere.
+     Change a value here, not in an individual section's CSS. */
   --tile-gap: 1.5rem;
   --tile-pad: clamp(1.25rem, 3vw, 1.75rem);
+  --tile-pad-lg: clamp(2rem, 6vw, 3.5rem);
   --tile-pad-compact: 1rem;
   --tile-radius: 1.5rem;
   --tile-frame-radius: 1rem;
@@ -213,12 +217,19 @@ img { max-width: 100%; display: block; }
   text-decoration: none;
 }
 
+/* Neutral frame for the logo mark — no fixed brand colour behind it, so
+   a transparent-background logo just sits on the page instead of showing
+   through a gold circle. */
 .brand-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   width: 44px;
   height: 44px;
   border-radius: 50%;
   overflow: hidden;
-  background: var(--color-gold);
+  background: var(--color-surface-soft);
+  border: 1px solid var(--color-border);
   flex: 0 0 auto;
 }
 
@@ -335,6 +346,17 @@ img { max-width: 100%; display: block; }
   gap: 2rem;
 }
 
+.footer-brand-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.85rem;
+}
+
+.footer-brand-mark { width: 40px; height: 40px; }
+
+.footer-brand-header .brand-name { margin: 0; }
+
 .footer-brand p, .footer-bottom { color: var(--color-muted); }
 
 .footer-column h2 {
@@ -446,6 +468,9 @@ img { max-width: 100%; display: block; }
    8. UNIVERSAL TILE SYSTEM
    The single spacing/shape contract for every card-like block
    on the site: cards, events, committee, gallery, faq, cta, etc.
+   Every tile grid uses the same --tile-gap, every tile the same
+   --tile-pad, so the dead space around content is identical no
+   matter which section type it belongs to.
    ===================================================== */
 
 .tile-grid {
@@ -532,6 +557,8 @@ img { max-width: 100%; display: block; }
   letter-spacing: 0.16em;
   text-transform: uppercase;
   font-size: 0.85rem;
+  text-align: center;
+  padding: var(--tile-pad-compact);
 }
 
 /* Crop frame: a fixed-aspect box for images that need reframing (committee photos, hero). */
@@ -600,7 +627,7 @@ img { max-width: 100%; display: block; }
   background: radial-gradient(circle at top right, rgba(247, 211, 93, 0.14), transparent 18rem), var(--color-surface);
 }
 
-.tile-cta { padding: clamp(2rem, 6vw, 3.5rem); text-align: center; align-items: center; }
+.tile-cta { padding: var(--tile-pad-lg); text-align: center; align-items: center; }
 
 .tile-cta-title {
   margin: 0;

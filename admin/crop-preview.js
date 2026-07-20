@@ -25,29 +25,91 @@
     return url;
   }
 
-  function assetUrl(src, getAsset) {
-    var value = clean(src);
-    if (!value) return "";
-
-    try {
-      var asset = getAsset(value);
-      if (asset) {
-        var resolved = asset.toString ? asset.toString() : String(asset);
-        if (resolved && resolved.indexOf("[object") === -1) return previewUrl(resolved);
-      }
-    } catch (error) {
-      // fall through to raw value
-    }
-
-    return previewUrl(value);
+  function assetToString(asset) {
+    if (!asset) return "";
+    var resolved = asset.toString ? asset.toString() : String(asset);
+    if (!resolved || resolved.indexOf("[object") !== -1) return "";
+    return resolved;
   }
+
+  // Decap CMS's getAsset() is synchronous on some backends (e.g. the local
+  // dev backend) but returns a Promise on others (e.g. the GitHub backend,
+  // which has to fetch the blob). The old version of this file assumed a
+  // synchronous return, so on GitHub-backed collections the preview never
+  // resolved and silently fell back to a broken raw path. AssetImage
+  // handles both cases and re-renders once the real URL is known.
+  var AssetImage = createClass({
+    getInitialState: function () {
+      return { status: "idle", url: "" };
+    },
+
+    componentDidMount: function () {
+      this.resolve(this.props.src);
+    },
+
+    componentDidUpdate: function (prevProps) {
+      if (prevProps.src !== this.props.src || prevProps.getAsset !== this.props.getAsset) {
+        this.resolve(this.props.src);
+      }
+    },
+
+    resolve: function (rawSrc) {
+      var value = clean(rawSrc);
+
+      if (!value) {
+        this.setState({ status: "empty", url: "" });
+        return;
+      }
+
+      if (value.indexOf("blob:") === 0 || value.indexOf("data:") === 0 || /^https?:\/\//i.test(value)) {
+        this.setState({ status: "ready", url: previewUrl(value) });
+        return;
+      }
+
+      this.setState({ status: "loading", url: "" });
+
+      var self = this;
+      var getAsset = this.props.getAsset;
+      var result;
+
+      try {
+        result = getAsset(value);
+      } catch (error) {
+        self.setState({ status: "ready", url: previewUrl(value) });
+        return;
+      }
+
+      if (result && typeof result.then === "function") {
+        result
+          .then(function (asset) {
+            var resolved = assetToString(asset);
+            self.setState({ status: "ready", url: previewUrl(resolved || value) });
+          })
+          .catch(function () {
+            self.setState({ status: "ready", url: previewUrl(value) });
+          });
+        return;
+      }
+
+      var resolved = assetToString(result);
+      self.setState({ status: "ready", url: previewUrl(resolved || value) });
+    },
+
+    render: function () {
+      if (this.state.status === "loading" || this.state.status === "idle") {
+        return h("div", { className: "crop-frame-empty" }, "Loading preview…");
+      }
+      if (!this.state.url) {
+        return h("div", { className: "crop-frame-empty" }, "No image selected");
+      }
+      return h("img", { src: this.state.url, alt: "" });
+    }
+  });
 
   // A crop frame renders the raw uploaded image inside a box shaped like the
   // published output (square, wide hero, etc), positioned and zoomed using
   // the same crop_x / crop_y / crop_zoom values the live site's CSS uses.
   function cropFrame(rawSrc, getAsset, cropX, cropY, cropZoom, shape) {
-    var url = assetUrl(rawSrc, getAsset);
-
     return h(
       "div",
       {
@@ -58,9 +120,7 @@
           "--crop-zoom": (cropZoom || 100) / 100
         }
       },
-      url
-        ? h("img", { src: url, alt: "" })
-        : h("div", { className: "crop-frame-empty" }, "No image selected"),
+      h(AssetImage, { src: rawSrc, getAsset: getAsset }),
       h("span", { className: "crop-frame-label" }, "Crop preview")
     );
   }

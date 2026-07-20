@@ -1,9 +1,93 @@
 title: Home
-description: ""
+description: Swim, bike and run with the University of Sheffield Triathlon Club — training, racing and socials for complete beginners and experienced athletes.
 sections:
   - type: hero
     id: home-hero
-    eyebrow: ""
-    title: Home
+    eyebrow: University of Sheffield Triathlon Club
+    title: Swim. Bike. Run. Belong.
+    subtitle: Sheffield's friendliest multisport club
+    body: >
+      Weekly coached sessions across all three disciplines, a beginner-friendly
+      "Couch to Tri" pathway, and a social calendar to match. No experience,
+      no bike, and no wetsuit required to get started.
+    primary_button:
+      label: Join the club
+      url: /#join
+    secondary_button:
+      label: See training sessions
+      url: /training/
+
+  - type: stats
+    id: home-stats
+    eyebrow: The club in numbers
+    title: A growing multisport community
     subtitle: ""
-    body: ""
+    items:
+      - number: "150+"
+        label: Members
+      - number: "6"
+        label: Sessions a week
+      - number: "12"
+        label: Races supported each year
+      - number: "0"
+        label: Experience required to start
+
+  - type: relay-bar
+    id: home-relay
+    eyebrow: How training breaks down
+    title: Swim, bike, run — in that order, every week
+
+  - type: cards
+    id: home-highlights
+    eyebrow: Why join
+    title: Three reasons to get started
+    subtitle: Whatever your goal — your first triathlon or a personal best — there's a lane, a group, and a session for you.
+    cards:
+      - label: Beginners
+        title: Couch to Tri
+        description: >
+          A structured programme for complete beginners, building confidence
+          in the pool, on the bike, and on the run before your first race.
+        url: /training/
+      - label: Training
+        title: Weekly sessions
+        description: >
+          Coached swim sets, structured turbo/road rides, and run sessions
+          for every pace, all year round.
+        url: /training/
+      - label: Community
+        title: Racing & socials
+        description: >
+          Club trips to local and national races, plus a social calendar
+          that makes sure triathlon isn't the only thing we talk about.
+        url: /socials/
+
+  - type: text
+    id: home-about
+    eyebrow: About us
+    title: A club for every kind of triathlete
+    subtitle: ""
+    body: |
+      We're a student-led triathlon club affiliated with the University of
+      Sheffield and Sport Sheffield, open to students and staff of all
+      abilities. Some of our members are training for their first sprint
+      triathlon; others are chasing qualification times. Most weeks, you'll
+      find both training side by side.
+
+      Membership includes access to coached sessions, discounted kit and
+      race entries, and a genuinely welcoming group of people who'll happily
+      talk you through your first open-water swim.
+
+  - type: cta
+    id: join
+    eyebrow: Ready to get started?
+    title: Come to a session, no commitment needed
+    body: >
+      Turn up to any beginner-friendly session to see what we're about —
+      full membership isn't required for your first visit.
+    primary_button:
+      label: Join the club
+      url: https://www.sheffieldstudentsunion.com/activities/societies/
+    secondary_button:
+      label: Ask us a question
+      url: /socials/

@@ -1,9 +1,77 @@
 title: Socials
-description: ""
+description: Club socials, trips and how to follow along on Instagram, Strava and Facebook.
 sections:
   - type: hero
     id: socials-hero
-    eyebrow: ""
-    title: Socials
+    eyebrow: Socials
+    title: Triathlon's not the only thing we do
+    subtitle: Socials, trips, and a genuinely friendly club
+    body: >
+      From post-training coffee to end-of-season trips away, our socials
+      are as much a part of the club as the training is.
+
+  - type: text
+    id: socials-intro
+    eyebrow: What to expect
+    title: A club that hangs out outside of kit
     subtitle: ""
-    body: ""
+    body: |
+      Socials happen most weeks, alongside the training calendar — nothing
+      is compulsory, and you don't need to have raced anything to come
+      along. It's usually the easiest way to actually get to know people
+      in the club.
+
+  - type: events
+    id: socials-calendar
+    eyebrow: Coming up
+    title: This term's socials
+    subtitle: ""
+    items:
+      - title: Welcome social
+        date: Week 1
+        location: Local pub, details on Instagram
+        type: Social
+        description: The easiest way to meet the club before your first session.
+      - title: Post-training coffee
+        date: Every Saturday, after the club ride
+        location: Endcliffe Park café
+        type: Weekly
+        description: Casual and drop-in — no need to have ridden to come along.
+      - title: Race season send-off
+        date: April
+        location: TBC
+        type: Social
+        description: A send-off before the club heads out to the Sheffield Sprint Triathlon.
+      - title: End-of-year formal
+        date: May
+        location: TBC
+        type: Social
+        description: Our biggest social of the year, celebrating the season with the whole club.
+
+  - type: socials
+    id: socials-links
+    eyebrow: Follow along
+    title: Find us online
+    subtitle: The fastest way to hear about session changes, race entries and social plans.
+    layout: cards
+    items:
+      - platform: Instagram
+        title: "@sheffunitri"
+        description: Session updates, race photos and the fastest way to reach the committee.
+        url: https://www.instagram.com/sheffunitri/
+        button: Follow
+      - platform: Strava
+        title: Sheffield Triathlon Club
+        description: Join the club segment leaderboard and see who's out training this week.
+        url: https://www.strava.com/clubs/UoSTri
+        button: Join club
+      - platform: Facebook
+        title: UoSTriathlon
+        description: Event pages, committee announcements and the wider alumni network.
+        url: https://www.facebook.com/UoSTriathlon/
+        button: Like page
+      - platform: Email
+        title: Get in touch
+        description: For anything that doesn't fit in a DM — membership questions, kit orders, or general queries.
+        url: mailto:triathlon@sheffield.ac.uk
+        button: Email us

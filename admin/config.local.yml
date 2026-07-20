@@ -21,6 +21,8 @@ collections:
             name: sections
             widget: list
             typeKey: type
+            summary: '{{fields.type}} — {{fields.title}}{{fields.platform}}'
+            hint: Add, remove, and drag to reorder the blocks that make up this page. Each block collapses to show its type and title so a long page stays easy to scan.
             types:
               - name: hero
                 label: Hero
@@ -85,6 +87,7 @@ collections:
                   - label: Items
                     name: items
                     widget: list
+                    summary: '{{fields.number}} — {{fields.label}}'
                     fields:
                       - {label: Number, name: number, widget: string}
                       - {label: Label, name: label, widget: string}
@@ -99,6 +102,7 @@ collections:
                   - label: Cards
                     name: cards
                     widget: list
+                    summary: '{{fields.title}}'
                     fields:
                       - {label: Title, name: title, widget: string}
                       - {label: Label, name: label, widget: string, required: false}
@@ -158,6 +162,7 @@ collections:
                   - label: Images
                     name: images
                     widget: list
+                    summary: '{{fields.caption}}'
                     fields:
                       - label: Source image
                         name: src_raw
@@ -187,9 +192,10 @@ collections:
                   - label: Items
                     name: items
                     widget: list
+                    summary: '{{fields.title}} — {{fields.date}}'
                     fields:
                       - {label: Title, name: title, widget: string}
-                      - {label: Date, name: date, widget: string, required: false}
+                      - {label: Date, name: date, widget: string, required: false, hint: "Free text, e.g. 'Mondays, 6:00–7:00pm' or '12 Oct 2026'"}
                       - {label: Location, name: location, widget: string, required: false}
                       - {label: Type, name: type, widget: string, required: false}
                       - {label: Description, name: description, widget: text, required: false}
@@ -246,6 +252,7 @@ collections:
                   - label: Sponsors
                     name: sponsors
                     widget: list
+                    summary: '{{fields.name}}'
                     fields:
                       - {label: Name, name: name, widget: string}
                       - {label: Description, name: description, widget: text, required: false}
@@ -261,6 +268,7 @@ collections:
                   - label: Items
                     name: items
                     widget: list
+                    summary: '{{fields.title}}'
                     fields:
                       - {label: Title, name: title, widget: string}
                       - {label: Description, name: description, widget: text, required: false}
@@ -275,6 +283,7 @@ collections:
                   - label: Items
                     name: items
                     widget: list
+                    summary: '{{fields.question}}'
                     fields:
                       - {label: Question, name: question, widget: string}
                       - {label: Answer, name: answer, widget: markdown}
@@ -313,6 +322,7 @@ collections:
                     name: embeds
                     widget: list
                     required: false
+                    summary: '{{fields.title}}'
                     fields:
                       - {label: Provider, name: provider, widget: string, required: false}
                       - {label: Title, name: title, widget: string, required: false}
@@ -329,10 +339,11 @@ collections:
                   - {label: Eyebrow, name: eyebrow, widget: string, required: false}
                   - {label: Title, name: title, widget: string, required: false}
                   - {label: Subtitle, name: subtitle, widget: string, required: false}
-                  - {label: Layout, name: layout, widget: select, options: [logos, cards], required: false}
+                  - {label: Layout, name: layout, widget: select, options: [logos, cards], required: false, hint: "'Logos' is a compact row of round icons. 'Cards' shows a title, description and button per platform."}
                   - label: Items
                     name: items
                     widget: list
+                    summary: '{{fields.platform}} — {{fields.title}}'
                     fields:
                       - {label: Platform, name: platform, widget: string}
                       - label: Source icon
@@ -390,6 +401,7 @@ collections:
                 choose_url: false
                 media_folder: /assets/images/brand
                 public_folder: /uostriathlon/assets/images/brand
+                hint: PNG with a transparent background works best — the logo sits in a plain circular frame with no fixed background colour behind it.
               - {label: "Logo crop horizontal %", name: logo_crop_x, widget: number, default: 50, min: 0, max: 100, value_type: int, required: false}
               - {label: "Logo crop vertical %", name: logo_crop_y, widget: number, default: 50, min: 0, max: 100, value_type: int, required: false}
               - {label: "Logo crop zoom %", name: logo_crop_zoom, widget: number, default: 100, min: 100, max: 220, value_type: int, required: false}
@@ -414,6 +426,7 @@ collections:
           - label: Items
             name: items
             widget: list
+            summary: '{{fields.label}}'
             fields:
               - {label: Label, name: label, widget: string}
               - {label: URL, name: url, widget: string}
@@ -431,6 +444,7 @@ collections:
           - label: Items
             name: items
             widget: list
+            summary: '{{fields.platform}}'
             fields:
               - {label: Platform, name: platform, widget: string}
               - {label: Label, name: label, widget: string}

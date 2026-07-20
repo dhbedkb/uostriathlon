@@ -1,9 +1,70 @@
 title: Races
-description: ""
+description: Races the club supports each season, from beginner-friendly sprint distance events to national student championships.
 sections:
   - type: hero
     id: races-hero
-    eyebrow: ""
-    title: Races
+    eyebrow: Races
+    title: From your first sprint to BUCS
+    subtitle: Club-supported races, every season
+    body: >
+      We block-book entries, organise transport, and always send an
+      experienced member along — so racing with the club is the easiest
+      way to do your first triathlon.
+
+  - type: text
+    id: races-intro
+    eyebrow: Racing with the club
+    title: You're never racing alone
     subtitle: ""
-    body: ""
+    body: |
+      Whether it's a local sprint triathlon or the British Universities
+      Championships, club members race together and support each other
+      through transition. First-timers are always paired with someone
+      who's done it before.
+
+  - type: events
+    id: races-calendar
+    eyebrow: Season calendar
+    title: Upcoming races
+    subtitle: Full details, entry links and deadlines are shared on the members area and club socials closer to each date.
+    items:
+      - title: Sheffield Sprint Triathlon
+        date: April
+        location: Sheffield
+        type: Sprint distance
+        description: Our home race and the most popular first triathlon for new members.
+      - title: BUCS Triathlon Championships
+        date: May
+        location: Nottingham
+        type: Standard distance
+        description: The national university championships — open to all abilities, with a club relay team too.
+      - title: Peak District Duathlon
+        date: June
+        location: Peak District
+        type: Duathlon
+        description: A hillier off-road alternative for members who prefer running and biking to swimming.
+      - title: Castle Howard Triathlon
+        date: July
+        location: North Yorkshire
+        type: Standard & sprint distance
+        description: A popular summer club trip with both sprint and standard distance options on the day.
+      - title: Club Championship Sprint
+        date: September
+        location: Sheffield
+        type: Internal club race
+        description: Our own end-of-season race, followed by presentations and a social.
+
+  - type: cta
+    id: races-cta
+    eyebrow: First time racing?
+    title: We'll help you enter and get race-day ready
+    body: >
+      Come to a training session and speak to the committee about upcoming
+      races — we'll point you to the right distance and talk you through
+      what race day actually looks like.
+    primary_button:
+      label: See training sessions
+      url: /training/
+    secondary_button:
+      label: Talk to the committee
+      url: /committee/
