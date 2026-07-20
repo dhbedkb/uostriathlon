@@ -8,29 +8,29 @@
     %}
 
     {% if include.section.cards %}
-      <div class="tile-grid card-grid">
+      <div class="tile-grid tile-grid-three-up">
         {% for card in include.section.cards %}
-          <article class="tile content-card reveal-card discipline-{{ card.label | downcase | slugify }}">
+          <article class="tile tile-surface reveal-card discipline-{{ card.label | downcase | slugify }}">
             {% if card.image %}
-              <div class="card-photo" style="background-image: url('{{ card.image | relative_url }}')" aria-hidden="true"></div>
+              <div class="tile-frame tile-frame-cover" style="background-image: url('{{ card.image | relative_url }}')" aria-hidden="true"></div>
             {% else %}
-              <div class="card-media" aria-hidden="true">
+              <div class="tile-frame tile-frame-placeholder tile-discipline-media" aria-hidden="true">
                 <span>{{ card.label | default: card.title }}</span>
               </div>
             {% endif %}
 
-            <div class="tile-body content-card-body">
+            <div class="tile-body">
               {% if card.label %}
-                <p class="card-label">{{ card.label }}</p>
+                <p class="tile-subtitle tile-meta">{{ card.label }}</p>
               {% endif %}
 
-              <h3>{{ card.title }}</h3>
+              <h3 class="tile-title">{{ card.title }}</h3>
 
               {% if card.description %}
-                <p>{{ card.description }}</p>
+                <p class="tile-text tile-muted">{{ card.description }}</p>
               {% endif %}
 
-              <div class="card-meta">
+              <div class="tile-stack tile-meta-list">
                 {% if card.schedule %}
                   <span><strong>Schedule</strong> {{ card.schedule }}</span>
                 {% endif %}

@@ -8,11 +8,11 @@
     %}
 
     {% if include.section.items %}
-      <div class="tile-grid stats-grid">
+      <div class="tile-grid tile-grid-four-up">
         {% for item in include.section.items %}
-          <article class="tile stat-card reveal-card">
-            <strong>{{ item.number }}</strong>
-            <span>{{ item.label }}</span>
+          <article class="tile tile-surface tile-stat reveal-card">
+            <strong class="tile-stat-value">{{ item.number }}</strong>
+            <span class="tile-stat-label tile-muted">{{ item.label }}</span>
           </article>
         {% endfor %}
       </div>

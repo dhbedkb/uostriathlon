@@ -3488,6 +3488,136 @@ main > .section:nth-of-type(even):not(.section-hero) {
   }
 }
 
+/* Reusable simple tile modifiers. */
+.tile-surface {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.tile-frame-cover,
+.tile-frame-placeholder {
+  display: grid;
+  min-height: var(--tile-frame-min-height, 170px);
+  place-items: center;
+}
+
+.tile-frame-cover {
+  background-size: cover;
+  background-position: center;
+}
+
+.tile-frame-placeholder {
+  background:
+    radial-gradient(circle at top left, rgba(242, 201, 76, 0.28), transparent 12rem),
+    linear-gradient(135deg, rgba(68, 0, 153, 0.72), rgba(15, 23, 42, 0.96));
+  color: var(--color-gold);
+  font-size: 0.85rem;
+  font-weight: 950;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.discipline-swim .tile-discipline-media,
+.discipline-swimming .tile-discipline-media {
+  background:
+    radial-gradient(circle at top left, rgba(14, 165, 233, 0.4), transparent 12rem),
+    linear-gradient(135deg, #0F172A, #0369A1);
+}
+
+.discipline-bike .tile-discipline-media,
+.discipline-cycling .tile-discipline-media {
+  background:
+    radial-gradient(circle at top left, rgba(248, 212, 93, 0.38), transparent 12rem),
+    linear-gradient(135deg, #24135F, #F8D45D);
+}
+
+.discipline-run .tile-discipline-media,
+.discipline-running .tile-discipline-media {
+  background:
+    radial-gradient(circle at top left, rgba(249, 115, 22, 0.42), transparent 12rem),
+    linear-gradient(135deg, #7C2D12, #F8D45D);
+}
+
+.tile-meta-list {
+  gap: 0.4rem;
+  margin: 1rem 0;
+  color: var(--tile-muted-color, var(--color-muted));
+  font-size: 0.95rem;
+}
+
+.tile-meta-list strong {
+  color: var(--color-text);
+}
+
+.tile-date-context {
+  position: relative;
+  padding-top: 5rem;
+}
+
+.tile-date-badge {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  border: 1px solid rgba(242, 201, 76, 0.35);
+  border-radius: 999px;
+  background: rgba(242, 201, 76, 0.1);
+  color: var(--color-gold);
+  padding: 0.35rem 0.7rem;
+  font-size: 0.85rem;
+  font-weight: 850;
+}
+
+.tile-grid-four-up {
+  --tile-grid-columns: repeat(4, minmax(0, 1fr));
+}
+
+@media (max-width: 980px) {
+  .tile-grid-four-up,
+  .tile-grid-three-up {
+    --tile-grid-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .tile-grid-four-up,
+  .tile-grid-three-up {
+    --tile-grid-columns: 1fr;
+  }
+}
+
+.tile-stat-value {
+  display: block;
+  color: var(--color-gold);
+  font-size: clamp(2.4rem, 6vw, 4.5rem);
+  line-height: 1;
+}
+
+.tile-stat-label {
+  font-weight: 750;
+}
+
+.tile-cta {
+  padding: clamp(2rem, 6vw, 4rem);
+  text-align: center;
+}
+
+.tile-cta-title {
+  margin: 0;
+  font-size: clamp(2.6rem, 8vw, 5.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.06em;
+}
+
+.tile-actions-center {
+  justify-content: center;
+}
+
+.tile-reveal-split {
+  --tile-reveal-body-border: 1px solid var(--color-border);
+  --tile-reveal-body-pad: var(--tile-pad-compact);
+}
+
 /* Reusable tile configuration modifiers. */
 .tile-grid-centered {
   --tile-grid-margin-inline: auto;

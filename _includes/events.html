@@ -8,25 +8,25 @@
     %}
 
     {% if include.section.items %}
-      <div class="tile-grid event-grid">
+      <div class="tile-grid tile-grid-three-up">
         {% for event in include.section.items %}
-          <article class="tile event-card reveal-card">
-            <div class="event-date">
+          <article class="tile tile-surface tile-date-context reveal-card">
+            <div class="tile-date-badge">
               <span>{{ event.date | default: "TBC" }}</span>
             </div>
 
             {% if event.type %}
-              <p class="card-label">{{ event.type }}</p>
+              <p class="tile-subtitle tile-meta">{{ event.type }}</p>
             {% endif %}
 
-            <h3>{{ event.title }}</h3>
+            <h3 class="tile-title">{{ event.title }}</h3>
 
             {% if event.location %}
-              <p class="event-location">{{ event.location }}</p>
+              <p class="tile-text tile-muted">{{ event.location }}</p>
             {% endif %}
 
             {% if event.description %}
-              <p>{{ event.description }}</p>
+              <p class="tile-text">{{ event.description }}</p>
             {% endif %}
 
             {% if event.url %}
