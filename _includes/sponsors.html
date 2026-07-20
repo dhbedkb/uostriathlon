@@ -10,7 +10,7 @@
     {% if include.section.sponsors %}
       <div class="sponsor-grid">
         {% for sponsor in include.section.sponsors %}
-          <article class="u-tile sponsor-card reveal-card">
+          <article class="tile sponsor-card reveal-card">
             <div class="sponsor-logo" aria-hidden="true">{{ sponsor.name | slice: 0 }}</div>
             <h3>{{ sponsor.name }}</h3>
             {% if sponsor.description %}
