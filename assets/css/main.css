@@ -362,7 +362,6 @@ a {
   }
 }
 
-
 /* Stage 5 section rendering styles */
 
 .hero {
@@ -455,13 +454,8 @@ a {
 }
 
 .notice-card,
-.stat-card,
-.content-card,
-.event-card,
 .profile-card,
-.sponsor-card,
-.faq-item,
-.cta-card {
+.sponsor-card {
   border: 1px solid var(--color-border);
   border-radius: var(--radius-xl);
   background: var(--color-surface-soft);
@@ -469,51 +463,23 @@ a {
 }
 
 .notice-card,
-.stat-card,
-.content-card-body,
-.event-card,
 .profile-card,
-.sponsor-card,
-.faq-item,
-.cta-card {
+.sponsor-card {
   padding: 1.5rem;
 }
 
-.stats-grid,
-.card-grid,
-.event-grid,
 .gallery-grid,
-.committee-grid,
 .sponsor-grid {
   display: grid;
   gap: 1rem;
 }
 
-.stats-grid {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-}
-
-.card-grid,
-.event-grid,
-.gallery-grid,
-.committee-grid {
+.gallery-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .sponsor-grid {
   grid-template-columns: repeat(4, minmax(0, 1fr));
-}
-
-.stat-card strong {
-  display: block;
-  color: var(--color-gold);
-  font-size: clamp(2.4rem, 6vw, 4.5rem);
-  line-height: 1;
-}
-
-.stat-card span {
-  color: var(--color-muted);
-  font-weight: 750;
 }
 
 .card-label {
@@ -525,16 +491,12 @@ a {
   text-transform: uppercase;
 }
 
-.content-card,
-.event-card,
 .profile-card,
 .sponsor-card,
 .gallery-item {
   overflow: hidden;
 }
 
-.content-card h3,
-.event-card h3,
 .profile-card h3,
 .sponsor-card h3 {
   margin-top: 0;
@@ -576,10 +538,7 @@ a {
 .gallery-item figcaption {
   padding: 1rem;
   color: var(--color-muted);
-}
-
-.timeline-list,
-.faq-list {
+}.timeline-list {
   display: grid;
   gap: 1rem;
 }
@@ -595,49 +554,19 @@ a {
   padding: 1rem 0 1rem 1.25rem;
 }
 
-.faq-item summary {
-  cursor: pointer;
-  font-weight: 850;
-}
-
-.cta-card {
-  padding: clamp(2rem, 6vw, 4rem);
-  text-align: center;
-}
-
-.cta-card h2 {
-  margin: 0;
-  font-size: clamp(2.6rem, 8vw, 5.5rem);
-  line-height: 0.95;
-  letter-spacing: -0.06em;
-}
-
-.cta-card .actions {
-  justify-content: center;
-}
-
-@media (max-width: 980px) {
-  .stats-grid,
-  .card-grid,
-  .event-grid,
-  .gallery-grid,
-  .committee-grid,
-  .sponsor-grid {
+@media (max-width: 980px) {.gallery-grid,
+.committee-grid,
+.sponsor-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
-@media (max-width: 640px) {
-  .stats-grid,
-  .card-grid,
-  .event-grid,
-  .gallery-grid,
-  .committee-grid,
-  .sponsor-grid {
+@media (max-width: 640px) {.gallery-grid,
+.committee-grid,
+.sponsor-grid {
     grid-template-columns: 1fr;
   }
 }
-
 
 /* Stage 6 component polish */
 
@@ -758,11 +687,6 @@ a {
   color: var(--color-text);
 }
 
-.event-card {
-  position: relative;
-  padding-top: 5rem;
-}
-
 .event-date {
   position: absolute;
   top: 1.25rem;
@@ -853,38 +777,6 @@ a {
   font-weight: 950;
 }
 
-.faq-item {
-  padding: 0;
-  overflow: hidden;
-}
-
-.faq-item summary {
-  padding: 1.25rem 1.5rem;
-  list-style: none;
-}
-
-.faq-item summary::-webkit-details-marker {
-  display: none;
-}
-
-.faq-answer {
-  border-top: 1px solid var(--color-border);
-  padding: 0 1.5rem 1.25rem;
-  color: var(--color-muted);
-}
-
-.cta-card {
-  background:
-    radial-gradient(circle at top right, rgba(242, 201, 76, 0.18), transparent 18rem),
-    linear-gradient(135deg, rgba(36, 19, 95, 0.95), rgba(7, 17, 31, 0.95));
-}
-
-[data-theme="light"] .cta-card {
-  background:
-    radial-gradient(circle at top right, rgba(242, 201, 76, 0.24), transparent 18rem),
-    linear-gradient(135deg, #FFFFFF, #F8FAFC);
-}
-
 .prose p:first-child {
   margin-top: 0;
 }
@@ -902,7 +794,6 @@ a {
     display: none;
   }
 }
-
 
 /* Revised structure: Sport Sheffield-style black/gold/photo system */
 
@@ -979,7 +870,6 @@ a {
     grid-template-columns: 1fr;
   }
 }
-
 
 /* Official palette, embeds and Apple-inspired overlap */
 
@@ -1166,7 +1056,6 @@ body {
   }
 }
 
-
 /* Strong Apple-style section sliding and social embeds */
 
 @media (min-width: 960px) and (prefers-reduced-motion: no-preference) {
@@ -1322,8 +1211,6 @@ body {
   }
 }
 
-
-
 /* Panel stack fix */
 
 .section {
@@ -1421,7 +1308,6 @@ body {
       transparent
     );
 }
-
 
 /* FINAL: solid Apple panels and working embeds */
 
@@ -1619,8 +1505,6 @@ main > .section:nth-of-type(even):not(.section-hero) {
     box-shadow: none;
   }
 }
-
-
 
 /* Base solid panels */
 .section {
@@ -1831,105 +1715,21 @@ body main > .section:nth-of-type(even):not(.section-hero) {
   background: var(--color-background) !important;
 }
 
-
-
-
-
-
-
-@media (max-width: 900px) {
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
 /* ----------------------------------------------------- */
 /* Mobile */
 /* ----------------------------------------------------- */
 
-@media (max-width: 1100px) {
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* Make the right-hand column visually match the Facebook card height */
-@media (min-width: 1101px) {
-
-}
 
 /* Mobile/tablet stack order */
-@media (max-width: 1100px) {
-
-}
 
 /* Small screens */
-@media (max-width: 560px) {
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* Make the right column visually balance the Facebook card */
-@media (min-width: 1101px) {
-}
 
 /* Mobile/tablet stack order keeps summary above activity */
-@media (max-width: 1100px) {
-}
 
 /* Small screens */
-@media (max-width: 560px) {
-
-}
-
-
-
-
-
-
-
-
-
-
-
 
 /*
   Unfortunately Facebook and Strava iframes control
@@ -1938,8 +1738,6 @@ body main > .section:nth-of-type(even):not(.section-hero) {
   Browsers do not allow us to reliably restyle
   iframe contents from another site.
 */
-
-
 
 .brand-logo-wrap {
   width: 48px !important;
@@ -2006,26 +1804,11 @@ body main > .section:nth-of-type(even):not(.section-hero) {
   font-weight: 950;
 }
 
-
-
-
-
-
-
-
-
-
 /* Facebook plugin max width is 500px;
-
-
-
 
 /* Mobile logic:
    Facebook first, then Strava summary, then Strava latest activity.
 */
-@media (max-width: 1100px) {
-
-}
 
 @media (max-width: 560px) {
   .brand-logo-wrap {
@@ -2039,9 +1822,7 @@ body main > .section:nth-of-type(even):not(.section-hero) {
     height: 74px;
   }
 
-
 }
-
 
 /* =====================================================
    FINAL HERO MOBILE + PARTIAL APPLE SLIDING REFINEMENT
@@ -2389,11 +2170,8 @@ main > .section:nth-of-type(even):not(.section-hero) {
 [data-theme="light"] .section li,
 [data-theme="light"] .section summary {
   color: #000000;
-}
-
-[data-theme="light"] .section .lede,
+}[data-theme="light"] .section .lede,
 [data-theme="light"] .section .hero-body,
-[data-theme="light"] .section .faq-answer,
 [data-theme="light"] .section .card-meta,
 [data-theme="light"] .section .event-location {
   color: #3f3f3f;
@@ -2404,7 +2182,6 @@ main > .section:nth-of-type(even):not(.section-hero) {
 [data-theme="light"] .section .text-link {
   color: #7a5e00;
 }
-
 
 /* ---- Relay bar signature component ---- */
 
@@ -2459,59 +2236,6 @@ main > .section:nth-of-type(even):not(.section-hero) {
 .relay-key .run i  { background: #4F6B52; }
 
 /* FINAL RAW PROFILE IMAGE PIPELINE: committee cards */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* stage 2 final square logo rendering:start */
 .brand-mark,
@@ -2676,15 +2400,8 @@ main > .section:nth-of-type(even):not(.section-hero) {
 
 .tile.reveal-card:hover {
   border-color: rgba(248, 212, 93, 0.32);
-}
-
-.tile.content-card,
-.tile.event-card,
-.tile.stat-card,
-.tile.social-card,
+}.tile.social-card,
 .tile.gallery-item,
-.tile.cta-card,
-.tile.faq-item,
 .tile.notice-card {
   min-width: 0;
 }
@@ -2693,14 +2410,6 @@ main > .section:nth-of-type(even):not(.section-hero) {
 .tile iframe,
 .tile video {
   max-width: 100%;
-}
-
-.tile.faq-item summary {
-  outline: none;
-}
-
-.tile.faq-item:focus-within {
-  box-shadow: var(--tile-focus-ring);
 }
 
 /* =====================================================
@@ -2738,35 +2447,6 @@ main > .section:nth-of-type(even):not(.section-hero) {
   }
 }
 
-
-
-
-
-
-
-@media (max-width: 560px) {
-
-
-}
-
-
-
-
-
-
-
-
-
-
-@media (max-width: 1100px) {
-
-}
-
-@media (max-width: 560px) {
-
-
-}
-
 /* Mobile: stack + CTA fallback */
 @media (max-width: 1100px) {
   .embed-facebook iframe { height: 650px !important; min-height: 650px !important; }
@@ -2775,29 +2455,14 @@ main > .section:nth-of-type(even):not(.section-hero) {
 }
 
 /* fallback */
-}
-
-/* Universal tile aliases for existing components */
-.content-card,
-.event-card,
-.stat-card,
-.social-card,
+}.social-card,
 .gallery-item,
-.cta-card,
-.faq-item,
 .notice-card,
 .sponsor-card,
 .timeline-item {
   box-sizing: border-box;
-}
-
-.content-card,
-.event-card,
-.stat-card,
-.social-card,
+}.social-card,
 .gallery-item,
-.cta-card,
-.faq-item,
 .notice-card,
 .sponsor-card {
   border-radius: var(--u-tile-radius);
@@ -2868,31 +2533,17 @@ main > .section:nth-of-type(even):not(.section-hero) {
   max-width: 100%;
   margin: 0;
   border: 0;
-}
-
-/* Universal tile aliases for existing card-like components */
+}/* Universal tile aliases for existing card-like components */
 .tile,
-.content-card,
-.event-card,
-.stat-card,
 .social-card,
 .gallery-item,
-.cta-card,
-.faq-item,
 .notice-card,
 .sponsor-card,
 .timeline-item {
   box-sizing: border-box;
-}
-
-.tile,
-.content-card,
-.event-card,
-.stat-card,
+}.tile,
 .social-card,
 .gallery-item,
-.cta-card,
-.faq-item,
 .notice-card,
 .sponsor-card {
   border-radius: var(--u-tile-radius);
@@ -2920,43 +2571,20 @@ main > .section:nth-of-type(even):not(.section-hero) {
 
 .u-tile .button {
   align-self: flex-start;
-}
-
-/* =====================================================
-   UNIVERSAL TILE SPACING NORMALISATION V2
-   Applies the universal tile spacing contract to common cards.
-   ===================================================== */
-
-.u-tile.content-card,
-.u-tile.event-card,
-.u-tile.stat-card,
-.u-tile.social-card,
+}.u-tile.social-card,
 .u-tile.gallery-item,
-.u-tile.cta-card,
 .u-tile.notice-card {
   display: flex;
   flex-direction: column;
   gap: var(--u-tile-pad-compact);
   padding: var(--u-tile-pad);
-}
-
-.u-tile.content-card > *,
-.u-tile.event-card > *,
-.u-tile.stat-card > *,
-.u-tile.social-card > *,
+}.u-tile.social-card > *,
 .u-tile.gallery-item > *,
-.u-tile.cta-card > *,
 .u-tile.notice-card > * {
   margin-block-start: 0;
   margin-block-end: 0;
-}
-
-.u-tile.content-card > :last-child,
-.u-tile.event-card > :last-child,
-.u-tile.stat-card > :last-child,
-.u-tile.social-card > :last-child,
+}.u-tile.social-card > :last-child,
 .u-tile.gallery-item > :last-child,
-.u-tile.cta-card > :last-child,
 .u-tile.notice-card > :last-child {
   margin-bottom: 0;
 }
@@ -2978,27 +2606,20 @@ main > .section:nth-of-type(even):not(.section-hero) {
 
 .u-tile .button {
   align-self: flex-start;
-}
-
-
-
-/* =====================================================
+}/* =====================================================
    UNIVERSAL TILE GRID GAP NORMALISATION V3
    Uses one spacing token for tile-to-tile gaps across common grids.
    ===================================================== */
 
 .content-grid,
 .cards-grid,
-.event-grid,
 .events-grid,
-.stats-grid,
 .social-grid,
 .gallery-grid,
 .cta-grid,
 .notice-grid,
 .sponsor-grid,
-.timeline-list,
-.card-grid {
+.timeline-list {
   gap: var(--u-tile-gap);
 }
 
@@ -3056,21 +2677,6 @@ main > .section:nth-of-type(even):not(.section-hero) {
   display: flex;
   flex-direction: column;
   gap: var(--tile-gap);
-}
-
-.tile.content-card,
-.tile.event-card,
-.tile.stat-card,
-.tile.cta-card,
-.tile.faq-item,
-.u-tile.content-card,
-.u-tile.event-card,
-.u-tile.stat-card,
-.u-tile.cta-card,
-.u-tile.faq-item {
-  display: flex;
-  flex-direction: column;
-  gap: var(--tile-pad-compact);
 }
 
 .tile .button,
@@ -3682,18 +3288,6 @@ main > .section:nth-of-type(even):not(.section-hero) {
 
 /* Temporary legacy neutralisation: committee cards must obey the tile contract. */
 
-
-
-
-
-
-
-
-
-
 /* Expanded committee content is a tile body: no bespoke horizontal inset. */
-
-
-
 
 /* The image frame is the media frame; crop logic remains separate. */
