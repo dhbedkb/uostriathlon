@@ -10,6 +10,8 @@
       {% include text.html section=section section_id=section_id section_index=section_index %}
     {% when "stats" %}
       {% include stats.html section=section section_id=section_id section_index=section_index %}
+    {% when "tile_grid" %}
+      {% include tile-grid.html section=section section_id=section_id section_index=section_index %}
     {% when "cards" %}
       {% include cards.html section=section section_id=section_id section_index=section_index %}
     {% when "gallery" %}

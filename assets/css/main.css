@@ -4735,3 +4735,26 @@ main > .section:nth-of-type(even):not(.section-hero) {
     width: 100% !important;
   }
 }
+
+/* =====================================================
+   DYNAMIC TILE GRID SUPPORT V1
+   Runtime support for CMS-driven tile_grid sections.
+   ===================================================== */
+
+.tile-grid-dynamic {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+}
+
+.tile-grid-nested {
+  margin-top: var(--tile-pad-compact);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
+}
+
+.tile-nested {
+  padding: var(--tile-pad-compact);
+  box-shadow: none;
+}
+
+.tile-buttons {
+  margin-top: var(--tile-pad-compact);
+}
