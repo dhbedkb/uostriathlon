@@ -47,10 +47,10 @@ sections:
   - question: What should I bring?
     answer: Bring the kit needed for the session and ask committee if unsure.
 - type: tile_grid
-  id: tile-system-test
-  eyebrow: Tile system
-  title: Training tile test.
-  subtitle: A temporary test section for the universal tile grid renderer.
+  id: training-overview-tiles
+  eyebrow: Training structure
+  title: How training works.
+  subtitle: A simple overview of swim, bike and run training.
   layout: grid
   tiles:
   - eyebrow: Swim
