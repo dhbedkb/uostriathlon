@@ -1,19 +1,20 @@
 title: Committee
 description: Meet the committee running Sheffield Triathlon Club this year.
 sections:
-  - type: hero
-    id: committee-hero
-    eyebrow: Committee
-    title: Run by members, for members
-    subtitle: Meet this year's committee
-    body: >
+  - body: >
       Every session, race trip and social is organised by a team of volunteer
       members. Get in touch with any of them directly, or use the club email for
       anything general.
-    secondary_button:
+    eyebrow: Committee
+    primary_button:
       label: "1"
       url: "1"
-    primary_button:
+    background_image_raw: /uostriathlon/assets/images/source/img_1783.jpeg
+    subtitle: Meet this year's committee
+    title: Run by members, for members
+    type: hero
+    id: committee-hero
+    secondary_button:
       label: "1"
       url: "1"
   - type: committee
