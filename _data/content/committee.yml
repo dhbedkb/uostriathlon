@@ -1,7 +1,8 @@
 title: Committee
 description: Meet the committee running Sheffield Triathlon Club this year.
 sections:
-  - body: >
+  - persistent_hero: true
+    body: >
       Every session, race trip and social is organised by a team of volunteer
       members. Get in touch with any of them directly, or use the club email for
       anything general.
