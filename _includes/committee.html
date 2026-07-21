@@ -42,8 +42,8 @@
             {% if has_extra %}
               <div class="tile-body tile-reveal-body">
                 {% if display_image and display_image != "" %}
-                  <div class="tile-frame tile-frame-crop" style="--crop-x: {{ crop_x }}%; --crop-y: {{ crop_y }}%; --crop-zoom: {{ crop_zoom | divided_by: 100.0 }};">
-                    <img class="tile-media-crop" src="{{ display_image | relative_url }}" alt="{{ member.name | default: 'Committee member' }}" loading="lazy">
+                  <div class="tile-frame" style="--crop-x: {{ crop_x }}%; --crop-y: {{ crop_y }}%; --crop-zoom: {{ crop_zoom | divided_by: 100.0 }};">
+                    <img src="{{ display_image | relative_url }}" alt="{{ member.name | default: 'Committee member' }}" width="900" height="900" loading="lazy" decoding="async">
                   </div>
                 {% endif %}
 

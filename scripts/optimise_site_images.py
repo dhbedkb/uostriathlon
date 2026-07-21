@@ -7,6 +7,12 @@ assets/images/committee/profiles for committee photos).
 This keeps the raw, full-size upload in the repo for future re-cropping,
 while the site itself only ever loads the small, compressed WebP.
 
+Compression is tuned per use rather than one flat setting for every image:
+a large hero photo is on screen for a second behind text and can take a
+lower quality; a small icon or logo is looked at directly and gets a
+higher one. See docs/image-pipeline.md for the reasoning and the full
+table of sizes/qualities.
+
 Run automatically by .github/workflows/deploy.yml before every build.
 Can also be run locally:
 
@@ -27,7 +33,13 @@ GENERATED_DIR.mkdir(parents=True, exist_ok=True)
 COMMITTEE_DIR.mkdir(parents=True, exist_ok=True)
 
 SUPPORTED_EXTENSIONS = {".jpg", ".jpeg", ".png", ".webp", ".bmp", ".tif", ".tiff"}
-WEBP_QUALITY = 82
+
+# WebP quality by use. Large, briefly-seen backgrounds tolerate more
+# compression than small images people actually look closely at.
+QUALITY_HERO = 76
+QUALITY_PHOTO = 80
+QUALITY_ICON = 88
+QUALITY_LOGO = 92
 
 
 def slugify(value):
@@ -104,22 +116,26 @@ def crop_to_aspect(img, aspect_w, aspect_h, crop_x=50, crop_y=50, crop_zoom=100)
     return img.crop((int(left), int(top), int(right), int(bottom)))
 
 
-def save_webp(src, dest, width, height, crop_x=50, crop_y=50, crop_zoom=100):
+def save_webp(src, dest, width, height, crop_x=50, crop_y=50, crop_zoom=100, quality=QUALITY_PHOTO):
     dest.parent.mkdir(parents=True, exist_ok=True)
     with Image.open(src) as img:
         cropped = crop_to_aspect(img, width, height, crop_x, crop_y, crop_zoom)
         cropped = cropped.resize((width, height), Image.Resampling.LANCZOS)
-        cropped.save(dest, "WEBP", quality=WEBP_QUALITY, method=6)
+        # method=6 is WebP's slowest/smallest compression effort setting.
+        # This only runs on publish, so it's worth spending the extra CPU
+        # time for a smaller file. No EXIF/ICC data is carried over, since
+        # `cropped` is a fresh image built from pixel data only.
+        cropped.save(dest, "WEBP", quality=quality, method=6)
     return "/" + str(dest).replace("\\", "/")
 
 
-def process_image(ref, page_slug, name, width, height, crop_x=50, crop_y=50, crop_zoom=100):
+def process_image(ref, page_slug, name, width, height, crop_x=50, crop_y=50, crop_zoom=100, quality=QUALITY_PHOTO):
     src = source_path(ref)
     if not supported(src):
         print(f"Skipping unsupported or missing image: {ref}")
         return None
     dest = GENERATED_DIR / page_slug / (slugify(name) + ".webp")
-    return save_webp(src, dest, width, height, crop_x, crop_y, crop_zoom)
+    return save_webp(src, dest, width, height, crop_x, crop_y, crop_zoom, quality)
 
 
 def process_committee_member(member):
@@ -137,6 +153,7 @@ def process_committee_member(member):
     public_ref = save_webp(
         src, dest, 900, 900,
         member.get("crop_x", 50), member.get("crop_y", 50), member.get("crop_zoom", 100),
+        quality=QUALITY_PHOTO,
     )
 
     if member.get("image_profile") != public_ref:
@@ -158,6 +175,7 @@ def process_file(yml_path):
                 section["background_image_raw"], page_slug, f"hero-{section.get('id') or s_index}",
                 2000, 1125,
                 section.get("background_crop_x", 50), section.get("background_crop_y", 50), section.get("background_crop_zoom", 100),
+                quality=QUALITY_HERO,
             )
             if generated and section.get("background_image") != generated:
                 section["background_image"] = generated
@@ -171,6 +189,7 @@ def process_file(yml_path):
                     card["image_raw"], page_slug, f"card-{section.get('id') or s_index}-{i}-{card.get('title')}",
                     900, 900,
                     card.get("crop_x", 50), card.get("crop_y", 50), card.get("crop_zoom", 100),
+                    quality=QUALITY_PHOTO,
                 )
                 if generated and card.get("image") != generated:
                     card["image"] = generated
@@ -184,6 +203,7 @@ def process_file(yml_path):
                     item["src_raw"], page_slug, f"gallery-{section.get('id') or s_index}-{i}",
                     1200, 1200,
                     item.get("crop_x", 50), item.get("crop_y", 50), item.get("crop_zoom", 100),
+                    quality=QUALITY_PHOTO,
                 )
                 if generated and item.get("src") != generated:
                     item["src"] = generated
@@ -197,6 +217,7 @@ def process_file(yml_path):
                     item["icon_raw"], page_slug, f"social-{section.get('id') or s_index}-{i}-{item.get('platform')}",
                     512, 512,
                     item.get("crop_x", 50), item.get("crop_y", 50), item.get("crop_zoom", 100),
+                    quality=QUALITY_ICON,
                 )
                 if generated and item.get("icon") != generated:
                     item["icon"] = generated
@@ -230,6 +251,7 @@ def main():
                     settings["brand"].get("logo_crop_x", 50),
                     settings["brand"].get("logo_crop_y", 50),
                     settings["brand"].get("logo_crop_zoom", 100),
+                    quality=QUALITY_LOGO,
                 )
                 settings["brand"]["logo"] = generated
                 settings_path.write_text(yaml.safe_dump(settings, sort_keys=False, allow_unicode=True))

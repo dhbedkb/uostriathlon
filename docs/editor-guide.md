@@ -16,7 +16,8 @@ Every image field in the editor works the same way:
 
 1. **Upload** the original photo in the "Source image" field. The editor
    preview shows it immediately, inside a frame shaped like where it will
-   actually appear (square card, wide hero banner, etc).
+   actually appear — on the live site this is always a square tile frame,
+   so what you see in the crop preview is what you'll get.
 2. **Reframe and zoom** using the crop horizontal %, crop vertical %, and
    crop zoom % fields next to it. The preview frame updates live — drag
    the horizontal/vertical sliders to move the visible area, and increase
@@ -24,7 +25,9 @@ Every image field in the editor works the same way:
 3. **Publish.** On every publish, a build step reads the source photo and
    your crop settings, produces a compressed WebP at the correct size, and
    updates the page automatically to use it. You never edit the
-   "Optimised image" field yourself — it's generated.
+   "Optimised image" field yourself — it's generated. See
+   `docs/image-pipeline.md` for what that compression step actually does
+   and why.
 
 The live site always loads the small compressed WebP, never the original
 upload, so pages stay fast even with high-resolution source photos.
@@ -79,3 +82,12 @@ Then open `http://127.0.0.1:4000/uostriathlon/admin/local.html`.
 3. Add an entry to `admin/config.yml` under `collections > pages > files`
    pointing at that content file, and to `_data/navigation.yml` if it
    should appear in the menu.
+
+## Keeping new sections consistent
+
+If you add a brand-new section type (a new `{% when %}` branch in
+`_includes/renderer.html`), build its markup from the shared tile classes
+— `.tile`, `.tile-frame`, `.tile-body`, `.tile-title`, `.tile-text` — in
+`assets/css/main.css`, rather than writing bespoke padding or image
+handling for it. That's what keeps every block on the site, present and
+future, lined up the same way.

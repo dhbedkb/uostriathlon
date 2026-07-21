@@ -1,14 +1,15 @@
 title: Training
-description: Weekly swim, bike and run sessions for every ability, plus our beginner-friendly Couch to Tri pathway.
+description: Weekly swim, bike and run sessions for every ability, plus two free weeks for beginners at the start of the year.
 sections:
   - type: hero
     id: training-hero
     eyebrow: Training
-    title: Six sessions a week, every ability welcome
-    subtitle: Coached, structured, and genuinely social
+    title: Six sessions a week
+    subtitle: Coached, structured, and grouped by pace not experience
     body: >
-      Sessions run year-round and are grouped by pace, not experience — so
-      you're always training alongside people at a similar level.
+      You don't need to attend every session, and you don't need to be
+      training for anything specific — come to as many or as few as fit
+      your week.
 
   - type: text
     id: training-intro
@@ -16,32 +17,33 @@ sections:
     title: Pick the sessions that suit your week
     subtitle: ""
     body: |
-      You don't need to attend every session, and you don't need to be
-      "training for" anything specific. Come to as many or as few sessions
-      as fit your week — pace groups mean you'll always find people to
-      train alongside.
+      Sessions are grouped by pace, so you're training alongside people
+      at a similar level whether it's your first year or your last. Club
+      bikes are available to borrow for anyone who doesn't have their
+      own, and full session times are confirmed each semester in the
+      members area.
 
   - type: events
     id: training-schedule
     eyebrow: Weekly schedule
     title: This week's sessions
-    subtitle: Locations and times are confirmed each semester — check the members area for the latest schedule.
+    subtitle: Locations and times are confirmed each semester — check the members area for the current schedule.
     items:
-      - title: Pool swim — technique & endurance
+      - title: Pool swim
         date: Mondays, 6:00–7:00pm
         location: Sheffield University Sports Centre pool
         type: Swim
-        description: Coached technique work followed by a structured set. All strokes and levels welcome.
+        description: Coached technique work followed by a set. All strokes and levels welcome.
       - title: Turbo session
         date: Tuesdays, 7:00–8:00pm
         location: Goodwin Sports Centre
         type: Bike
         description: Indoor structured intervals — no outdoor bike needed to take part.
-      - title: Track & interval running
+      - title: Track running
         date: Wednesdays, 6:30–7:30pm
         location: Goodwin Sports Centre track
         type: Run
-        description: Pace-group intervals for everyone from first 5k to marathon training.
+        description: Pace-group intervals, from first 5k to marathon training.
       - title: Open pool swim
         date: Thursdays, 6:00–7:00pm
         location: Sheffield University Sports Centre pool
@@ -51,31 +53,31 @@ sections:
         date: Saturdays, 9:00am
         location: Meet at Endcliffe Park
         type: Bike
-        description: Social-paced group ride with a faster group peeling off for intervals.
+        description: Group ride into the Peak District, with a faster group for those who want intervals.
       - title: Sunday long run
         date: Sundays, 9:30am
         location: Meet at Weston Park
         type: Run
-        description: Steady long run with route options for shorter and longer distances.
+        description: Steady long run with shorter and longer route options.
 
   - type: tile_grid
     id: training-pathway
     eyebrow: New to triathlon
-    title: The Couch to Tri pathway
-    subtitle: A structured six-week introduction that gets you race-ready without any prior multisport experience.
+    title: Give It A Go
+    subtitle: Two free weeks of training at the start of the year, for anyone with no prior multisport experience.
     tiles:
-      - title: Weeks 1–2 — Foundations
+      - title: Week 1 — Foundations
         body: >
-          Learn front crawl technique in the pool, get comfortable on a bike
-          in a group, and build an easy running base.
-      - title: Weeks 3–4 — Building
+          Front crawl technique in the pool, getting comfortable on a
+          bike in a group, and an easy running base.
+      - title: Week 2 — Race ready
         body: >
-          Introduce brick sessions (bike-to-run transitions) and open-water
-          swim skills ahead of race season.
-      - title: Weeks 5–6 — Race ready
+          Brick sessions (bike-to-run transitions), transition practice,
+          and everything you need for race-day logistics.
+      - title: The duathlon
         body: >
-          Practice full transitions, pacing strategy, and everything you
-          need to know for race-day logistics.
+          The two weeks end with the Give It A Go duathlon — a chance to
+          meet the club and decide if it's for you.
 
   - type: faq
     id: training-faq
@@ -85,15 +87,15 @@ sections:
     items:
       - question: Do I need my own bike to start training?
         answer: >
-          No — our turbo sessions use club equipment, and several members
-          car-share or use hire bikes for outdoor rides until they're ready
+          No — the club has bikes you can borrow, and several members
+          car-share or hire bikes for outdoor rides until they're ready
           to buy their own.
       - question: I can't swim front crawl. Can I still join?
         answer: >
-          Yes. Our coached swim sessions are built around technique, and
-          beginners are grouped separately so you're never out of your depth.
+          Yes. Coached swim sessions are built around technique, and
+          beginners train separately so you're never out of your depth.
       - question: What should I bring to my first session?
         answer: >
-          Just kit for whichever discipline you're trying — swimwear and a
+          Kit for whichever discipline you're trying — swimwear and a
           towel for pool sessions, or trainers for a run. We'll talk you
           through anything else you need.

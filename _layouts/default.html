@@ -10,6 +10,23 @@
     <meta name="color-scheme" content="dark light">
 
     <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+
+    {% comment %}
+      Preload the first hero photo on the page, if there is one, so it's
+      requested immediately rather than after CSS/JS parsing — this is
+      normally the largest single image on the page and drives Largest
+      Contentful Paint.
+    {% endcomment %}
+    {% assign page_content = site.data.content[page.content_file] %}
+    {% if page_content and page_content.sections %}
+      {% assign first_hero = page_content.sections | where: "type", "hero" | first %}
+      {% if first_hero %}
+        {% assign hero_preload_image = first_hero.background_image | default: first_hero.background_image_raw %}
+        {% if hero_preload_image and hero_preload_image != "" %}
+          <link rel="preload" as="image" href="{{ hero_preload_image | relative_url }}" fetchpriority="high">
+        {% endif %}
+      {% endif %}
+    {% endif %}
   </head>
 
   <body class="page-{{ page.content_file | default: page.layout | default: 'site' }}">

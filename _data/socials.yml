@@ -2,9 +2,6 @@ items:
   - platform: Instagram
     label: "@sheffunitri"
     url: https://www.instagram.com/sheffunitri/
-  - platform: Strava
-    label: Sheffield Triathlon on Strava
-    url: https://www.strava.com/clubs/UoSTri
   - platform: Facebook
     label: UoSTriathlon
     url: https://www.facebook.com/UoSTriathlon/

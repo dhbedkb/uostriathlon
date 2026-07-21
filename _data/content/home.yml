@@ -4,12 +4,13 @@ sections:
   - type: hero
     id: home-hero
     eyebrow: University of Sheffield Triathlon Club
-    title: Swim. Bike. Run. Belong.
-    subtitle: Sheffield's friendliest multisport club
+    title: Swim. Bike. Run.
+    subtitle: Open to all abilities — no experience needed
     body: >
-      Weekly coached sessions across all three disciplines, a beginner-friendly
-      "Couch to Tri" pathway, and a social calendar to match. No experience,
-      no bike, and no wetsuit required to get started.
+      A student-run club for anyone at the University of Sheffield, from
+      complete beginners to experienced triathletes. We run coached
+      sessions across all three disciplines, club bikes you can borrow,
+      and two weeks of free training at the start of the year.
     primary_button:
       label: Join the club
       url: /#join
@@ -39,27 +40,27 @@ sections:
 
   - type: cards
     id: home-highlights
-    eyebrow: Why join
-    title: Three reasons to get started
-    subtitle: Whatever your goal — your first triathlon or a personal best — there's a lane, a group, and a session for you.
+    eyebrow: Getting started
+    title: Three ways in
+    subtitle: However you get involved, you'll be training and racing alongside people at a similar level.
     cards:
       - label: Beginners
-        title: Couch to Tri
+        title: Give It A Go
         description: >
-          A structured programme for complete beginners, building confidence
-          in the pool, on the bike, and on the run before your first race.
+          Two free weeks of training at the start of the year, ending in a
+          beginner-friendly duathlon — no bike or wetsuit required.
         url: /training/
       - label: Training
         title: Weekly sessions
         description: >
-          Coached swim sets, structured turbo/road rides, and run sessions
-          for every pace, all year round.
+          Coached swim, bike and run sessions for every pace, plus club
+          bikes you can borrow if you don't have your own.
         url: /training/
       - label: Community
         title: Racing & socials
         description: >
-          Club trips to local and national races, plus a social calendar
-          that makes sure triathlon isn't the only thing we talk about.
+          Club trips to local and national races, and a social calendar
+          that runs alongside the training week.
         url: /socials/
 
   - type: text
@@ -68,23 +69,23 @@ sections:
     title: A club for every kind of triathlete
     subtitle: ""
     body: |
-      We're a student-led triathlon club affiliated with the University of
+      We're a student-run triathlon club connected to the University of
       Sheffield and Sport Sheffield, open to students and staff of all
-      abilities. Some of our members are training for their first sprint
-      triathlon; others are chasing qualification times. Most weeks, you'll
-      find both training side by side.
+      abilities. Sheffield sits right on the edge of the Peak District,
+      where our outdoor bike sessions take place, and club bikes are
+      available to borrow if you don't have your own.
 
-      Membership includes access to coached sessions, discounted kit and
-      race entries, and a genuinely welcoming group of people who'll happily
-      talk you through your first open-water swim.
+      Some members are training for their first sprint triathlon; others
+      are working towards qualification times. Most weeks you'll find
+      both training side by side.
 
   - type: cta
     id: join
-    eyebrow: Ready to get started?
-    title: Come to a session, no commitment needed
+    eyebrow: Getting started
+    title: Come to a session before you decide
     body: >
-      Turn up to any beginner-friendly session to see what we're about —
-      full membership isn't required for your first visit.
+      Full membership isn't needed for your first visit — turn up to any
+      beginner-friendly session to see what training's actually like.
     primary_button:
       label: Join the club
       url: https://www.sheffieldstudentsunion.com/activities/societies/

@@ -12,7 +12,9 @@
         {% for card in include.section.cards %}
           <article class="tile tile-surface">
             {% if card.image and card.image != "" %}
-              <div class="tile-frame tile-frame-cover" style="background-image: url('{{ card.image | relative_url }}')" aria-hidden="true"></div>
+              <div class="tile-frame">
+                <img src="{{ card.image | relative_url }}" alt="{{ card.label | default: card.title }}" width="900" height="900" loading="lazy" decoding="async">
+              </div>
             {% else %}
               <div class="tile-frame tile-frame-placeholder" aria-hidden="true">
                 <span>{{ card.label | default: card.title }}</span>

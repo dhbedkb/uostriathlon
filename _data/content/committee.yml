@@ -7,15 +7,11 @@ sections:
     title: Run by members, for members
     subtitle: Meet this year's committee
     body: >
-      Every session, race trip and social is organised by a team of volunteer
-      members. Get in touch with any of them directly, or use the club email for
-      anything general.
-    secondary_button:
-      label: "1"
-      url: "1"
-    primary_button:
-      label: "1"
-      url: "1"
+      Every session, race trip and social is organised by a team of
+      volunteer members. Get in touch with any of them directly, or use
+      the club email for anything general.
+    background_image_raw: /uostriathlon/assets/images/source/img_1783.jpeg
+
   - type: committee
     id: committee-members
     eyebrow: This year's committee
@@ -43,6 +39,9 @@ sections:
         role: Beginners Coordinator
         bio: Add a short bio here — a sentence or two is plenty.
         email: ""
+        image_raw: /uostriathlon/assets/images/committee/raw/708752699_1640993453798187_4377617180923485565_n.jpg
+        crop_zoom: 200
+        crop_y: 6
       - name: Add name
         role: Welfare & Inclusion Officer
         bio: Add a short bio here — a sentence or two is plenty.
@@ -55,6 +54,7 @@ sections:
         role: Social Secretary
         bio: Add a short bio here — a sentence or two is plenty.
         email: ""
+
   - type: faq
     id: committee-faq
     eyebrow: Getting involved
@@ -63,10 +63,10 @@ sections:
     items:
       - question: When are committee elections held?
         answer: >
-          Elections are held at the club's AGM, usually in the spring term.
-          Details are shared with members ahead of time on Instagram and by
-          email.
+          Elections are held at the club's AGM, usually in the spring
+          term. Details are shared with members ahead of time on
+          Instagram and by email.
       - question: Do I need previous committee experience?
         answer: >
-          No — most of our committee members' first role was on this committee.
+          No — most committee members' first role was on this committee.
           Outgoing members hand over notes and are always happy to help.

@@ -16,14 +16,15 @@
 
   /* Universal tile system — every card-like block on the site (cards,
      events, committee, gallery, faq, cta, stats…) is built from these
-     same tokens, so spacing and dead space stay identical everywhere.
-     Change a value here, not in an individual section's CSS. */
+     same tokens, so spacing, padding and image alignment stay identical
+     everywhere. Change a value here, not in an individual section's CSS. */
   --tile-gap: 1.5rem;
   --tile-pad: clamp(1.25rem, 3vw, 1.75rem);
   --tile-pad-lg: clamp(2rem, 6vw, 3.5rem);
   --tile-pad-compact: 1rem;
   --tile-radius: 1.5rem;
   --tile-frame-radius: 1rem;
+  --tile-frame-aspect: 1 / 1;
   --tile-inner-gap: 1rem;
   --tile-grid-min: 260px;
 }
@@ -466,11 +467,16 @@ img { max-width: 100%; display: block; }
 
 /* =====================================================
    8. UNIVERSAL TILE SYSTEM
-   The single spacing/shape contract for every card-like block
-   on the site: cards, events, committee, gallery, faq, cta, etc.
+   The single spacing/shape contract for every card-like block on the
+   site: cards, events, committee, gallery, faq, cta, stats, etc.
+
    Every tile grid uses the same --tile-gap, every tile the same
-   --tile-pad, so the dead space around content is identical no
-   matter which section type it belongs to.
+   --tile-pad, and — this is the important part — every tile's media
+   (photo, cover image, icon) sits INSET inside that same padding, using
+   the same --tile-inner-gap before the text that follows it. Media never
+   bleeds to the tile's edge while text stays padded; that mismatch is
+   what used to make image tiles look misaligned against text-only ones.
+   A tile is one padded box, top to bottom, always.
    ===================================================== */
 
 .tile-grid {
@@ -531,19 +537,33 @@ img { max-width: 100%; display: block; }
 .tile-body { display: flex; flex-direction: column; gap: var(--tile-inner-gap); margin: 0; }
 .tile-body > * { margin-block: 0; }
 
+/* Media frame: always inset within the tile's own padding, at a fixed
+   aspect ratio (matches the square images the build produces), so a
+   tile's photo lines up left/right with the text below it every time. */
 .tile-frame {
   display: block;
+  position: relative;
   width: 100%;
+  aspect-ratio: var(--tile-frame-aspect, 1 / 1);
   border-radius: var(--tile-frame-radius);
   overflow: hidden;
-  margin: calc(var(--tile-pad) * -1) calc(var(--tile-pad) * -1) 0;
-  width: calc(100% + var(--tile-pad) * 2);
+  background: var(--color-surface);
+  flex: none;
 }
 
-.tile-frame img { width: 100%; display: block; }
+.tile-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: var(--crop-x, 50%) var(--crop-y, 50%);
+  transform: scale(var(--crop-zoom, 1));
+  transform-origin: var(--crop-x, 50%) var(--crop-y, 50%);
+  display: block;
+}
 
 .tile-frame-cover, .tile-frame-placeholder {
-  min-height: 190px;
+  width: 100%;
+  height: 100%;
   display: grid;
   place-items: center;
 }
@@ -559,23 +579,6 @@ img { max-width: 100%; display: block; }
   font-size: 0.85rem;
   text-align: center;
   padding: var(--tile-pad-compact);
-}
-
-/* Crop frame: a fixed-aspect box for images that need reframing (committee photos, hero). */
-.tile-frame-crop {
-  position: relative;
-  aspect-ratio: 1 / 1;
-  overflow: hidden;
-  background: #101010;
-}
-
-.tile-media-crop {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: var(--crop-x, 50%) var(--crop-y, 50%);
-  transform: scale(var(--crop-zoom, 1));
-  transform-origin: var(--crop-x, 50%) var(--crop-y, 50%);
 }
 
 .tile-title {
@@ -678,11 +681,17 @@ details[open] .tile-reveal-toggle::after { background: #000000; }
 details[open] .tile-reveal-toggle::after { display: none; }
 
 .tile-reveal-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--tile-inner-gap);
   border-top: 1px solid var(--color-border);
   padding-top: var(--tile-inner-gap);
+  margin-top: var(--tile-inner-gap);
 }
 
-/* Embed widgets (Facebook/Strava iframes etc) */
+/* Embed widgets (Facebook/Strava iframes etc) — deliberately not part of
+   the media-frame system above, since these are fixed-size third-party
+   iframes rather than photos. */
 .tile-frame-embed {
   width: fit-content;
   max-width: 100%;

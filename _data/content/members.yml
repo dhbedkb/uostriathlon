@@ -4,12 +4,11 @@ sections:
   - type: hero
     id: members-hero
     eyebrow: Members Area
-    title: Everything your membership includes
+    title: What membership includes
     subtitle: One membership, every session
     body: >
       Membership covers coached training across all three disciplines,
-      discounted race entries, and access to club kit — plus a place in
-      Sheffield's friendliest multisport community.
+      access to club bikes, discounted race entries, and club kit.
 
   - type: stats
     id: members-stats
@@ -21,8 +20,8 @@ sections:
         label: Coached sessions a week
       - number: "£"
         label: Discounted race entries
-      - number: "1"
-        label: Free taster session before joining
+      - number: "2"
+        label: Free weeks before joining
       - number: "365"
         label: Days of club community
 
@@ -35,27 +34,27 @@ sections:
       - title: Coached training
         body: >
           Access to all weekly swim, bike and run sessions, plus the
-          Couch to Tri beginner pathway.
+          Give It A Go beginner pathway.
+      - title: Club bikes
+        body: >
+          Bikes you can borrow for turbo sessions and outdoor rides if
+          you don't have your own in Sheffield.
       - title: Race support
         body: >
-          Block-booked entries, discounted fees, and an experienced member
-          on hand at every club-supported race.
+          Block-booked entries, discounted fees, and an experienced
+          member at every club-supported race.
       - title: Club kit
         body: >
           Discounted club tri suits and training kit, ordered each term
           through the Kit Secretary.
-      - title: Socials
-        body: >
-          Full access to the social calendar, from weekly coffee catch-ups
-          to end-of-season trips.
 
   - type: cta
     id: members-join
     eyebrow: Ready to join?
-    title: Membership starts with a free taster session
+    title: Membership starts through the Students' Union
     body: >
-      Come to any beginner-friendly session before committing — membership
-      is only required once you've decided the club's for you.
+      Come to any beginner-friendly session before committing — you don't
+      need to be a member for your first two weeks.
     primary_button:
       label: Join via the Students' Union
       url: https://www.sheffieldstudentsunion.com/activities/societies/
