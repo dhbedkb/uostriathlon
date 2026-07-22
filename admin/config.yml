@@ -103,9 +103,34 @@ collections:
                     required: false
                     default: custom
                     hint: >
-                      Guidance only — picking a preset just sets a helpful
-                      label for this block in the list above. It never
-                      hides or removes any field below.
+                      Guidance only — picking a preset sets a helpful label
+                      for this block in the list above. It never hides or
+                      removes any field below, and it does not set Content
+                      order or Visibility for you (Decap can't vary those by
+                      preset) — set those manually using the recommended
+                      starting points below, then adjust freely.
+
+
+                      Committee: order Title, Subtitle, Image, Body, Email,
+                      Buttons. Visibility: Title/Subtitle/Image = Always,
+                      Body/Email/Buttons = Hover.
+
+
+                      FAQ: order Title, Body. Visibility: Title = Always,
+                      Body = Click.
+
+
+                      Sponsors: order Image, Title, Body, Buttons.
+                      Visibility: all = Always.
+
+
+                      Events: order Title, Image, Meta, Buttons (Badge, e.g.
+                      a date, is set directly on the tile below and always
+                      shows). Visibility: all = Always.
+
+
+                      Cards / Gallery / Stats / Custom: order and visibility
+                      as needed — most read best with everything Always.
                     options:
                       - {label: "Cards", value: cards}
                       - {label: "Gallery", value: gallery}
@@ -140,16 +165,16 @@ collections:
                   - label: Behaviour
                     name: behavior
                     widget: object
-                    hint: What happens to each tile's extra detail (body text, links, etc). Individual tiles can override this below.
+                    hint: What happens to each tile's extra detail (body text, links, etc) by default. Individual tiles can override this below, and a tile's own Content order / Visibility settings can override it further per field.
                     fields:
-                      - {label: Reveal extra detail, name: expand, widget: select, options: [none, hover, click], default: none, required: false, hint: "'None' always shows everything. 'Hover'/'click' hide body text, links and email until the tile is opened — used for committee bios and FAQs."}
+                      - {label: Reveal extra detail, name: expand, widget: select, options: [none, hover, click], default: none, required: false, hint: "'None' always shows everything. 'Hover'/'click' hide any field a tile marks Reveal on hover/click until the tile is opened — used for committee bios and FAQs."}
                   - label: Tiles
                     name: tiles
                     widget: list
                     summary: '{{fields.title}}{{fields.eyebrow}}'
                     fields: &tile_fields
                       - {label: Visual style, name: style, widget: select, options: [default, accent], default: default, required: false, hint: "'Accent' highlights a single tile — used for a call-to-action block."}
-                      - {label: Badge (small tag, e.g. a date), name: badge, widget: string, required: false}
+                      - {label: Badge (small tag, e.g. a date), name: badge, widget: string, required: false, hint: "Always shown, positioned in the corner — not part of Content order below."}
                       - {label: Eyebrow, name: eyebrow, widget: string, required: false}
                       - {label: Title, name: title, widget: string, required: false}
                       - {label: Subtitle, name: subtitle, widget: string, required: false}
@@ -220,6 +245,57 @@ collections:
                         hint: Leave blank to use the grid's setting above.
                         fields:
                           - {label: Reveal extra detail, name: expand, widget: select, options: ["", none, hover, click], default: "", required: false}
+                      - label: Content order
+                        name: content_order
+                        widget: list
+                        required: false
+                        summary: '{{fields.type}}'
+                        hint: >
+                          Drag to reorder. Add each piece of content you want
+                          this tile to show, in the order it should appear.
+                          Leave empty to use the default order (Image,
+                          Eyebrow, Title, Subtitle, Body, Q&A, Meta rows,
+                          Email, Buttons) — the order the site has always
+                          used. Badge is not included here; it's a fixed
+                          corner tag, always shown.
+                        fields:
+                          - label: Content type
+                            name: type
+                            widget: select
+                            options:
+                              - {label: Eyebrow, value: eyebrow}
+                              - {label: Title, value: title}
+                              - {label: Subtitle, value: subtitle}
+                              - {label: Image, value: image}
+                              - {label: Body, value: body}
+                              - {label: Questions & answers, value: qa}
+                              - {label: Meta rows, value: meta}
+                              - {label: Email, value: email}
+                              - {label: Buttons, value: buttons}
+                      - label: Visibility
+                        name: visibility
+                        widget: object
+                        required: false
+                        hint: >
+                          When each piece of content appears. Leave any field
+                          on its blank/default setting to fall back to this
+                          grid's Reveal behaviour above (Eyebrow, Title,
+                          Subtitle and Image always fall back to Always
+                          regardless of that setting). "Reveal on hover" and
+                          "Reveal on click" both mean "shown when the tile
+                          opens" — a tile only has one open trigger, inferred
+                          from whichever you use here (or set explicitly via
+                          Reveal override above).
+                        fields:
+                          - {label: Eyebrow, name: eyebrow, widget: select, options: ["", always, hover, click, hidden], default: "", required: false}
+                          - {label: Title, name: title, widget: select, options: ["", always, hover, click, hidden], default: "", required: false}
+                          - {label: Subtitle, name: subtitle, widget: select, options: ["", always, hover, click, hidden], default: "", required: false}
+                          - {label: Image, name: image, widget: select, options: ["", always, hover, click, hidden], default: "", required: false}
+                          - {label: Body, name: body, widget: select, options: ["", always, hover, click, hidden], default: "", required: false}
+                          - {label: Questions & answers, name: qa, widget: select, options: ["", always, hover, click, hidden], default: "", required: false}
+                          - {label: Meta rows, name: meta, widget: select, options: ["", always, hover, click, hidden], default: "", required: false}
+                          - {label: Email, name: email, widget: select, options: ["", always, hover, click, hidden], default: "", required: false}
+                          - {label: Buttons, name: buttons, widget: select, options: ["", always, hover, click, hidden], default: "", required: false}
 
       - {name: training, label: Training, file: _data/content/training.yml, fields: *page_fields}
       - {name: races, label: Races, file: _data/content/races.yml, fields: *page_fields}

@@ -18,6 +18,9 @@ See `ARCHITECTURE.md` for the full model and reasoning, and
   automatically compressed to WebP on publish. See `docs/editor-guide.md`
   for how that pipeline works, and `docs/image-pipeline.md` for the
   compression settings behind it.
+- Content order and per-field visibility (which parts of a tile show
+  up front vs. on hover/click) are also editor-controlled now — see
+  `docs/editor-guide.md`.
 
 ## The tile system, in one rule
 
@@ -27,7 +30,9 @@ fixed 1:1 aspect ratio (or round, for icon-style images), with the same
 gap above the text that follows it. It never bleeds to the tile's edge
 while the text stays indented. `_includes/tile.html` builds every tile
 from this system regardless of what preset it was created from, so this
-stays true automatically as the site grows.
+stays true automatically as the site grows — and, as of Phase 2, the
+editor controls both which pieces of content appear and what order they
+render in, not just their content.
 
 ## Local development
 

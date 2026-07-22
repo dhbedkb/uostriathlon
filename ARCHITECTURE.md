@@ -149,3 +149,42 @@ Statistics / Events / FAQ / Call to action / Social links / Embed /
 Timeline / Custom) purely to pre-fill sensible labels and defaults —
 picking "Custom" or deleting the preset never removes any content, it
 just stops suggesting field names.
+
+## 9. Phase 2 addendum: content order & per-field visibility
+
+The Section/Tile/Content model didn't need to change to support this —
+only `_includes/tile.html` did. Two new optional Tile-level fields:
+
+- `content_order`: a list of `{type: "..."}` entries. `tile.html`
+  builds its render loop from this (falling back to the same order it
+  has always used when the field is absent), instead of hard-coding
+  eyebrow → title → subtitle → image → body → … as separate `{% if %}`
+  blocks in a fixed sequence.
+- `visibility`: an object mapping each content type to
+  always/hover/click/hidden, read per item inside that same loop. The
+  existing single `behavior.expand` (none/hover/click) still exists and
+  still governs the tile's one open/close mechanism; visibility just
+  decides which fields sit inside that expandable region versus outside
+  it (or are dropped entirely).
+
+Nothing about the CMS schema, the renderer, or the image pipeline grew
+a second per-type branch — `content_order` and `visibility` are generic
+Content-level metadata, the same as `meta` or `qa` already were, so a
+brand-new content field added to a tile in future only ever needs one
+new `{% when %}` case in the loop and one new option in the two select
+lists — not a new component.
+
+A deliberate scoping decision: badge and the numbered-index badge stay
+fixed, non-orderable overlay elements. They're absolutely positioned in
+CSS, not flow content, so making them draggable inside `content_order`
+would be cosmetic-only (nothing would visually change) while adding a
+rendering special case for no real benefit.
+
+Another deliberate scoping decision: Decap CMS has no way to make one
+field's default vary based on a sibling field's value (e.g. "when preset
+= Committee, default Content order to X") without a custom widget
+plugin. Building one would reintroduce exactly the kind of per-type
+special-casing this whole refactor exists to remove, for a benefit
+(pre-filled defaults) that's fully covered by the recommended-values
+table in `docs/editor-guide.md` and the preset dropdown's hint text.
+See `MIGRATION.md` for the practical summary of this change.

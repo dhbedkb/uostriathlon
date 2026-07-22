@@ -1,116 +1,215 @@
 {% comment %}
-  Renders one Tile. This include has never heard of "committee members"
-  or "FAQ items" — it only knows about Content fields (eyebrow, title,
-  subtitle, body, image, embed, badge, meta, qa, buttons, email) and one
-  Behaviour (expand: none / hover / click). See ARCHITECTURE.md.
+  Renders one Tile. This include still doesn't know about "committee
+  members" or "FAQ items" — only Content fields (eyebrow, title,
+  subtitle, body, image, embed, badge, meta, qa, buttons, email) and,
+  as of Phase 2, two things the editor now controls directly:
+
+  - tile.content_order: a list of {type: "..."} entries controlling
+    which Content fields render and in what order. Falls back to
+    DEFAULT_ORDER below when absent, which matches the order this
+    template has always rendered in — chosen deliberately so existing
+    _data/content/*.yml files render identically without a migration.
+    (This differs from the illustrative "Badge, Eyebrow, Title,
+    Subtitle, Image…" order in the brief — Image has always rendered
+    before Eyebrow/Title/Subtitle on this site, so the fallback matches
+    that instead, to avoid changing the look of every existing page.)
+
+  - tile.visibility: an object mapping each content type to
+    always / hover / click / hidden. Falls back to the pre-Phase-2
+    behaviour: eyebrow/title/subtitle/image are always visible; body,
+    qa, meta, email and buttons follow the tile/section's expand
+    setting, same as before.
+
+  Badge and the numbered index badge are NOT part of content_order —
+  they're absolutely-positioned overlay tags, not flow content, so
+  reordering them has no visual meaning. They always render exactly as
+  before.
+
+  A tile can only have ONE reveal mechanism (hover or click) at a time,
+  same as pre-Phase-2 — an individual content field can ask for
+  "hover" or "click", but what that actually determines is *which
+  fields sit inside the expandable region*, not a second independent
+  trigger. If nothing on a tile is hover/click, it renders as a plain
+  always-visible tile (an <article>, no toggle).
 
   Params: tile, expand_default, numbered, index
 {% endcomment %}
 {% assign tile = include.tile %}
-{% assign expand = tile.behavior.expand | default: include.expand_default | default: "none" %}
+{% assign base_expand = tile.behavior.expand | default: include.expand_default | default: "none" %}
 {% assign is_accent = false %}
 {% if tile.style == "accent" %}{% assign is_accent = true %}{% endif %}
+
+{% assign title_class = "tile-title" %}
+{% if is_accent %}{% assign title_class = "tile-cta-title" %}{% endif %}
+
+{% comment %} ---- Resolve content order (custom, or the backward-compatible default) ---- {% endcomment %}
+{% assign default_order = "image,eyebrow,title,subtitle,body,qa,meta,email,buttons" | split: "," %}
+{% if tile.content_order and tile.content_order.size > 0 %}
+  {% assign order_types = tile.content_order | map: "type" %}
+{% else %}
+  {% assign order_types = default_order %}
+{% endif %}
+
+{% comment %} ---- Render each content field, sorting into "always" vs "revealed" buckets ---- {% endcomment %}
+{% assign always_html = "" %}
+{% assign reveal_html = "" %}
+{% assign has_hover = false %}
+{% assign has_click = false %}
+
+{% for content_type in order_types %}
+  {% assign v = tile.visibility[content_type] %}
+  {% if v == blank %}
+    {% case content_type %}
+      {% when "eyebrow" or "title" or "subtitle" or "image" %}
+        {% assign v = "always" %}
+      {% else %}
+        {% if base_expand == "none" %}
+          {% assign v = "always" %}
+        {% else %}
+          {% assign v = base_expand %}
+        {% endif %}
+    {% endcase %}
+  {% endif %}
+
+  {% if v == "hidden" %}
+    {% continue %}
+  {% endif %}
+
+  {% capture item_html %}
+    {% case content_type %}
+
+      {% when "eyebrow" %}
+        {% if tile.eyebrow %}<p class="tile-subtitle tile-meta">{{ tile.eyebrow }}</p>{% endif %}
+
+      {% when "title" %}
+        {% if tile.title %}<h3 class="{{ title_class }}">{{ tile.title }}</h3>{% endif %}
+
+      {% when "subtitle" %}
+        {% if tile.subtitle %}<p class="tile-subtitle tile-meta">{{ tile.subtitle }}</p>{% endif %}
+
+      {% when "image" %}
+        {% if tile.image %}
+          {% assign img_src = tile.image.src | default: tile.image.src_raw %}
+          {% if img_src %}
+            <div class="tile-frame{% if tile.image.shape == "round" %} tile-frame-round{% endif %}" style="--crop-x: {{ tile.image.crop_x | default: 50 }}%; --crop-y: {{ tile.image.crop_y | default: 50 }}%; --crop-zoom: {{ tile.image.crop_zoom | default: 100 | divided_by: 100.0 }};">
+              <img src="{{ img_src | relative_url }}" alt="{{ tile.image.alt | default: tile.title | default: '' }}" width="900" height="900" loading="lazy" decoding="async">
+            </div>
+          {% endif %}
+        {% elsif tile.embed.embed_html %}
+          <div class="tile-frame-embed" style="--tile-embed-width: {{ tile.embed.width | default: '500px' }};">
+            {{ tile.embed.embed_html }}
+          </div>
+        {% endif %}
+
+      {% when "body" %}
+        {% if tile.body %}<div class="tile-text tile-muted">{{ tile.body | markdownify }}</div>{% endif %}
+
+      {% when "qa" %}
+        {% if tile.qa %}
+          <div class="tile-stack">
+            {% for item in tile.qa %}
+              {% if item.question or item.answer %}
+                <div class="tile-nested">
+                  {% if item.question %}<strong>{{ item.question }}</strong>{% endif %}
+                  {% if item.answer %}<p>{{ item.answer }}</p>{% endif %}
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        {% endif %}
+
+      {% when "meta" %}
+        {% if tile.meta %}
+          <div class="tile-stack tile-meta-list">
+            {% for row in tile.meta %}
+              {% if row.label and row.value %}<span><strong>{{ row.label }}</strong> {{ row.value }}</span>{% endif %}
+            {% endfor %}
+          </div>
+        {% endif %}
+
+      {% when "email" %}
+        {% if tile.email %}
+          <p class="tile-text"><a class="text-link" href="mailto:{{ tile.email }}">Email →</a></p>
+        {% endif %}
+
+      {% when "buttons" %}
+        {% if tile.embed and tile.embed.embed_html == nil and tile.embed.url %}
+          <div class="tile-actions-center">
+            <a class="button secondary" href="{{ tile.embed.url }}" target="_blank" rel="noopener noreferrer">
+              {{ tile.embed.button_label | default: "Open" }}
+            </a>
+          </div>
+        {% endif %}
+        {% if tile.buttons %}
+          <div class="actions{% if is_accent %} tile-actions-center{% endif %}">
+            {% for btn in tile.buttons %}
+              {% if btn.label and btn.url %}
+                {% assign btn_href = btn.url %}
+                {% unless btn.url contains "://" or btn.url contains "mailto:" %}{% assign btn_href = btn.url | relative_url %}{% endunless %}
+                <a class="button {{ btn.style | default: 'secondary' }}" href="{{ btn_href }}">{{ btn.label }}</a>
+              {% endif %}
+            {% endfor %}
+          </div>
+        {% endif %}
+
+    {% endcase %}
+  {% endcapture %}
+  {% assign item_html = item_html | strip %}
+
+  {% if item_html != "" %}
+    {% if v == "always" %}
+      {% assign always_html = always_html | append: item_html %}
+    {% else %}
+      {% if v == "click" %}{% assign has_click = true %}{% else %}{% assign has_hover = true %}{% endif %}
+      {% assign reveal_html = reveal_html | append: item_html %}
+    {% endif %}
+  {% endif %}
+{% endfor %}
+
+{% assign reveal_html_trimmed = reveal_html | strip %}
+
+{% comment %} ---- Work out the tile's single reveal trigger ---- {% endcomment %}
+{% assign explicit_trigger = tile.behavior.expand %}
+{% if explicit_trigger and explicit_trigger != blank %}
+  {% assign effective_trigger = explicit_trigger %}
+{% elsif has_click %}
+  {% assign effective_trigger = "click" %}
+{% elsif has_hover %}
+  {% assign effective_trigger = "hover" %}
+{% else %}
+  {% assign effective_trigger = include.expand_default | default: "none" %}
+{% endif %}
+{% if reveal_html_trimmed == "" %}
+  {% assign effective_trigger = "none" %}
+{% endif %}
 
 {% assign tile_classes = "tile tile-surface" %}
 {% if is_accent %}{% assign tile_classes = "tile tile-surface-accent tile-cta" %}{% endif %}
 {% if tile.badge %}{% assign tile_classes = tile_classes | append: " tile-has-badge" %}{% endif %}
 {% if include.numbered %}{% assign tile_classes = tile_classes | append: " tile-numbered" %}{% endif %}
-{% unless expand == "none" %}{% assign tile_classes = tile_classes | append: " tile-reveal" %}{% endunless %}
+{% unless effective_trigger == "none" %}{% assign tile_classes = tile_classes | append: " tile-reveal" %}{% endunless %}
 
-{% assign title_class = "tile-title" %}
-{% if is_accent %}{% assign title_class = "tile-cta-title" %}{% endif %}
-
-{% comment %} Always-visible content: badge, media, eyebrow/title/subtitle. {% endcomment %}
-{% capture always_content %}
-  {% if tile.image %}
-    {% assign img_src = tile.image.src | default: tile.image.src_raw %}
-    {% if img_src %}
-      <div class="tile-frame{% if tile.image.shape == "round" %} tile-frame-round{% endif %}" style="--crop-x: {{ tile.image.crop_x | default: 50 }}%; --crop-y: {{ tile.image.crop_y | default: 50 }}%; --crop-zoom: {{ tile.image.crop_zoom | default: 100 | divided_by: 100.0 }};">
-        <img src="{{ img_src | relative_url }}" alt="{{ tile.image.alt | default: tile.title | default: '' }}" width="900" height="900" loading="lazy" decoding="async">
-      </div>
-    {% endif %}
-  {% elsif tile.embed.embed_html %}
-    <div class="tile-frame-embed" style="--tile-embed-width: {{ tile.embed.width | default: '500px' }};">
-      {{ tile.embed.embed_html }}
-    </div>
-  {% endif %}
-  {% if tile.eyebrow %}<p class="tile-subtitle tile-meta">{{ tile.eyebrow }}</p>{% endif %}
-  {% if tile.title %}<h3 class="{{ title_class }}">{{ tile.title }}</h3>{% endif %}
-  {% if tile.subtitle %}<p class="tile-subtitle tile-meta">{{ tile.subtitle }}</p>{% endif %}
-{% endcapture %}
-
-{% comment %} Content that collapses when the section/tile expand behaviour isn't "none". {% endcomment %}
-{% capture expand_content %}
-  {% if tile.body %}<div class="tile-text tile-muted">{{ tile.body | markdownify }}</div>{% endif %}
-
-  {% if tile.qa %}
-    <div class="tile-stack">
-      {% for item in tile.qa %}
-        {% if item.question or item.answer %}
-          <div class="tile-nested">
-            {% if item.question %}<strong>{{ item.question }}</strong>{% endif %}
-            {% if item.answer %}<p>{{ item.answer }}</p>{% endif %}
-          </div>
-        {% endif %}
-      {% endfor %}
-    </div>
-  {% endif %}
-
-  {% if tile.meta %}
-    <div class="tile-stack tile-meta-list">
-      {% for row in tile.meta %}
-        {% if row.label and row.value %}<span><strong>{{ row.label }}</strong> {{ row.value }}</span>{% endif %}
-      {% endfor %}
-    </div>
-  {% endif %}
-
-  {% if tile.email %}
-    <p class="tile-text"><a class="text-link" href="mailto:{{ tile.email }}">Email →</a></p>
-  {% endif %}
-
-  {% if tile.embed and tile.embed.embed_html == nil and tile.embed.url %}
-    <div class="tile-actions-center">
-      <a class="button secondary" href="{{ tile.embed.url }}" target="_blank" rel="noopener noreferrer">
-        {{ tile.embed.button_label | default: "Open" }}
-      </a>
-    </div>
-  {% endif %}
-
-  {% if tile.buttons %}
-    <div class="actions{% if is_accent %} tile-actions-center{% endif %}">
-      {% for btn in tile.buttons %}
-        {% if btn.label and btn.url %}
-          {% assign btn_href = btn.url %}
-          {% unless btn.url contains "://" or btn.url contains "mailto:" %}{% assign btn_href = btn.url | relative_url %}{% endunless %}
-          <a class="button {{ btn.style | default: 'secondary' }}" href="{{ btn_href }}">{{ btn.label }}</a>
-        {% endif %}
-      {% endfor %}
-    </div>
-  {% endif %}
-{% endcapture %}
-{% assign expand_content_trimmed = expand_content | strip %}
-
-<{% if expand == "none" %}article{% else %}details{% endif %}
+<{% if effective_trigger == "none" %}article{% else %}details{% endif %}
   class="{{ tile_classes }}"
-  {% if expand == "hover" %}data-reveal-mode="hover"{% endif %}
+  {% if effective_trigger == "hover" %}data-reveal-mode="hover"{% endif %}
 >
   {% if tile.badge %}<span class="tile-badge">{{ tile.badge }}</span>{% endif %}
   {% if include.numbered %}<span class="tile-index-badge">{{ include.index }}</span>{% endif %}
 
-  {% if expand == "none" %}
+  {% if effective_trigger == "none" %}
     <div class="tile-content-wrap">
-      {{ always_content }}
-      {{ expand_content }}
+      {{ always_html }}
+      {{ reveal_html }}
     </div>
   {% else %}
     <summary class="tile-header tile-header-row tile-reveal-summary">
-      <span class="tile-header-text">{{ always_content }}</span>
+      <span class="tile-header-text">{{ always_html }}</span>
       <span class="tile-reveal-toggle" aria-hidden="true"></span>
     </summary>
-    {% if expand_content_trimmed != "" %}
+    {% if reveal_html_trimmed != "" %}
       <div class="tile-body tile-reveal-body">
-        {{ expand_content }}
+        {{ reveal_html }}
       </div>
     {% endif %}
   {% endif %}
-</{% if expand == "none" %}article{% else %}details{% endif %}>
+</{% if effective_trigger == "none" %}article{% else %}details{% endif %}>

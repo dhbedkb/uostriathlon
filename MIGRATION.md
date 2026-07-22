@@ -69,3 +69,29 @@ the practical "what changed and how to apply it" summary.
   replaced by the new file of the same name)) should be deleted from
   the repo — they're not referenced by the new `renderer.html` and are
   simply omitted from this delivery.
+
+## Phase 2: content order & per-field visibility
+
+See the new section at the end of `ARCHITECTURE.md` and the "Content
+order", "Visibility" and "Preset starting points" sections in
+`docs/editor-guide.md` for the full explanation. In short:
+
+- `_includes/tile.html` was rewritten to loop through a configurable
+  `content_order` list instead of rendering eyebrow/title/subtitle/
+  image/body/etc as separate hard-coded `{% if %}` blocks in a fixed
+  sequence.
+- A new `visibility` object lets each content field independently be
+  Always / Reveal on hover / Reveal on click / Hidden, instead of the
+  old all-or-nothing `behavior.expand` applying to the whole bottom
+  half of a tile.
+- Both are optional. Existing tiles with neither field render exactly
+  as before — the fallback order matches the site's current visual
+  output (Image, Eyebrow, Title, Subtitle, Body, Q&A, Meta, Email,
+  Buttons), and fallback visibility reproduces the old
+  always-visible/hidden-until-reveal split exactly.
+- `admin/config.yml` / `admin/config.local.yml` gained two new fields
+  on the tile schema (`content_order`, `visibility`); no new section
+  types, no new Liquid includes, no per-preset renderer branches.
+- `admin/crop-preview.js`'s `renderTile` now walks the same
+  `content_order` (with the same fallback) so the CMS preview matches
+  what the live site will render.
