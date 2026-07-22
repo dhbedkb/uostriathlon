@@ -171,7 +171,7 @@ img { max-width: 100%; display: block; }
   background: var(--color-background);
 }
 
-.section:nth-of-type(even):not(.section-hero) {
+.section:nth-of-type(even):not(.section-hero):not(.section-tile-grid) {
   background: var(--color-surface);
 }
 
@@ -831,3 +831,109 @@ details[open] .tile-reveal-toggle::after { display: none; }
     transition-duration: 0.001ms !important;
   }
 }
+
+/* =====================================================
+   12. TILE-GRID SECTION LAYOUT
+   Every option a Section exposes (columns, equal height, scroll,
+   width, padding, background) maps to one class each here. Nothing
+   about a specific *kind* of tile lives in this block — that's the
+   point: this is the one place section layout is controlled, no
+   matter which preset the tiles inside were built from.
+   ===================================================== */
+
+.section-tile-grid[data-columns="1"] .tile-grid { --tile-grid-min: 100%; }
+.section-tile-grid[data-columns="2"] .tile-grid { --tile-grid-min: 340px; }
+.section-tile-grid[data-columns="3"] .tile-grid { --tile-grid-min: 280px; }
+.section-tile-grid[data-columns="4"] .tile-grid { --tile-grid-min: 220px; }
+
+.tile-grid-align-stretch { align-items: stretch; }
+.tile-grid-align-stretch .tile { height: 100%; }
+
+/* Horizontal scroll variant: tiles become a fixed-width scrolling row
+   instead of wrapping. Used when a section has more tiles than make
+   sense to wrap onto a new line (e.g. a long sponsor row). */
+.tile-grid-scroll {
+  display: flex;
+  grid-template-columns: none;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  padding-bottom: 0.5rem;
+  -webkit-overflow-scrolling: touch;
+}
+
+.tile-grid-scroll .tile {
+  flex: 0 0 min(80vw, var(--tile-grid-min, 280px));
+  scroll-snap-align: start;
+}
+
+/* Width variants, matching the .container / .container-narrow already
+   used elsewhere, plus a wide option for sections that want the full
+   1120px+ measure even though most tile grids read better narrower. */
+.section-width-wide .container-narrow { width: min(1400px, calc(100% - 2rem)); }
+
+/* Padding variants */
+.section-padding-compact { padding-block: clamp(2rem, 4vw, 3rem); }
+.section-padding-spacious { padding-block: clamp(4.5rem, 9vw, 8rem); }
+
+/* Background variants — explicit, so a Section no longer depends on
+   its position in the page (old odd/even striping) to control this. */
+.section-bg-default { background: var(--color-background); }
+.section-bg-surface { background: var(--color-surface); }
+.section-bg-accent {
+  background: radial-gradient(circle at top left, rgba(247, 211, 93, 0.12), transparent 32rem), var(--color-background);
+}
+
+/* Centred tile-grid, used by the old "cta" preset: a single tile,
+   narrow width, centred text — built entirely from existing tile
+   classes (.tile-surface-accent / .tile-cta / .tile-actions-center). */
+.tile-grid-center { justify-items: center; }
+
+/* Numbered variant, replaces the old dedicated timeline include: any
+   tile-grid can ask for a leading number badge per tile via
+   layout.numbered instead of needing its own section type. */
+.tile-index-badge {
+  display: grid;
+  width: 40px;
+  height: 40px;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--color-gold);
+  color: #000000;
+  font-weight: 900;
+}
+
+.tile-numbered { flex-direction: row; align-items: flex-start; gap: 1rem; }
+.tile-numbered .tile-body { flex: 1 1 auto; }
+
+/* Wraps a tile's header + expandable content together so it behaves as
+   one flex sibling next to a badge/index number when a tile lays out
+   horizontally (numbered mode), and is otherwise an invisible no-op. */
+.tile-content-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--tile-inner-gap);
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+/* Round image variant, for icon/logo-style tile images (e.g. social
+   platform icons) instead of the default square photo frame. */
+.tile-frame-round { border-radius: 50%; aspect-ratio: 1 / 1; width: 72px; }
+
+/* Badge — a small free-floating tag (event date, race distance, etc),
+   generalised from the old committee-only "tile-date-badge". */
+.tile-badge {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  border: 1px solid rgba(247, 211, 93, 0.35);
+  border-radius: var(--radius-full);
+  background: rgba(247, 211, 93, 0.1);
+  color: var(--color-gold);
+  padding: 0.3rem 0.65rem;
+  font-size: 0.82rem;
+  font-weight: 850;
+}
+
+.tile-has-badge { position: relative; padding-top: 4.5rem; }

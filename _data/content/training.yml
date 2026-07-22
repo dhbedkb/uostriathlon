@@ -1,101 +1,143 @@
 title: Training
 description: Weekly swim, bike and run sessions for every ability, plus two free weeks for beginners at the start of the year.
 sections:
-  - type: hero
-    id: training-hero
-    eyebrow: Training
-    title: Six sessions a week
-    subtitle: Coached, structured, and grouped by pace not experience
-    body: >
-      You don't need to attend every session, and you don't need to be
-      training for anything specific — come to as many or as few as fit
-      your week.
+- type: hero
+  id: training-hero
+  eyebrow: Training
+  title: Six sessions a week
+  subtitle: Coached, structured, and grouped by pace not experience
+  body: 'You don''t need to attend every session, and you don''t need to be training for anything specific — come to as many or as few as fit your week.
 
-  - type: text
-    id: training-intro
-    eyebrow: How it works
-    title: Pick the sessions that suit your week
-    subtitle: ""
-    body: |
-      Sessions are grouped by pace, so you're training alongside people
-      at a similar level whether it's your first year or your last. Club
-      bikes are available to borrow for anyone who doesn't have their
-      own, and full session times are confirmed each semester in the
-      members area.
+    '
+- type: text
+  id: training-intro
+  eyebrow: How it works
+  title: Pick the sessions that suit your week
+  subtitle: ''
+  body: 'Sessions are grouped by pace, so you''re training alongside people
 
-  - type: events
-    id: training-schedule
-    eyebrow: Weekly schedule
-    title: This week's sessions
-    subtitle: Locations and times are confirmed each semester — check the members area for the current schedule.
-    items:
-      - title: Pool swim
-        date: Mondays, 6:00–7:00pm
-        location: Sheffield University Sports Centre pool
-        type: Swim
-        description: Coached technique work followed by a set. All strokes and levels welcome.
-      - title: Turbo session
-        date: Tuesdays, 7:00–8:00pm
-        location: Goodwin Sports Centre
-        type: Bike
-        description: Indoor structured intervals — no outdoor bike needed to take part.
-      - title: Track running
-        date: Wednesdays, 6:30–7:30pm
-        location: Goodwin Sports Centre track
-        type: Run
-        description: Pace-group intervals, from first 5k to marathon training.
-      - title: Open pool swim
-        date: Thursdays, 6:00–7:00pm
-        location: Sheffield University Sports Centre pool
-        type: Swim
-        description: A more relaxed session for building distance and confidence in the water.
-      - title: Club road ride
-        date: Saturdays, 9:00am
-        location: Meet at Endcliffe Park
-        type: Bike
-        description: Group ride into the Peak District, with a faster group for those who want intervals.
-      - title: Sunday long run
-        date: Sundays, 9:30am
-        location: Meet at Weston Park
-        type: Run
-        description: Steady long run with shorter and longer route options.
+    at a similar level whether it''s your first year or your last. Club
 
-  - type: tile_grid
-    id: training-pathway
-    eyebrow: New to triathlon
-    title: Give It A Go
-    subtitle: Two free weeks of training at the start of the year, for anyone with no prior multisport experience.
-    tiles:
-      - title: Week 1 — Foundations
-        body: >
-          Front crawl technique in the pool, getting comfortable on a
-          bike in a group, and an easy running base.
-      - title: Week 2 — Race ready
-        body: >
-          Brick sessions (bike-to-run transitions), transition practice,
-          and everything you need for race-day logistics.
-      - title: The duathlon
-        body: >
-          The two weeks end with the Give It A Go duathlon — a chance to
-          meet the club and decide if it's for you.
+    bikes are available to borrow for anyone who doesn''t have their
 
-  - type: faq
-    id: training-faq
-    eyebrow: Questions
-    title: Training FAQs
-    subtitle: ""
-    items:
-      - question: Do I need my own bike to start training?
-        answer: >
-          No — the club has bikes you can borrow, and several members
-          car-share or hire bikes for outdoor rides until they're ready
-          to buy their own.
-      - question: I can't swim front crawl. Can I still join?
-        answer: >
-          Yes. Coached swim sessions are built around technique, and
-          beginners train separately so you're never out of your depth.
-      - question: What should I bring to my first session?
-        answer: >
-          Kit for whichever discipline you're trying — swimwear and a
-          towel for pool sessions, or trainers for a run. We'll talk you
-          through anything else you need.
+    own, and full session times are confirmed each semester in the
+
+    members area.
+
+    '
+- type: tile-grid
+  id: training-schedule
+  preset: events
+  eyebrow: Weekly schedule
+  title: This week's sessions
+  subtitle: Locations and times are confirmed each semester — check the members area for the current schedule.
+  layout:
+    columns: 3
+    equal_height: true
+    width: normal
+    padding: normal
+    background: default
+  behavior:
+    expand: none
+  tiles:
+  - badge: Mondays, 6:00–7:00pm
+    title: Pool swim
+    body: Coached technique work followed by a set. All strokes and levels welcome.
+    meta:
+    - label: Type
+      value: Swim
+    - label: Location
+      value: Sheffield University Sports Centre pool
+  - badge: Tuesdays, 7:00–8:00pm
+    title: Turbo session
+    body: Indoor structured intervals — no outdoor bike needed to take part.
+    meta:
+    - label: Type
+      value: Bike
+    - label: Location
+      value: Goodwin Sports Centre
+  - badge: Wednesdays, 6:30–7:30pm
+    title: Track running
+    body: Pace-group intervals, from first 5k to marathon training.
+    meta:
+    - label: Type
+      value: Run
+    - label: Location
+      value: Goodwin Sports Centre track
+  - badge: Thursdays, 6:00–7:00pm
+    title: Open pool swim
+    body: A more relaxed session for building distance and confidence in the water.
+    meta:
+    - label: Type
+      value: Swim
+    - label: Location
+      value: Sheffield University Sports Centre pool
+  - badge: Saturdays, 9:00am
+    title: Club road ride
+    body: Group ride into the Peak District, with a faster group for those who want intervals.
+    meta:
+    - label: Type
+      value: Bike
+    - label: Location
+      value: Meet at Endcliffe Park
+  - badge: Sundays, 9:30am
+    title: Sunday long run
+    body: Steady long run with shorter and longer route options.
+    meta:
+    - label: Type
+      value: Run
+    - label: Location
+      value: Meet at Weston Park
+- type: tile-grid
+  id: training-pathway
+  preset: custom
+  eyebrow: New to triathlon
+  title: Give It A Go
+  subtitle: Two free weeks of training at the start of the year, for anyone with no prior multisport experience.
+  layout:
+    columns: 3
+    equal_height: true
+    width: normal
+    padding: normal
+    background: default
+  behavior:
+    expand: none
+  tiles:
+  - title: Week 1 — Foundations
+    body: 'Front crawl technique in the pool, getting comfortable on a bike in a group, and an easy running base.
+
+      '
+  - title: Week 2 — Race ready
+    body: 'Brick sessions (bike-to-run transitions), transition practice, and everything you need for race-day logistics.
+
+      '
+  - title: The duathlon
+    body: 'The two weeks end with the Give It A Go duathlon — a chance to meet the club and decide if it''s for you.
+
+      '
+- type: tile-grid
+  id: training-faq
+  preset: faq
+  eyebrow: Questions
+  title: Training FAQs
+  layout:
+    columns: 1
+    equal_height: false
+    width: narrow
+    padding: normal
+    background: default
+  behavior:
+    expand: click
+  tiles:
+  - title: Do I need my own bike to start training?
+    body: 'No — the club has bikes you can borrow, and several members car-share or hire bikes for outdoor rides until they''re ready to buy their own.
+
+      '
+  - title: I can't swim front crawl. Can I still join?
+    body: 'Yes. Coached swim sessions are built around technique, and beginners train separately so you''re never out of your depth.
+
+      '
+  - title: What should I bring to my first session?
+    body: 'Kit for whichever discipline you''re trying — swimwear and a towel for pool sessions, or trainers for a run. We''ll talk you through anything else you need.
+
+      '

@@ -1,94 +1,134 @@
 title: Home
 description: Swim, bike and run with the University of Sheffield Triathlon Club — training, racing and socials for complete beginners and experienced athletes.
 sections:
-  - type: hero
-    id: home-hero
-    eyebrow: University of Sheffield Triathlon Club
-    title: Swim. Bike. Run.
-    subtitle: Open to all abilities — no experience needed
-    body: >
-      A student-run club for anyone at the University of Sheffield, from
-      complete beginners to experienced triathletes. We run coached
-      sessions across all three disciplines, club bikes you can borrow,
-      and two weeks of free training at the start of the year.
-    primary_button:
-      label: Join the club
-      url: /#join
-    secondary_button:
-      label: See training sessions
+- type: hero
+  id: home-hero
+  eyebrow: University of Sheffield Triathlon Club
+  title: Swim. Bike. Run.
+  subtitle: Open to all abilities — no experience needed
+  body: 'A student-run club for anyone at the University of Sheffield, from complete beginners to experienced triathletes. We run coached sessions across all three disciplines, club bikes you can borrow, and two weeks of free training at the start of the year.
+
+    '
+  primary_button:
+    label: Join the club
+    url: /#join
+  secondary_button:
+    label: See training sessions
+    url: /training/
+- type: tile-grid
+  id: home-stats
+  preset: stats
+  eyebrow: The club in numbers
+  title: A growing multisport community
+  layout:
+    columns: 4
+    equal_height: true
+    width: normal
+    padding: normal
+    background: default
+  behavior:
+    expand: none
+  tiles:
+  - title: 150+
+    subtitle: Members
+  - title: '6'
+    subtitle: Sessions a week
+  - title: '12'
+    subtitle: Races supported each year
+  - title: '0'
+    subtitle: Experience required to start
+- type: relay-bar
+  id: home-relay
+  eyebrow: How training breaks down
+  title: Swim, bike, run — in that order, every week
+- type: tile-grid
+  id: home-highlights
+  preset: cards
+  eyebrow: Getting started
+  title: Three ways in
+  subtitle: However you get involved, you'll be training and racing alongside people at a similar level.
+  layout:
+    columns: 3
+    equal_height: true
+    width: normal
+    padding: normal
+    background: default
+  behavior:
+    expand: none
+  tiles:
+  - eyebrow: Beginners
+    title: Give It A Go
+    body: 'Two free weeks of training at the start of the year, ending in a beginner-friendly duathlon — no bike or wetsuit required.
+
+      '
+    buttons:
+    - label: Learn more
       url: /training/
+      style: secondary
+  - eyebrow: Training
+    title: Weekly sessions
+    body: 'Coached swim, bike and run sessions for every pace, plus club bikes you can borrow if you don''t have your own.
 
-  - type: stats
-    id: home-stats
-    eyebrow: The club in numbers
-    title: A growing multisport community
-    subtitle: ""
-    items:
-      - number: "150+"
-        label: Members
-      - number: "6"
-        label: Sessions a week
-      - number: "12"
-        label: Races supported each year
-      - number: "0"
-        label: Experience required to start
+      '
+    buttons:
+    - label: Learn more
+      url: /training/
+      style: secondary
+  - eyebrow: Community
+    title: Racing & socials
+    body: 'Club trips to local and national races, and a social calendar that runs alongside the training week.
 
-  - type: relay-bar
-    id: home-relay
-    eyebrow: How training breaks down
-    title: Swim, bike, run — in that order, every week
-
-  - type: cards
-    id: home-highlights
-    eyebrow: Getting started
-    title: Three ways in
-    subtitle: However you get involved, you'll be training and racing alongside people at a similar level.
-    cards:
-      - label: Beginners
-        title: Give It A Go
-        description: >
-          Two free weeks of training at the start of the year, ending in a
-          beginner-friendly duathlon — no bike or wetsuit required.
-        url: /training/
-      - label: Training
-        title: Weekly sessions
-        description: >
-          Coached swim, bike and run sessions for every pace, plus club
-          bikes you can borrow if you don't have your own.
-        url: /training/
-      - label: Community
-        title: Racing & socials
-        description: >
-          Club trips to local and national races, and a social calendar
-          that runs alongside the training week.
-        url: /socials/
-
-  - type: text
-    id: home-about
-    eyebrow: About us
-    title: A club for every kind of triathlete
-    subtitle: ""
-    body: |
-      We're a student-run triathlon club connected to the University of
-      Sheffield and Sport Sheffield, open to students and staff of all
-      abilities. Sheffield sits right on the edge of the Peak District,
-      where our outdoor bike sessions take place, and club bikes are
-      available to borrow if you don't have your own.
-
-      Some members are training for their first sprint triathlon; others
-      are working towards qualification times. Most weeks you'll find
-      both training side by side.
-
-  - type: cta
-    id: join
-    eyebrow: Getting started
-    title: Come to a session before you decide
-    body: >
-      Full membership isn't needed for your first visit — turn up to any
-      beginner-friendly session to see what training's actually like.
-    primary_button:
-      label: Join the club
-      url: https://www.sheffieldstudentsunion.com/activities/societies/
-    secondary_button:
-      label: Ask us a question
+      '
+    buttons:
+    - label: Learn more
       url: /socials/
+      style: secondary
+- type: text
+  id: home-about
+  eyebrow: About us
+  title: A club for every kind of triathlete
+  subtitle: ''
+  body: 'We''re a student-run triathlon club connected to the University of
+
+    Sheffield and Sport Sheffield, open to students and staff of all
+
+    abilities. Sheffield sits right on the edge of the Peak District,
+
+    where our outdoor bike sessions take place, and club bikes are
+
+    available to borrow if you don''t have your own.
+
+
+    Some members are training for their first sprint triathlon; others
+
+    are working towards qualification times. Most weeks you''ll find
+
+    both training side by side.
+
+    '
+- type: tile-grid
+  id: join
+  preset: cta
+  layout:
+    columns: 1
+    equal_height: false
+    width: narrow
+    padding: spacious
+    background: default
+    align_center: true
+  behavior:
+    expand: none
+  tiles:
+  - title: Come to a session before you decide
+    body: 'Full membership isn''t needed for your first visit — turn up to any beginner-friendly session to see what training''s actually like.
+
+      '
+    buttons:
+    - label: Join the club
+      url: https://www.sheffieldstudentsunion.com/activities/societies/
+      style: primary
+    - label: Ask us a question
+      url: /socials/
+      style: secondary
+    eyebrow: Getting started
+    style: accent

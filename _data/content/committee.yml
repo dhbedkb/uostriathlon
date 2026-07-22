@@ -1,72 +1,92 @@
 title: Committee
 description: Meet the committee running Sheffield Triathlon Club this year.
 sections:
-  - type: hero
-    id: committee-hero
-    eyebrow: Committee
-    title: Run by members, for members
-    subtitle: Meet this year's committee
-    body: >
-      Every session, race trip and social is organised by a team of
-      volunteer members. Get in touch with any of them directly, or use
-      the club email for anything general.
-    background_image_raw: /uostriathlon/assets/images/source/img_1783.jpeg
+- body: 'Every session, race trip and social is organised by a team of volunteer members. Get in touch with any of them directly, or use the club email for anything general.
 
-  - type: committee
-    id: committee-members
-    eyebrow: This year's committee
-    title: Your committee
-    subtitle: Click a name to read more and get in touch.
-    members:
-      - name: Add name
-        role: Club Captain
-        bio: Add a short bio here — a sentence or two is plenty.
-        email: triathlon@sheffield.ac.uk
-      - name: Barnaby Read
-        role: Secretary
-        bio: Add a short bio here — a sentence or two is plenty.
-        email: ""
-        image_raw: /uostriathlon/assets/images/committee/raw/img_9541.jpg
-      - name: Add name
-        role: Vice Captain (Social)
-        bio: Add a short bio here — a sentence or two is plenty.
-        email: ""
-      - name: Add name
-        role: Treasurer
-        bio: Add a short bio here — a sentence or two is plenty.
-        email: ""
-      - name: Add name
-        role: Beginners Coordinator
-        bio: Add a short bio here — a sentence or two is plenty.
-        email: ""
-        image_raw: /uostriathlon/assets/images/committee/raw/708752699_1640993453798187_4377617180923485565_n.jpg
-        crop_zoom: 200
-        crop_y: 6
-      - name: Add name
-        role: Welfare & Inclusion Officer
-        bio: Add a short bio here — a sentence or two is plenty.
-        email: ""
-      - name: Add name
-        role: Kit Secretary
-        bio: Add a short bio here — a sentence or two is plenty.
-        email: ""
-      - name: Add name
-        role: Social Secretary
-        bio: Add a short bio here — a sentence or two is plenty.
-        email: ""
+    '
+  eyebrow: Committee
+  primary_button:
+    label: '1'
+    url: '1'
+  background_image_raw: /uostriathlon/assets/images/source/img_1783.jpeg
+  subtitle: Meet this year's committee
+  title: Run by members, for members
+  type: hero
+  id: committee-hero
+  secondary_button:
+    label: '1'
+    url: '1'
+- type: tile-grid
+  id: committee-members
+  preset: committee
+  eyebrow: This year's committee
+  title: Your committee
+  subtitle: Click a name to read more and get in touch.
+  layout:
+    columns: 3
+    equal_height: true
+    width: normal
+    padding: normal
+    background: default
+  behavior:
+    expand: hover
+  tiles:
+  - title: Add name
+    subtitle: Club Captain
+    body: Add a short bio here — a sentence or two is plenty.
+    email: triathlon@sheffield.ac.uk
+  - title: Barnaby Read
+    subtitle: Secretary
+    body: Add a short bio here — a sentence or two is plenty.
+    image:
+      src_raw: /uostriathlon/assets/images/committee/raw/img_9541.jpg
+      alt: Barnaby Read
+      crop_x: 50
+      crop_y: 50
+      crop_zoom: 100
+  - title: Add name
+    subtitle: Vice Captain (Social)
+    body: Add a short bio here — a sentence or two is plenty.
+  - title: Add name
+    subtitle: Treasurer
+    body: Add a short bio here — a sentence or two is plenty.
+  - title: Add name
+    subtitle: Beginners Coordinator
+    body: Add a short bio here — a sentence or two is plenty.
+    image:
+      src_raw: /uostriathlon/assets/images/committee/raw/708752699_1640993453798187_4377617180923485565_n.jpg
+      alt: Add name
+      crop_x: 50
+      crop_y: 6
+      crop_zoom: 200
+  - title: Add name
+    subtitle: Welfare & Inclusion Officer
+    body: Add a short bio here — a sentence or two is plenty.
+  - title: Add name
+    subtitle: Kit Secretary
+    body: Add a short bio here — a sentence or two is plenty.
+  - title: Add name
+    subtitle: Social Secretary
+    body: Add a short bio here — a sentence or two is plenty.
+- type: tile-grid
+  id: committee-faq
+  preset: faq
+  eyebrow: Getting involved
+  title: Want to join the committee?
+  layout:
+    columns: 1
+    equal_height: false
+    width: narrow
+    padding: normal
+    background: default
+  behavior:
+    expand: click
+  tiles:
+  - title: When are committee elections held?
+    body: 'Elections are held at the club''s AGM, usually in the spring term. Details are shared with members ahead of time on Instagram and by email.
 
-  - type: faq
-    id: committee-faq
-    eyebrow: Getting involved
-    title: Want to join the committee?
-    subtitle: ""
-    items:
-      - question: When are committee elections held?
-        answer: >
-          Elections are held at the club's AGM, usually in the spring
-          term. Details are shared with members ahead of time on
-          Instagram and by email.
-      - question: Do I need previous committee experience?
-        answer: >
-          No — most committee members' first role was on this committee.
-          Outgoing members hand over notes and are always happy to help.
+      '
+  - title: Do I need previous committee experience?
+    body: 'No — most committee members'' first role was on this committee. Outgoing members hand over notes and are always happy to help.
+
+      '

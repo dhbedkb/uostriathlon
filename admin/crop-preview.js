@@ -34,10 +34,8 @@
 
   // Decap CMS's getAsset() is synchronous on some backends (e.g. the local
   // dev backend) but returns a Promise on others (e.g. the GitHub backend,
-  // which has to fetch the blob). The old version of this file assumed a
-  // synchronous return, so on GitHub-backed collections the preview never
-  // resolved and silently fell back to a broken raw path. AssetImage
-  // handles both cases and re-renders once the real URL is known.
+  // which has to fetch the blob). AssetImage handles both cases and
+  // re-renders once the real URL is known.
   var AssetImage = createClass({
     getInitialState: function () {
       return { status: "idle", url: "" };
@@ -107,8 +105,9 @@
   });
 
   // A crop frame renders the raw uploaded image inside a box shaped like the
-  // published output (square, wide hero, etc), positioned and zoomed using
-  // the same crop_x / crop_y / crop_zoom values the live site's CSS uses.
+  // published output (square, wide hero, round icon…), positioned and
+  // zoomed using the same crop_x / crop_y / crop_zoom values the live
+  // site's CSS uses.
   function cropFrame(rawSrc, getAsset, cropX, cropY, cropZoom, shape) {
     return h(
       "div",
@@ -125,117 +124,71 @@
     );
   }
 
-  function heading(section, label) {
+  function heading(title, label, subtitle) {
     return [
-      h("p", { className: "cp-tag" }, label || section.type || "Section"),
-      h("h2", { className: "cp-title" }, section.title || section.platform || "Untitled"),
-      section.subtitle ? h("p", { className: "cp-subtitle" }, section.subtitle) : null,
-      section.body ? h("p", { className: "cp-body" }, section.body) : null
+      h("p", { className: "cp-tag" }, label || "Section"),
+      h("h2", { className: "cp-title" }, title || "Untitled"),
+      subtitle ? h("p", { className: "cp-subtitle" }, subtitle) : null
     ];
   }
 
+  // --- Hero: the one section type that still gets bespoke preview
+  // treatment, because it's a full-bleed background photo rather than a
+  // tile — everything else below is generic Tile rendering. ---
   function renderHero(section, getAsset, key) {
     var source = section.background_image_raw || "";
     return h(
       "section",
       { className: "cp-section", key: key },
-      heading(section, "Hero"),
+      heading(section.title, "Hero", section.subtitle),
       source
         ? cropFrame(source, getAsset, section.background_crop_x, section.background_crop_y, section.background_crop_zoom, "wide")
         : h("p", { className: "cp-muted" }, "No hero image selected")
     );
   }
 
-  function renderCards(section, getAsset, key) {
-    var cards = section.cards || [];
+  // --- Tile-grid: the rendering engine. This function has no idea what
+  // "committee" or "sponsors" mean — it only reads the same Content
+  // fields _includes/tile.html reads on the live site (image, embed,
+  // eyebrow, title, subtitle, body, badge, meta, buttons). Adding a new
+  // preset never requires touching this file. ---
+  function renderTile(tile, getAsset, key) {
+    var image = tile.image || {};
+    var hasImage = !!(image.src_raw || image.src);
+    var shape = image.shape === "round" ? "round" : "square";
+
     return h(
-      "section",
-      { className: "cp-section", key: key },
-      heading(section, "Cards"),
-      h(
-        "div",
-        { className: "cp-grid" },
-        cards.map(function (card, i) {
-          return h(
-            "article",
-            { className: "cp-card", key: i },
-            card.image_raw ? cropFrame(card.image_raw, getAsset, card.crop_x, card.crop_y, card.crop_zoom, "square") : null,
-            h("strong", null, card.title || "Card"),
-            card.description ? h("p", null, card.description) : null
-          );
-        })
-      )
+      "article",
+      { className: "cp-card", key: key },
+      tile.badge ? h("span", { className: "cp-badge" }, tile.badge) : null,
+      hasImage
+        ? cropFrame(image.src_raw || image.src, getAsset, image.crop_x, image.crop_y, image.crop_zoom, shape)
+        : (tile.embed && tile.embed.embed_html ? h("p", { className: "cp-muted" }, "Embed") : null),
+      tile.eyebrow ? h("p", { className: "cp-tag" }, tile.eyebrow) : null,
+      h("strong", null, tile.title || "Tile"),
+      tile.subtitle ? h("p", { className: "cp-muted" }, tile.subtitle) : null,
+      tile.body ? h("p", null, tile.body) : null
     );
   }
 
-  function renderGallery(section, getAsset, key) {
-    var images = section.images || [];
+  function renderTileGrid(section, getAsset, key) {
+    var tiles = section.tiles || [];
     return h(
       "section",
       { className: "cp-section", key: key },
-      heading(section, "Gallery"),
+      heading(section.title, "Card grid — " + (section.preset || "custom"), section.subtitle),
       h(
         "div",
         { className: "cp-grid" },
-        images.map(function (item, i) {
-          return h(
-            "article",
-            { className: "cp-card", key: i },
-            cropFrame(item.src_raw, getAsset, item.crop_x, item.crop_y, item.crop_zoom, "square"),
-            item.caption ? h("p", null, item.caption) : null
-          );
-        })
-      )
-    );
-  }
-
-  function renderSocials(section, getAsset, key) {
-    var items = section.items || [];
-    return h(
-      "section",
-      { className: "cp-section", key: key },
-      heading(section, "Socials"),
-      h(
-        "div",
-        { className: "cp-grid" },
-        items.map(function (item, i) {
-          return h(
-            "article",
-            { className: "cp-card", key: i },
-            item.icon_raw ? cropFrame(item.icon_raw, getAsset, item.crop_x, item.crop_y, item.crop_zoom, "square") : null,
-            h("strong", null, item.platform || "Social link")
-          );
-        })
-      )
-    );
-  }
-
-  function renderCommittee(section, getAsset, key) {
-    var members = section.members || [];
-    return h(
-      "section",
-      { className: "cp-section", key: key },
-      heading(section, "Committee"),
-      h(
-        "div",
-        { className: "cp-grid" },
-        members.map(function (member, i) {
-          var source = clean(member.image_raw);
-          return h(
-            "article",
-            { className: "cp-card", key: i },
-            h("strong", null, member.name || "Committee member"),
-            member.role ? h("p", { className: "cp-muted" }, member.role) : null,
-            cropFrame(source, getAsset, member.crop_x, member.crop_y, member.crop_zoom, "square"),
-            member.bio ? h("p", null, member.bio) : null
-          );
+        tiles.map(function (tile, i) {
+          return renderTile(tile, getAsset, i);
         })
       )
     );
   }
 
   function renderGeneric(section, key) {
-    return h("section", { className: "cp-section", key: key }, heading(section, section.type));
+    return h("section", { className: "cp-section", key: key }, heading(section.title, section.type));
   }
 
   function renderSection(section, getAsset, index) {
@@ -243,10 +196,7 @@
 
     switch (section.type) {
       case "hero": return renderHero(section, getAsset, index);
-      case "cards": return renderCards(section, getAsset, index);
-      case "gallery": return renderGallery(section, getAsset, index);
-      case "socials": return renderSocials(section, getAsset, index);
-      case "committee": return renderCommittee(section, getAsset, index);
+      case "tile-grid": return renderTileGrid(section, getAsset, index);
       default: return renderGeneric(section, index);
     }
   }

@@ -1,72 +1,106 @@
 title: Socials
 description: Club socials, and how to follow along on Instagram and Facebook.
 sections:
-  - type: hero
-    id: socials-hero
-    eyebrow: Socials
-    title: Triathlon isn't the only thing we do
-    subtitle: Socials run alongside the training calendar
-    body: >
-      Nothing is compulsory, and you don't need to have raced anything to
-      come along — socials are usually the easiest way to get to know
-      people in the club.
+- type: hero
+  id: socials-hero
+  eyebrow: Socials
+  title: Triathlon isn't the only thing we do
+  subtitle: Socials run alongside the training calendar
+  body: 'Nothing is compulsory, and you don''t need to have raced anything to come along — socials are usually the easiest way to get to know people in the club.
 
-  - type: text
-    id: socials-intro
-    eyebrow: What to expect
-    title: A club that hangs out outside of kit
-    subtitle: ""
-    body: |
-      Socials happen most weeks alongside training. Check Instagram and
-      Facebook for what's coming up — that's where session changes,
-      social plans and race information are posted first.
+    '
+- type: text
+  id: socials-intro
+  eyebrow: What to expect
+  title: A club that hangs out outside of kit
+  subtitle: ''
+  body: 'Socials happen most weeks alongside training. Check Instagram and
 
-  - type: events
-    id: socials-calendar
-    eyebrow: Coming up
-    title: This term's socials
-    subtitle: ""
-    items:
-      - title: Welcome social
-        date: Week 1
-        location: Local pub, details on Instagram
-        type: Social
-        description: The easiest way to meet the club before your first session.
-      - title: Post-training coffee
-        date: Every Saturday, after the club ride
-        location: Endcliffe Park café
-        type: Weekly
-        description: Casual and drop-in — no need to have ridden to come along.
-      - title: Race season send-off
-        date: April
-        location: TBC
-        type: Social
-        description: A send-off before the club heads to the Sheffield Sprint Triathlon.
-      - title: End-of-year social
-        date: May
-        location: TBC
-        type: Social
-        description: The year's biggest social, celebrating the season with the whole club.
+    Facebook for what''s coming up — that''s where session changes,
 
-  - type: socials
-    id: socials-links
-    eyebrow: Follow along
-    title: Find us online
-    subtitle: The fastest way to hear about session changes, race entries and social plans.
-    layout: cards
-    items:
-      - platform: Instagram
-        title: "@sheffunitri"
-        description: Session updates, race photos and the fastest way to reach the committee.
-        url: https://www.instagram.com/sheffunitri/
-        button: Follow
-      - platform: Facebook
-        title: UoSTriathlon
-        description: Event pages, committee announcements and the wider alumni network.
-        url: https://www.facebook.com/UoSTriathlon/
-        button: Like page
-      - platform: Email
-        title: Get in touch
-        description: For anything that doesn't fit in a DM — membership questions, kit orders, or general queries.
-        url: mailto:triathlon@sheffield.ac.uk
-        button: Email us
+    social plans and race information are posted first.
+
+    '
+- type: tile-grid
+  id: socials-calendar
+  preset: events
+  eyebrow: Coming up
+  title: This term's socials
+  layout:
+    columns: 3
+    equal_height: true
+    width: normal
+    padding: normal
+    background: default
+  behavior:
+    expand: none
+  tiles:
+  - badge: Week 1
+    title: Welcome social
+    body: The easiest way to meet the club before your first session.
+    meta:
+    - label: Type
+      value: Social
+    - label: Location
+      value: Local pub, details on Instagram
+  - badge: Every Saturday, after the club ride
+    title: Post-training coffee
+    body: Casual and drop-in — no need to have ridden to come along.
+    meta:
+    - label: Type
+      value: Weekly
+    - label: Location
+      value: Endcliffe Park café
+  - badge: April
+    title: Race season send-off
+    body: A send-off before the club heads to the Sheffield Sprint Triathlon.
+    meta:
+    - label: Type
+      value: Social
+    - label: Location
+      value: TBC
+  - badge: May
+    title: End-of-year social
+    body: The year's biggest social, celebrating the season with the whole club.
+    meta:
+    - label: Type
+      value: Social
+    - label: Location
+      value: TBC
+- type: tile-grid
+  id: socials-links
+  preset: socials
+  eyebrow: Follow along
+  title: Find us online
+  subtitle: The fastest way to hear about session changes, race entries and social plans.
+  layout:
+    columns: 4
+    equal_height: true
+    width: normal
+    padding: normal
+    background: default
+    chip_style: false
+  behavior:
+    expand: none
+  tiles:
+  - eyebrow: Instagram
+    title: '@sheffunitri'
+    body: Session updates, race photos and the fastest way to reach the committee.
+    buttons:
+    - label: Follow
+      url: https://www.instagram.com/sheffunitri/
+      style: secondary
+  - eyebrow: Facebook
+    title: UoSTriathlon
+    body: Event pages, committee announcements and the wider alumni network.
+    buttons:
+    - label: Like page
+      url: https://www.facebook.com/UoSTriathlon/
+      style: secondary
+  - eyebrow: Email
+    title: Get in touch
+    body: For anything that doesn't fit in a DM — membership questions, kit orders, or general queries.
+    buttons:
+    - label: Email us
+      url: mailto:triathlon@sheffield.ac.uk
+      style: secondary

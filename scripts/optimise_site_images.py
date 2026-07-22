@@ -1,17 +1,22 @@
 """
-Reads every content file, finds any *_raw image references, applies the
-crop/zoom the editor recorded, resizes to the size the section needs, and
-saves a compressed WebP into assets/images/generated (or
-assets/images/committee/profiles for committee photos).
+Reads every content file, finds any raw image references (the hero
+background, or a tile's image.src_raw), applies the crop/zoom the editor
+recorded, resizes to the size that kind of image needs, and saves a
+compressed WebP into assets/images/generated (or
+assets/images/committee/profiles for committee-preset tile images, kept
+separate for backwards compatibility with existing uploads).
 
-This keeps the raw, full-size upload in the repo for future re-cropping,
-while the site itself only ever loads the small, compressed WebP.
+Because every non-hero image on the site now lives at the same place in
+the data shape — `sections[].tiles[].image` — this script no longer
+needs one branch per section type. A brand-new preset (e.g. "testimonials")
+never requires a change here: if its tiles have an `image.src_raw`, it's
+already handled.
 
-Compression is tuned per use rather than one flat setting for every image:
-a large hero photo is on screen for a second behind text and can take a
-lower quality; a small icon or logo is looked at directly and gets a
-higher one. See docs/image-pipeline.md for the reasoning and the full
-table of sizes/qualities.
+Compression is tuned by *shape*, not by what the image is a photo of: a
+square tile photo (card, gallery, committee, sponsor…) gets one
+treatment, a round tile image (icon-style, e.g. social platform logos)
+gets another, tuned for a small sharp-edged graphic. See
+docs/image-pipeline.md for the reasoning.
 
 Run automatically by .github/workflows/deploy.yml before every build.
 Can also be run locally:
@@ -37,9 +42,14 @@ SUPPORTED_EXTENSIONS = {".jpg", ".jpeg", ".png", ".webp", ".bmp", ".tif", ".tiff
 # WebP quality by use. Large, briefly-seen backgrounds tolerate more
 # compression than small images people actually look closely at.
 QUALITY_HERO = 76
-QUALITY_PHOTO = 80
+QUALITY_TILE = 80
 QUALITY_ICON = 88
 QUALITY_LOGO = 92
+
+TILE_SIZE = (1000, 1000)
+ICON_SIZE = (512, 512)
+HERO_SIZE = (2000, 1125)
+LOGO_SIZE = (240, 240)
 
 
 def slugify(value):
@@ -116,8 +126,9 @@ def crop_to_aspect(img, aspect_w, aspect_h, crop_x=50, crop_y=50, crop_zoom=100)
     return img.crop((int(left), int(top), int(right), int(bottom)))
 
 
-def save_webp(src, dest, width, height, crop_x=50, crop_y=50, crop_zoom=100, quality=QUALITY_PHOTO):
+def save_webp(src, dest, size, crop_x=50, crop_y=50, crop_zoom=100, quality=QUALITY_TILE):
     dest.parent.mkdir(parents=True, exist_ok=True)
+    width, height = size
     with Image.open(src) as img:
         cropped = crop_to_aspect(img, width, height, crop_x, crop_y, crop_zoom)
         cropped = cropped.resize((width, height), Image.Resampling.LANCZOS)
@@ -129,35 +140,57 @@ def save_webp(src, dest, width, height, crop_x=50, crop_y=50, crop_zoom=100, qua
     return "/" + str(dest).replace("\\", "/")
 
 
-def process_image(ref, page_slug, name, width, height, crop_x=50, crop_y=50, crop_zoom=100, quality=QUALITY_PHOTO):
-    src = source_path(ref)
-    if not supported(src):
-        print(f"Skipping unsupported or missing image: {ref}")
-        return None
-    dest = GENERATED_DIR / page_slug / (slugify(name) + ".webp")
-    return save_webp(src, dest, width, height, crop_x, crop_y, crop_zoom, quality)
-
-
-def process_committee_member(member):
-    raw = member.get("image_raw")
+def process_hero(section, page_slug, s_index, changed_flag):
+    raw = section.get("background_image_raw")
     if not raw:
-        return False
-
+        return changed_flag
     src = source_path(raw)
     if not supported(src):
-        print(f"Skipping unsupported or missing committee image: {raw}")
+        print(f"Skipping unsupported or missing hero image: {raw}")
+        return changed_flag
+    dest = GENERATED_DIR / page_slug / f"hero-{section.get('id') or s_index}.webp"
+    generated = save_webp(
+        src, dest, HERO_SIZE,
+        section.get("background_crop_x", 50), section.get("background_crop_y", 50),
+        section.get("background_crop_zoom", 100), quality=QUALITY_HERO,
+    )
+    if section.get("background_image") != generated:
+        section["background_image"] = generated
+        return True
+    return changed_flag
+
+
+def process_tile_image(tile, page_slug, section, s_index, t_index):
+    image = tile.get("image")
+    if not image or not image.get("src_raw"):
         return False
 
-    name = f"{member.get('name', '')}-{member.get('role', '')}"
-    dest = COMMITTEE_DIR / (slugify(name) + ".webp")
-    public_ref = save_webp(
-        src, dest, 900, 900,
-        member.get("crop_x", 50), member.get("crop_y", 50), member.get("crop_zoom", 100),
-        quality=QUALITY_PHOTO,
-    )
+    src = source_path(image["src_raw"])
+    if not supported(src):
+        print(f"Skipping unsupported or missing tile image: {image['src_raw']}")
+        return False
 
-    if member.get("image_profile") != public_ref:
-        member["image_profile"] = public_ref
+    is_round = image.get("shape") == "round"
+    name_bits = f"{section.get('id') or s_index}-{t_index}-{tile.get('title') or tile.get('eyebrow') or ''}"
+    slug = slugify(name_bits)
+
+    # Committee-preset photos keep their historical output folder so
+    # existing generated assets and any external references don't move.
+    if section.get("preset") == "committee":
+        dest = COMMITTEE_DIR / (slugify(f"{tile.get('title', '')}-{tile.get('subtitle', '')}") + ".webp")
+    else:
+        dest = GENERATED_DIR / page_slug / (slug + ".webp")
+
+    size = ICON_SIZE if is_round else TILE_SIZE
+    quality = QUALITY_ICON if is_round else QUALITY_TILE
+
+    generated = save_webp(
+        src, dest, size,
+        image.get("crop_x", 50), image.get("crop_y", 50), image.get("crop_zoom", 100),
+        quality=quality,
+    )
+    if image.get("src") != generated:
+        image["src"] = generated
         return True
     return False
 
@@ -170,62 +203,12 @@ def process_file(yml_path):
     for s_index, section in enumerate(data.get("sections", [])):
         stype = section.get("type")
 
-        if stype == "hero" and section.get("background_image_raw"):
-            generated = process_image(
-                section["background_image_raw"], page_slug, f"hero-{section.get('id') or s_index}",
-                2000, 1125,
-                section.get("background_crop_x", 50), section.get("background_crop_y", 50), section.get("background_crop_zoom", 100),
-                quality=QUALITY_HERO,
-            )
-            if generated and section.get("background_image") != generated:
-                section["background_image"] = generated
-                changed = True
+        if stype == "hero":
+            changed = process_hero(section, page_slug, s_index, changed) or changed
 
-        elif stype == "cards":
-            for i, card in enumerate(section.get("cards", [])):
-                if not card.get("image_raw"):
-                    continue
-                generated = process_image(
-                    card["image_raw"], page_slug, f"card-{section.get('id') or s_index}-{i}-{card.get('title')}",
-                    900, 900,
-                    card.get("crop_x", 50), card.get("crop_y", 50), card.get("crop_zoom", 100),
-                    quality=QUALITY_PHOTO,
-                )
-                if generated and card.get("image") != generated:
-                    card["image"] = generated
-                    changed = True
-
-        elif stype == "gallery":
-            for i, item in enumerate(section.get("images", [])):
-                if not item.get("src_raw"):
-                    continue
-                generated = process_image(
-                    item["src_raw"], page_slug, f"gallery-{section.get('id') or s_index}-{i}",
-                    1200, 1200,
-                    item.get("crop_x", 50), item.get("crop_y", 50), item.get("crop_zoom", 100),
-                    quality=QUALITY_PHOTO,
-                )
-                if generated and item.get("src") != generated:
-                    item["src"] = generated
-                    changed = True
-
-        elif stype == "socials":
-            for i, item in enumerate(section.get("items", [])):
-                if not item.get("icon_raw"):
-                    continue
-                generated = process_image(
-                    item["icon_raw"], page_slug, f"social-{section.get('id') or s_index}-{i}-{item.get('platform')}",
-                    512, 512,
-                    item.get("crop_x", 50), item.get("crop_y", 50), item.get("crop_zoom", 100),
-                    quality=QUALITY_ICON,
-                )
-                if generated and item.get("icon") != generated:
-                    item["icon"] = generated
-                    changed = True
-
-        elif stype == "committee":
-            for member in section.get("members", []):
-                if process_committee_member(member):
+        elif stype == "tile-grid":
+            for t_index, tile in enumerate(section.get("tiles", [])):
+                if process_tile_image(tile, page_slug, section, s_index, t_index):
                     changed = True
 
     if changed:
@@ -247,7 +230,7 @@ def main():
             if supported(src):
                 dest = GENERATED_DIR / "brand" / "logo.webp"
                 generated = save_webp(
-                    src, dest, 240, 240,
+                    src, dest, LOGO_SIZE,
                     settings["brand"].get("logo_crop_x", 50),
                     settings["brand"].get("logo_crop_y", 50),
                     settings["brand"].get("logo_crop_zoom", 100),

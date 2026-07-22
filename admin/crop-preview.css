@@ -36,10 +36,24 @@ body {
 }
 
 .cp-card {
+  position: relative;
   border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 14px;
   padding: 14px;
   background: #101010;
+}
+
+.cp-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(247, 211, 93, 0.14);
+  border: 1px solid rgba(247, 211, 93, 0.35);
+  color: #F7D35D;
+  font-size: 11px;
+  font-weight: 800;
 }
 
 /* Crop frame: matches the shape + crop math used by the live site. */
@@ -56,6 +70,7 @@ body {
 
 .crop-frame-square { aspect-ratio: 1 / 1; }
 .crop-frame-wide { aspect-ratio: 16 / 9; }
+.crop-frame-round { aspect-ratio: 1 / 1; border-radius: 999px; max-width: 96px; }
 
 .crop-frame img {
   width: 100%;

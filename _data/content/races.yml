@@ -1,69 +1,104 @@
 title: Races
 description: Races the club supports each season, from beginner-friendly sprint distance events to national student championships.
 sections:
-  - type: hero
-    id: races-hero
-    eyebrow: Races
-    title: From your first sprint to BUCS
-    subtitle: Club-supported races, every season
-    body: >
-      Entries are block-booked, transport is organised, and an
-      experienced member always comes along — first-timers are usually
-      paired with someone who's raced before.
+- type: hero
+  id: races-hero
+  eyebrow: Races
+  title: From your first sprint to BUCS
+  subtitle: Club-supported races, every season
+  body: 'Entries are block-booked, transport is organised, and an experienced member always comes along — first-timers are usually paired with someone who''s raced before.
 
-  - type: text
-    id: races-intro
-    eyebrow: Racing with the club
-    title: You're never racing alone
-    subtitle: ""
-    body: |
-      Whether it's a local sprint triathlon or the British Universities
-      Championships, members race together and support each other
-      through transition.
+    '
+- type: text
+  id: races-intro
+  eyebrow: Racing with the club
+  title: You're never racing alone
+  subtitle: ''
+  body: 'Whether it''s a local sprint triathlon or the British Universities
 
-  - type: events
-    id: races-calendar
-    eyebrow: Season calendar
-    title: Upcoming races
-    subtitle: Full details, entry links and deadlines are shared on the members area and club socials closer to each date.
-    items:
-      - title: Sheffield Sprint Triathlon
-        date: April
-        location: Sheffield
-        type: Sprint distance
-        description: A popular first triathlon for new members.
-      - title: BUCS Triathlon Championships
-        date: May
-        location: Nottingham
-        type: Standard distance
-        description: The national university championships — open to all abilities, with a club relay team too.
-      - title: Peak District Duathlon
-        date: June
-        location: Peak District
-        type: Duathlon
-        description: An off-road alternative for members who prefer running and biking to swimming.
-      - title: Castle Howard Triathlon
-        date: July
-        location: North Yorkshire
-        type: Standard & sprint distance
-        description: A club trip with both sprint and standard distance options on the day.
-      - title: Club Championship Sprint
-        date: September
-        location: Sheffield
-        type: Internal club race
-        description: The club's own end-of-season race, followed by a social.
+    Championships, members race together and support each other
 
-  - type: cta
-    id: races-cta
-    eyebrow: First time racing?
-    title: Talk to the committee about your first race
-    body: >
-      Come to a training session and ask the committee about upcoming
-      races — they'll point you to the right distance and talk you
-      through what race day involves.
-    primary_button:
-      label: See training sessions
+    through transition.
+
+    '
+- type: tile-grid
+  id: races-calendar
+  preset: events
+  eyebrow: Season calendar
+  title: Upcoming races
+  subtitle: Full details, entry links and deadlines are shared on the members area and club socials closer to each date.
+  layout:
+    columns: 3
+    equal_height: true
+    width: normal
+    padding: normal
+    background: default
+  behavior:
+    expand: none
+  tiles:
+  - badge: April
+    title: Sheffield Sprint Triathlon
+    body: A popular first triathlon for new members.
+    meta:
+    - label: Type
+      value: Sprint distance
+    - label: Location
+      value: Sheffield
+  - badge: May
+    title: BUCS Triathlon Championships
+    body: The national university championships — open to all abilities, with a club relay team too.
+    meta:
+    - label: Type
+      value: Standard distance
+    - label: Location
+      value: Nottingham
+  - badge: June
+    title: Peak District Duathlon
+    body: An off-road alternative for members who prefer running and biking to swimming.
+    meta:
+    - label: Type
+      value: Duathlon
+    - label: Location
+      value: Peak District
+  - badge: July
+    title: Castle Howard Triathlon
+    body: A club trip with both sprint and standard distance options on the day.
+    meta:
+    - label: Type
+      value: Standard & sprint distance
+    - label: Location
+      value: North Yorkshire
+  - badge: September
+    title: Club Championship Sprint
+    body: The club's own end-of-season race, followed by a social.
+    meta:
+    - label: Type
+      value: Internal club race
+    - label: Location
+      value: Sheffield
+- type: tile-grid
+  id: races-cta
+  preset: cta
+  layout:
+    columns: 1
+    equal_height: false
+    width: narrow
+    padding: spacious
+    background: default
+    align_center: true
+  behavior:
+    expand: none
+  tiles:
+  - title: Talk to the committee about your first race
+    body: 'Come to a training session and ask the committee about upcoming races — they''ll point you to the right distance and talk you through what race day involves.
+
+      '
+    buttons:
+    - label: See training sessions
       url: /training/
-    secondary_button:
-      label: Talk to the committee
+      style: primary
+    - label: Talk to the committee
       url: /committee/
+      style: secondary
+    eyebrow: First time racing?
+    style: accent
