@@ -31,6 +31,16 @@ sections:
           crop_x: 50
           crop_y: 50
           crop_zoom: 100
+        visibility:
+          title: always
+          subtitle: always
+          image: hover
+        meta: []
+        content_order:
+          - type: title
+          - type: subtitle
+          - type: image
+          - type: body
       - title: Add name
         subtitle: Vice Captain (Social)
         body: Add a short bio here — a sentence or two is plenty.
@@ -57,7 +67,7 @@ sections:
         body: Add a short bio here — a sentence or two is plenty.
     eyebrow: This year's committee
     layout:
-      columns: 3
+      columns: "3"
       equal_height: true
       width: normal
       padding: normal
