@@ -211,7 +211,8 @@ collections:
                                       - {label: Style, name: style, widget: select, options: [primary, secondary], default: secondary, required: false}
                               - name: expand
                                 label: "— Expand from here —"
-                                fields: []
+                                fields:
+                                  - {label: Marker, name: marker, widget: hidden, default: true}
                         default:
                           blocks: []
 
