@@ -3,17 +3,13 @@ brand:
   short_name: Sheffield Triathlon
   tagline: Swim. Bike. Run. Belong.
   email: triathlon@sheffield.ac.uk
-  logo: ""
+  logo: /uostriathlon/assets/images/brand/bordered.png
   logo_crop_x: 50
   logo_crop_y: 50
   logo_crop_zoom: 100
 theme:
   default: dark
 interactions:
-  # One setting for every expandable tile on the site (any tile whose
-  # blocks list includes an "expand" marker with something after it).
-  # Hover works well on desktop; click is more reliable on touch and is
-  # what happens on mobile either way regardless of this setting.
   expand_trigger: hover
 footer:
   description: >
