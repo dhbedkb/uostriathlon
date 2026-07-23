@@ -1,22 +1,16 @@
 {% comment %}
   Renders a Section of type "tile-grid". A Section only ever controls
   layout (columns / equal height / scroll / width / padding /
-  background / numbering) and one editor-facing behaviour switch —
-  Expandable or Not expandable (Phase 3, #5). It has no idea what its
-  Tiles contain. See ARCHITECTURE.md.
-
-  The hover-vs-click mechanism used to be a per-section choice; it is
-  now one site-wide setting (Site Settings > Interactions > "How
-  hidden content is revealed"), so every expandable grid on the site
-  behaves the same way and an editor never has to think about it here.
+  background / numbering / chip row) — it has no idea what its Tiles
+  contain, and no longer has an expand/behaviour setting of its own:
+  whether a tile reveals anything, and what, is entirely down to that
+  tile's own blocks list (see _includes/tile.html). See ARCHITECTURE.md.
 {% endcomment %}
 {% assign layout = include.section.layout %}
 {% assign columns = layout.columns | default: 3 %}
 {% assign width = layout.width | default: "normal" %}
 {% assign padding = layout.padding | default: "normal" %}
 {% assign background = layout.background | default: "default" %}
-{% assign section_expandable = include.section.behavior.expandable | default: false %}
-{% assign global_trigger = site.data.settings.interactions.expand_trigger | default: "hover" %}
 
 {% assign section_classes = "section section-tile-grid section-bg-" | append: background %}
 {% if padding == "compact" %}{% assign section_classes = section_classes | append: " section-padding-compact" %}{% endif %}
@@ -49,8 +43,6 @@
           {% for tile in include.section.tiles %}
             {% include tile.html
               tile=tile
-              section_expandable=section_expandable
-              global_trigger=global_trigger
               numbered=layout.numbered
               index=forloop.index
             %}

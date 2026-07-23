@@ -2,19 +2,21 @@
 
 `scripts/optimise_site_images.py` runs on every publish (see
 `.github/workflows/deploy.yml`). It reads each content file, finds the
-Hero's background image and every Tile's `image.src_raw`, applies the
-crop/zoom recorded by the editor, resizes to the size that kind of image
-needs, and writes a compressed WebP into `assets/images/generated` (or
-`assets/images/committee/profiles`, kept as a separate folder for
-backwards compatibility with existing committee photo uploads). The raw
-upload stays in the repo so it can be re-cropped later; the live site
-never loads it.
+Hero's background image and every **image block** inside any tile's
+`blocks` list, applies the crop/zoom recorded by the editor, resizes to
+the size that kind of image needs, and writes a compressed WebP into
+`assets/images/generated` (or `assets/images/committee/profiles`, kept
+as a separate folder for backwards compatibility with existing
+committee photo uploads). The raw upload stays in the repo so it can be
+re-cropped later; the live site never loads it.
 
-Because a Tile's image always lives at the same place in the data —
-`sections[].tiles[].image` — this script has one code path for every
-preset (cards, gallery, committee, sponsors, social icons…) instead of
-one per section type. Sizing is chosen by the image's **shape**
-(`square` or `round`), not by what kind of card it happens to sit in:
+Because an image block always lives at the same place in the data —
+somewhere in `sections[].tiles[].blocks[]`, tagged `type: image` — this
+script has one code path for every tile, regardless of preset, and
+regardless of how many image blocks a single tile happens to contain
+(each is found and processed independently). Sizing is chosen by the
+image's **shape** (`square` or `round`), not by what preset it happens
+to sit in:
 
 | Use                                   | Output size | WebP quality |
 |-----------------------------------------|------------|-------------|

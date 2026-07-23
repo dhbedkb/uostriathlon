@@ -1,16 +1,20 @@
 """
 Reads every content file, finds any raw image references (the hero
-background, or a tile's image.src_raw), applies the crop/zoom the editor
-recorded, resizes to the size that kind of image needs, and saves a
-compressed WebP into assets/images/generated (or
-assets/images/committee/profiles for committee-preset tile images, kept
-separate for backwards compatibility with existing uploads).
+background, or an image block's src_raw inside a tile's `blocks` list),
+applies the crop/zoom the editor recorded, resizes to the size that
+kind of image needs, and saves a compressed WebP into
+assets/images/generated (or assets/images/committee/profiles for
+committee-preset tile images, kept separate for backwards compatibility
+with existing uploads).
 
 Because every non-hero image on the site now lives at the same place in
-the data shape — `sections[].tiles[].image` — this script no longer
-needs one branch per section type. A brand-new preset (e.g. "testimonials")
-never requires a change here: if its tiles have an `image.src_raw`, it's
-already handled.
+the data shape — a block of type "image" somewhere in
+`sections[].tiles[].blocks` — this script doesn't need one branch per
+section type, or even one branch per tile preset. A brand-new preset
+never requires a change here: if a tile has an image block, it's
+already handled, and a tile can have as many image blocks as it likes
+(each is found and processed independently, keyed by its position in
+the list).
 
 Compression is tuned by *shape*, not by what the image is a photo of: a
 square tile photo (card, gallery, committee, sponsor…) gets one
@@ -160,39 +164,54 @@ def process_hero(section, page_slug, s_index, changed_flag):
     return changed_flag
 
 
-def process_tile_image(tile, page_slug, section, s_index, t_index):
-    image = tile.get("image")
-    if not image or not image.get("src_raw"):
-        return False
+def tile_text(tile, block_type):
+    """First block of a given type's `text` field, for naming generated files."""
+    for block in tile.get("blocks", []):
+        if block.get("type") == block_type and block.get("text"):
+            return block["text"]
+    return ""
 
-    src = source_path(image["src_raw"])
-    if not supported(src):
-        print(f"Skipping unsupported or missing tile image: {image['src_raw']}")
-        return False
 
-    is_round = image.get("shape") == "round"
-    name_bits = f"{section.get('id') or s_index}-{t_index}-{tile.get('title') or tile.get('eyebrow') or ''}"
-    slug = slugify(name_bits)
+def process_tile_images(tile, page_slug, section, s_index, t_index):
+    """A tile's blocks list can contain any number of image blocks (in
+    practice usually zero or one). Each is looked up and compressed the
+    same way, keyed by its position in the list so multiple images on
+    one tile don't collide."""
+    changed = False
 
-    # Committee-preset photos keep their historical output folder so
-    # existing generated assets and any external references don't move.
-    if section.get("preset") == "committee":
-        dest = COMMITTEE_DIR / (slugify(f"{tile.get('title', '')}-{tile.get('subtitle', '')}") + ".webp")
-    else:
-        dest = GENERATED_DIR / page_slug / (slug + ".webp")
+    for b_index, block in enumerate(tile.get("blocks", [])):
+        if block.get("type") != "image" or not block.get("src_raw"):
+            continue
 
-    size = ICON_SIZE if is_round else TILE_SIZE
-    quality = QUALITY_ICON if is_round else QUALITY_TILE
+        src = source_path(block["src_raw"])
+        if not supported(src):
+            print(f"Skipping unsupported or missing tile image: {block['src_raw']}")
+            continue
 
-    generated = save_webp(
-        src, dest, size,
-        image.get("crop_x", 50), image.get("crop_y", 50), image.get("crop_zoom", 100),
-        quality=quality,
-    )
-    if image.get("src") != generated:
-        image["src"] = generated
-        return True
-    return False
+        is_round = block.get("shape") == "round"
+        name_bits = f"{section.get('id') or s_index}-{t_index}-{b_index}-{tile_text(tile, 'title') or tile_text(tile, 'eyebrow')}"
+        slug = slugify(name_bits)
+
+        # Committee-preset photos keep their historical output folder so
+        # existing generated assets and any external references don't move.
+        if tile.get("preset") == "committee":
+            dest = COMMITTEE_DIR / (slugify(f"{tile_text(tile, 'title')}-{tile_text(tile, 'subtitle')}") + ".webp")
+        else:
+            dest = GENERATED_DIR / page_slug / (slug + ".webp")
+
+        size = ICON_SIZE if is_round else TILE_SIZE
+        quality = QUALITY_ICON if is_round else QUALITY_TILE
+
+        generated = save_webp(
+            src, dest, size,
+            block.get("crop_x", 50), block.get("crop_y", 50), block.get("crop_zoom", 100),
+            quality=quality,
+        )
+        if block.get("src") != generated:
+            block["src"] = generated
+            changed = True
+
+    return changed
 
 
 def process_file(yml_path):
@@ -208,7 +227,7 @@ def process_file(yml_path):
 
         elif stype == "tile-grid":
             for t_index, tile in enumerate(section.get("tiles", [])):
-                if process_tile_image(tile, page_slug, section, s_index, t_index):
+                if process_tile_images(tile, page_slug, section, s_index, t_index):
                     changed = True
 
     if changed:

@@ -58,12 +58,9 @@
   }, { passive: true });
 
   // Hover-reveal tiles: expand on hover for pointer devices, click/tap
-  // elsewhere. Generic — any tile-grid section with an expandable tile
-  // renders a <details data-reveal-mode="hover">, not just committee
-  // cards. The hover-vs-click choice itself now comes from one site-wide
-  // setting (Site Settings > Interactions) rather than a per-section
-  // pick, so this script doesn't need to know or care which section it's
-  // looking at — same as before.
+  // elsewhere. Generic — any tile-grid section with behavior.expand:
+  // hover renders a <details data-reveal-mode="hover">, not just
+  // committee cards.
   function canHover() {
     return window.matchMedia && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
   }

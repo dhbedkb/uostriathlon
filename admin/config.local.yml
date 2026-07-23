@@ -25,11 +25,10 @@ collections:
             hint: >
               A page is built from four kinds of block. Hero and Text are
               one-off layouts. Divider bar is a small decorative widget.
-              Card grid is used for everything else — cards, photos,
-              committee members, sponsors, stats, FAQs, events, a call to
-              action, embeds, social links — pick a preset inside it as a
-              label/reminder for what you're building; every field below
-              is still available no matter which preset you pick.
+              Card grid lays out any number of Tiles — cards, photos,
+              committee members, sponsors, FAQs, events, a call to
+              action, embeds, social links are all just Tiles with
+              different content blocks inside them.
             types:
               - name: hero
                 label: Hero
@@ -93,55 +92,6 @@ collections:
                 label: Card grid
                 fields:
                   - {label: ID, name: id, widget: string, required: false}
-                  - label: Preset
-                    name: preset
-                    widget: select
-                    required: false
-                    default: custom
-                    hint: >
-                      A label only, to help you find this block again and
-                      to remind you which fields below are worth filling
-                      in for this kind of content — Decap CMS can't change
-                      which fields appear based on this choice, so nothing
-                      is hidden and you're free to mix and match. See
-                      docs/editor-guide.md for the recommended Content
-                      order per preset.
-
-
-                      Committee member: fill in Title (name), Subtitle
-                      (role), Image (photo), Body (bio), Email. Suggested
-                      order: Title, Subtitle, Image, Body, Email, Buttons.
-
-
-                      Event: fill in Badge (date), Title (event name),
-                      Image, Body (description), Buttons. Meta rows work
-                      well for Type/Location.
-
-
-                      FAQ: fill in Title (the question), Body (the
-                      answer). Suggested order: Title, Body.
-
-
-                      Sponsor: fill in Title (organisation), Image (logo),
-                      Body (description), Buttons (website link).
-
-
-                      Cards / Gallery / Stats / Custom: use whichever
-                      fields you need — most read best with everything
-                      set to Always visible.
-                    options:
-                      - {label: "Cards", value: cards}
-                      - {label: "Gallery", value: gallery}
-                      - {label: "Committee / people", value: committee}
-                      - {label: "Sponsors", value: sponsors}
-                      - {label: "Statistics", value: stats}
-                      - {label: "Events", value: events}
-                      - {label: "FAQ", value: faq}
-                      - {label: "Call to action", value: cta}
-                      - {label: "Social links", value: socials}
-                      - {label: "Embed", value: embed}
-                      - {label: "Timeline / steps", value: timeline}
-                      - {label: "Custom", value: custom}
                   - {label: Eyebrow, name: eyebrow, widget: string, required: false}
                   - {label: Title, name: title, widget: string, required: false}
                   - {label: Subtitle, name: subtitle, widget: string, required: false}
@@ -160,147 +110,174 @@ collections:
                       - {label: Numbered steps, name: numbered, widget: boolean, default: false, required: false, hint: "For a timeline/step list — shows 1, 2, 3… beside each tile instead of a grid."}
                       - {label: Compact icon row, name: chip_style, widget: boolean, default: false, required: false, hint: "For a row of small round icon links, e.g. social platform icons."}
                       - {label: Centre single tile, name: align_center, widget: boolean, default: false, required: false, hint: "For a single centred call-to-action tile."}
-                  - label: Behaviour
-                    name: behavior
-                    widget: object
-                    hint: >
-                      Whether tiles in this grid can hide extra detail
-                      until opened (committee bios, FAQ answers, etc). How
-                      opening works — hover or click — is set once for
-                      the whole site under Site Settings > Interactions,
-                      not here.
-                    fields:
-                      - {label: Expandable, name: expandable, widget: boolean, default: false, required: false, hint: "On = tiles can show a summary first and reveal the rest when opened. Off = every tile always shows everything."}
                   - label: Tiles
                     name: tiles
                     widget: list
-                    summary: '{{fields.title}}{{fields.eyebrow}}'
-                    fields: &tile_fields
-                      - {label: Visual style, name: style, widget: select, options: [default, accent], default: default, required: false, hint: "'Accent' highlights a single tile — used for a call-to-action block."}
-                      - {label: Badge (small tag, e.g. a date), name: badge, widget: string, required: false, hint: "Always shown, positioned in the corner — not part of Content order below."}
-                      - {label: Eyebrow, name: eyebrow, widget: string, required: false}
-                      - {label: Title, name: title, widget: string, required: false}
-                      - {label: Subtitle, name: subtitle, widget: string, required: false}
-                      - {label: Body, name: body, widget: markdown, required: false}
-                      - label: Image
-                        name: image
-                        widget: object
-                        required: false
+                    typeKey: preset
+                    summary: '{{fields.preset}} — {{fields.badge}}'
+                    hint: >
+                      Click "Add Tile" and pick a starting point. Committee /
+                      FAQ / Sponsor / Event come pre-filled with the blocks
+                      that kind of content usually needs — delete, add, or
+                      reorder any of them afterwards, exactly as if you'd
+                      built the tile from scratch. Custom starts empty. None
+                      of this shows up on the published site — it only
+                      affects what you start with in the editor.
+                    types:
+                      - name: custom
+                        label: "Blank tile"
+                        fields: &tile_shared_fields
+                          - {label: Visual style, name: style, widget: select, options: [default, accent], default: default, required: false, hint: "'Accent' highlights a single tile — used for a call-to-action block."}
+                          - {label: Badge (small tag, e.g. a date), name: badge, widget: string, required: false, hint: "Always shown, positioned in the corner — not one of the blocks below."}
+                          - label: Content blocks
+                            name: blocks
+                            widget: list
+                            typeKey: type
+                            summary: '{{fields.type}}'
+                            hint: >
+                              Drag to reorder — this list IS the tile, top
+                              to bottom, exactly as it renders. Add an
+                              "— Expand from here —" block to make
+                              everything below it (and only it) stay hidden
+                              until the tile is opened; leave it out and the
+                              whole tile is always visible.
+                            types: &block_types
+                              - name: eyebrow
+                                label: Eyebrow
+                                fields:
+                                  - {label: Text, name: text, widget: string}
+                              - name: title
+                                label: Title
+                                fields:
+                                  - {label: Text, name: text, widget: string}
+                              - name: subtitle
+                                label: Subtitle
+                                fields:
+                                  - {label: Text, name: text, widget: string}
+                              - name: image
+                                label: Image
+                                fields:
+                                  - label: Source image
+                                    name: src_raw
+                                    widget: image
+                                    required: false
+                                    choose_url: false
+                                    media_folder: /assets/images/source
+                                    public_folder: /uostriathlon/assets/images/source
+                                  - label: Optimised image
+                                    name: src
+                                    widget: string
+                                    required: false
+                                    hint: Generated automatically on publish. Do not edit manually.
+                                  - {label: "Crop horizontal %", name: crop_x, widget: number, default: 50, min: 0, max: 100, value_type: int, required: false}
+                                  - {label: "Crop vertical %", name: crop_y, widget: number, default: 50, min: 0, max: 100, value_type: int, required: false}
+                                  - {label: "Crop zoom %", name: crop_zoom, widget: number, default: 100, min: 100, max: 220, value_type: int, required: false}
+                                  - {label: Shape, name: shape, widget: select, options: [square, round], default: square, required: false}
+                                  - {label: Alt text, name: alt, widget: string, required: false}
+                              - name: embed
+                                label: Embed
+                                fields:
+                                  - {label: Provider, name: provider, widget: string, required: false}
+                                  - {label: Raw embed HTML, name: embed_html, widget: text, required: false}
+                                  - {label: Frame width, name: width, widget: string, required: false}
+                                  - {label: Fallback link URL, name: url, widget: string, required: false, hint: Used only if no embed HTML is set.}
+                                  - {label: Fallback link label, name: button_label, widget: string, required: false}
+                              - name: body
+                                label: Body
+                                fields:
+                                  - {label: Text, name: text, widget: markdown}
+                              - name: note
+                                label: Note (fact, or a question & answer)
+                                fields:
+                                  - {label: Heading, name: heading, widget: string, required: false, hint: "e.g. a Location or Schedule label, or an FAQ question."}
+                                  - {label: Detail, name: detail, widget: text, required: false, hint: "e.g. the value, or an FAQ answer."}
+                              - name: email
+                                label: Email
+                                fields:
+                                  - {label: Address, name: value, widget: string}
+                              - name: buttons
+                                label: Buttons
+                                fields:
+                                  - label: Buttons
+                                    name: items
+                                    widget: list
+                                    summary: '{{fields.label}}'
+                                    fields:
+                                      - {label: Label, name: label, widget: string}
+                                      - {label: URL, name: url, widget: string}
+                                      - {label: Style, name: style, widget: select, options: [primary, secondary], default: secondary, required: false}
+                              - name: expand
+                                label: "— Expand from here —"
+                                fields: []
+                        default:
+                          blocks: []
+
+                      - name: committee
+                        label: "Committee member"
                         fields:
-                          - label: Source image
-                            name: src_raw
-                            widget: image
-                            required: false
-                            choose_url: false
-                            media_folder: /assets/images/source
-                            public_folder: /uostriathlon/assets/images/source
-                          - label: Optimised image
-                            name: src
-                            widget: string
-                            required: false
-                            hint: Generated automatically on publish. Do not edit manually.
-                          - {label: "Crop horizontal %", name: crop_x, widget: number, default: 50, min: 0, max: 100, value_type: int, required: false}
-                          - {label: "Crop vertical %", name: crop_y, widget: number, default: 50, min: 0, max: 100, value_type: int, required: false}
-                          - {label: "Crop zoom %", name: crop_zoom, widget: number, default: 100, min: 100, max: 220, value_type: int, required: false}
-                          - {label: Shape, name: shape, widget: select, options: ["", square, round], default: "", required: false, hint: "Leave blank to use the site's default image shape (Site Settings > Design system > Cards)."}
-                          - {label: Alt text, name: alt, widget: string, required: false}
-                          - {label: Caption, name: caption, widget: string, required: false}
-                      - label: Embed (use instead of Image for iframes/widgets)
-                        name: embed
-                        widget: object
-                        required: false
+                          - {label: Visual style, name: style, widget: select, options: [default, accent], default: default, required: false}
+                          - {label: Badge, name: badge, widget: string, required: false}
+                          - label: Content blocks
+                            name: blocks
+                            widget: list
+                            typeKey: type
+                            summary: '{{fields.type}}'
+                            types: *block_types
+                            default:
+                              - {type: title, text: "Full Name"}
+                              - {type: subtitle, text: "Role"}
+                              - {type: image}
+                              - {type: expand}
+                              - {type: body, text: "Add a short bio here — a sentence or two is plenty."}
+                              - {type: email, value: "triathlon@sheffield.ac.uk"}
+
+                      - name: faq
+                        label: "FAQ item"
                         fields:
-                          - {label: Provider, name: provider, widget: string, required: false}
-                          - {label: Raw embed HTML, name: embed_html, widget: text, required: false}
-                          - {label: Frame width, name: width, widget: string, required: false}
-                          - {label: Fallback link URL, name: url, widget: string, required: false, hint: Used only if no embed HTML is set.}
-                          - {label: Fallback link label, name: button_label, widget: string, required: false}
-                      - label: Meta rows (e.g. Location, Schedule)
-                        name: meta
-                        widget: list
-                        required: false
-                        summary: '{{fields.label}}'
+                          - {label: Visual style, name: style, widget: select, options: [default, accent], default: default, required: false}
+                          - {label: Badge, name: badge, widget: string, required: false}
+                          - label: Content blocks
+                            name: blocks
+                            widget: list
+                            typeKey: type
+                            summary: '{{fields.type}}'
+                            types: *block_types
+                            default:
+                              - {type: title, text: "Question goes here?"}
+                              - {type: expand}
+                              - {type: body, text: "Answer goes here."}
+
+                      - name: sponsor
+                        label: "Sponsor"
                         fields:
-                          - {label: Label, name: label, widget: string}
-                          - {label: Value, name: value, widget: string}
-                      - label: Questions & answers
-                        name: qa
-                        widget: list
-                        required: false
-                        summary: '{{fields.question}}'
+                          - {label: Visual style, name: style, widget: select, options: [default, accent], default: default, required: false}
+                          - {label: Badge, name: badge, widget: string, required: false}
+                          - label: Content blocks
+                            name: blocks
+                            widget: list
+                            typeKey: type
+                            summary: '{{fields.type}}'
+                            types: *block_types
+                            default:
+                              - {type: image}
+                              - {type: title, text: "Sponsor name"}
+                              - {type: body, text: "A sentence about the sponsor."}
+
+                      - name: event
+                        label: "Event"
                         fields:
-                          - {label: Question, name: question, widget: string, required: false}
-                          - {label: Answer, name: answer, widget: text, required: false}
-                      - {label: Email, name: email, widget: string, required: false}
-                      - label: Buttons
-                        name: buttons
-                        widget: list
-                        required: false
-                        summary: '{{fields.label}}'
-                        fields:
-                          - {label: Label, name: label, widget: string}
-                          - {label: URL, name: url, widget: string}
-                          - {label: Style, name: style, widget: select, options: [primary, secondary], default: secondary, required: false}
-                      - label: Content order
-                        name: content_order
-                        widget: list
-                        required: false
-                        collapsed: true
-                        summary: '{{fields.type}}'
-                        hint: >
-                          Drag to reorder — this list IS the order the
-                          website renders in, top to bottom. Add each
-                          piece of content you want this tile to show.
-                          Leave empty to use the default order (Image,
-                          Eyebrow, Title, Subtitle, Body, Q&A, Meta rows,
-                          Email, Buttons). Badge is not included here;
-                          it's a fixed corner tag, always shown.
-                        fields:
-                          - label: Content type
-                            name: type
-                            widget: select
-                            options:
-                              - {label: Eyebrow, value: eyebrow}
-                              - {label: Title, value: title}
-                              - {label: Subtitle, value: subtitle}
-                              - {label: Image, value: image}
-                              - {label: Body, value: body}
-                              - {label: Questions & answers, value: qa}
-                              - {label: Meta rows, value: meta}
-                              - {label: Email, value: email}
-                              - {label: Buttons, value: buttons}
-                      - label: Visibility
-                        name: visibility
-                        widget: object
-                        required: false
-                        collapsed: true
-                        hint: >
-                          Whether each piece of content starts visible or
-                          hidden. Leave a field on its blank/default
-                          setting to fall back to this grid's Expandable
-                          setting above (Eyebrow, Title, Subtitle and
-                          Image always fall back to Always visible
-                          regardless). There's no separate hover/click
-                          choice any more — that's one site-wide setting
-                          under Site Settings > Interactions.
-                        fields:
-                          - {label: Eyebrow, name: eyebrow, widget: select, options: ["", always, hidden_initially, hidden], default: "", required: false}
-                          - {label: Title, name: title, widget: select, options: ["", always, hidden_initially, hidden], default: "", required: false}
-                          - {label: Subtitle, name: subtitle, widget: select, options: ["", always, hidden_initially, hidden], default: "", required: false}
-                          - {label: Image, name: image, widget: select, options: ["", always, hidden_initially, hidden], default: "", required: false}
-                          - {label: Body, name: body, widget: select, options: ["", always, hidden_initially, hidden], default: "", required: false}
-                          - {label: Questions & answers, name: qa, widget: select, options: ["", always, hidden_initially, hidden], default: "", required: false}
-                          - {label: Meta rows, name: meta, widget: select, options: ["", always, hidden_initially, hidden], default: "", required: false}
-                          - {label: Email, name: email, widget: select, options: ["", always, hidden_initially, hidden], default: "", required: false}
-                          - {label: Buttons, name: buttons, widget: select, options: ["", always, hidden_initially, hidden], default: "", required: false}
-                      - label: Advanced
-                        name: behavior
-                        widget: object
-                        required: false
-                        collapsed: true
-                        hint: Only needed to make one specific tile behave differently from the rest of its grid.
-                        fields:
-                          - {label: "Expandable override", name: expandable, widget: select, options: ["", "yes", "no"], default: "", required: false, hint: "Leave blank to use the grid's Expandable setting."}
+                          - {label: Visual style, name: style, widget: select, options: [default, accent], default: default, required: false}
+                          - {label: Badge (e.g. a date), name: badge, widget: string, required: false}
+                          - label: Content blocks
+                            name: blocks
+                            widget: list
+                            typeKey: type
+                            summary: '{{fields.type}}'
+                            types: *block_types
+                            default:
+                              - {type: title, text: "Event name"}
+                              - {type: image}
+                              - {type: note, heading: "Location", detail: ""}
 
       - {name: training, label: Training, file: _data/content/training.yml, fields: *page_fields}
       - {name: races, label: Races, file: _data/content/races.yml, fields: *page_fields}
@@ -339,48 +316,14 @@ collections:
             widget: object
             required: false
             fields:
-              - {label: Default, name: default, widget: select, options: [dark, light], default: dark, required: false}
-          - label: Design system
-            name: design
-            widget: object
-            required: false
-            hint: These become the site's defaults everywhere at once — no CSS or code required. Individual sections can still override background/width/padding themselves.
-            fields:
-              - label: Colours
-                name: colors
-                widget: object
-                fields:
-                  - {label: Primary (accent gold, buttons, links), name: primary, widget: color, required: false}
-                  - {label: Text, name: secondary, widget: color, required: false}
-                  - {label: Accent (reserved for future use), name: accent, widget: color, required: false}
-              - label: Cards
-                name: cards
-                widget: object
-                fields:
-                  - {label: Corner roundness, name: radius, widget: select, options: [none, small, normal, large], default: normal, required: false}
-                  - {label: Shadow, name: shadow, widget: select, options: [none, soft, hard], default: soft, required: false}
-                  - {label: Padding, name: padding, widget: select, options: [compact, normal, spacious], default: normal, required: false}
-                  - {label: "Default image shape", name: image_shape, widget: select, options: [square, round], default: square, required: false, hint: "Used whenever a tile's own image doesn't set a Shape."}
-              - label: Typography
-                name: typography
-                widget: object
-                fields:
-                  - {label: Heading weight, name: heading_style, widget: select, options: [normal, bold, black], default: black, required: false}
-                  - {label: Body text density, name: body_style, widget: select, options: [compact, normal, relaxed], default: normal, required: false}
-              - label: Layout
-                name: layout
-                widget: object
-                fields:
-                  - {label: Page width, name: container_width, widget: select, options: [narrow, normal, wide], default: normal, required: false}
-                  - {label: Grid gap, name: grid_gap, widget: select, options: [compact, normal, spacious], default: normal, required: false}
-                  - {label: Vertical section spacing, name: vertical_spacing, widget: select, options: [compact, normal, spacious], default: normal, required: false}
+              - {label: Default, name: default, widget: string, required: false}
           - label: Interactions
             name: interactions
             widget: object
             required: false
-            hint: One setting, applied to every expandable card grid on the site.
+            hint: One setting, applied to every expandable tile on the site.
             fields:
-              - {label: "How hidden content is revealed", name: expand_trigger, widget: select, options: [hover, click], default: hover, required: false, hint: "Hover works well on desktop; Click is more reliable on touch screens and is what happens on mobile either way."}
+              - {label: "How hidden content is revealed", name: expand_trigger, widget: select, options: [hover, click], default: hover, required: false, hint: "Hover works well on desktop; click is more reliable on touch and is what happens on mobile either way."}
           - label: Footer
             name: footer
             widget: object

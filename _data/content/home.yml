@@ -17,7 +17,6 @@ sections:
     url: /training/
 - type: tile-grid
   id: home-stats
-  preset: stats
   eyebrow: The club in numbers
   title: A growing multisport community
   layout:
@@ -26,24 +25,37 @@ sections:
     width: normal
     padding: normal
     background: default
-  behavior:
-    expandable: false
   tiles:
-  - title: 150+
-    subtitle: Members
-  - title: '6'
-    subtitle: Sessions a week
-  - title: '12'
-    subtitle: Races supported each year
-  - title: '0'
-    subtitle: Experience required to start
+  - preset: custom
+    blocks:
+    - type: title
+      text: 150+
+    - type: subtitle
+      text: Members
+  - preset: custom
+    blocks:
+    - type: title
+      text: '6'
+    - type: subtitle
+      text: Sessions a week
+  - preset: custom
+    blocks:
+    - type: title
+      text: '12'
+    - type: subtitle
+      text: Races supported each year
+  - preset: custom
+    blocks:
+    - type: title
+      text: '0'
+    - type: subtitle
+      text: Experience required to start
 - type: relay-bar
   id: home-relay
   eyebrow: How training breaks down
   title: Swim, bike, run — in that order, every week
 - type: tile-grid
   id: home-highlights
-  preset: cards
   eyebrow: Getting started
   title: Three ways in
   subtitle: However you get involved, you'll be training and racing alongside people at a similar level.
@@ -53,36 +65,52 @@ sections:
     width: normal
     padding: normal
     background: default
-  behavior:
-    expandable: false
   tiles:
-  - eyebrow: Beginners
-    title: Give It A Go
-    body: 'Two free weeks of training at the start of the year, ending in a beginner-friendly duathlon — no bike or wetsuit required.
+  - preset: custom
+    blocks:
+    - type: eyebrow
+      text: Beginners
+    - type: title
+      text: Give It A Go
+    - type: body
+      text: 'Two free weeks of training at the start of the year, ending in a beginner-friendly duathlon — no bike or wetsuit required.
 
-      '
-    buttons:
-    - label: Learn more
-      url: /training/
-      style: secondary
-  - eyebrow: Training
-    title: Weekly sessions
-    body: 'Coached swim, bike and run sessions for every pace, plus club bikes you can borrow if you don''t have your own.
+        '
+    - type: buttons
+      items:
+      - label: Learn more
+        url: /training/
+        style: secondary
+  - preset: custom
+    blocks:
+    - type: eyebrow
+      text: Training
+    - type: title
+      text: Weekly sessions
+    - type: body
+      text: 'Coached swim, bike and run sessions for every pace, plus club bikes you can borrow if you don''t have your own.
 
-      '
-    buttons:
-    - label: Learn more
-      url: /training/
-      style: secondary
-  - eyebrow: Community
-    title: Racing & socials
-    body: 'Club trips to local and national races, and a social calendar that runs alongside the training week.
+        '
+    - type: buttons
+      items:
+      - label: Learn more
+        url: /training/
+        style: secondary
+  - preset: custom
+    blocks:
+    - type: eyebrow
+      text: Community
+    - type: title
+      text: Racing & socials
+    - type: body
+      text: 'Club trips to local and national races, and a social calendar that runs alongside the training week.
 
-      '
-    buttons:
-    - label: Learn more
-      url: /socials/
-      style: secondary
+        '
+    - type: buttons
+      items:
+      - label: Learn more
+        url: /socials/
+        style: secondary
 - type: text
   id: home-about
   eyebrow: About us
@@ -108,7 +136,6 @@ sections:
     '
 - type: tile-grid
   id: join
-  preset: cta
   layout:
     columns: 1
     equal_height: false
@@ -116,19 +143,23 @@ sections:
     padding: spacious
     background: default
     align_center: true
-  behavior:
-    expandable: false
   tiles:
-  - title: Come to a session before you decide
-    body: 'Full membership isn''t needed for your first visit — turn up to any beginner-friendly session to see what training''s actually like.
-
-      '
-    buttons:
-    - label: Join the club
-      url: https://www.sheffieldstudentsunion.com/activities/societies/
-      style: primary
-    - label: Ask us a question
-      url: /socials/
-      style: secondary
-    eyebrow: Getting started
+  - preset: custom
     style: accent
+    blocks:
+    - type: eyebrow
+      text: Getting started
+    - type: title
+      text: Come to a session before you decide
+    - type: body
+      text: 'Full membership isn''t needed for your first visit — turn up to any beginner-friendly session to see what training''s actually like.
+
+        '
+    - type: buttons
+      items:
+      - label: Join the club
+        url: https://www.sheffieldstudentsunion.com/activities/societies/
+        style: primary
+      - label: Ask us a question
+        url: /socials/
+        style: secondary

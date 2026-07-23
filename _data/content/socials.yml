@@ -23,7 +23,6 @@ sections:
     '
 - type: tile-grid
   id: socials-calendar
-  preset: events
   eyebrow: Coming up
   title: This term's socials
   layout:
@@ -32,44 +31,61 @@ sections:
     width: normal
     padding: normal
     background: default
-  behavior:
-    expandable: false
   tiles:
-  - badge: Week 1
-    title: Welcome social
-    body: The easiest way to meet the club before your first session.
-    meta:
-    - label: Type
-      value: Social
-    - label: Location
-      value: Local pub, details on Instagram
-  - badge: Every Saturday, after the club ride
-    title: Post-training coffee
-    body: Casual and drop-in — no need to have ridden to come along.
-    meta:
-    - label: Type
-      value: Weekly
-    - label: Location
-      value: Endcliffe Park café
-  - badge: April
-    title: Race season send-off
-    body: A send-off before the club heads to the Sheffield Sprint Triathlon.
-    meta:
-    - label: Type
-      value: Social
-    - label: Location
-      value: TBC
-  - badge: May
-    title: End-of-year social
-    body: The year's biggest social, celebrating the season with the whole club.
-    meta:
-    - label: Type
-      value: Social
-    - label: Location
-      value: TBC
+  - preset: event
+    badge: Week 1
+    blocks:
+    - type: title
+      text: Welcome social
+    - type: body
+      text: The easiest way to meet the club before your first session.
+    - type: note
+      heading: Type
+      detail: Social
+    - type: note
+      heading: Location
+      detail: Local pub, details on Instagram
+  - preset: event
+    badge: Every Saturday, after the club ride
+    blocks:
+    - type: title
+      text: Post-training coffee
+    - type: body
+      text: Casual and drop-in — no need to have ridden to come along.
+    - type: note
+      heading: Type
+      detail: Weekly
+    - type: note
+      heading: Location
+      detail: Endcliffe Park café
+  - preset: event
+    badge: April
+    blocks:
+    - type: title
+      text: Race season send-off
+    - type: body
+      text: A send-off before the club heads to the Sheffield Sprint Triathlon.
+    - type: note
+      heading: Type
+      detail: Social
+    - type: note
+      heading: Location
+      detail: TBC
+  - preset: event
+    badge: May
+    blocks:
+    - type: title
+      text: End-of-year social
+    - type: body
+      text: The year's biggest social, celebrating the season with the whole club.
+    - type: note
+      heading: Type
+      detail: Social
+    - type: note
+      heading: Location
+      detail: TBC
 - type: tile-grid
   id: socials-links
-  preset: socials
   eyebrow: Follow along
   title: Find us online
   subtitle: The fastest way to hear about session changes, race entries and social plans.
@@ -80,27 +96,43 @@ sections:
     padding: normal
     background: default
     chip_style: false
-  behavior:
-    expandable: false
   tiles:
-  - eyebrow: Instagram
-    title: '@sheffunitri'
-    body: Session updates, race photos and the fastest way to reach the committee.
-    buttons:
-    - label: Follow
-      url: https://www.instagram.com/sheffunitri/
-      style: secondary
-  - eyebrow: Facebook
-    title: UoSTriathlon
-    body: Event pages, committee announcements and the wider alumni network.
-    buttons:
-    - label: Like page
-      url: https://www.facebook.com/UoSTriathlon/
-      style: secondary
-  - eyebrow: Email
-    title: Get in touch
-    body: For anything that doesn't fit in a DM — membership questions, kit orders, or general queries.
-    buttons:
-    - label: Email us
-      url: mailto:triathlon@sheffield.ac.uk
-      style: secondary
+  - preset: custom
+    blocks:
+    - type: eyebrow
+      text: Instagram
+    - type: title
+      text: '@sheffunitri'
+    - type: body
+      text: Session updates, race photos and the fastest way to reach the committee.
+    - type: buttons
+      items:
+      - label: Follow
+        url: https://www.instagram.com/sheffunitri/
+        style: secondary
+  - preset: custom
+    blocks:
+    - type: eyebrow
+      text: Facebook
+    - type: title
+      text: UoSTriathlon
+    - type: body
+      text: Event pages, committee announcements and the wider alumni network.
+    - type: buttons
+      items:
+      - label: Like page
+        url: https://www.facebook.com/UoSTriathlon/
+        style: secondary
+  - preset: custom
+    blocks:
+    - type: eyebrow
+      text: Email
+    - type: title
+      text: Get in touch
+    - type: body
+      text: For anything that doesn't fit in a DM — membership questions, kit orders, or general queries.
+    - type: buttons
+      items:
+      - label: Email us
+        url: mailto:triathlon@sheffield.ac.uk
+        style: secondary

@@ -134,7 +134,7 @@
 
   // --- Hero: the one section type that still gets bespoke preview
   // treatment, because it's a full-bleed background photo rather than a
-  // tile — everything else below is generic Tile rendering. ---
+  // tile — everything else below is generic block rendering. ---
   function renderHero(section, getAsset, key) {
     var source = section.background_image_raw || "";
     return h(
@@ -148,96 +148,65 @@
   }
 
   // --- Tile-grid: the rendering engine. This function has no idea what
-  // "committee" or "sponsors" mean — it only reads the same Content
-  // fields _includes/tile.html reads on the live site (image, embed,
-  // eyebrow, title, subtitle, body, badge, meta, buttons), and the same
-  // content_order / visibility fields, so the preview's field order and
-  // visibility match what the site will actually render. Adding a new
-  // preset never requires touching this file. ---
+  // "committee" or "sponsor" mean — it only walks tile.blocks in order,
+  // splitting on the first "expand" block, exactly like
+  // _includes/tile.html does on the live site. A brand-new block type
+  // never requires touching this file's structure, only one more
+  // switch case below (mirroring one more {% when %} in tile.html). ---
 
-  // Mirrors _includes/tile.html's DEFAULT fallback order exactly, so the
-  // preview matches the live site when a tile has no custom order set.
-  var DEFAULT_ORDER = ["image", "eyebrow", "title", "subtitle", "body", "qa", "meta", "email", "buttons"];
-
-  function orderFor(tile) {
-    if (tile.content_order && tile.content_order.length) {
-      var types = tile.content_order.map(function (item) { return item && item.type; }).filter(Boolean);
-      if (types.length) return types;
-    }
-    return DEFAULT_ORDER;
-  }
-
-  // Phase 3: whether a tile can expand at all is a Section-level
-  // Expandable boolean (with an optional per-tile "yes"/"no" override) —
-  // there's no longer a per-tile hover/click choice. Mirrors
-  // _includes/tile.html.
-  function isExpandable(section, tile) {
-    var override = tile.behavior && tile.behavior.expandable;
-    if (override === "yes") return true;
-    if (override === "no") return false;
-    return !!(section.behavior && section.behavior.expandable);
-  }
-
-  // Mirrors _includes/tile.html's visibility fallback: eyebrow/title/
-  // subtitle/image default to "always"; everything else falls back to
-  // "hidden_initially" if the tile is expandable, or "always" if not.
-  function visibilityFor(section, tile, type) {
-    var explicit = tile.visibility && tile.visibility[type];
-    if (explicit) return explicit;
-    if (type === "eyebrow" || type === "title" || type === "subtitle" || type === "image") return "always";
-    return isExpandable(section, tile) ? "hidden_initially" : "always";
-  }
-
-  function renderContentNode(tile, type, getAsset) {
-    var image = tile.image || {};
-    var hasImage = !!(image.src_raw || image.src);
-    var shape = image.shape === "round" ? "round" : "square";
-
-    switch (type) {
-      case "image":
-        if (hasImage) return cropFrame(image.src_raw || image.src, getAsset, image.crop_x, image.crop_y, image.crop_zoom, shape);
-        if (tile.embed && tile.embed.embed_html) return h("p", { className: "cp-muted" }, "Embed");
-        return null;
+  function renderBlock(block, getAsset) {
+    switch (block.type) {
+      case "image": {
+        var hasImage = !!(block.src_raw || block.src);
+        if (!hasImage) return null;
+        var shape = block.shape === "round" ? "round" : "square";
+        return cropFrame(block.src_raw || block.src, getAsset, block.crop_x, block.crop_y, block.crop_zoom, shape);
+      }
+      case "embed":
+        return block.embed_html ? h("p", { className: "cp-muted" }, "Embed") : null;
       case "eyebrow":
-        return tile.eyebrow ? h("p", { className: "cp-tag" }, tile.eyebrow) : null;
+        return block.text ? h("p", { className: "cp-tag" }, block.text) : null;
       case "title":
-        return h("strong", null, tile.title || "Tile");
+        return h("strong", null, block.text || "Tile");
       case "subtitle":
-        return tile.subtitle ? h("p", { className: "cp-muted" }, tile.subtitle) : null;
+        return block.text ? h("p", { className: "cp-muted" }, block.text) : null;
       case "body":
-        return tile.body ? h("p", null, tile.body) : null;
-      case "qa":
-        return (tile.qa && tile.qa.length) ? h("p", { className: "cp-muted" }, tile.qa.length + " Q&A item(s)") : null;
-      case "meta":
-        return (tile.meta && tile.meta.length)
-          ? h("p", { className: "cp-muted" }, tile.meta.map(function (m) { return m.label; }).filter(Boolean).join(", "))
+        return block.text ? h("p", null, block.text) : null;
+      case "note":
+        return (block.heading || block.detail)
+          ? h("p", { className: "cp-muted" }, [block.heading, block.detail].filter(Boolean).join(" — "))
           : null;
       case "email":
-        return tile.email ? h("p", { className: "cp-muted" }, tile.email) : null;
+        return block.value ? h("p", { className: "cp-muted" }, block.value) : null;
       case "buttons":
-        return (tile.buttons && tile.buttons.length)
-          ? h("p", { className: "cp-muted" }, tile.buttons.map(function (b) { return b.label; }).filter(Boolean).join(" / "))
+        return (block.items && block.items.length)
+          ? h("p", { className: "cp-muted" }, block.items.map(function (b) { return b.label; }).filter(Boolean).join(" / "))
           : null;
       default:
         return null;
     }
   }
 
-  function renderTile(section, tile, getAsset, key) {
+  function renderTile(tile, getAsset, key) {
+    var blocks = tile.blocks || [];
     var nodes = [];
+    var pastExpand = false;
 
-    orderFor(tile).forEach(function (type, i) {
-      var visibility = visibilityFor(section, tile, type);
-      if (visibility === "hidden") return;
+    blocks.forEach(function (block, i) {
+      if (block.type === "expand") {
+        pastExpand = true;
+        nodes.push(h("div", { key: "expand-" + i, className: "cp-badge", style: { position: "static", display: "block", marginBlock: "6px" } }, "— expands from here —"));
+        return;
+      }
 
-      var content = renderContentNode(tile, type, getAsset);
+      var content = renderBlock(block, getAsset);
       if (!content) return;
 
-      var reveal = (visibility === "hidden_initially")
-        ? h("span", { className: "cp-badge", style: { position: "static", display: "inline-block", marginBottom: "4px" } }, "hidden initially")
+      var reveal = pastExpand
+        ? h("span", { className: "cp-badge", style: { position: "static", display: "inline-block", marginBottom: "4px" } }, "revealed")
         : null;
 
-      nodes.push(h("div", { key: type + "-" + i }, reveal, content));
+      nodes.push(h("div", { key: block.type + "-" + i }, reveal, content));
     });
 
     return h(
@@ -253,12 +222,12 @@
     return h(
       "section",
       { className: "cp-section", key: key },
-      heading(section.title, "Card grid — " + (section.preset || "custom"), section.subtitle),
+      heading(section.title, "Card grid", section.subtitle),
       h(
         "div",
         { className: "cp-grid" },
         tiles.map(function (tile, i) {
-          return renderTile(section, tile, getAsset, i);
+          return renderTile(tile, getAsset, i);
         })
       )
     );

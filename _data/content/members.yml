@@ -11,7 +11,6 @@ sections:
     '
 - type: tile-grid
   id: members-stats
-  preset: stats
   eyebrow: What you get
   title: Membership at a glance
   layout:
@@ -20,20 +19,33 @@ sections:
     width: normal
     padding: normal
     background: default
-  behavior:
-    expandable: false
   tiles:
-  - title: '6'
-    subtitle: Coached sessions a week
-  - title: £
-    subtitle: Discounted race entries
-  - title: '2'
-    subtitle: Free weeks before joining
-  - title: '365'
-    subtitle: Days of club community
+  - preset: custom
+    blocks:
+    - type: title
+      text: '6'
+    - type: subtitle
+      text: Coached sessions a week
+  - preset: custom
+    blocks:
+    - type: title
+      text: £
+    - type: subtitle
+      text: Discounted race entries
+  - preset: custom
+    blocks:
+    - type: title
+      text: '2'
+    - type: subtitle
+      text: Free weeks before joining
+  - preset: custom
+    blocks:
+    - type: title
+      text: '365'
+    - type: subtitle
+      text: Days of club community
 - type: tile-grid
   id: members-benefits
-  preset: custom
   eyebrow: Membership benefits
   title: What's included
   layout:
@@ -42,28 +54,41 @@ sections:
     width: normal
     padding: normal
     background: default
-  behavior:
-    expandable: false
   tiles:
-  - title: Coached training
-    body: 'Access to all weekly swim, bike and run sessions, plus the Give It A Go beginner pathway.
+  - preset: custom
+    blocks:
+    - type: title
+      text: Coached training
+    - type: body
+      text: 'Access to all weekly swim, bike and run sessions, plus the Give It A Go beginner pathway.
 
-      '
-  - title: Club bikes
-    body: 'Bikes you can borrow for turbo sessions and outdoor rides if you don''t have your own in Sheffield.
+        '
+  - preset: custom
+    blocks:
+    - type: title
+      text: Club bikes
+    - type: body
+      text: 'Bikes you can borrow for turbo sessions and outdoor rides if you don''t have your own in Sheffield.
 
-      '
-  - title: Race support
-    body: 'Block-booked entries, discounted fees, and an experienced member at every club-supported race.
+        '
+  - preset: custom
+    blocks:
+    - type: title
+      text: Race support
+    - type: body
+      text: 'Block-booked entries, discounted fees, and an experienced member at every club-supported race.
 
-      '
-  - title: Club kit
-    body: 'Discounted club tri suits and training kit, ordered each term through the Kit Secretary.
+        '
+  - preset: custom
+    blocks:
+    - type: title
+      text: Club kit
+    - type: body
+      text: 'Discounted club tri suits and training kit, ordered each term through the Kit Secretary.
 
-      '
+        '
 - type: tile-grid
   id: members-join
-  preset: cta
   layout:
     columns: 1
     equal_height: false
@@ -71,25 +96,28 @@ sections:
     padding: spacious
     background: default
     align_center: true
-  behavior:
-    expandable: false
   tiles:
-  - title: Membership starts through the Students' Union
-    body: 'Come to any beginner-friendly session before committing — you don''t need to be a member for your first two weeks.
-
-      '
-    buttons:
-    - label: Join via the Students' Union
-      url: https://www.sheffieldstudentsunion.com/activities/societies/
-      style: primary
-    - label: See the training schedule
-      url: /training/
-      style: secondary
-    eyebrow: Ready to join?
+  - preset: custom
     style: accent
+    blocks:
+    - type: eyebrow
+      text: Ready to join?
+    - type: title
+      text: Membership starts through the Students' Union
+    - type: body
+      text: 'Come to any beginner-friendly session before committing — you don''t need to be a member for your first two weeks.
+
+        '
+    - type: buttons
+      items:
+      - label: Join via the Students' Union
+        url: https://www.sheffieldstudentsunion.com/activities/societies/
+        style: primary
+      - label: See the training schedule
+        url: /training/
+        style: secondary
 - type: tile-grid
   id: members-faq
-  preset: faq
   eyebrow: Questions
   title: Membership FAQs
   layout:
@@ -98,18 +126,31 @@ sections:
     width: narrow
     padding: normal
     background: default
-  behavior:
-    expandable: true
   tiles:
-  - title: Is membership only for University of Sheffield students?
-    body: 'Membership is open to current students and staff of the University of Sheffield. Contact the committee if you''re unsure whether you''re eligible.
+  - preset: faq
+    blocks:
+    - type: title
+      text: Is membership only for University of Sheffield students?
+    - type: expand
+    - type: body
+      text: 'Membership is open to current students and staff of the University of Sheffield. Contact the committee if you''re unsure whether you''re eligible.
 
-      '
-  - title: Can I try a session before joining?
-    body: 'Yes — come to any beginner-friendly session listed on the training page first, no membership required.
+        '
+  - preset: faq
+    blocks:
+    - type: title
+      text: Can I try a session before joining?
+    - type: expand
+    - type: body
+      text: 'Yes — come to any beginner-friendly session listed on the training page first, no membership required.
 
-      '
-  - title: How do I renew my membership each year?
-    body: 'Membership runs through the Students'' Union and renews annually — you''ll get a reminder from the committee before your renewal date.
+        '
+  - preset: faq
+    blocks:
+    - type: title
+      text: How do I renew my membership each year?
+    - type: expand
+    - type: body
+      text: 'Membership runs through the Students'' Union and renews annually — you''ll get a reminder from the committee before your renewal date.
 
-      '
+        '

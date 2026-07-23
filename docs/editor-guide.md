@@ -2,7 +2,7 @@
 
 This site uses Jekyll, GitHub Pages, and Decap CMS.
 
-## The model: Page → Section → Tile → Content
+## The model: Page → Section → Tile → Blocks
 
 Every page is a list of **Sections**. There are only four kinds:
 
@@ -10,154 +10,127 @@ Every page is a list of **Sections**. There are only four kinds:
 - **Text** — a block of prose (About us, an intro paragraph…).
 - **Divider bar** — the small swim/bike/run bar on the home page.
 - **Card grid** — everything else. Cards, photos, committee members,
-  sponsors, statistics, events, FAQs, a call-to-action button, embedded
-  widgets, social links — all of these are a **Card grid** with different
-  content in its **Tiles**.
+  sponsors, FAQs, events, a call-to-action button, embedded widgets,
+  social links — all of these are a **Card grid** full of **Tiles**.
 
-A Card grid controls *layout* (columns, equal height, scrolling, width,
-padding, background) and one behaviour switch, **Expandable**. A Tile
-controls *content*: an optional badge, eyebrow, title, subtitle, body
-text, image (or an embed instead of an image), some label/value rows,
-question & answer pairs, an email address, and buttons. Every one of
-those is optional. A tile also controls the **order** those pieces
-render in (drag to reorder) and the **visibility** of each one
-individually — see below.
+A Card grid controls *layout only*: how many columns, whether tiles are
+the same height, whether they scroll sideways, how much padding, what
+background.
 
-**Preset** is a dropdown on a Card grid purely as a label and a reminder
-of which fields are worth filling in for that kind of content (see the
-table at the bottom of this page). It doesn't hide or add any fields —
-you can change it, or set it to "Custom", any time without losing
-content. Decap CMS genuinely can't show or hide fields based on this
-choice — see `PHASE3-NOTES.md` if you want the technical reason.
+A **Tile** is: an optional Badge (a small fixed tag in the corner, e.g.
+a date), an optional Visual style ("Accent" for a highlighted
+call-to-action tile), and a single list of **Content blocks**. That
+blocks list *is* the tile's content — what it contains, and the order
+it renders in, is exactly what you see in that list. There's no
+separate "content order" setting to keep in sync with it.
 
-## Content order
+## Content blocks
 
-By default, a tile's content renders in the order it always has —
-Image, Eyebrow, Title, Subtitle, Body, Q&A, Meta rows, Email, Buttons.
-Override this per tile with **Content order**: it's a drag-and-drop list
-— the order you arrange it in *is* the order the website renders in, top
-to bottom. Add each piece of content you want, drag it into place.
-Leave it empty to keep the default order.
+Click "Add" on a tile's blocks list to add a piece of content:
+**Eyebrow**, **Title**, **Subtitle**, **Image**, **Embed**, **Body**,
+**Note**, **Email**, **Buttons**, or the special **— Expand from here —**
+marker (see below). Drag any block by its handle to reorder — dragging
+*is* reordering the tile, since the list you're dragging is the exact
+list the site renders.
 
-Anything you don't add to Content order simply doesn't render, even if
-the field has content filled in elsewhere on the tile — so if you set a
-custom order, make sure it includes everything you actually want shown.
+Delete a block you don't want; there's no separate "hide this" setting
+— a block that isn't in the list simply doesn't render.
 
-Badge (the small tag in the corner, e.g. a date) and the numbered-step
-indicator are not part of Content order — they're positioned outside the
-tile's content, so they always render exactly as before.
+**Note** covers two things that used to be separate fields: a labelled
+fact (e.g. Location: *Sheffield*) and an FAQ question/answer pair. Both
+use the same two fields — Heading and Detail — and render the same way
+(bold heading, plain text beneath). Add one Note block per fact or per
+question.
 
-**Example** — editor configuration:
+**Buttons** holds a whole row of buttons at once (label/URL/style each)
+— add one Buttons block, then add as many individual buttons inside it
+as you need; you don't add a separate Buttons block per button.
 
-```yaml
-content_order:
-  - type: image
-  - type: title
-  - type: buttons
-  - type: body
-```
+**Image** vs **Embed**: use Image for a photo, Embed for an iframe or
+widget (a Facebook post, a Strava map, etc). Only add one or the other
+where you want a tile's visual to sit.
 
-Renders as: Image, Title, Buttons, Body — in that order, exactly as
-configured.
+## The "— Expand from here —" block
 
-## Expandable grids, and visibility
+Add this block anywhere in a tile's list to split it in two:
 
-A Card grid can be **Expandable** or not (a single on/off switch, under
-the grid's Behaviour settings). When it's off, every tile always shows
-everything. When it's on, each tile becomes something you can open —
-useful for committee bios or FAQ answers you don't want cluttering the
-page up front.
+- Everything **above** it renders straight away.
+- Everything **from it onward** stays hidden until the tile is opened
+  (hover or click, depending on the site-wide Interactions setting —
+  see below), and is what makes the tile show a small toggle at all.
 
-*How* an expandable tile opens — hover or click — is no longer chosen
-per section. It's one setting for the whole site:
-**Site Settings → Interactions → "How hidden content is revealed."**
-Every expandable grid on the site follows it, so the interaction feels
-consistent everywhere. (Touch devices always use a tap regardless of
-this setting, since there's no such thing as "hover" on a phone.)
+No expand block → the whole tile is always visible, no toggle. An
+expand block with nothing after it behaves the same as no expand block
+at all — there's nothing to hide, so nothing collapses.
 
-Each piece of content on a tile — Eyebrow, Title, Subtitle, Image, Body,
-Q&A, Meta rows, Email, Buttons — has its own **Visibility**:
-
-- **Always visible.**
-- **Hidden initially** — only shown once the tile is opened. Only has an
-  effect if the grid (or this tile) is Expandable.
-- **Hidden** — never shown, even if the field has content.
-
-Leave a field on its blank default and it falls back automatically:
-Eyebrow/Title/Subtitle/Image are always visible regardless; everything
-else follows the grid's Expandable setting (hidden initially if the grid
-is expandable, always visible if it isn't).
-
-A single tile can override the grid's Expandable setting under its own
-**Advanced → Expandable override**, for the rare case one tile in a grid
-needs to behave differently from its neighbours.
-
-**Example** — a committee card showing name and photo up front,
-everything else hidden until opened:
+**Example** — a committee card showing name and photo up front, bio and
+contact details on hover:
 
 ```
-Title: Always visible
-Subtitle: Always visible
-Image: Always visible
-Body: Hidden initially
-Email: Hidden initially
-Buttons: Hidden initially
+Title       "Alex Smith"
+Subtitle    "President"
+Image       [photo]
+— Expand from here —
+Body        "Runs committee meetings and manages training."
+Email       "president@..."
 ```
 
-Normal state:
+Normal state: name, role, photo. Hover state adds the bio and email.
 
-```
-Alex Smith
-President
-[Photo]
-```
+Move the Image block below the expand marker instead, and the photo
+itself stays hidden until hover too — reordering the expand marker (or
+anything else) is just dragging, the same as reordering any other
+block.
 
-Opened state adds:
+## Presets
 
-```
-Runs committee meetings and manages training.
-Email →
-```
+When you click "Add Tile" on a Card grid, you're offered five starting
+points: **Committee member**, **FAQ item**, **Sponsor**, **Event**, and
+**Blank tile**. Picking one of the first four pre-fills the blocks list
+with the content that kind of tile usually needs — a Committee tile
+starts with Title/Subtitle/Image/Expand/Body/Email already in place, an
+FAQ tile starts with Title/Expand/Body, and so on. **Blank tile** starts
+completely empty.
 
-Both fully-visible and expandable tiles are supported on the same site,
-grid by grid.
+Once inserted, a preset tile is just an ordinary tile — add, remove, or
+reorder its blocks exactly as you would a blank one. Nothing about
+which preset it started from shows up on the published site, and
+nothing prevents you from turning a "Committee member" tile into
+something that looks nothing like a committee card.
 
-## Preset starting points
+**A limitation worth knowing:** these five starting points are fixed in
+`admin/config.yml` — changing what a preset pre-fills (e.g. adding a
+Meta note to every new Sponsor tile by default) means editing that file
+and committing the change, not something you can do from inside the
+CMS. This was a deliberate trade-off: Decap CMS doesn't have a safe,
+supported way to let the CMS UI edit its own "insert defaults" without
+either relying on undocumented internals or rebuilding the drag-and-drop
+and image-upload UI from scratch — both of which carry more risk than a
+five-minute code change is worth. If you find yourself wanting a sixth
+preset, or want to change what an existing one pre-fills, that's a
+one-line change to `admin/config.yml` (see "Adding a new preset"
+below) — ask whoever maintains the codebase, or open a PR.
 
-| Preset     | Fill in                                         | Suggested Content order |
-|------------|--------------------------------------------------|--------------------------|
-| Committee  | Title (name), Subtitle (role), Image, Body (bio), Email | Title, Subtitle, Image, Body, Email, Buttons |
-| Event      | Badge (date), Title, Image, Body, Meta (Type/Location), Buttons | Title, Image, Meta, Buttons |
-| FAQ        | Title (question), Body (answer)                   | Title, Body |
-| Sponsor    | Image (logo), Title (organisation), Body, Buttons (website) | Image, Title, Body, Buttons |
-| Cards / Gallery / Stats / Custom | whatever fits            | usually all "Always visible" |
+## Interactions
+
+**Site Settings → Interactions → "How hidden content is revealed"** is
+one setting for the whole site: hover or click. It applies to every
+tile anywhere that has an Expand block with something after it — a
+committee bio, an FAQ answer, anything. There's no per-section or
+per-tile override any more.
 
 ## Editing
 
 1. Open `/admin` on the live site (or `/admin/local.html` when testing
    locally).
-2. Open a page and add/edit sections. Each section in the list shows its
-   type and title in the collapsed view.
+2. Open a page and add/edit sections and tiles.
 3. Publish. GitHub Pages rebuilds automatically — this takes a minute or
    two.
 
-## Site Settings is the design system
-
-Site Settings now controls more than branding. Under **Design system**
-you can set the whole site's colours, card corner roundness/shadow/
-padding/default image shape, heading weight, body text density, page
-width, grid gap, and vertical section spacing — one place, applied
-everywhere, no CSS or code involved. Individual sections can still
-override background, width, and padding for themselves if a specific
-block needs to differ from the site default.
-
-**Interactions** controls the one hover-vs-click setting described
-above.
-
 ## Images: upload, crop, compress
 
-Every image field in the editor works the same way, whether it's a Hero
-background or a Tile's image:
+Every image works the same way, whether it's a Hero background or a
+tile's Image block:
 
 1. **Upload** the original photo in the "Source image" field. The editor
    preview shows it immediately, inside a frame shaped like where it will
@@ -170,10 +143,9 @@ background or a Tile's image:
    "Optimised image" field yourself — it's generated. See
    `docs/image-pipeline.md` for what that compression step actually does.
 
-A Tile's image has one extra option, **Shape**: leave it blank to use
-the site's default image shape (Site Settings → Design system → Cards),
-or set it explicitly to `square` (photos) or `round` (icon-style images,
-e.g. social platform logos).
+An Image block has one extra option, **Shape**: `square` (the default,
+used for photos) or `round` (used for small icon-style images, e.g.
+social platform logos).
 
 The live site always loads the small compressed WebP, never the original
 upload, so pages stay fast even with high-resolution source photos.
@@ -221,24 +193,37 @@ Then open `http://127.0.0.1:4000/uostriathlon/admin/local.html`.
    under `collections > pages > files`, and to `_data/navigation.yml` if
    it should appear in the menu.
 
-## Adding a genuinely new kind of content
+## Adding a new preset
 
-Almost everything should be a Card grid preset, not a new section type.
-Adding a new preset means:
+Presets are defined in `admin/config.yml`, under
+`.../tile-grid/fields/.../tiles/types`. Copy one of the existing entries
+(Committee is a good template), give it a new `name`/`label`, and set
+its `default: blocks:` to whatever starting content makes sense. It
+must reuse `types: *block_types` for its own `blocks` field — that's
+what keeps every preset (and Custom) offering the exact same set of
+block types, so a brand-new preset never needs a renderer change.
+Repeat the same edit in `admin/config.local.yml`.
 
-1. Add it to the `preset` select's `options` list in `admin/config.yml`
-   / `admin/config.local.yml`, and a row to the table above — this is
-   guidance only, not new configuration for the renderer.
-2. That's it. `_includes/tile.html` already knows how to render any
-   combination of the existing Content fields, in whatever order and
-   visibility you configure.
+## Adding a new block type
 
-Only build a genuinely new Section type (with its own Liquid include and
-a new `{% when %}` branch in `_includes/renderer.html`) if the thing you
-need truly isn't "a grid of tiles" — the way Hero and Text aren't.
+1. Add a new entry under the `block_types` anchor (search for
+   `&block_types` in `admin/config.yml`) — this one definition is
+   shared by every preset and by Custom, via YAML's `*block_types`
+   alias, so you only add it once.
+2. Add a matching `{% when "yourtype" %}` case in `_includes/tile.html`.
+3. If it involves an image, add a matching case in
+   `admin/crop-preview.js`'s `renderBlock` function, and check whether
+   `scripts/optimise_site_images.py` needs to know about it (it already
+   finds any block of `type: image` automatically, wherever it sits).
+
+Everything else — drag ordering, the Expand marker, presets — keeps
+working without further changes, because none of it is aware of which
+specific block types exist.
 
 ## What this editor can't do (and why)
 
-See `PHASE3-NOTES.md` for a straight answer on which parts of a
-"Notion/Webflow-style" editor are genuinely achievable in Decap CMS
-without custom widget code, and which aren't.
+Presets can't be edited from inside the CMS at runtime (see "Presets"
+above) — that's the one deliberate gap versus a fully dynamic builder,
+and the reasoning is spelled out there rather than hidden. Everything
+else in this guide reflects what's actually implemented and testable
+today.
