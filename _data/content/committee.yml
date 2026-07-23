@@ -107,10 +107,11 @@ sections:
     eyebrow: This year's committee
     layout:
       columns: "2"
-      equal_height: true
+      equal_height: false
       width: normal
       padding: normal
       background: default
+      scroll: true
     subtitle: Click a name to read more and get in touch.
     title: Your committee
     type: tile-grid
