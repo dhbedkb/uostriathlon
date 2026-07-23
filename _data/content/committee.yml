@@ -106,7 +106,7 @@ sections:
             text: Add a short bio here — a sentence or two is plenty.
     eyebrow: This year's committee
     layout:
-      columns: 3
+      columns: "2"
       equal_height: true
       width: normal
       padding: normal
