@@ -108,7 +108,7 @@ sections:
     eyebrow: This year's committee
     layout:
       columns: "4"
-      equal_height: false
+      equal_height: true
       width: normal
       padding: normal
       background: default
