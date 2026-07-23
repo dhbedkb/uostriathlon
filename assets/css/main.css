@@ -236,10 +236,8 @@ img { max-width: 100%; display: block; }
   justify-content: center;
   width: 44px;
   height: 44px;
-  border-radius: 50%;
+  border-radius: var(--tile-frame-radius); /* square-ish rounded corners, matches tile system; use 0 for a hard square */
   overflow: hidden;
-  background: var(--color-surface-soft);
-  border: 1px solid var(--color-border);
   flex: 0 0 auto;
 }
 
