@@ -1,14 +1,9 @@
-# Site Settings is now the site's design system, not just branding.
-# Anything an editor sets here becomes a CSS custom property in
-# _layouts/default.html and cascades to every page automatically —
-# individual sections/tiles keep the ability to override it locally
-# (e.g. a section's own Background choice), but this is the default.
 brand:
   name: University of Sheffield Triathlon Club
   short_name: Sheffield Triathlon
   tagline: Swim. Bike. Run. Belong.
   email: triathlon@sheffield.ac.uk
-  logo: ""
+  logo: /uostriathlon/assets/images/brand/bordered.png
   logo_crop_x: 50
   logo_crop_y: 50
   logo_crop_zoom: 100
@@ -32,10 +27,6 @@ design:
     grid_gap: normal
     vertical_spacing: normal
 interactions:
-  # Replaces the old per-section "hover vs click" choice (Phase 3, #5).
-  # Every expandable card grid on the site (committee bios, FAQs, etc)
-  # now shares this one setting instead of asking an editor to pick a
-  # trigger mechanism per block.
   expand_trigger: hover
 footer:
   description: >
