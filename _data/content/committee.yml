@@ -69,7 +69,7 @@ sections:
           - type: subtitle
             text: Beginners Coordinator
           - type: image
-            src_raw: /uostriathlon/assets/images/committee/raw/708752699_1640993453798187_4377617180923485565_n.jpg
+            src_raw: ""
             crop_x: 50
             crop_y: 6
             crop_zoom: 200
