@@ -1,0 +1,26 @@
+{% comment %}
+  Compact variant of a Tile: a round icon that links out, used for the
+  "social logos row" layout (Layout > Compact icon row). Still just
+  Content — pulls its image and link out of the same tile.blocks list
+  every other tile uses, not a separate component or data shape.
+{% endcomment %}
+{% assign tile = include.tile %}
+{% assign image_block = tile.blocks | where: "type", "image" | first %}
+{% assign embed_block = tile.blocks | where: "type", "embed" | first %}
+{% assign buttons_block = tile.blocks | where: "type", "buttons" | first %}
+{% assign eyebrow_block = tile.blocks | where: "type", "eyebrow" | first %}
+{% assign title_block = tile.blocks | where: "type", "title" | first %}
+
+{% assign link = buttons_block.items[0].url | default: embed_block.url %}
+{% assign img_src = image_block.src | default: image_block.src_raw %}
+{% assign label = eyebrow_block.text | default: title_block.text %}
+
+{% if link %}
+  <a class="social-logo-link" href="{{ link }}" target="_blank" rel="noopener" aria-label="{{ label }}">
+    {% if img_src %}
+      <img src="{{ img_src | relative_url }}" alt="" width="512" height="512" loading="lazy" decoding="async">
+    {% else %}
+      <span>{{ label | slice: 0 }}</span>
+    {% endif %}
+  </a>
+{% endif %}

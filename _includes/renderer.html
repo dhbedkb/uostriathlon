@@ -1,0 +1,29 @@
+{% comment %}
+  Page → Section → Tile → Content.
+
+  Only four section types exist. `hero`, `text` and `relay-bar` are each
+  a genuinely unique, one-off layout. Everything that used to be its own
+  section type (cards, gallery, events, committee, sponsors, stats, FAQ,
+  CTA, embeds, social links, timeline) is now `tile-grid`: one section
+  that lays out any number of tiles, and one tile renderer that doesn't
+  know or care what kind of content a tile is holding. See
+  ARCHITECTURE.md for the reasoning and the full migration table.
+{% endcomment %}
+{% for section in include.sections %}
+  {% assign section_type = section.type | default: "unknown" %}
+  {% assign section_id = section.id | default: section_type | slugify %}
+  {% assign section_index = forloop.index %}
+
+  {% case section_type %}
+    {% when "hero" %}
+      {% include hero.html section=section section_id=section_id section_index=section_index %}
+    {% when "text" %}
+      {% include text.html section=section section_id=section_id section_index=section_index %}
+    {% when "relay-bar" %}
+      {% include relay-bar.html section=section section_id=section_id section_index=section_index %}
+    {% when "tile-grid" %}
+      {% include tile-grid.html section=section section_id=section_id section_index=section_index %}
+    {% else %}
+      {% include unknown-section.html section=section section_id=section_id section_index=section_index %}
+  {% endcase %}
+{% endfor %}

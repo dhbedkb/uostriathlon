@@ -1,0 +1,12 @@
+---
+layout: default
+---
+
+{% assign content_key = page.content_file %}
+{% assign page_content = site.data.content[content_key] %}
+
+{% if page_content and page_content.sections %}
+  {% include renderer.html sections=page_content.sections page_content=page_content %}
+{% else %}
+  {% include missing-content.html content_key=content_key page_title=page.title %}
+{% endif %}

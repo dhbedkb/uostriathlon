@@ -1,0 +1,20 @@
+brand:
+  name: University of Sheffield Triathlon Club
+  short_name: Sheffield Triathlon
+  tagline: Swim. Bike. Run. Belong.
+  email: triathlon@sheffield.ac.uk
+  logo: /uostriathlon/assets/images/brand/bordered.png
+  logo_crop_x: 50
+  logo_crop_y: 50
+  logo_crop_zoom: 100
+theme:
+  default: dark
+interactions:
+  expand_trigger: hover
+footer:
+  description: >
+    Swim, bike and run with Sheffield Triathlon. Training, racing and socials
+    for complete beginners and experienced athletes.
+  affiliation: >
+    A student-led University of Sheffield triathlon club connected to Sport
+    Sheffield.

@@ -1,0 +1,368 @@
+backend:
+  name: github
+  repo: dhbedkb/uostriathlon
+  branch: main
+  base_url: https://uostriathlon-cms-auth.barnabytri.workers.dev
+  auth_endpoint: auth
+
+media_folder: /assets/images/uploads
+public_folder: /uostriathlon/assets/images/uploads
+publish_mode: simple
+site_url: https://dhbedkb.github.io/uostriathlon/
+
+collections:
+  - name: pages
+    label: Pages
+    files:
+      - name: home
+        label: Home
+        file: _data/content/home.yml
+        fields: &page_fields
+          - {label: Title, name: title, widget: string}
+          - {label: Description, name: description, widget: text, required: false}
+          - label: Sections
+            name: sections
+            widget: list
+            typeKey: type
+            summary: '{{fields.type}} — {{fields.title}}'
+            hint: >
+              A page is built from four kinds of block. Hero and Text are
+              one-off layouts. Divider bar is a small decorative widget.
+              Card grid lays out any number of Tiles — cards, photos,
+              committee members, sponsors, FAQs, events, a call to
+              action, embeds, social links are all just Tiles with
+              different content blocks inside them.
+            types:
+              - name: hero
+                label: Hero
+                fields: &hero_fields
+                  - {label: ID, name: id, widget: string, required: false}
+                  - {label: Eyebrow, name: eyebrow, widget: string, required: false}
+                  - {label: Title, name: title, widget: string, required: false}
+                  - {label: Subtitle, name: subtitle, widget: string, required: false}
+                  - {label: Body, name: body, widget: text, required: false}
+                  - label: Source background image
+                    name: background_image_raw
+                    widget: image
+                    required: false
+                    choose_url: false
+                    media_folder: /assets/images/source
+                    public_folder: /uostriathlon/assets/images/source
+                    hint: Upload the original photo. The editor preview uses this immediately.
+                  - label: Optimised background image
+                    name: background_image
+                    widget: string
+                    required: false
+                    hint: Generated automatically on publish. Do not edit manually — the live site uses this compressed version.
+                  - {label: "Background crop horizontal %", name: background_crop_x, widget: number, default: 50, min: 0, max: 100, value_type: int, required: false, hint: "0 = left, 50 = centre, 100 = right"}
+                  - {label: "Background crop vertical %", name: background_crop_y, widget: number, default: 50, min: 0, max: 100, value_type: int, required: false, hint: "0 = top, 50 = centre, 100 = bottom"}
+                  - {label: "Background crop zoom %", name: background_crop_zoom, widget: number, default: 100, min: 100, max: 220, value_type: int, required: false, hint: "100 = normal, increase to zoom in"}
+                  - label: Persistent hero
+                    name: persistent_hero
+                    widget: boolean
+                    default: false
+                    required: false
+                  - label: Primary button
+                    name: primary_button
+                    widget: object
+                    required: false
+                    fields: &button_fields
+                      - {label: Label, name: label, widget: string}
+                      - {label: URL, name: url, widget: string}
+                  - label: Secondary button
+                    name: secondary_button
+                    widget: object
+                    required: false
+                    fields: *button_fields
+
+              - name: text
+                label: Text block
+                fields:
+                  - {label: ID, name: id, widget: string, required: false}
+                  - {label: Eyebrow, name: eyebrow, widget: string, required: false}
+                  - {label: Title, name: title, widget: string, required: false}
+                  - {label: Subtitle, name: subtitle, widget: string, required: false}
+                  - {label: Body, name: body, widget: markdown, required: false}
+
+              - name: relay-bar
+                label: Divider bar
+                fields:
+                  - {label: ID, name: id, widget: string, required: false}
+                  - {label: Eyebrow, name: eyebrow, widget: string, required: false}
+                  - {label: Title, name: title, widget: string, required: false}
+
+              - name: tile-grid
+                label: Card grid
+                fields:
+                  - {label: ID, name: id, widget: string, required: false}
+                  - {label: Eyebrow, name: eyebrow, widget: string, required: false}
+                  - {label: Title, name: title, widget: string, required: false}
+                  - {label: Subtitle, name: subtitle, widget: string, required: false}
+                  - {label: Heading alignment, name: alignment, widget: select, options: [left, center], default: left, required: false}
+                  - label: Layout
+                    name: layout
+                    widget: object
+                    hint: Controls how the tiles below are arranged. Leave everything on its default for a good result.
+                    fields:
+                      - {label: Columns (desktop), name: columns, widget: select, options: ["1", "2", "3", "4"], default: "3", required: false}
+                      - {label: Equal height tiles, name: equal_height, widget: boolean, default: true, required: false}
+                      - {label: Scroll horizontally instead of wrapping, name: scroll, widget: boolean, default: false, required: false, hint: Only enable this if there are more tiles than fit in one row.}
+                      - {label: Width, name: width, widget: select, options: [normal, narrow, wide], default: normal, required: false}
+                      - {label: Padding, name: padding, widget: select, options: [normal, compact, spacious], default: normal, required: false}
+                      - {label: Background, name: background, widget: select, options: [default, surface, accent], default: default, required: false}
+                      - {label: Numbered steps, name: numbered, widget: boolean, default: false, required: false, hint: "For a timeline/step list — shows 1, 2, 3… beside each tile instead of a grid."}
+                      - {label: Compact icon row, name: chip_style, widget: boolean, default: false, required: false, hint: "For a row of small round icon links, e.g. social platform icons."}
+                      - {label: Centre single tile, name: align_center, widget: boolean, default: false, required: false, hint: "For a single centred call-to-action tile."}
+                  - label: Tiles
+                    name: tiles
+                    widget: list
+                    typeKey: preset
+                    summary: '{{fields.preset}} — {{fields.badge}}'
+                    hint: >
+                      Click "Add Tile" and pick a starting point. Committee /
+                      FAQ / Sponsor / Event come pre-filled with the blocks
+                      that kind of content usually needs — delete, add, or
+                      reorder any of them afterwards, exactly as if you'd
+                      built the tile from scratch. Custom starts empty. None
+                      of this shows up on the published site — it only
+                      affects what you start with in the editor.
+                    types:
+                      - name: custom
+                        label: "Blank tile"
+                        fields: &tile_shared_fields
+                          - {label: Visual style, name: style, widget: select, options: [default, accent], default: default, required: false, hint: "'Accent' highlights a single tile — used for a call-to-action block."}
+                          - {label: Badge (small tag, e.g. a date), name: badge, widget: string, required: false, hint: "Always shown, positioned in the corner — not one of the blocks below."}
+                          - label: Content blocks
+                            name: blocks
+                            widget: list
+                            typeKey: type
+                            summary: '{{fields.type}}'
+                            hint: >
+                              Drag to reorder — this list IS the tile, top
+                              to bottom, exactly as it renders. Add an
+                              "— Expand from here —" block to make
+                              everything below it (and only it) stay hidden
+                              until the tile is opened; leave it out and the
+                              whole tile is always visible.
+                            types: &block_types
+                              - name: eyebrow
+                                label: Eyebrow
+                                fields:
+                                  - {label: Text, name: text, widget: string}
+                              - name: title
+                                label: Title
+                                fields:
+                                  - {label: Text, name: text, widget: string}
+                              - name: subtitle
+                                label: Subtitle
+                                fields:
+                                  - {label: Text, name: text, widget: string}
+                              - name: image
+                                label: Image
+                                fields:
+                                  - label: Source image
+                                    name: src_raw
+                                    widget: image
+                                    required: false
+                                    choose_url: false
+                                    media_folder: /assets/images/source
+                                    public_folder: /uostriathlon/assets/images/source
+                                  - label: Optimised image
+                                    name: src
+                                    widget: string
+                                    required: false
+                                    hint: Generated automatically on publish. Do not edit manually.
+                                  - {label: "Crop horizontal %", name: crop_x, widget: number, default: 50, min: 0, max: 100, value_type: int, required: false}
+                                  - {label: "Crop vertical %", name: crop_y, widget: number, default: 50, min: 0, max: 100, value_type: int, required: false}
+                                  - {label: "Crop zoom %", name: crop_zoom, widget: number, default: 100, min: 100, max: 220, value_type: int, required: false}
+                                  - {label: Shape, name: shape, widget: select, options: [square, round], default: square, required: false}
+                                  - {label: Alt text, name: alt, widget: string, required: false}
+                              - name: embed
+                                label: Embed
+                                fields:
+                                  - {label: Provider, name: provider, widget: string, required: false}
+                                  - {label: Raw embed HTML, name: embed_html, widget: text, required: false}
+                                  - {label: Frame width, name: width, widget: string, required: false}
+                                  - {label: Fallback link URL, name: url, widget: string, required: false, hint: Used only if no embed HTML is set.}
+                                  - {label: Fallback link label, name: button_label, widget: string, required: false}
+                              - name: body
+                                label: Body
+                                fields:
+                                  - {label: Text, name: text, widget: markdown}
+                              - name: note
+                                label: Note (fact, or a question & answer)
+                                fields:
+                                  - {label: Heading, name: heading, widget: string, required: false, hint: "e.g. a Location or Schedule label, or an FAQ question."}
+                                  - {label: Detail, name: detail, widget: text, required: false, hint: "e.g. the value, or an FAQ answer."}
+                              - name: email
+                                label: Email
+                                fields:
+                                  - {label: Address, name: value, widget: string}
+                              - name: buttons
+                                label: Buttons
+                                fields:
+                                  - label: Buttons
+                                    name: items
+                                    widget: list
+                                    summary: '{{fields.label}}'
+                                    fields:
+                                      - {label: Label, name: label, widget: string}
+                                      - {label: URL, name: url, widget: string}
+                                      - {label: Style, name: style, widget: select, options: [primary, secondary], default: secondary, required: false}
+                              - name: expand
+                                label: "— Expand from here —"
+                                fields:
+                                  - {label: Marker, name: marker, widget: hidden, default: true}
+                        default:
+                          blocks: []
+
+                      - name: committee
+                        label: "Committee member"
+                        fields:
+                          - {label: Visual style, name: style, widget: select, options: [default, accent], default: default, required: false}
+                          - {label: Badge, name: badge, widget: string, required: false}
+                          - label: Content blocks
+                            name: blocks
+                            widget: list
+                            typeKey: type
+                            summary: '{{fields.type}}'
+                            types: *block_types
+                            default:
+                              - {type: title, text: "Full Name"}
+                              - {type: subtitle, text: "Role"}
+                              - {type: image}
+                              - {type: expand}
+                              - {type: body, text: "Add a short bio here — a sentence or two is plenty."}
+                              - {type: email, value: "triathlon@sheffield.ac.uk"}
+
+                      - name: faq
+                        label: "FAQ item"
+                        fields:
+                          - {label: Visual style, name: style, widget: select, options: [default, accent], default: default, required: false}
+                          - {label: Badge, name: badge, widget: string, required: false}
+                          - label: Content blocks
+                            name: blocks
+                            widget: list
+                            typeKey: type
+                            summary: '{{fields.type}}'
+                            types: *block_types
+                            default:
+                              - {type: title, text: "Question goes here?"}
+                              - {type: expand}
+                              - {type: body, text: "Answer goes here."}
+
+                      - name: sponsor
+                        label: "Sponsor"
+                        fields:
+                          - {label: Visual style, name: style, widget: select, options: [default, accent], default: default, required: false}
+                          - {label: Badge, name: badge, widget: string, required: false}
+                          - label: Content blocks
+                            name: blocks
+                            widget: list
+                            typeKey: type
+                            summary: '{{fields.type}}'
+                            types: *block_types
+                            default:
+                              - {type: image}
+                              - {type: title, text: "Sponsor name"}
+                              - {type: body, text: "A sentence about the sponsor."}
+
+                      - name: event
+                        label: "Event"
+                        fields:
+                          - {label: Visual style, name: style, widget: select, options: [default, accent], default: default, required: false}
+                          - {label: Badge (e.g. a date), name: badge, widget: string, required: false}
+                          - label: Content blocks
+                            name: blocks
+                            widget: list
+                            typeKey: type
+                            summary: '{{fields.type}}'
+                            types: *block_types
+                            default:
+                              - {type: title, text: "Event name"}
+                              - {type: image}
+                              - {type: note, heading: "Location", detail: ""}
+
+      - {name: training, label: Training, file: _data/content/training.yml, fields: *page_fields}
+      - {name: races, label: Races, file: _data/content/races.yml, fields: *page_fields}
+      - {name: socials, label: Socials, file: _data/content/socials.yml, fields: *page_fields}
+      - {name: committee, label: Our Committee, file: _data/content/committee.yml, fields: *page_fields}
+      - {name: members, label: Members Area, file: _data/content/members.yml, fields: *page_fields}
+
+  - name: settings
+    label: Site settings
+    files:
+      - name: settings
+        label: Brand and settings
+        file: _data/settings.yml
+        fields:
+          - label: Brand
+            name: brand
+            widget: object
+            fields:
+              - {label: Name, name: name, widget: string}
+              - {label: Short name, name: short_name, widget: string}
+              - {label: Tagline, name: tagline, widget: string}
+              - {label: Email, name: email, widget: string}
+              - label: Logo
+                name: logo
+                widget: image
+                required: false
+                choose_url: false
+                media_folder: /assets/images/brand
+                public_folder: /uostriathlon/assets/images/brand
+                hint: PNG with a transparent background works best — the logo sits in a plain circular frame with no fixed background colour behind it.
+              - {label: "Logo crop horizontal %", name: logo_crop_x, widget: number, default: 50, min: 0, max: 100, value_type: int, required: false}
+              - {label: "Logo crop vertical %", name: logo_crop_y, widget: number, default: 50, min: 0, max: 100, value_type: int, required: false}
+              - {label: "Logo crop zoom %", name: logo_crop_zoom, widget: number, default: 100, min: 100, max: 220, value_type: int, required: false}
+          - label: Theme
+            name: theme
+            widget: object
+            required: false
+            fields:
+              - {label: Default, name: default, widget: string, required: false}
+          - label: Interactions
+            name: interactions
+            widget: object
+            required: false
+            hint: One setting, applied to every expandable tile on the site.
+            fields:
+              - {label: "How hidden content is revealed", name: expand_trigger, widget: select, options: [hover, click], default: hover, required: false, hint: "Hover works well on desktop; click is more reliable on touch and is what happens on mobile either way."}
+          - label: Footer
+            name: footer
+            widget: object
+            required: false
+            fields:
+              - {label: Description, name: description, widget: text, required: false}
+              - {label: Affiliation, name: affiliation, widget: text, required: false}
+
+      - name: navigation
+        label: Navigation
+        file: _data/navigation.yml
+        fields:
+          - label: Items
+            name: items
+            widget: list
+            summary: '{{fields.label}}'
+            fields:
+              - {label: Label, name: label, widget: string}
+              - {label: URL, name: url, widget: string}
+          - label: Join button
+            name: cta
+            widget: object
+            fields:
+              - {label: Label, name: label, widget: string}
+              - {label: URL, name: url, widget: string}
+
+      - name: socials_list
+        label: Footer social links
+        file: _data/socials.yml
+        fields:
+          - label: Items
+            name: items
+            widget: list
+            summary: '{{fields.platform}}'
+            fields:
+              - {label: Platform, name: platform, widget: string}
+              - {label: Label, name: label, widget: string}
+              - {label: URL, name: url, widget: string}

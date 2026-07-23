@@ -1,0 +1,10 @@
+items:
+  - platform: Instagram
+    label: "@sheffunitri"
+    url: https://www.instagram.com/sheffunitri/
+  - platform: Facebook
+    label: UoSTriathlon
+    url: https://www.facebook.com/UoSTriathlon/
+  - platform: Email
+    label: triathlon@sheffield.ac.uk
+    url: mailto:triathlon@sheffield.ac.uk
