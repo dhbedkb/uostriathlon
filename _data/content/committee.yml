@@ -35,13 +35,13 @@ sections:
             text: Barnaby Read
           - type: subtitle
             text: Secretary
+          - type: expand
           - type: image
-            src_raw: ""
+            src_raw: /uostriathlon/assets/images/source/img_9541.jpeg
             crop_x: 50
             crop_y: 50
             crop_zoom: 100
             alt: Barnaby Read
-          - type: expand
           - type: body
             text: Add a short bio here — a sentence or two is plenty.
       - preset: committee
@@ -106,12 +106,12 @@ sections:
             text: Add a short bio here — a sentence or two is plenty.
     eyebrow: This year's committee
     layout:
-      columns: "2"
+      columns: "4"
       equal_height: false
       width: normal
       padding: normal
       background: default
-      scroll: true
+      scroll: false
     subtitle: Click a name to read more and get in touch.
     title: Your committee
     type: tile-grid
