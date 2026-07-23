@@ -38,10 +38,11 @@ sections:
           - type: expand
           - type: image
             src_raw: /uostriathlon/assets/images/source/img_9541.jpeg
-            crop_x: 50
+            crop_x: 55
             crop_y: 50
-            crop_zoom: 100
+            crop_zoom: 130
             alt: Barnaby Read
+            shape: square
           - type: body
             text: Add a short bio here — a sentence or two is plenty.
       - preset: committee
