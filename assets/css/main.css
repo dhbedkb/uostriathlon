@@ -236,7 +236,7 @@ img { max-width: 100%; display: block; }
   justify-content: center;
   width: 44px;
   height: 44px;
-  border-radius: var(--tile-frame-radius); /* square-ish rounded corners, matches tile system; use 0 for a hard square */
+  border-radius: 0
   overflow: hidden;
   flex: 0 0 auto;
 }
