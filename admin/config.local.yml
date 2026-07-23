@@ -27,10 +27,9 @@ collections:
               one-off layouts. Divider bar is a small decorative widget.
               Card grid is used for everything else — cards, photos,
               committee members, sponsors, stats, FAQs, events, a call to
-              action, embeds, social links — pick a preset inside it to
-              get sensible field labels and defaults for what you're
-              adding; nothing is ever hidden, so you can mix and match
-              fields freely.
+              action, embeds, social links — pick a preset inside it as a
+              label/reminder for what you're building; every field below
+              is still available no matter which preset you pick.
             types:
               - name: hero
                 label: Hero
@@ -100,34 +99,36 @@ collections:
                     required: false
                     default: custom
                     hint: >
-                      Guidance only — picking a preset sets a helpful label
-                      for this block in the list above. It never hides or
-                      removes any field below, and it does not set Content
-                      order or Visibility for you (Decap can't vary those by
-                      preset) — set those manually using the recommended
-                      starting points below, then adjust freely.
+                      A label only, to help you find this block again and
+                      to remind you which fields below are worth filling
+                      in for this kind of content — Decap CMS can't change
+                      which fields appear based on this choice, so nothing
+                      is hidden and you're free to mix and match. See
+                      docs/editor-guide.md for the recommended Content
+                      order per preset.
 
 
-                      Committee: order Title, Subtitle, Image, Body, Email,
-                      Buttons. Visibility: Title/Subtitle/Image = Always,
-                      Body/Email/Buttons = Hover.
+                      Committee member: fill in Title (name), Subtitle
+                      (role), Image (photo), Body (bio), Email. Suggested
+                      order: Title, Subtitle, Image, Body, Email, Buttons.
 
 
-                      FAQ: order Title, Body. Visibility: Title = Always,
-                      Body = Click.
+                      Event: fill in Badge (date), Title (event name),
+                      Image, Body (description), Buttons. Meta rows work
+                      well for Type/Location.
 
 
-                      Sponsors: order Image, Title, Body, Buttons.
-                      Visibility: all = Always.
+                      FAQ: fill in Title (the question), Body (the
+                      answer). Suggested order: Title, Body.
 
 
-                      Events: order Title, Image, Meta, Buttons (Badge, e.g.
-                      a date, is set directly on the tile below and always
-                      shows). Visibility: all = Always.
+                      Sponsor: fill in Title (organisation), Image (logo),
+                      Body (description), Buttons (website link).
 
 
-                      Cards / Gallery / Stats / Custom: order and visibility
-                      as needed — most read best with everything Always.
+                      Cards / Gallery / Stats / Custom: use whichever
+                      fields you need — most read best with everything
+                      set to Always visible.
                     options:
                       - {label: "Cards", value: cards}
                       - {label: "Gallery", value: gallery}
@@ -162,9 +163,14 @@ collections:
                   - label: Behaviour
                     name: behavior
                     widget: object
-                    hint: What happens to each tile's extra detail (body text, links, etc) by default. Individual tiles can override this below, and a tile's own Content order / Visibility settings can override it further per field.
+                    hint: >
+                      Whether tiles in this grid can hide extra detail
+                      until opened (committee bios, FAQ answers, etc). How
+                      opening works — hover or click — is set once for
+                      the whole site under Site Settings > Interactions,
+                      not here.
                     fields:
-                      - {label: Reveal extra detail, name: expand, widget: select, options: [none, hover, click], default: none, required: false, hint: "'None' always shows everything. 'Hover'/'click' hide any field a tile marks Reveal on hover/click until the tile is opened — used for committee bios and FAQs."}
+                      - {label: Expandable, name: expandable, widget: boolean, default: false, required: false, hint: "On = tiles can show a summary first and reveal the rest when opened. Off = every tile always shows everything."}
                   - label: Tiles
                     name: tiles
                     widget: list
@@ -196,7 +202,7 @@ collections:
                           - {label: "Crop horizontal %", name: crop_x, widget: number, default: 50, min: 0, max: 100, value_type: int, required: false}
                           - {label: "Crop vertical %", name: crop_y, widget: number, default: 50, min: 0, max: 100, value_type: int, required: false}
                           - {label: "Crop zoom %", name: crop_zoom, widget: number, default: 100, min: 100, max: 220, value_type: int, required: false}
-                          - {label: Shape, name: shape, widget: select, options: [square, round], default: square, required: false}
+                          - {label: Shape, name: shape, widget: select, options: ["", square, round], default: "", required: false, hint: "Leave blank to use the site's default image shape (Site Settings > Design system > Cards)."}
                           - {label: Alt text, name: alt, widget: string, required: false}
                           - {label: Caption, name: caption, widget: string, required: false}
                       - label: Embed (use instead of Image for iframes/widgets)
@@ -235,26 +241,20 @@ collections:
                           - {label: Label, name: label, widget: string}
                           - {label: URL, name: url, widget: string}
                           - {label: Style, name: style, widget: select, options: [primary, secondary], default: secondary, required: false}
-                      - label: Reveal override
-                        name: behavior
-                        widget: object
-                        required: false
-                        hint: Leave blank to use the grid's setting above.
-                        fields:
-                          - {label: Reveal extra detail, name: expand, widget: select, options: ["", none, hover, click], default: "", required: false}
                       - label: Content order
                         name: content_order
                         widget: list
                         required: false
+                        collapsed: true
                         summary: '{{fields.type}}'
                         hint: >
-                          Drag to reorder. Add each piece of content you want
-                          this tile to show, in the order it should appear.
+                          Drag to reorder — this list IS the order the
+                          website renders in, top to bottom. Add each
+                          piece of content you want this tile to show.
                           Leave empty to use the default order (Image,
                           Eyebrow, Title, Subtitle, Body, Q&A, Meta rows,
-                          Email, Buttons) — the order the site has always
-                          used. Badge is not included here; it's a fixed
-                          corner tag, always shown.
+                          Email, Buttons). Badge is not included here;
+                          it's a fixed corner tag, always shown.
                         fields:
                           - label: Content type
                             name: type
@@ -273,26 +273,34 @@ collections:
                         name: visibility
                         widget: object
                         required: false
+                        collapsed: true
                         hint: >
-                          When each piece of content appears. Leave any field
-                          on its blank/default setting to fall back to this
-                          grid's Reveal behaviour above (Eyebrow, Title,
-                          Subtitle and Image always fall back to Always
-                          regardless of that setting). "Reveal on hover" and
-                          "Reveal on click" both mean "shown when the tile
-                          opens" — a tile only has one open trigger, inferred
-                          from whichever you use here (or set explicitly via
-                          Reveal override above).
+                          Whether each piece of content starts visible or
+                          hidden. Leave a field on its blank/default
+                          setting to fall back to this grid's Expandable
+                          setting above (Eyebrow, Title, Subtitle and
+                          Image always fall back to Always visible
+                          regardless). There's no separate hover/click
+                          choice any more — that's one site-wide setting
+                          under Site Settings > Interactions.
                         fields:
-                          - {label: Eyebrow, name: eyebrow, widget: select, options: ["", always, hover, click, hidden], default: "", required: false}
-                          - {label: Title, name: title, widget: select, options: ["", always, hover, click, hidden], default: "", required: false}
-                          - {label: Subtitle, name: subtitle, widget: select, options: ["", always, hover, click, hidden], default: "", required: false}
-                          - {label: Image, name: image, widget: select, options: ["", always, hover, click, hidden], default: "", required: false}
-                          - {label: Body, name: body, widget: select, options: ["", always, hover, click, hidden], default: "", required: false}
-                          - {label: Questions & answers, name: qa, widget: select, options: ["", always, hover, click, hidden], default: "", required: false}
-                          - {label: Meta rows, name: meta, widget: select, options: ["", always, hover, click, hidden], default: "", required: false}
-                          - {label: Email, name: email, widget: select, options: ["", always, hover, click, hidden], default: "", required: false}
-                          - {label: Buttons, name: buttons, widget: select, options: ["", always, hover, click, hidden], default: "", required: false}
+                          - {label: Eyebrow, name: eyebrow, widget: select, options: ["", always, hidden_initially, hidden], default: "", required: false}
+                          - {label: Title, name: title, widget: select, options: ["", always, hidden_initially, hidden], default: "", required: false}
+                          - {label: Subtitle, name: subtitle, widget: select, options: ["", always, hidden_initially, hidden], default: "", required: false}
+                          - {label: Image, name: image, widget: select, options: ["", always, hidden_initially, hidden], default: "", required: false}
+                          - {label: Body, name: body, widget: select, options: ["", always, hidden_initially, hidden], default: "", required: false}
+                          - {label: Questions & answers, name: qa, widget: select, options: ["", always, hidden_initially, hidden], default: "", required: false}
+                          - {label: Meta rows, name: meta, widget: select, options: ["", always, hidden_initially, hidden], default: "", required: false}
+                          - {label: Email, name: email, widget: select, options: ["", always, hidden_initially, hidden], default: "", required: false}
+                          - {label: Buttons, name: buttons, widget: select, options: ["", always, hidden_initially, hidden], default: "", required: false}
+                      - label: Advanced
+                        name: behavior
+                        widget: object
+                        required: false
+                        collapsed: true
+                        hint: Only needed to make one specific tile behave differently from the rest of its grid.
+                        fields:
+                          - {label: "Expandable override", name: expandable, widget: select, options: ["", "yes", "no"], default: "", required: false, hint: "Leave blank to use the grid's Expandable setting."}
 
       - {name: training, label: Training, file: _data/content/training.yml, fields: *page_fields}
       - {name: races, label: Races, file: _data/content/races.yml, fields: *page_fields}
@@ -331,7 +339,48 @@ collections:
             widget: object
             required: false
             fields:
-              - {label: Default, name: default, widget: string, required: false}
+              - {label: Default, name: default, widget: select, options: [dark, light], default: dark, required: false}
+          - label: Design system
+            name: design
+            widget: object
+            required: false
+            hint: These become the site's defaults everywhere at once — no CSS or code required. Individual sections can still override background/width/padding themselves.
+            fields:
+              - label: Colours
+                name: colors
+                widget: object
+                fields:
+                  - {label: Primary (accent gold, buttons, links), name: primary, widget: color, required: false}
+                  - {label: Text, name: secondary, widget: color, required: false}
+                  - {label: Accent (reserved for future use), name: accent, widget: color, required: false}
+              - label: Cards
+                name: cards
+                widget: object
+                fields:
+                  - {label: Corner roundness, name: radius, widget: select, options: [none, small, normal, large], default: normal, required: false}
+                  - {label: Shadow, name: shadow, widget: select, options: [none, soft, hard], default: soft, required: false}
+                  - {label: Padding, name: padding, widget: select, options: [compact, normal, spacious], default: normal, required: false}
+                  - {label: "Default image shape", name: image_shape, widget: select, options: [square, round], default: square, required: false, hint: "Used whenever a tile's own image doesn't set a Shape."}
+              - label: Typography
+                name: typography
+                widget: object
+                fields:
+                  - {label: Heading weight, name: heading_style, widget: select, options: [normal, bold, black], default: black, required: false}
+                  - {label: Body text density, name: body_style, widget: select, options: [compact, normal, relaxed], default: normal, required: false}
+              - label: Layout
+                name: layout
+                widget: object
+                fields:
+                  - {label: Page width, name: container_width, widget: select, options: [narrow, normal, wide], default: normal, required: false}
+                  - {label: Grid gap, name: grid_gap, widget: select, options: [compact, normal, spacious], default: normal, required: false}
+                  - {label: Vertical section spacing, name: vertical_spacing, widget: select, options: [compact, normal, spacious], default: normal, required: false}
+          - label: Interactions
+            name: interactions
+            widget: object
+            required: false
+            hint: One setting, applied to every expandable card grid on the site.
+            fields:
+              - {label: "How hidden content is revealed", name: expand_trigger, widget: select, options: [hover, click], default: hover, required: false, hint: "Hover works well on desktop; Click is more reliable on touch screens and is what happens on mobile either way."}
           - label: Footer
             name: footer
             widget: object

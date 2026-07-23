@@ -21,7 +21,7 @@ sections:
     padding: normal
     background: default
   behavior:
-    expand: none
+    expandable: false
   tiles:
   - title: '6'
     subtitle: Coached sessions a week
@@ -43,7 +43,7 @@ sections:
     padding: normal
     background: default
   behavior:
-    expand: none
+    expandable: false
   tiles:
   - title: Coached training
     body: 'Access to all weekly swim, bike and run sessions, plus the Give It A Go beginner pathway.
@@ -72,7 +72,7 @@ sections:
     background: default
     align_center: true
   behavior:
-    expand: none
+    expandable: false
   tiles:
   - title: Membership starts through the Students' Union
     body: 'Come to any beginner-friendly session before committing — you don''t need to be a member for your first two weeks.
@@ -99,7 +99,7 @@ sections:
     padding: normal
     background: default
   behavior:
-    expand: click
+    expandable: true
   tiles:
   - title: Is membership only for University of Sheffield students?
     body: 'Membership is open to current students and staff of the University of Sheffield. Contact the committee if you''re unsure whether you''re eligible.

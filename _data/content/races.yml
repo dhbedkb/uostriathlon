@@ -34,7 +34,7 @@ sections:
     padding: normal
     background: default
   behavior:
-    expand: none
+    expandable: false
   tiles:
   - badge: April
     title: Sheffield Sprint Triathlon
@@ -87,7 +87,7 @@ sections:
     background: default
     align_center: true
   behavior:
-    expand: none
+    expandable: false
   tiles:
   - title: Talk to the committee about your first race
     body: 'Come to a training session and ask the committee about upcoming races — they''ll point you to the right distance and talk you through what race day involves.

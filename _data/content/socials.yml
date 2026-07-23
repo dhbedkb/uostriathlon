@@ -33,7 +33,7 @@ sections:
     padding: normal
     background: default
   behavior:
-    expand: none
+    expandable: false
   tiles:
   - badge: Week 1
     title: Welcome social
@@ -81,7 +81,7 @@ sections:
     background: default
     chip_style: false
   behavior:
-    expand: none
+    expandable: false
   tiles:
   - eyebrow: Instagram
     title: '@sheffunitri'

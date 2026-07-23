@@ -27,7 +27,7 @@ sections:
     padding: normal
     background: default
   behavior:
-    expand: none
+    expandable: false
   tiles:
   - title: 150+
     subtitle: Members
@@ -54,7 +54,7 @@ sections:
     padding: normal
     background: default
   behavior:
-    expand: none
+    expandable: false
   tiles:
   - eyebrow: Beginners
     title: Give It A Go
@@ -117,7 +117,7 @@ sections:
     background: default
     align_center: true
   behavior:
-    expand: none
+    expandable: false
   tiles:
   - title: Come to a session before you decide
     body: 'Full membership isn''t needed for your first visit — turn up to any beginner-friendly session to see what training''s actually like.

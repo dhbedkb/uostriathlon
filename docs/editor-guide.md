@@ -14,42 +14,38 @@ Every page is a list of **Sections**. There are only four kinds:
   widgets, social links — all of these are a **Card grid** with different
   content in its **Tiles**.
 
-A Card grid controls *layout only*: how many columns, whether tiles are
-the same height, whether they scroll sideways, how much padding, what
-background. A Tile controls *content*: an optional badge, eyebrow,
-title, subtitle, body text, image (or an embed instead of an image),
-some label/value rows, question & answer pairs, an email address, and
-buttons. Every one of those is optional — a tile can be just a title and
-image, or just a title and a Q&A list, or all of the above. As of Phase
-2, a tile also controls the **order** those pieces render in and the
-**visibility** of each one individually — see below.
+A Card grid controls *layout* (columns, equal height, scrolling, width,
+padding, background) and one behaviour switch, **Expandable**. A Tile
+controls *content*: an optional badge, eyebrow, title, subtitle, body
+text, image (or an embed instead of an image), some label/value rows,
+question & answer pairs, an email address, and buttons. Every one of
+those is optional. A tile also controls the **order** those pieces
+render in (drag to reorder) and the **visibility** of each one
+individually — see below.
 
-**Preset** is a dropdown on a Card grid purely to help you: pick
-"Committee" and the block gets labelled "Committee" in the list below so
-it's easy to find later. It doesn't hide or add any fields — you can
-change it, or set it to "Custom", any time without losing content.
-
-**Reveal extra detail** (on a Card grid, or per-tile as an override)
-controls the default for any field a tile marks "Reveal on hover" or
-"Reveal on click" below — always shown, only shown on hover (used for
-committee bios), or only shown when clicked (used for FAQs).
+**Preset** is a dropdown on a Card grid purely as a label and a reminder
+of which fields are worth filling in for that kind of content (see the
+table at the bottom of this page). It doesn't hide or add any fields —
+you can change it, or set it to "Custom", any time without losing
+content. Decap CMS genuinely can't show or hide fields based on this
+choice — see `PHASE3-NOTES.md` if you want the technical reason.
 
 ## Content order
 
 By default, a tile's content renders in the order it always has —
 Image, Eyebrow, Title, Subtitle, Body, Q&A, Meta rows, Email, Buttons.
-You can override this per tile with **Content order**: add each piece
-of content you want, drag them into the order you want, and the site
-renders exactly that order. Leave it empty to keep the default.
+Override this per tile with **Content order**: it's a drag-and-drop list
+— the order you arrange it in *is* the order the website renders in, top
+to bottom. Add each piece of content you want, drag it into place.
+Leave it empty to keep the default order.
 
 Anything you don't add to Content order simply doesn't render, even if
-the field has content filled in elsewhere on the tile — so if you add a
+the field has content filled in elsewhere on the tile — so if you set a
 custom order, make sure it includes everything you actually want shown.
 
 Badge (the small tag in the corner, e.g. a date) and the numbered-step
-indicator are not part of Content order — they're positioned outside
-the tile's content, not something that meaningfully "reorders" with the
-rest, so they always render exactly as before.
+indicator are not part of Content order — they're positioned outside the
+tile's content, so they always render exactly as before.
 
 **Example** — editor configuration:
 
@@ -64,33 +60,48 @@ content_order:
 Renders as: Image, Title, Buttons, Body — in that order, exactly as
 configured.
 
-## Visibility
+## Expandable grids, and visibility
 
-Each content type on a tile — Eyebrow, Title, Subtitle, Image, Body,
-Q&A, Meta rows, Email, Buttons — can be set individually to:
+A Card grid can be **Expandable** or not (a single on/off switch, under
+the grid's Behaviour settings). When it's off, every tile always shows
+everything. When it's on, each tile becomes something you can open —
+useful for committee bios or FAQ answers you don't want cluttering the
+page up front.
 
-- **Always** — always shown.
-- **Reveal on hover** / **Reveal on click** — hidden until the tile is
-  opened. Both mean the same thing (shown once the tile opens); which
-  one you pick just documents your intent, since a tile can only have
-  one open gesture. Whichever appears anywhere on the tile becomes that
-  tile's trigger, unless you set Reveal extra detail explicitly.
+*How* an expandable tile opens — hover or click — is no longer chosen
+per section. It's one setting for the whole site:
+**Site Settings → Interactions → "How hidden content is revealed."**
+Every expandable grid on the site follows it, so the interaction feels
+consistent everywhere. (Touch devices always use a tap regardless of
+this setting, since there's no such thing as "hover" on a phone.)
+
+Each piece of content on a tile — Eyebrow, Title, Subtitle, Image, Body,
+Q&A, Meta rows, Email, Buttons — has its own **Visibility**:
+
+- **Always visible.**
+- **Hidden initially** — only shown once the tile is opened. Only has an
+  effect if the grid (or this tile) is Expandable.
 - **Hidden** — never shown, even if the field has content.
 
-Leave a field on its blank default and it falls back to the grid's
-Reveal extra detail setting (Eyebrow/Title/Subtitle/Image always fall
-back to Always, regardless).
+Leave a field on its blank default and it falls back automatically:
+Eyebrow/Title/Subtitle/Image are always visible regardless; everything
+else follows the grid's Expandable setting (hidden initially if the grid
+is expandable, always visible if it isn't).
+
+A single tile can override the grid's Expandable setting under its own
+**Advanced → Expandable override**, for the rare case one tile in a grid
+needs to behave differently from its neighbours.
 
 **Example** — a committee card showing name and photo up front,
-everything else on hover:
+everything else hidden until opened:
 
 ```
-Title: Always
-Subtitle: Always
-Image: Always
-Body: Reveal on hover
-Email: Reveal on hover
-Buttons: Reveal on hover
+Title: Always visible
+Subtitle: Always visible
+Image: Always visible
+Body: Hidden initially
+Email: Hidden initially
+Buttons: Hidden initially
 ```
 
 Normal state:
@@ -101,55 +112,25 @@ President
 [Photo]
 ```
 
-Hover state adds:
+Opened state adds:
 
 ```
 Runs committee meetings and manages training.
 Email →
 ```
 
-**Example** — a committee card that hides the photo until hover too:
-
-```
-Title: Always
-Subtitle: Always
-Image: Reveal on hover
-Body: Reveal on hover
-```
-
-Normal state:
-
-```
-Alex Smith
-President
-```
-
-Hover state adds:
-
-```
-[Photo]
-Runs committee meetings and manages training.
-```
-
-Both approaches are fully supported on the same site, tile by tile.
+Both fully-visible and expandable tiles are supported on the same site,
+grid by grid.
 
 ## Preset starting points
 
-Presets only set a label — Decap can't vary Content order or Visibility
-by preset automatically (there's no way to make a shared field's default
-depend on a sibling field's value without a custom widget plugin, which
-would reintroduce the kind of per-type special-casing this system exists
-to avoid). So instead, here's what each preset is designed to look like
-once you set Content order and Visibility manually — the preset
-dropdown's hint text repeats this as a reminder:
-
-| Preset     | Content order                                | Visibility |
-|------------|-----------------------------------------------|------------|
-| Committee  | Title, Subtitle, Image, Body, Email, Buttons   | Title/Subtitle/Image = Always, rest = Hover |
-| FAQ        | Title, Body                                     | Title = Always, Body = Click |
-| Sponsors   | Image, Title, Body, Buttons                      | All = Always |
-| Events     | Title, Image, Meta, Buttons (Badge is set directly on the tile and always shows) | All = Always |
-| Cards / Gallery / Stats / Custom | as needed | usually all Always |
+| Preset     | Fill in                                         | Suggested Content order |
+|------------|--------------------------------------------------|--------------------------|
+| Committee  | Title (name), Subtitle (role), Image, Body (bio), Email | Title, Subtitle, Image, Body, Email, Buttons |
+| Event      | Badge (date), Title, Image, Body, Meta (Type/Location), Buttons | Title, Image, Meta, Buttons |
+| FAQ        | Title (question), Body (answer)                   | Title, Body |
+| Sponsor    | Image (logo), Title (organisation), Body, Buttons (website) | Image, Title, Body, Buttons |
+| Cards / Gallery / Stats / Custom | whatever fits            | usually all "Always visible" |
 
 ## Editing
 
@@ -159,6 +140,19 @@ dropdown's hint text repeats this as a reminder:
    type and title in the collapsed view.
 3. Publish. GitHub Pages rebuilds automatically — this takes a minute or
    two.
+
+## Site Settings is the design system
+
+Site Settings now controls more than branding. Under **Design system**
+you can set the whole site's colours, card corner roundness/shadow/
+padding/default image shape, heading weight, body text density, page
+width, grid gap, and vertical section spacing — one place, applied
+everywhere, no CSS or code involved. Individual sections can still
+override background, width, and padding for themselves if a specific
+block needs to differ from the site default.
+
+**Interactions** controls the one hover-vs-click setting described
+above.
 
 ## Images: upload, crop, compress
 
@@ -176,9 +170,10 @@ background or a Tile's image:
    "Optimised image" field yourself — it's generated. See
    `docs/image-pipeline.md` for what that compression step actually does.
 
-A Tile's image has one extra option, **Shape**: `square` (the default,
-used for photos) or `round` (used for small icon-style images, e.g.
-social platform logos).
+A Tile's image has one extra option, **Shape**: leave it blank to use
+the site's default image shape (Site Settings → Design system → Cards),
+or set it explicitly to `square` (photos) or `round` (icon-style images,
+e.g. social platform logos).
 
 The live site always loads the small compressed WebP, never the original
 upload, so pages stay fast even with high-resolution source photos.
@@ -232,16 +227,18 @@ Almost everything should be a Card grid preset, not a new section type.
 Adding a new preset means:
 
 1. Add it to the `preset` select's `options` list in `admin/config.yml`
-   / `admin/config.local.yml` — this is guidance only, not new
-   configuration for the renderer.
+   / `admin/config.local.yml`, and a row to the table above — this is
+   guidance only, not new configuration for the renderer.
 2. That's it. `_includes/tile.html` already knows how to render any
    combination of the existing Content fields, in whatever order and
    visibility you configure.
 
 Only build a genuinely new Section type (with its own Liquid include and
 a new `{% when %}` branch in `_includes/renderer.html`) if the thing you
-need truly isn't "a grid of tiles" — the way Hero and Text aren't. Before
-doing that, check whether it could instead be expressed as a Card grid
-with an unusual `layout` (e.g. `numbered`, `chip_style`, `align_center`
-already exist for exactly this reason), or an unusual Content order /
-Visibility combination on its tiles.
+need truly isn't "a grid of tiles" — the way Hero and Text aren't.
+
+## What this editor can't do (and why)
+
+See `PHASE3-NOTES.md` for a straight answer on which parts of a
+"Notion/Webflow-style" editor are genuinely achievable in Decap CMS
+without custom widget code, and which aren't.

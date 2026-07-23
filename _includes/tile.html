@@ -1,41 +1,44 @@
 {% comment %}
   Renders one Tile. This include still doesn't know about "committee
   members" or "FAQ items" — only Content fields (eyebrow, title,
-  subtitle, body, image, embed, badge, meta, qa, buttons, email) and,
-  as of Phase 2, two things the editor now controls directly:
+  subtitle, body, image, embed, badge, meta, qa, buttons, email), plus
+  two editor-controlled things:
 
   - tile.content_order: a list of {type: "..."} entries controlling
-    which Content fields render and in what order. Falls back to
-    DEFAULT_ORDER below when absent, which matches the order this
-    template has always rendered in — chosen deliberately so existing
-    _data/content/*.yml files render identically without a migration.
-    (This differs from the illustrative "Badge, Eyebrow, Title,
-    Subtitle, Image…" order in the brief — Image has always rendered
-    before Eyebrow/Title/Subtitle on this site, so the fallback matches
-    that instead, to avoid changing the look of every existing page.)
+    which Content fields render and in what order (drag-and-drop in the
+    editor — Phase 3, #3). Falls back to DEFAULT_ORDER below when
+    absent, which matches the order this template has always rendered
+    in.
 
-  - tile.visibility: an object mapping each content type to
-    always / hover / click / hidden. Falls back to the pre-Phase-2
-    behaviour: eyebrow/title/subtitle/image are always visible; body,
-    qa, meta, email and buttons follow the tile/section's expand
-    setting, same as before.
+  - tile.visibility: an object mapping each content type to one of
+    three states — always / hidden_initially / hidden (Phase 3, #4).
+    This replaced the old always/hover/click/hidden model: a tile no
+    longer picks *how* hidden content is revealed (hover vs click),
+    only *whether* it starts hidden. Whether a tile can be opened at
+    all is a Section-level (or per-tile override) yes/no — see
+    "Expandable" below — and if it can, the site's one global
+    Interactions > "How hidden content is revealed" setting decides
+    hover vs click for every expandable tile on the site.
 
   Badge and the numbered index badge are NOT part of content_order —
   they're absolutely-positioned overlay tags, not flow content, so
   reordering them has no visual meaning. They always render exactly as
   before.
 
-  A tile can only have ONE reveal mechanism (hover or click) at a time,
-  same as pre-Phase-2 — an individual content field can ask for
-  "hover" or "click", but what that actually determines is *which
-  fields sit inside the expandable region*, not a second independent
-  trigger. If nothing on a tile is hover/click, it renders as a plain
-  always-visible tile (an <article>, no toggle).
-
-  Params: tile, expand_default, numbered, index
+  Params: tile, section_expandable, global_trigger, numbered, index
 {% endcomment %}
 {% assign tile = include.tile %}
-{% assign base_expand = tile.behavior.expand | default: include.expand_default | default: "none" %}
+
+{% comment %} ---- Resolve whether THIS tile can expand at all ---- {% endcomment %}
+{% assign tile_expandable_override = tile.behavior.expandable %}
+{% if tile_expandable_override == "yes" %}
+  {% assign is_expandable = true %}
+{% elsif tile_expandable_override == "no" %}
+  {% assign is_expandable = false %}
+{% else %}
+  {% assign is_expandable = include.section_expandable %}
+{% endif %}
+
 {% assign is_accent = false %}
 {% if tile.style == "accent" %}{% assign is_accent = true %}{% endif %}
 
@@ -53,8 +56,7 @@
 {% comment %} ---- Render each content field, sorting into "always" vs "revealed" buckets ---- {% endcomment %}
 {% assign always_html = "" %}
 {% assign reveal_html = "" %}
-{% assign has_hover = false %}
-{% assign has_click = false %}
+{% assign has_reveal_content = false %}
 
 {% for content_type in order_types %}
   {% assign v = tile.visibility[content_type] %}
@@ -63,10 +65,10 @@
       {% when "eyebrow" or "title" or "subtitle" or "image" %}
         {% assign v = "always" %}
       {% else %}
-        {% if base_expand == "none" %}
-          {% assign v = "always" %}
+        {% if is_expandable %}
+          {% assign v = "hidden_initially" %}
         {% else %}
-          {% assign v = base_expand %}
+          {% assign v = "always" %}
         {% endif %}
     {% endcase %}
   {% endif %}
@@ -91,7 +93,8 @@
         {% if tile.image %}
           {% assign img_src = tile.image.src | default: tile.image.src_raw %}
           {% if img_src %}
-            <div class="tile-frame{% if tile.image.shape == "round" %} tile-frame-round{% endif %}" style="--crop-x: {{ tile.image.crop_x | default: 50 }}%; --crop-y: {{ tile.image.crop_y | default: 50 }}%; --crop-zoom: {{ tile.image.crop_zoom | default: 100 | divided_by: 100.0 }};">
+            {% assign img_shape = tile.image.shape | default: site.data.settings.design.cards.image_shape | default: "square" %}
+            <div class="tile-frame{% if img_shape == "round" %} tile-frame-round{% endif %}" style="--crop-x: {{ tile.image.crop_x | default: 50 }}%; --crop-y: {{ tile.image.crop_y | default: 50 }}%; --crop-zoom: {{ tile.image.crop_zoom | default: 100 | divided_by: 100.0 }};">
               <img src="{{ img_src | relative_url }}" alt="{{ tile.image.alt | default: tile.title | default: '' }}" width="900" height="900" loading="lazy" decoding="async">
             </div>
           {% endif %}
@@ -160,7 +163,7 @@
     {% if v == "always" %}
       {% assign always_html = always_html | append: item_html %}
     {% else %}
-      {% if v == "click" %}{% assign has_click = true %}{% else %}{% assign has_hover = true %}{% endif %}
+      {% assign has_reveal_content = true %}
       {% assign reveal_html = reveal_html | append: item_html %}
     {% endif %}
   {% endif %}
@@ -168,48 +171,45 @@
 
 {% assign reveal_html_trimmed = reveal_html | strip %}
 
-{% comment %} ---- Work out the tile's single reveal trigger ---- {% endcomment %}
-{% assign explicit_trigger = tile.behavior.expand %}
-{% if explicit_trigger and explicit_trigger != blank %}
-  {% assign effective_trigger = explicit_trigger %}
-{% elsif has_click %}
-  {% assign effective_trigger = "click" %}
-{% elsif has_hover %}
-  {% assign effective_trigger = "hover" %}
+{% comment %}
+  ---- Work out whether this tile actually renders as expandable ----
+  Only expandable, and only using <details>, if the tile is allowed to
+  expand AND it actually has something in the "hidden initially" bucket
+  — an expandable tile with nothing to reveal just renders flat.
+{% endcomment %}
+{% if is_expandable and reveal_html_trimmed != "" %}
+  {% assign renders_expandable = true %}
 {% else %}
-  {% assign effective_trigger = include.expand_default | default: "none" %}
+  {% assign renders_expandable = false %}
 {% endif %}
-{% if reveal_html_trimmed == "" %}
-  {% assign effective_trigger = "none" %}
-{% endif %}
+
+{% assign trigger = include.global_trigger | default: "hover" %}
 
 {% assign tile_classes = "tile tile-surface" %}
 {% if is_accent %}{% assign tile_classes = "tile tile-surface-accent tile-cta" %}{% endif %}
 {% if tile.badge %}{% assign tile_classes = tile_classes | append: " tile-has-badge" %}{% endif %}
 {% if include.numbered %}{% assign tile_classes = tile_classes | append: " tile-numbered" %}{% endif %}
-{% unless effective_trigger == "none" %}{% assign tile_classes = tile_classes | append: " tile-reveal" %}{% endunless %}
+{% if renders_expandable %}{% assign tile_classes = tile_classes | append: " tile-reveal" %}{% endif %}
 
-<{% if effective_trigger == "none" %}article{% else %}details{% endif %}
+<{% if renders_expandable %}details{% else %}article{% endif %}
   class="{{ tile_classes }}"
-  {% if effective_trigger == "hover" %}data-reveal-mode="hover"{% endif %}
+  {% if renders_expandable and trigger == "hover" %}data-reveal-mode="hover"{% endif %}
 >
   {% if tile.badge %}<span class="tile-badge">{{ tile.badge }}</span>{% endif %}
   {% if include.numbered %}<span class="tile-index-badge">{{ include.index }}</span>{% endif %}
 
-  {% if effective_trigger == "none" %}
-    <div class="tile-content-wrap">
-      {{ always_html }}
-      {{ reveal_html }}
-    </div>
-  {% else %}
+  {% if renders_expandable %}
     <summary class="tile-header tile-header-row tile-reveal-summary">
       <span class="tile-header-text">{{ always_html }}</span>
       <span class="tile-reveal-toggle" aria-hidden="true"></span>
     </summary>
-    {% if reveal_html_trimmed != "" %}
-      <div class="tile-body tile-reveal-body">
-        {{ reveal_html }}
-      </div>
-    {% endif %}
+    <div class="tile-body tile-reveal-body">
+      {{ reveal_html }}
+    </div>
+  {% else %}
+    <div class="tile-content-wrap">
+      {{ always_html }}
+      {{ reveal_html }}
+    </div>
   {% endif %}
-</{% if effective_trigger == "none" %}article{% else %}details{% endif %}>
+</{% if renders_expandable %}details{% else %}article{% endif %}>

@@ -34,7 +34,7 @@ sections:
         visibility:
           title: always
           subtitle: always
-          image: hover
+          image: hidden_initially
         meta: []
         content_order:
           - type: title
@@ -73,7 +73,7 @@ sections:
       padding: normal
       background: default
     behavior:
-      expand: hover
+      expandable: true
     subtitle: Click a name to read more and get in touch.
     title: Your committee
     type: tile-grid
@@ -91,7 +91,7 @@ sections:
       padding: normal
       background: default
     behavior:
-      expand: click
+      expandable: true
     tiles:
       - title: When are committee elections held?
         body: >

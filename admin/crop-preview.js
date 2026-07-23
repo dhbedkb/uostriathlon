@@ -150,10 +150,10 @@
   // --- Tile-grid: the rendering engine. This function has no idea what
   // "committee" or "sponsors" mean — it only reads the same Content
   // fields _includes/tile.html reads on the live site (image, embed,
-  // eyebrow, title, subtitle, body, badge, meta, buttons), and — as of
-  // Phase 2 — the same content_order / visibility fields, so the
-  // preview's field order matches what the site will actually render.
-  // Adding a new preset never requires touching this file. ---
+  // eyebrow, title, subtitle, body, badge, meta, buttons), and the same
+  // content_order / visibility fields, so the preview's field order and
+  // visibility match what the site will actually render. Adding a new
+  // preset never requires touching this file. ---
 
   // Mirrors _includes/tile.html's DEFAULT fallback order exactly, so the
   // preview matches the live site when a tile has no custom order set.
@@ -167,15 +167,25 @@
     return DEFAULT_ORDER;
   }
 
+  // Phase 3: whether a tile can expand at all is a Section-level
+  // Expandable boolean (with an optional per-tile "yes"/"no" override) —
+  // there's no longer a per-tile hover/click choice. Mirrors
+  // _includes/tile.html.
+  function isExpandable(section, tile) {
+    var override = tile.behavior && tile.behavior.expandable;
+    if (override === "yes") return true;
+    if (override === "no") return false;
+    return !!(section.behavior && section.behavior.expandable);
+  }
+
   // Mirrors _includes/tile.html's visibility fallback: eyebrow/title/
   // subtitle/image default to "always"; everything else falls back to
-  // the grid's Reveal behaviour (or "always" if that's "none").
-  function visibilityFor(tile, type) {
+  // "hidden_initially" if the tile is expandable, or "always" if not.
+  function visibilityFor(section, tile, type) {
     var explicit = tile.visibility && tile.visibility[type];
     if (explicit) return explicit;
     if (type === "eyebrow" || type === "title" || type === "subtitle" || type === "image") return "always";
-    var expand = tile.behavior && tile.behavior.expand;
-    return expand && expand !== "none" ? expand : "always";
+    return isExpandable(section, tile) ? "hidden_initially" : "always";
   }
 
   function renderContentNode(tile, type, getAsset) {
@@ -213,18 +223,18 @@
     }
   }
 
-  function renderTile(tile, getAsset, key) {
+  function renderTile(section, tile, getAsset, key) {
     var nodes = [];
 
     orderFor(tile).forEach(function (type, i) {
-      var visibility = visibilityFor(tile, type);
+      var visibility = visibilityFor(section, tile, type);
       if (visibility === "hidden") return;
 
       var content = renderContentNode(tile, type, getAsset);
       if (!content) return;
 
-      var reveal = (visibility === "hover" || visibility === "click")
-        ? h("span", { className: "cp-badge", style: { position: "static", display: "inline-block", marginBottom: "4px" } }, "reveals on " + visibility)
+      var reveal = (visibility === "hidden_initially")
+        ? h("span", { className: "cp-badge", style: { position: "static", display: "inline-block", marginBottom: "4px" } }, "hidden initially")
         : null;
 
       nodes.push(h("div", { key: type + "-" + i }, reveal, content));
@@ -248,7 +258,7 @@
         "div",
         { className: "cp-grid" },
         tiles.map(function (tile, i) {
-          return renderTile(tile, getAsset, i);
+          return renderTile(section, tile, getAsset, i);
         })
       )
     );

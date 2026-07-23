@@ -6,6 +6,17 @@ tile-grid). See ARCHITECTURE.md for the full mapping table.
 Safe to re-run: sections already in the new shape (type already one of
 hero/text/relay-bar/tile-grid with a `layout` key) are left untouched.
 
+Phase 3 note: this script still writes the pre-Phase-3 key names
+(`behavior.expand: none/hover/click`) because it predates that change
+and is kept only as a historical record of the original 15→4 migration.
+Running it against content that's already on the Phase 3 schema
+(`behavior.expandable: true/false`, `visibility: ...: hidden_initially`)
+is harmless — those sections are already caught by the "already
+migrated" check below and left alone — but this script does NOT perform
+the Phase 3 key rename itself. That rename was applied by hand across
+_data/content/*.yml (see MIGRATION.md, "Phase 3" section) since it only
+touched a handful of files and keys, not a new section-type shape.
+
 Usage:
   python3 scripts/migrate_content.py            # writes in place
   python3 scripts/migrate_content.py --check    # prints, doesn't write

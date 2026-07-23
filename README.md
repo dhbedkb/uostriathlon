@@ -4,8 +4,12 @@ A Jekyll site with a Decap CMS editor. Every page is a list of
 **Sections**, and almost everything on the site — cards, photos,
 committee members, sponsors, stats, FAQs, events, a call-to-action,
 embeds, social links — is one **Card grid** section full of **Tiles**.
-See `ARCHITECTURE.md` for the full model and reasoning, and
-`docs/editor-guide.md` for how to use it day-to-day.
+See `ARCHITECTURE.md` for the full model and reasoning,
+`docs/editor-guide.md` for how to use it day-to-day, and
+`PHASE3-NOTES.md` for an honest account of the latest editor-UX pass —
+what changed, and what a "real" Notion/Webflow-style builder would still
+need (custom Decap CMS widget development, out of scope for a config
+change).
 
 - Edit content: see `docs/editor-guide.md`.
 - Add a new *preset* (a new kind of card): add it to the `preset`
@@ -18,9 +22,16 @@ See `ARCHITECTURE.md` for the full model and reasoning, and
   automatically compressed to WebP on publish. See `docs/editor-guide.md`
   for how that pipeline works, and `docs/image-pipeline.md` for the
   compression settings behind it.
-- Content order and per-field visibility (which parts of a tile show
-  up front vs. on hover/click) are also editor-controlled now — see
-  `docs/editor-guide.md`.
+- Content order (drag-and-drop) and per-field Visibility (Always
+  visible / Hidden initially / Hidden) are editor-controlled — see
+  `docs/editor-guide.md`. Whether a grid can expand at all, and whether
+  that happens on hover or click, are separate: Expandable is set per
+  Card grid, hover-vs-click is one site-wide setting under Site
+  Settings → Interactions.
+- Site Settings is also the site's design system: colours, card
+  radius/shadow/padding/default image shape, typography, and layout
+  spacing all live there and apply everywhere via CSS custom
+  properties — no CSS or code edits needed to reskin the site.
 
 ## The tile system, in one rule
 
@@ -30,9 +41,9 @@ fixed 1:1 aspect ratio (or round, for icon-style images), with the same
 gap above the text that follows it. It never bleeds to the tile's edge
 while the text stays indented. `_includes/tile.html` builds every tile
 from this system regardless of what preset it was created from, so this
-stays true automatically as the site grows — and, as of Phase 2, the
-editor controls both which pieces of content appear and what order they
-render in, not just their content.
+stays true automatically as the site grows — and the editor controls
+both which pieces of content appear, what order they render in, and
+whether they start visible or hidden.
 
 ## Local development
 

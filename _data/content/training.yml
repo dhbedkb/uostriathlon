@@ -38,7 +38,7 @@ sections:
     padding: normal
     background: default
   behavior:
-    expand: none
+    expandable: false
   tiles:
   - badge: Mondays, 6:00–7:00pm
     title: Pool swim
@@ -101,7 +101,7 @@ sections:
     padding: normal
     background: default
   behavior:
-    expand: none
+    expandable: false
   tiles:
   - title: Week 1 — Foundations
     body: 'Front crawl technique in the pool, getting comfortable on a bike in a group, and an easy running base.
@@ -127,7 +127,7 @@ sections:
     padding: normal
     background: default
   behavior:
-    expand: click
+    expandable: true
   tiles:
   - title: Do I need my own bike to start training?
     body: 'No — the club has bikes you can borrow, and several members car-share or hire bikes for outdoor rides until they''re ready to buy their own.
