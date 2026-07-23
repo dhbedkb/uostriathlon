@@ -1,145 +1,147 @@
 title: Committee
 description: Meet the committee running Sheffield Triathlon Club this year.
 sections:
-- body: 'Every session, race trip and social is organised by a team of volunteer members. Get in touch with any of them directly, or use the club email for anything general.
-
-    '
-  eyebrow: Committee
-  primary_button:
-    label: '1'
-    url: '1'
-  background_image_raw: /uostriathlon/assets/images/source/img_1783.jpg
-  subtitle: Meet this year's committee
-  title: Run by members, for members
-  type: hero
-  id: committee-hero
-  secondary_button:
-    label: '1'
-    url: '1'
-- tiles:
-  - preset: committee
-    blocks:
-    - type: title
-      text: Add name
-    - type: subtitle
-      text: Club Captain
-    - type: expand
-    - type: body
-      text: Add a short bio here — a sentence or two is plenty.
-    - type: email
-      value: triathlon@sheffield.ac.uk
-  - preset: committee
-    blocks:
-    - type: title
-      text: Barnaby Read
-    - type: subtitle
-      text: Secretary
-    - type: image
-      src_raw: /uostriathlon/assets/images/source/img_9541.jpg
-      crop_x: 50
-      crop_y: 50
-      crop_zoom: 100
-      alt: Barnaby Read
-    - type: expand
-    - type: body
-      text: Add a short bio here — a sentence or two is plenty.
-  - preset: committee
-    blocks:
-    - type: title
-      text: Add name
-    - type: subtitle
-      text: Vice Captain (Social)
-    - type: expand
-    - type: body
-      text: Add a short bio here — a sentence or two is plenty.
-  - preset: committee
-    blocks:
-    - type: title
-      text: Add name
-    - type: subtitle
-      text: Treasurer
-    - type: expand
-    - type: body
-      text: Add a short bio here — a sentence or two is plenty.
-  - preset: committee
-    blocks:
-    - type: title
-      text: Add name
-    - type: subtitle
-      text: Beginners Coordinator
-    - type: image
-      src_raw: /uostriathlon/assets/images/committee/raw/708752699_1640993453798187_4377617180923485565_n.jpg
-      crop_x: 50
-      crop_y: 6
-      crop_zoom: 200
-      alt: Add name
-    - type: expand
-    - type: body
-      text: Add a short bio here — a sentence or two is plenty.
-  - preset: committee
-    blocks:
-    - type: title
-      text: Add name
-    - type: subtitle
-      text: Welfare & Inclusion Officer
-    - type: expand
-    - type: body
-      text: Add a short bio here — a sentence or two is plenty.
-  - preset: committee
-    blocks:
-    - type: title
-      text: Add name
-    - type: subtitle
-      text: Kit Secretary
-    - type: expand
-    - type: body
-      text: Add a short bio here — a sentence or two is plenty.
-  - preset: committee
-    blocks:
-    - type: title
-      text: Add name
-    - type: subtitle
-      text: Social Secretary
-    - type: expand
-    - type: body
-      text: Add a short bio here — a sentence or two is plenty.
-  eyebrow: This year's committee
-  layout:
-    columns: 3
-    equal_height: true
-    width: normal
-    padding: normal
-    background: default
-  subtitle: Click a name to read more and get in touch.
-  title: Your committee
-  type: tile-grid
-  id: committee-members
-- type: tile-grid
-  id: committee-faq
-  eyebrow: Getting involved
-  title: Want to join the committee?
-  layout:
-    columns: 1
-    equal_height: false
-    width: narrow
-    padding: normal
-    background: default
-  tiles:
-  - preset: faq
-    blocks:
-    - type: title
-      text: When are committee elections held?
-    - type: expand
-    - type: body
-      text: 'Elections are held at the club''s AGM, usually in the spring term. Details are shared with members ahead of time on Instagram and by email.
-
-        '
-  - preset: faq
-    blocks:
-    - type: title
-      text: Do I need previous committee experience?
-    - type: expand
-    - type: body
-      text: 'No — most committee members'' first role was on this committee. Outgoing members hand over notes and are always happy to help.
-
-        '
+  - body: >
+      Every session, race trip and social is organised by a team of volunteer
+      members. Get in touch with any of them directly, or use the club email for
+      anything general.
+    eyebrow: Committee
+    primary_button:
+      label: "1"
+      url: "1"
+    background_image_raw: ""
+    subtitle: Meet this year's committee
+    title: Run by members, for members
+    type: hero
+    id: committee-hero
+    secondary_button:
+      label: "1"
+      url: "1"
+  - tiles:
+      - preset: committee
+        blocks:
+          - type: title
+            text: Add name
+          - type: subtitle
+            text: Club Captain
+          - type: expand
+          - type: body
+            text: Add a short bio here — a sentence or two is plenty.
+          - type: email
+            value: triathlon@sheffield.ac.uk
+      - preset: committee
+        blocks:
+          - type: title
+            text: Barnaby Read
+          - type: subtitle
+            text: Secretary
+          - type: image
+            src_raw: ""
+            crop_x: 50
+            crop_y: 50
+            crop_zoom: 100
+            alt: Barnaby Read
+          - type: expand
+          - type: body
+            text: Add a short bio here — a sentence or two is plenty.
+      - preset: committee
+        blocks:
+          - type: title
+            text: Add name
+          - type: subtitle
+            text: Vice Captain (Social)
+          - type: expand
+          - type: body
+            text: Add a short bio here — a sentence or two is plenty.
+      - preset: committee
+        blocks:
+          - type: title
+            text: Add name
+          - type: subtitle
+            text: Treasurer
+          - type: expand
+          - type: body
+            text: Add a short bio here — a sentence or two is plenty.
+      - preset: committee
+        blocks:
+          - type: title
+            text: Add name
+          - type: subtitle
+            text: Beginners Coordinator
+          - type: image
+            src_raw: /uostriathlon/assets/images/committee/raw/708752699_1640993453798187_4377617180923485565_n.jpg
+            crop_x: 50
+            crop_y: 6
+            crop_zoom: 200
+            alt: Add name
+          - type: expand
+          - type: body
+            text: Add a short bio here — a sentence or two is plenty.
+      - preset: committee
+        blocks:
+          - type: title
+            text: Add name
+          - type: subtitle
+            text: Welfare & Inclusion Officer
+          - type: expand
+          - type: body
+            text: Add a short bio here — a sentence or two is plenty.
+      - preset: committee
+        blocks:
+          - type: title
+            text: Add name
+          - type: subtitle
+            text: Kit Secretary
+          - type: expand
+          - type: body
+            text: Add a short bio here — a sentence or two is plenty.
+      - preset: committee
+        blocks:
+          - type: title
+            text: Add name
+          - type: subtitle
+            text: Social Secretary
+          - type: expand
+          - type: body
+            text: Add a short bio here — a sentence or two is plenty.
+    eyebrow: This year's committee
+    layout:
+      columns: 3
+      equal_height: true
+      width: normal
+      padding: normal
+      background: default
+    subtitle: Click a name to read more and get in touch.
+    title: Your committee
+    type: tile-grid
+    id: committee-members
+  - type: tile-grid
+    id: committee-faq
+    eyebrow: Getting involved
+    title: Want to join the committee?
+    layout:
+      columns: 1
+      equal_height: false
+      width: narrow
+      padding: normal
+      background: default
+    tiles:
+      - preset: faq
+        blocks:
+          - type: title
+            text: When are committee elections held?
+          - type: expand
+          - type: body
+            text: >
+              Elections are held at the club's AGM, usually in the spring term.
+              Details are shared with members ahead of time on Instagram and by
+              email.
+      - preset: faq
+        blocks:
+          - type: title
+            text: Do I need previous committee experience?
+          - type: expand
+          - type: body
+            text: >
+              No — most committee members' first role was on this committee.
+              Outgoing members hand over notes and are always happy to help.
