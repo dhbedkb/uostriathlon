@@ -9,7 +9,7 @@ sections:
     primary_button:
       label: "1"
       url: "1"
-    background_image_raw: ""
+    background_image_raw: /uostriathlon/assets/images/source/img_1783.jpeg
     subtitle: Meet this year's committee
     title: Run by members, for members
     type: hero
@@ -20,10 +20,10 @@ sections:
   - tiles:
       - preset: committee
         blocks:
-          - type: title
-            text: Add name
           - type: subtitle
             text: Club Captain
+          - type: title
+            text: Jamie Thornton
           - type: expand
           - type: body
             text: Add a short bio here — a sentence or two is plenty.
@@ -48,63 +48,134 @@ sections:
       - preset: committee
         blocks:
           - type: title
-            text: Add name
-          - type: subtitle
-            text: Vice Captain (Social)
-          - type: expand
-          - type: body
-            text: Add a short bio here — a sentence or two is plenty.
-      - preset: committee
-        blocks:
-          - type: title
-            text: Add name
+            text: Lorna Preston
           - type: subtitle
             text: Treasurer
           - type: expand
+          - type: image
+            crop_x: 50
+            crop_y: 50
+            crop_zoom: 100
+            shape: square
           - type: body
             text: Add a short bio here — a sentence or two is plenty.
       - preset: committee
         blocks:
           - type: title
-            text: Add name
+            text: Kiera Dickinson
           - type: subtitle
-            text: Beginners Coordinator
+            text: Welfare Officer
+          - type: expand
+          - type: body
+            text: Add a short bio here — a sentence or two is plenty.
+      - preset: committee
+        blocks:
+          - type: title
+            text: Joseph Fields
+          - type: subtitle
+            text: Competitions Officer
+          - type: expand
           - type: image
             src_raw: ""
             crop_x: 50
             crop_y: 6
             crop_zoom: 200
             alt: Add name
-          - type: expand
           - type: body
             text: Add a short bio here — a sentence or two is plenty.
       - preset: committee
+        style: default
         blocks:
           - type: title
-            text: Add name
+            text: Becky Smith
+          - type: eyebrow
+            text: Swim
           - type: subtitle
-            text: Welfare & Inclusion Officer
+            text: Training Officer
           - type: expand
+          - type: image
           - type: body
             text: Add a short bio here — a sentence or two is plenty.
       - preset: committee
+        style: default
         blocks:
           - type: title
-            text: Add name
+            text: Tom Siepp
           - type: subtitle
-            text: Kit Secretary
+            text: Training Officer
+          - type: eyebrow
+            text: Cycling
+          - type: image
           - type: expand
           - type: body
             text: Add a short bio here — a sentence or two is plenty.
+          - type: email
+            value: triathlon@sheffield.ac.uk
       - preset: committee
+        style: default
         blocks:
           - type: title
-            text: Add name
+            text: Full Name
           - type: subtitle
-            text: Social Secretary
+            text: Role
+          - type: image
           - type: expand
           - type: body
             text: Add a short bio here — a sentence or two is plenty.
+          - type: email
+            value: triathlon@sheffield.ac.uk
+      - preset: committee
+        style: default
+        blocks:
+          - type: title
+            text: Full Name
+          - type: subtitle
+            text: Role
+          - type: image
+          - type: expand
+          - type: body
+            text: Add a short bio here — a sentence or two is plenty.
+          - type: email
+            value: triathlon@sheffield.ac.uk
+      - preset: committee
+        style: default
+        blocks:
+          - type: title
+            text: Full Name
+          - type: subtitle
+            text: Role
+          - type: image
+          - type: expand
+          - type: body
+            text: Add a short bio here — a sentence or two is plenty.
+          - type: email
+            value: triathlon@sheffield.ac.uk
+      - preset: committee
+        style: default
+        blocks:
+          - type: title
+            text: Full Name
+          - type: subtitle
+            text: Role
+          - type: image
+          - type: expand
+          - type: body
+            text: Add a short bio here — a sentence or two is plenty.
+          - type: email
+            value: triathlon@sheffield.ac.uk
+      - preset: committee
+        style: default
+        blocks:
+          - type: title
+            text: Full Name
+          - type: subtitle
+            text: Role
+          - type: image
+          - type: expand
+          - type: body
+            text: Add a short bio here — a sentence or two is plenty.
+          - type: email
+            value: triathlon@sheffield.ac.uk
     eyebrow: This year's committee
     layout:
       columns: "4"
