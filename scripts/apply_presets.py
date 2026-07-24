@@ -78,8 +78,15 @@ def sync_config(text, presets_by_name):
                 for block in presets_by_name[current_preset]["blocks"]:
                     out.append(f"{item_indent}- {block_to_flow_yaml(block)}")
                 changed = True
-                current_preset = None
-                continue
+            # Either way, `line` (the types: *block_types line) has already
+            # been appended and `i` already advanced past it above -- fall
+            # through to the top of the loop rather than the generic
+            # append below, or it gets appended a second time (this hit
+            # the "Tile presets" collection, which reuses *block_types
+            # without a following `default:`, and silently duplicated the
+            # line while dropping whatever came after it).
+            current_preset = None
+            continue
 
         out.append(line)
         i += 1

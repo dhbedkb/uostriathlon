@@ -384,7 +384,7 @@ collections:
                     typeKey: type
                     summary: '{{fields.type}}'
                     types: *block_types
-                    types: *block_types
+              - name: faq
                 label: FAQ item
                 fields:
                   - {label: Label, name: label, widget: string, default: "FAQ item"}
@@ -394,7 +394,7 @@ collections:
                     typeKey: type
                     summary: '{{fields.type}}'
                     types: *block_types
-                    types: *block_types
+              - name: sponsor
                 label: Sponsor
                 fields:
                   - {label: Label, name: label, widget: string, default: "Sponsor"}
@@ -404,7 +404,7 @@ collections:
                     typeKey: type
                     summary: '{{fields.type}}'
                     types: *block_types
-                    types: *block_types
+              - name: event
                 label: Event
                 fields:
                   - {label: Label, name: label, widget: string, default: "Event"}
@@ -413,5 +413,4 @@ collections:
                     widget: list
                     typeKey: type
                     summary: '{{fields.type}}'
-                    types: *block_types
                     types: *block_types
