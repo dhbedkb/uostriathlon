@@ -1,17 +1,3 @@
-# Preset library — edited from Site Settings → Tile presets in the CMS.
-#
-# scripts/apply_presets.py reads this file on every publish and writes
-# the matching `default:` block list into the Tiles typed-list inside
-# admin/config.yml and admin/config.local.yml. Edit a preset here,
-# publish, and the next tile someone inserts with that preset starts
-# from whatever's saved — this does not change tiles already on a
-# page.
-#
-# Each `name` below must match one of the fixed preset types wired
-# into admin/config.yml's Tiles list (committee / faq / sponsor /
-# event). Adding a new name here on its own does nothing — see
-# "Adding a new preset" in docs/editor-guide.md for what a genuinely
-# new preset type requires.
 presets:
   - name: committee
     label: Committee member
@@ -20,13 +6,10 @@ presets:
         text: Full Name
       - type: subtitle
         text: Role
-      - type: image
       - type: expand
+      - type: image
       - type: body
         text: Add a short bio here — a sentence or two is plenty.
-      - type: email
-        value: triathlon@sheffield.ac.uk
-
   - name: faq
     label: FAQ item
     blocks:
@@ -35,7 +18,6 @@ presets:
       - type: expand
       - type: body
         text: Answer goes here.
-
   - name: sponsor
     label: Sponsor
     blocks:
@@ -44,7 +26,6 @@ presets:
         text: Sponsor name
       - type: body
         text: A sentence about the sponsor.
-
   - name: event
     label: Event
     blocks:
