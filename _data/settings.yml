@@ -4,9 +4,6 @@ brand:
   tagline: Swim. Bike. Run. Belong.
   email: triathlon@sheffield.ac.uk
   logo: /uostriathlon/assets/images/brand/bordered.png
-  logo_crop_x: 50
-  logo_crop_y: 50
-  logo_crop_zoom: 100
 theme:
   default: dark
 interactions:

@@ -18,12 +18,23 @@ regardless of how many image blocks a single tile happens to contain
 image's **shape** (`square` or `round`), not by what preset it happens
 to sit in:
 
-| Use                                   | Output size | WebP quality |
-|-----------------------------------------|------------|-------------|
-| Hero background                          | 2000×1125  | 76          |
-| Tile image, shape = square (the default) | 1000×1000  | 80          |
-| Tile image, shape = round                 | 512×512    | 88          |
-| Brand logo                                | 240×240    | 92          |
+| Use                                       | Output size    | WebP quality |
+|--------------------------------------------|----------------|-------------|
+| Hero background                             | 2000×1125      | 76          |
+| Tile image, shape = square (the default)    | 1000×1000      | 80          |
+| Tile image, shape = round                    | 512×512        | 88          |
+| Brand logo                                    | fits within 480×480, no cropping | 92 |
+
+## The logo is handled differently
+
+Every other image on the site is cropped to a fixed aspect ratio and
+(for round images) implicitly expected to work as a small circular
+mark. The brand logo isn't: it's shown at its own natural proportions
+in the nav and footer, so cropping or masking it would cut a
+transparent-background logo into a shape it was never designed for.
+`save_logo_webp` in `scripts/optimise_site_images.py` only downscales
+if the source is larger than its bounding box — it never crops, and it
+preserves transparency. There are no crop controls for it in the CMS.
 
 ## Why WebP, and why these settings
 

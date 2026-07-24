@@ -26,7 +26,7 @@
   --tile-frame-radius: 1rem;
   --tile-frame-aspect: 1 / 1;
   --tile-inner-gap: 1rem;
-  --tile-grid-min: 260px;
+  --tile-columns: 3;
 }
 
 [data-theme="light"] {
@@ -218,29 +218,22 @@ img { max-width: 100%; display: block; }
   text-decoration: none;
 }
 
-/* Neutral frame for the logo mark — no fixed brand colour behind it, so
-   a transparent-background logo just sits on the page instead of showing
-   through a gold circle. */
+/* Logo mark: shown at its own proportions, never cropped or masked —
+   important for a transparent-background logo, which a circular clip
+   would otherwise cut into. */
 .brand-mark {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 44px;
   height: 44px;
-  border-radius: 50%;
-  overflow: hidden;
-  background: var(--color-surface-soft);
-  border: 1px solid var(--color-border);
   flex: 0 0 auto;
 }
 
 .brand-mark img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: var(--crop-x, 50%) var(--crop-y, 50%);
-  transform: scale(var(--crop-zoom, 1));
-  transform-origin: var(--crop-x, 50%) var(--crop-y, 50%);
+  object-fit: contain;
 }
 
 .brand-name { font-weight: 900; letter-spacing: -0.02em; }
@@ -477,21 +470,19 @@ img { max-width: 100%; display: block; }
    bleeds to the tile's edge while text stays padded; that mismatch is
    what used to make image tiles look misaligned against text-only ones.
    A tile is one padded box, top to bottom, always.
+
+   Column count is an explicit --tile-columns integer (set per section
+   in block 12, below) rather than an auto-fit/minmax heuristic — a
+   fixed count is what "Columns: 2" in the editor actually promises,
+   and auto-fit can't guarantee a precise number at a given container
+   width.
    ===================================================== */
 
 .tile-grid {
   display: grid;
   gap: var(--tile-gap);
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--tile-grid-min)), 1fr));
+  grid-template-columns: repeat(var(--tile-columns, 3), minmax(0, 1fr));
   align-items: start;
-}
-
-.tile-grid-three-up { --tile-grid-min: 280px; }
-.tile-grid-four-up { --tile-grid-min: 220px; }
-
-.tile-grid-nested {
-  margin-top: var(--tile-pad-compact);
-  --tile-grid-min: 200px;
 }
 
 .tile-stack { display: flex; flex-direction: column; gap: var(--tile-gap); }
@@ -513,13 +504,6 @@ img { max-width: 100%; display: block; }
 }
 
 .tile:hover { border-color: rgba(247, 211, 93, 0.4); }
-
-.tile-nested {
-  padding: var(--tile-pad-compact);
-  border-radius: var(--tile-frame-radius);
-  background: var(--color-surface-soft);
-  box-shadow: none;
-}
 
 .tile-header { margin: 0; }
 .tile-header > :first-child { margin-top: 0; }
@@ -731,7 +715,7 @@ details[open] .tile-reveal-toggle::after { display: none; }
   background: rgba(255, 255, 255, 0.08);
 }
 
-/* Sections that must not be squeezed by the tile grid auto-fit (iframes) */
+/* Sections that must not be squeezed by the tile grid (iframes) */
 .section-normal-flow { overflow: visible; }
 
 /* =====================================================
@@ -838,10 +822,25 @@ details[open] .tile-reveal-toggle::after { display: none; }
    matter which preset the tiles inside were built from.
    ===================================================== */
 
-.section-tile-grid[data-columns="1"] .tile-grid { --tile-grid-min: 100%; }
-.section-tile-grid[data-columns="2"] .tile-grid { --tile-grid-min: 340px; }
-.section-tile-grid[data-columns="3"] .tile-grid { --tile-grid-min: 280px; }
-.section-tile-grid[data-columns="4"] .tile-grid { --tile-grid-min: 220px; }
+.section-tile-grid[data-columns="1"] .tile-grid { --tile-columns: 1; }
+.section-tile-grid[data-columns="2"] .tile-grid { --tile-columns: 2; }
+.section-tile-grid[data-columns="3"] .tile-grid { --tile-columns: 3; }
+.section-tile-grid[data-columns="4"] .tile-grid { --tile-columns: 4; }
+
+/* Responsive collapse. Selectors match the rules above exactly (same
+   specificity), so later source order decides — no auto-fit heuristic
+   and no !important needed. */
+@media (max-width: 860px) {
+  .section-tile-grid[data-columns="3"] .tile-grid,
+  .section-tile-grid[data-columns="4"] .tile-grid { --tile-columns: 2; }
+}
+
+@media (max-width: 560px) {
+  .section-tile-grid[data-columns="1"] .tile-grid,
+  .section-tile-grid[data-columns="2"] .tile-grid,
+  .section-tile-grid[data-columns="3"] .tile-grid,
+  .section-tile-grid[data-columns="4"] .tile-grid { --tile-columns: 1; }
+}
 
 .tile-grid-align-stretch { align-items: stretch; }
 .tile-grid-align-stretch .tile { height: 100%; }
@@ -859,7 +858,7 @@ details[open] .tile-reveal-toggle::after { display: none; }
 }
 
 .tile-grid-scroll .tile {
-  flex: 0 0 min(80vw, var(--tile-grid-min, 280px));
+  flex: 0 0 min(80vw, 280px);
   scroll-snap-align: start;
 }
 

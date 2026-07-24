@@ -118,11 +118,10 @@ collections:
                     hint: >
                       Click "Add Tile" and pick a starting point. Committee /
                       FAQ / Sponsor / Event come pre-filled with the blocks
-                      that kind of content usually needs — delete, add, or
-                      reorder any of them afterwards, exactly as if you'd
-                      built the tile from scratch. Custom starts empty. None
-                      of this shows up on the published site — it only
-                      affects what you start with in the editor.
+                      that kind of content usually needs — edit what they
+                      pre-fill from Site Settings → Tile presets. Custom
+                      starts empty. Once inserted, a tile is a tile — add,
+                      remove, or reorder its blocks however you like.
                     types:
                       - name: custom
                         label: "Blank tile"
@@ -225,13 +224,12 @@ collections:
                             summary: '{{fields.type}}'
                             types: *block_types
                             default:
-                              - {type: title, text: "Full Name"}
-                              - {type: subtitle, text: "Role"}
+                              - {type: title, text: Full Name}
+                              - {type: subtitle, text: Role}
                               - {type: image}
                               - {type: expand}
-                              - {type: body, text: "Add a short bio here — a sentence or two is plenty."}
-                              - {type: email, value: "triathlon@sheffield.ac.uk"}
-
+                              - {type: body, text: Add a short bio here — a sentence or two is plenty.}
+                              - {type: email, value: triathlon@sheffield.ac.uk}
                       - name: faq
                         label: "FAQ item"
                         fields:
@@ -244,10 +242,9 @@ collections:
                             summary: '{{fields.type}}'
                             types: *block_types
                             default:
-                              - {type: title, text: "Question goes here?"}
+                              - {type: title, text: 'Question goes here?'}
                               - {type: expand}
-                              - {type: body, text: "Answer goes here."}
-
+                              - {type: body, text: Answer goes here.}
                       - name: sponsor
                         label: "Sponsor"
                         fields:
@@ -261,9 +258,8 @@ collections:
                             types: *block_types
                             default:
                               - {type: image}
-                              - {type: title, text: "Sponsor name"}
-                              - {type: body, text: "A sentence about the sponsor."}
-
+                              - {type: title, text: Sponsor name}
+                              - {type: body, text: A sentence about the sponsor.}
                       - name: event
                         label: "Event"
                         fields:
@@ -276,10 +272,9 @@ collections:
                             summary: '{{fields.type}}'
                             types: *block_types
                             default:
-                              - {type: title, text: "Event name"}
+                              - {type: title, text: Event name}
                               - {type: image}
-                              - {type: note, heading: "Location", detail: ""}
-
+                              - {type: note, heading: Location, detail: ''}
       - {name: training, label: Training, file: _data/content/training.yml, fields: *page_fields}
       - {name: races, label: Races, file: _data/content/races.yml, fields: *page_fields}
       - {name: socials, label: Socials, file: _data/content/socials.yml, fields: *page_fields}
@@ -308,10 +303,7 @@ collections:
                 choose_url: false
                 media_folder: /assets/images/brand
                 public_folder: /uostriathlon/assets/images/brand
-                hint: PNG with a transparent background works best — the logo sits in a plain circular frame with no fixed background colour behind it.
-              - {label: "Logo crop horizontal %", name: logo_crop_x, widget: number, default: 50, min: 0, max: 100, value_type: int, required: false}
-              - {label: "Logo crop vertical %", name: logo_crop_y, widget: number, default: 50, min: 0, max: 100, value_type: int, required: false}
-              - {label: "Logo crop zoom %", name: logo_crop_zoom, widget: number, default: 100, min: 100, max: 220, value_type: int, required: false}
+                hint: PNG with a transparent background works best. The logo is shown in full (never cropped or masked) at its natural proportions.
           - label: Theme
             name: theme
             widget: object
@@ -363,3 +355,60 @@ collections:
               - {label: Platform, name: platform, widget: string}
               - {label: Label, name: label, widget: string}
               - {label: URL, name: url, widget: string}
+
+      - name: presets
+        label: Tile presets
+        file: _data/presets.yml
+        fields:
+          - label: Presets
+            name: presets
+            widget: list
+            typeKey: name
+            summary: '{{fields.label}}'
+            hint: >
+              What a new tile starts with when you pick this preset in a
+              Card grid. Edit and publish — the next tile you insert with
+              this preset uses whatever's saved here. This doesn't change
+              tiles you've already added to a page.
+            types:
+              - name: committee
+                label: Committee member
+                fields:
+                  - {label: Label, name: label, widget: string, default: "Committee member"}
+                  - label: Content blocks
+                    name: blocks
+                    widget: list
+                    typeKey: type
+                    summary: '{{fields.type}}'
+                    types: *block_types
+                    types: *block_types
+                label: FAQ item
+                fields:
+                  - {label: Label, name: label, widget: string, default: "FAQ item"}
+                  - label: Content blocks
+                    name: blocks
+                    widget: list
+                    typeKey: type
+                    summary: '{{fields.type}}'
+                    types: *block_types
+                    types: *block_types
+                label: Sponsor
+                fields:
+                  - {label: Label, name: label, widget: string, default: "Sponsor"}
+                  - label: Content blocks
+                    name: blocks
+                    widget: list
+                    typeKey: type
+                    summary: '{{fields.type}}'
+                    types: *block_types
+                    types: *block_types
+                label: Event
+                fields:
+                  - {label: Label, name: label, widget: string, default: "Event"}
+                  - label: Content blocks
+                    name: blocks
+                    widget: list
+                    typeKey: type
+                    summary: '{{fields.type}}'
+                    types: *block_types
+                    types: *block_types

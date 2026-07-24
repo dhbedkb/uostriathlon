@@ -57,10 +57,6 @@
     if (header) header.classList.toggle("is-scrolled", window.scrollY > 12);
   }, { passive: true });
 
-  // Hover-reveal tiles: expand on hover for pointer devices, click/tap
-  // elsewhere. Generic — any tile-grid section with behavior.expand:
-  // hover renders a <details data-reveal-mode="hover">, not just
-  // committee cards.
   function canHover() {
     return window.matchMedia && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
   }

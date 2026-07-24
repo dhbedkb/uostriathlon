@@ -3,7 +3,7 @@
     <a class="brand" href="{{ '/' | relative_url }}">
       {% assign logo = site.data.settings.brand.logo %}
       {% if logo and logo != "" %}
-        <span class="brand-mark" aria-hidden="true" style="--crop-x: {{ site.data.settings.brand.logo_crop_x | default: 50 }}%; --crop-y: {{ site.data.settings.brand.logo_crop_y | default: 50 }}%; --crop-zoom: {{ site.data.settings.brand.logo_crop_zoom | default: 100 | divided_by: 100.0 }};">
+        <span class="brand-mark" aria-hidden="true">
           <img src="{{ logo | relative_url }}" alt="{{ site.data.settings.brand.short_name | default: site.title | escape }}" width="240" height="240" loading="eager" decoding="async">
         </span>
       {% endif %}

@@ -5,13 +5,14 @@ A Jekyll site with a Decap CMS editor. Every page is a list of
 committee members, sponsors, FAQs, events, a call-to-action, embeds,
 social links — is one **Card grid** section full of **Tiles**, each
 built from a single ordered list of **Content blocks**. See
-`ARCHITECTURE.md` for the full model and reasoning, and
 `docs/editor-guide.md` for how to use it day-to-day.
 
 - Edit content: see `docs/editor-guide.md`.
-- Add a new *preset* (a pre-filled starting point for a new tile, e.g.
-  Committee/FAQ/Sponsor/Event): see "Adding a new preset" in
-  `docs/editor-guide.md` — a config change, not new rendering code.
+- Edit a *preset's* content (what a new Committee/FAQ/Sponsor/Event
+  tile starts pre-filled with): Site Settings → Tile presets in the
+  CMS, no code change needed. See "Presets" in `docs/editor-guide.md`.
+- Add a brand-new preset *name*: see "Adding a new preset" in
+  `docs/editor-guide.md` — a small config change.
 - Add a new *block type* (a new kind of content a tile can contain):
   see "Adding a new block type" in `docs/editor-guide.md`.
 - Add a genuinely new *section type* (rare — only for things that truly
@@ -21,7 +22,8 @@ built from a single ordered list of **Content blocks**. See
 - Images: uploaded through the editor, cropped/zoomed there, then
   automatically compressed to WebP on publish. See `docs/editor-guide.md`
   for how that pipeline works, and `docs/image-pipeline.md` for the
-  compression settings behind it.
+  compression settings behind it. The brand logo is the one exception —
+  it's shown at its own proportions, never cropped or masked.
 - Content order is just the order of blocks in a tile's list — drag to
   reorder. Visibility is a single "— Expand from here —" block you can
   drag into place, not a separate setting. See `docs/editor-guide.md`.

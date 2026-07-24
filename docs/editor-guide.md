@@ -98,18 +98,19 @@ which preset it started from shows up on the published site, and
 nothing prevents you from turning a "Committee member" tile into
 something that looks nothing like a committee card.
 
-**A limitation worth knowing:** these five starting points are fixed in
-`admin/config.yml` — changing what a preset pre-fills (e.g. adding a
-Meta note to every new Sponsor tile by default) means editing that file
-and committing the change, not something you can do from inside the
-CMS. This was a deliberate trade-off: Decap CMS doesn't have a safe,
-supported way to let the CMS UI edit its own "insert defaults" without
-either relying on undocumented internals or rebuilding the drag-and-drop
-and image-upload UI from scratch — both of which carry more risk than a
-five-minute code change is worth. If you find yourself wanting a sixth
-preset, or want to change what an existing one pre-fills, that's a
-one-line change to `admin/config.yml` (see "Adding a new preset"
-below) — ask whoever maintains the codebase, or open a PR.
+**Editing what a preset pre-fills** is done from **Site Settings →
+Tile presets** — no code change needed. Each preset there has the same
+kind of blocks list a tile has; edit it and publish, and the next tile
+someone inserts with that preset starts from whatever you saved.
+Existing tiles already on a page are untouched — this only changes the
+*starting point* for new tiles.
+
+The five preset *names* themselves (which five options show up in the
+"Add Tile" list) are fixed in `admin/config.yml` — adding a genuinely
+new sixth option, or removing one, is a one-line code change (see
+"Adding a new preset" below), because Decap CMS doesn't support a way
+for the CMS itself to add a new item to that list at runtime. Editing
+what an *existing* preset contains does not have that limitation.
 
 ## Interactions
 
@@ -129,8 +130,7 @@ per-tile override any more.
 
 ## Images: upload, crop, compress
 
-Every image works the same way, whether it's a Hero background or a
-tile's Image block:
+Every tile or hero image works the same way:
 
 1. **Upload** the original photo in the "Source image" field. The editor
    preview shows it immediately, inside a frame shaped like where it will
@@ -149,6 +149,12 @@ social platform logos).
 
 The live site always loads the small compressed WebP, never the original
 upload, so pages stay fast even with high-resolution source photos.
+
+**The brand logo (Site Settings → Brand → Logo) is the one exception.**
+It's shown at its own natural proportions, never cropped or masked to a
+circle — a transparent-background PNG is the right format, and nothing
+about how it's displayed will cut into it. There are no crop controls
+for it, because there's nothing to crop.
 
 ## Removing or replacing images
 
@@ -195,21 +201,28 @@ Then open `http://127.0.0.1:4000/uostriathlon/admin/local.html`.
 
 ## Adding a new preset
 
-Presets are defined in `admin/config.yml`, under
-`.../tile-grid/fields/.../tiles/types`. Copy one of the existing entries
-(Committee is a good template), give it a new `name`/`label`, and set
-its `default: blocks:` to whatever starting content makes sense. It
-must reuse `types: *block_types` for its own `blocks` field — that's
-what keeps every preset (and Custom) offering the exact same set of
-block types, so a brand-new preset never needs a renderer change.
-Repeat the same edit in `admin/config.local.yml`.
+*Editing an existing preset's content* doesn't need this section — see
+"Presets" above. This section is for adding a genuinely new preset
+**name** to the "Add Tile" list (a sixth option alongside Committee/
+FAQ/Sponsor/Event/Blank).
+
+1. In `admin/config.yml`, under `.../tile-grid/fields/.../tiles/types`,
+   copy one of the existing entries (Committee is a good template),
+   give it a new `name`/`label`. It must reuse `types: *block_types`
+   for its own `blocks` field, and can leave off `default:` (or set a
+   simple one) — its real defaults will come from step 2.
+2. Add a matching entry to `_data/presets.yml` with the same `name`,
+   and add a matching type to the `presets` field in the "Tile presets"
+   collection at the bottom of `admin/config.yml`, so the new preset is
+   editable from Site Settings too.
+3. Repeat both edits in `admin/config.local.yml`.
 
 ## Adding a new block type
 
 1. Add a new entry under the `block_types` anchor (search for
    `&block_types` in `admin/config.yml`) — this one definition is
-   shared by every preset and by Custom, via YAML's `*block_types`
-   alias, so you only add it once.
+   shared by every preset, by Custom, and by Tile presets in Site
+   Settings, via YAML's `*block_types` alias, so you only add it once.
 2. Add a matching `{% when "yourtype" %}` case in `_includes/tile.html`.
 3. If it involves an image, add a matching case in
    `admin/crop-preview.js`'s `renderBlock` function, and check whether
@@ -219,11 +232,3 @@ Repeat the same edit in `admin/config.local.yml`.
 Everything else — drag ordering, the Expand marker, presets — keeps
 working without further changes, because none of it is aware of which
 specific block types exist.
-
-## What this editor can't do (and why)
-
-Presets can't be edited from inside the CMS at runtime (see "Presets"
-above) — that's the one deliberate gap versus a fully dynamic builder,
-and the reasoning is spelled out there rather than hidden. Everything
-else in this guide reflects what's actually implemented and testable
-today.

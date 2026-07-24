@@ -6,8 +6,7 @@
   section type (cards, gallery, events, committee, sponsors, stats, FAQ,
   CTA, embeds, social links, timeline) is now `tile-grid`: one section
   that lays out any number of tiles, and one tile renderer that doesn't
-  know or care what kind of content a tile is holding. See
-  ARCHITECTURE.md for the reasoning and the full migration table.
+  know or care what kind of content a tile is holding.
 {% endcomment %}
 {% for section in include.sections %}
   {% assign section_type = section.type | default: "unknown" %}

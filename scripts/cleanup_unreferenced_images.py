@@ -5,12 +5,11 @@ so old replaced photos don't pile up in the repo forever.
 Does NOT touch generated derivatives (assets/images/generated,
 assets/images/committee/profiles) — those are rebuilt by the optimiser.
 
-Unmodified by the tile-grid or block-list refactors: this script does a
-plain text scan over the YAML/include/page source looking for each
-candidate file's path as a substring, so it doesn't care whether that
-path sits at `card.image_raw` or `tiles[].blocks[].src_raw` — nesting
-the field deeper inside a block object doesn't change how it's
-referenced as a string in the YAML.
+This script does a plain text scan over the YAML/include/page source
+looking for each candidate file's path as a substring, so it doesn't
+care whether that path sits at `card.image_raw` or
+`tiles[].blocks[].src_raw` — nesting the field deeper inside a block
+object doesn't change how it's referenced as a string in the YAML.
 
 Usage:
   python3 scripts/cleanup_unreferenced_images.py

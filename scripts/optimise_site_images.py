@@ -22,6 +22,12 @@ treatment, a round tile image (icon-style, e.g. social platform logos)
 gets another, tuned for a small sharp-edged graphic. See
 docs/image-pipeline.md for the reasoning.
 
+The brand logo is handled separately (see process_logo below): it's
+never cropped to an aspect ratio or masked to a shape — it's just
+downscaled to fit within a bounding box, preserving its own proportions
+and any transparency, since it's shown at natural size in the nav/footer
+rather than inside a tile frame.
+
 Run automatically by .github/workflows/deploy.yml before every build.
 Can also be run locally:
 
@@ -53,7 +59,7 @@ QUALITY_LOGO = 92
 TILE_SIZE = (1000, 1000)
 ICON_SIZE = (512, 512)
 HERO_SIZE = (2000, 1125)
-LOGO_SIZE = (240, 240)
+LOGO_MAX_SIZE = (480, 480)  # bounding box only — never cropped to this
 
 
 def slugify(value):
@@ -141,6 +147,20 @@ def save_webp(src, dest, size, crop_x=50, crop_y=50, crop_zoom=100, quality=QUAL
         # time for a smaller file. No EXIF/ICC data is carried over, since
         # `cropped` is a fresh image built from pixel data only.
         cropped.save(dest, "WEBP", quality=quality, method=6)
+    return "/" + str(dest).replace("\\", "/")
+
+
+def save_logo_webp(src, dest, max_size=LOGO_MAX_SIZE, quality=QUALITY_LOGO):
+    """Downscale-if-needed only — no cropping, no forced aspect ratio,
+    no shape mask. Preserves transparency so a logo with a transparent
+    background stays transparent."""
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    with Image.open(src) as img:
+        img = ImageOps.exif_transpose(img)
+        has_alpha = img.mode in ("RGBA", "LA") or (img.mode == "P" and "transparency" in img.info)
+        img = img.convert("RGBA" if has_alpha else "RGB")
+        img.thumbnail(max_size, Image.Resampling.LANCZOS)
+        img.save(dest, "WEBP", quality=quality, method=6)
     return "/" + str(dest).replace("\\", "/")
 
 
@@ -235,29 +255,29 @@ def process_file(yml_path):
         print(f"Updated {yml_path}")
 
 
+def process_logo():
+    settings_path = ROOT / "_data/settings.yml"
+    if not settings_path.exists():
+        return
+    settings = yaml.safe_load(settings_path.read_text()) or {}
+    logo_raw = (settings.get("brand") or {}).get("logo")
+    if not logo_raw or str(logo_raw).startswith("/assets/images/generated"):
+        return
+    src = source_path(logo_raw)
+    if not supported(src):
+        return
+    dest = GENERATED_DIR / "brand" / "logo.webp"
+    generated = save_logo_webp(src, dest)
+    settings["brand"]["logo"] = generated
+    settings_path.write_text(yaml.safe_dump(settings, sort_keys=False, allow_unicode=True))
+    print("Updated _data/settings.yml (logo)")
+
+
 def main():
     for yml_path in CONTENT_DIR.glob("*.yml"):
         process_file(yml_path)
 
-    # Also optimise the brand logo, if one has been uploaded.
-    settings_path = ROOT / "_data/settings.yml"
-    if settings_path.exists():
-        settings = yaml.safe_load(settings_path.read_text()) or {}
-        logo_raw = (settings.get("brand") or {}).get("logo")
-        if logo_raw and not str(logo_raw).startswith("/assets/images/generated"):
-            src = source_path(logo_raw)
-            if supported(src):
-                dest = GENERATED_DIR / "brand" / "logo.webp"
-                generated = save_webp(
-                    src, dest, LOGO_SIZE,
-                    settings["brand"].get("logo_crop_x", 50),
-                    settings["brand"].get("logo_crop_y", 50),
-                    settings["brand"].get("logo_crop_zoom", 100),
-                    quality=QUALITY_LOGO,
-                )
-                settings["brand"]["logo"] = generated
-                settings_path.write_text(yaml.safe_dump(settings, sort_keys=False, allow_unicode=True))
-                print("Updated _data/settings.yml (logo)")
+    process_logo()
 
 
 if __name__ == "__main__":
